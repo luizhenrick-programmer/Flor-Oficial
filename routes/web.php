@@ -35,4 +35,5 @@ Route::middleware(['auth', 'vendedor'])->group(function () {
 Route::middleware(['auth', 'cliente'])->group(function () {
     Route::get('dashboard', [UserController::class, 'dashboard'])->name('cliente.dashboard');
 });
+
 require __DIR__.'/auth.php';
