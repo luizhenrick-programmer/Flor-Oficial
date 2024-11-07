@@ -28,17 +28,17 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        if ($request->user()->role === 'admin') {
-            return redirect('admin/dashboard');
+        if (Auth::user()->role === 'admin') {
+            return redirect()->intended(route('admin.dashboard'));
         }
-        elseif ($request->user()->role === 'gerente') {
-            return redirect('gerente/dashboard');
+        else if ($request->user()->role === 'gerente') {
+            return redirect()->intended(route('gerente.dashboard'));
         }
-        elseif ($request->user()->role === 'vendedor') {
-            return redirect('vendedor/dashboard');
+        else if ($request->user()->role === 'vendedor') {
+            return redirect()->intended(route('vendedor.dashboard'));
         }
-        elseif ($request->user()->role === 'cliente') {
-            return redirect('dashboard');
+        else if ($request->user()->role === 'cliente') {
+            return redirect()->intended(route('dashboard'));
         }
         else {
             return redirect('login')->with('error', 'Seus dados estão incorretos');

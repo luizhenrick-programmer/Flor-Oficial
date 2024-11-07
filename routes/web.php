@@ -8,8 +8,9 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -35,4 +36,5 @@ Route::middleware(['auth', 'vendedor'])->group(function () {
 Route::middleware(['auth', 'cliente'])->group(function () {
     Route::get('dashboard', [UserController::class, 'dashboard'])->name('cliente.dashboard');
 });
+
 require __DIR__.'/auth.php';
