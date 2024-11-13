@@ -252,7 +252,7 @@
     }
 
     .logo__image {
-      max-width: 220px;
+      max-width: 250px;
     }
   </style>
   <div class="header-mobile header_sticky">
@@ -265,8 +265,8 @@
       </a>
 
       <div class="logo">
-        <a href="index.html">
-          <--! <img src="{{ asset('assets/images/logo.png') }}" alt="Uomo" class="logo__image d-block" /> 
+        <a href="#">
+          <img src="{{ asset('assets/images/logoSite.jpeg') }}" alt="Logo_nave" class="logo__image d-block" /> 
         </a>
       </div>
 
@@ -364,26 +364,26 @@
       <div class="header-desk header-desk_type_1">
         <div class="logo">
           <a href="index.html">
-            <img src="{{ asset('#') }}" alt="" />
+            <img src="{{ asset('assets/images/logoSite.jpeg') }}" alt="logo" width="110"/>
           </a>
         </div>
 
         <nav class="navigation">
           <ul class="navigation__list list-unstyled d-flex">
             <li class="navigation__item">
-              <a href="index.html" class="navigation__link">Início</a>
+              <a href="#" class="navigation__link">Início</a>
             </li>
             <li class="navigation__item">
-              <a href="shop.html" class="navigation__link">Loja</a>
+              <a href="#" class="navigation__link">Loja</a>
             </li>
             <li class="navigation__item">
-              <a href="cart.html" class="navigation__link">Carrinho</a>
+              <a href="#" class="navigation__link">Carrinho</a>
             </li>
             <li class="navigation__item">
-              <a href="about.html" class="navigation__link">Sobre</a>
+              <a href="#" class="navigation__link">Sobre</a>
             </li>
             <li class="navigation__item">
-              <a href="contact.html" class="navigation__link">Contato</a>
+              <a href="#" class="navigation__link">Contato</a>
             </li>
           </ul>
         </nav>
@@ -403,7 +403,7 @@
 
             <div class="search-popup js-hidden-content">
               <form action="#" method="GET" class="search-field container">
-                <p class="text-uppercase text-secondary fw-medium mb-4">What are you looking for?</p>
+                <p class="text-uppercase text-secondary fw-medium mb-4">O que você está procurando?</p>
                 <div class="position-relative">
                   <input class="search-field__input search-popup__input w-100 fw-medium" type="text"
                     name="search-keyword" placeholder="Search products" />
@@ -437,23 +437,21 @@
           </div>
 
           <div class="header-tools__item hover-container">
-            <a href="login.html" class="header-tools__item">
-              <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
-                xmlns="http://www.w3.org/2000/svg">
+            <a href="#" class="header-tools__item">
+              <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <use href="#icon_user" />
               </svg>
             </a>
           </div>
 
-          <a href="wishlist.html" class="header-tools__item">
+          <a href="#" class="header-tools__item">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <use href="#icon_heart" />
             </svg>
           </a>
 
-          <a href="cart.html" class="header-tools__item header-tools__cart">
-            <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
-              xmlns="http://www.w3.org/2000/svg">
+          <a href="#" class="header-tools__item header-tools__cart">
+            <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
               <use href="#icon_cart" />
             </svg>
             <span class="cart-amount d-block position-absolute js-cart-items-count">3</span>
@@ -472,7 +470,7 @@
           <div class="footer-column footer-store-info col-12 mb-4 mb-lg-0">
             <div class="logo">
               <a href="index.html">
-                <img src="{{ asset('') }}" alt="FlorOficial" class="logo__image d-block" />
+                <img src="{{ asset('assets/images/logoSite.jpeg') }}" alt="FlorOficial" class="logo__image d-block" />
               </a>
             </div>
             <p class="footer-address">112233, Centro, Formosa</p>
