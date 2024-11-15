@@ -9,7 +9,7 @@ use App\Http\Controllers\Backend\Pagamento;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('index');
+    return view('home');
 });
 
 Route::get('/pagamento', [Pagamento::class, 'index'])->name('pagamento');

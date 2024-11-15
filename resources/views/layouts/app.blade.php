@@ -1,10 +1,23 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@yield('title', config('app.name', 'Laravel'))</title>
+    <link href="{{ asset('css/app.css') }}" type="text/css" rel="stylesheet">
+    <link href="css/app.css" type="text/css" rel="stylesheet">
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+  </head>
+<body>
+    <div id="app">
+        <header>
+        @include('partials.header')
+        </head>
+        <main class="py-4">
+            @yield('content')
+        </main>
 
+<<<<<<< HEAD
         <title>{{ config('app.name', 'Laravel') }}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -603,5 +616,11 @@
   <script src="{{ asset('assets/js/plugins/countdown.js') }}"></script>
   <script src="{{ asset('assets/js/theme.js') }}"></script>
   @stack("scripts")
+=======
+        <footer>
+            @include('partials.footer')
+        </footer>
+    </div>
+>>>>>>> 7977c1c2f348ff1bc3c155d549a3e6fbdf225121
 </body>
 </html>
