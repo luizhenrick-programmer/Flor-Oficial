@@ -19,7 +19,7 @@
             class="slideshow-character__img animate animate_fade animate_btt animate_delay-9 w-auto h-auto" />
           <div class="character_markup type2">
             <p
-              class="text-uppercase font-sofia mark-grey-color animate animate_fade animate_btt animate_delay-10 mb-0">
+              class="text-uppercase font-sofia mark-grey-color animate animate_fade animate_btt animate_delay-10 mb-0 text-danger">
               Vestidos</p>
           </div>
         </div>

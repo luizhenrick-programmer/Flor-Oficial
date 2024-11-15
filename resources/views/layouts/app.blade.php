@@ -266,7 +266,7 @@
 
       <div class="logo">
         <a href="index.html">
-          <--! <img src="{{ asset('assets/images/logo.png') }}" alt="Uomo" class="logo__image d-block" /> 
+          <--! <img src="{{ asset('assets/images/logo.png') }}" alt="Uomo" class="logo__image d-block" />
         </a>
       </div>
 
@@ -298,7 +298,7 @@
             <div class="search-result"></div>
           </div>
         </form>
-      </div>  
+      </div>
 
       <div class="container">
         <div class="overflow-hidden">
@@ -374,7 +374,7 @@
               <a href="index.html" class="navigation__link">Início</a>
             </li>
             <li class="navigation__item">
-              <a href="shop.html" class="navigation__link">Loja</a>
+              <a href="{{ route('Pagamento') }}" class="navigation__link">Pagamento</a>
             </li>
             <li class="navigation__item">
               <a href="cart.html" class="navigation__link">Carrinho</a>
@@ -488,7 +488,7 @@
                   </svg>
                 </a>
               </li>
-              
+
               <li>
                 <a href="#" class="footer__social-link d-block">
                   <svg class="svg-icon svg-icon_instagram" width="14" height="13" viewBox="0 0 14 13"
@@ -497,7 +497,7 @@
                   </svg>
                 </a>
               </li>
-              
+
             </ul>
           </div>
 
