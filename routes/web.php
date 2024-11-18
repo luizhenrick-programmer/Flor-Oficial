@@ -16,7 +16,6 @@ Route::get('/comprar', function () {
     return view('shop');
 })->name('shopping');
 
-Route::get('/pagamento', [Pagamento::class, 'index'])->name('pagamento');
 
 
 Route::middleware('auth')->group(function () {
