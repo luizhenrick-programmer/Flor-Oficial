@@ -62,7 +62,7 @@
         <div class="d-flex align-items-center">
             <a href="#" class="me-3">
                 <img src="{{ asset('assets/images/imagesIcons/search_glass.svg') }}" alt="Buscar" width="21" height="24"></a>
-            <a href="#" class="me-3">
+            <a href="{{ route('profile.edit') }}" class="me-3">
                 <img src="{{ asset('assets/images/imagesIcons/user_solid.svg') }}" alt="Perfil do Usuário" width="20" height="24">
             </a>
             <a href="#" class="me-3">
@@ -152,7 +152,7 @@
             <section id="ofertas" class="mt-5 row w-100 d-flex d-flex align-items-center justify-content-center">
                 <h2 class="d-flex align-items-center justify-content-center">Para encher seu carrinho</h2>
                 <div class="mt-4 d-block w-25">
-                    <h3>Ofertas Primavera<br>
+                    <h3 class="text-pink-500">Ofertas Primavera<br>
                         <span class="fw-bold fs-4">até 60% de desconto</span>
                     </h3>
                     <a href="#" class="mt-5 fw-bold fs-5 text-dark text-center">Ver tudo</a>
@@ -177,14 +177,17 @@
                 </div>
             </section>
             <section>
-                <div id="destaque-promocao" class="bg-dark rounded w-50 imagem-relative" style="width: 100px; height: 800px;">
+                <div id="destaque-promocao" class="bg-body-tertiary rounded w-50 imagem-relative" style="width: 100px; height: 600px;">
                     <div class="rounded-circle bg-danger d-flex align-items-center justify-content-center p-3 circulo-absolute">
-                        <p class="text-white">A partir<br>
-                            <span>de R$ 20</span>
-                        </p>
+                    <p class="text-white ">A partir<br>
+                        <span>de R$ 20</span>
+                    </p>
                     </div>
+
+                    <img src="{{ asset('assets/images/categoriaFOREY.png') }}">
+
                     <div>
-                        <h3 class="text-white">Promoção</h3>
+                        <h3 class="text-black">Promoção</h3>
                         <a href="#">Compre Agora</a>
                     </div>
                 </div>
@@ -228,12 +231,12 @@
                             <p class="category-title mt-3">Produto 8</p>
                         </div>
                     </div>
-                    <a href="#" class="d-flex align-items-center justify-content-center">Ver tudo</a>
+                    <a href="{{ route('shopping') }}" class="d-flex align-items-center justify-content-center">Ver tudo</a>
                 </div>
             </section>
         </div>
     </main>
-    <footer class="bg-dark text-light py-3">
+    <footer class="bg-body-tertiary text-black py-3 mt-3 mt-lg-5">
         <div class="container">
           <div class="row">
             <div class="col-md-4">
