@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\GerenteController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\VendedorController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Backend\Pagamento;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -15,6 +16,7 @@ Route::get('/comprar', function () {
     return view('shop');
 })->name('shopping');
 
+Route::get('/pagamento', [Pagamento::class, 'index'])->name('pagamento');
 
 
 Route::middleware('auth')->group(function () {

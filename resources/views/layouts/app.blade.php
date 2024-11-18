@@ -1,10 +1,23 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@yield('title', config('app.name', 'Laravel'))</title>
+    <link href="{{ asset('css/app.css') }}" type="text/css" rel="stylesheet">
+    <link href="css/app.css" type="text/css" rel="stylesheet">
+    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+  </head>
+<body>
+    <div id="app">
+        <header>
+        @include('partials.header')
+        </head>
+        <main class="py-4">
+            @yield('content')
+        </main>
 
+<<<<<<< HEAD
         <title>{{ config('app.name', 'Laravel') }}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -266,7 +279,7 @@
 
       <div class="logo">
         <a href="index.html">
-          <--! <img src="{{ asset('assets/images/logo.png') }}" alt="Uomo" class="logo__image d-block" /> 
+          <--! <img src="{{ asset('assets/images/logo.png') }}" alt="Uomo" class="logo__image d-block" />
         </a>
       </div>
 
@@ -298,7 +311,7 @@
             <div class="search-result"></div>
           </div>
         </form>
-      </div>  
+      </div>
 
       <div class="container">
         <div class="overflow-hidden">
@@ -374,7 +387,7 @@
               <a href="index.html" class="navigation__link">Início</a>
             </li>
             <li class="navigation__item">
-              <a href="shop.html" class="navigation__link">Loja</a>
+              <a href="{{ route('Pagamento') }}" class="navigation__link">Pagamento</a>
             </li>
             <li class="navigation__item">
               <a href="cart.html" class="navigation__link">Carrinho</a>
@@ -488,7 +501,7 @@
                   </svg>
                 </a>
               </li>
-              
+
               <li>
                 <a href="#" class="footer__social-link d-block">
                   <svg class="svg-icon svg-icon_instagram" width="14" height="13" viewBox="0 0 14 13"
@@ -497,7 +510,7 @@
                   </svg>
                 </a>
               </li>
-              
+
             </ul>
           </div>
 
