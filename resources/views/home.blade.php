@@ -88,8 +88,8 @@
                     <!-- Pagination -->
                     <div class="d-flex align-items-center mt-4">
                         <div class="carousel-indicators">
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1">01</button>
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2">02</button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1">01 -</button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2">02 -</button>
                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3">03</button>
                         </div>
                     </div>
@@ -228,7 +228,7 @@
                             <p class="category-title mt-3">Produto 8</p>
                         </div>
                     </div>
-                    <a href="#" class="mt-5 fw-bold fs-4">Ver tudo</a>
+                    <a href="#" class="d-flex align-items-center justify-content-center">Ver tudo</a>
                 </div>
             </section>
         </div>
