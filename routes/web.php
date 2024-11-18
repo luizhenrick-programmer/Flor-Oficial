@@ -16,6 +16,14 @@ Route::get('/comprar', function () {
     return view('shop');
 })->name('shopping');
 
+Route::get('/sobre', function () {
+    return view('about');
+})->name('about');
+
+Route::get('/contato', function () {
+    return view('contact');
+})->name('contact');
+
 
 
 Route::middleware('auth')->group(function () {
