@@ -1,78 +1,8 @@
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Pre:wght@400..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Sofia&display=swap" rel="stylesheet">
+@extends('layouts.app') {{-- herança --}}
 
-<style>
-    .image-container img {
-        transition: transform 0.3s ease; /* Suaviza o efeito de zoom */
-        transform: none; /* Tamanho normal */
-        
-    }
-    .image-container img:hover {
-        transform: scale(1.2); /* Aplica o zoom ao passar o mouse */
-    }
+@section('titulo', 'Flor de Pitanga')
 
-    .imagem-relative {
-        display: block;
-        position: relative;
-        background-image: url(../);
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-
-    .circulo-absolute {
-        position: absolute;
-        top: 20;
-        right: 20;
-    }
-
-</style>
-
-<x-app-layout>
-    <header class="header d-flex justify-content-around align-items-center bg-white border-bottom shadow-sm py-3 px-4">
-        <div class="d-flex align-items-center">
-            <a href="{{ route('dashboard') }}" class="logo">
-                <img src="{{ asset('assets/images/logoSite.png') }}" alt="Logo Flor Oficial" width="80" height="80">
-            </a>
-            <div>
-                <span class="d-block" style="font-family: 'Roboto', sans-serif; font-weight: bold;">FLOR OFICIAL</span>
-                <span class="d-block" style="font-family: 'Roboto', sans-serif;">BY Thays Conrado</span>
-            </div>
-        </div>
-
-        <nav class="navbar">
-            <div class="container-fluid">
-                <ul class="nav nav-underline">
-                    <li class="nav-item">
-                      <a class="nav-link text-dark" href="{{ route('dashboard') }}">Início</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link text-dark" href="{{ route('shopping') }}">Comprar</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link text-dark" href="{{ route('about') }}">Sobre</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" href="{{ route('contact') }}">Contato</a>
-                    </li>
-                  </ul>
-            </div>
-        </nav>
-
-        <div class="d-flex align-items-center">
-            <a href="#" class="me-3">
-                <img src="{{ asset('assets/images/imagesIcons/search_glass.svg') }}" alt="Buscar" width="21" height="24"></a>
-            <a href="{{ route('profile.edit') }}" class="me-3">
-                <img src="{{ asset('assets/images/imagesIcons/user_solid.svg') }}" alt="Perfil do Usuário" width="20" height="24">
-            </a>
-            <a href="#" class="me-3">
-                <img src="{{ asset('assets/images/imagesIcons/heart_solid.svg') }}" alt="Favoritos" width="23" height="24">
-            </a>
-            <a href="#">
-                <img src="{{ asset('assets/images/imagesIcons/cart_shop.svg') }}" alt="Carrinho de Compras" width="22" height="24">
-            </a>
-        </div>
-    </header>
+@section('content')
 
     <main>
         <div class="container">
@@ -112,6 +42,7 @@
                 </div>
               </div>
             </section>
+
             <section id="carrosel-categoria" class="mt-4">
                 <h2 class="d-flex align-items-center justify-content-center">Estilos feitos para você</h2>
                 <div id="categorias" class="d-flex align-items-center justify-content-center">
@@ -236,50 +167,5 @@
             </section>
         </div>
     </main>
-    <footer class="bg-body-tertiary text-black py-3 mt-3 mt-lg-5">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-4">
-              <img src="{{asset('assets/images/logoSite.png') }}" alt="Logo da Flor de Pitanga" class="mb-3" style="width: 150px; height: 150px;">
-              <p>R. Visc. de Porto Seguro, 339 - Centro, Formosa-GO, 73801-010</p>
-              <p>flordipintanga@gmail.com</p>
-              <p>+55 61 99999-9999</p>
-              <ul class="list-inline">
-                <li class="list-inline-item"><a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a></li>
-                <li class="list-inline-item"><a href="#" class="text-white"><i class="fab fa-instagram"></i></a></li>
-                <li class="list-inline-item"><a href="#" class="text-white"><i class="fab fa-envelope"></i></a></li>
-              </ul>
-            </div>
-            <div class="col-md-2">
-              <h5>Compras</h5>
-              <ul class="list-unstyled">
-                <li><a href="#" class="">Exemplo</a></li>
-                <li><a href="#" class="">Exemplo</a></li>
-                <li><a href="#" class="">Exemplo</a></li>
-                <li><a href="#" class="">Exemplo</a></li>
-              </ul>
-            </div>
-            <div class="col-md-2">
-              <h5>Categorias</h5>
-              <ul class="list-unstyled">
-                <li><a href="#" class="">Exemplo</a></li>
-                <li><a href="#" class="">Exemplo</a></li>
-                <li><a href="#" class="">Exemplo</a></li>
-                <li><a href="#" class="">Exemplo</a></li>
-              </ul>
-            </div>
-            <div class="col-md-2">
-              <h5>Help</h5>
-              <ul class="list-unstyled">
-                <li><a href="#" class="">Exemplo</a></li>
-                <li><a href="#" class="">Exemplo</a></li>
-                <li><a href="#" class="">Exemplo</a></li>
-                <li><a href="#" class="">Exemplo</a></li>
-              </ul>
-            </div>
-          </div>
-          <hr>
-          <p class="text-center">&copy; 2024 Flor de Pitanga</p>
-        </div>
-      </footer>
-</x-app-layout>
+    
+@endsection

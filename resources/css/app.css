@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.image-container img {
+    transition: transform 0.3s ease; /* Suaviza o efeito de zoom */
+    transform: none; /* Tamanho normal */
+    
+}
+.image-container img:hover {
+    transform: scale(1.2); /* Aplica o zoom ao passar o mouse */
+}
+
+.imagem-relative {
+    display: block;
+    position: relative;
+    background-image: url(../);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.circulo-absolute {
+    position: absolute;
+    top: 20;
+    right: 20;
+}
+.scroll-hidden {
+    overflow-y: scroll;
+}
