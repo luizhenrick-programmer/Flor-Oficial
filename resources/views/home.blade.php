@@ -1,35 +1,9 @@
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Edu+AU+VIC+WA+NT+Pre:wght@400..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Sofia&display=swap" rel="stylesheet">
+@extends('layouts.app') {{-- herança --}}
 
-<style>
-    .image-container img {
-        transition: transform 0.3s ease; /* Suaviza o efeito de zoom */
-        transform: none; /* Tamanho normal */
+@section('titulo', 'Flor de Pitanga')
 
-    }
-    .image-container img:hover {
-        transform: scale(1.2); /* Aplica o zoom ao passar o mouse */
-    }
+@section('content')
 
-    .imagem-relative {
-        display: block;
-        position: relative;
-        background-image: url(../);
-        background-repeat: no-repeat;
-        background-size: cover;
-    }
-
-    .circulo-absolute {
-        position: absolute;
-        top: 20;
-        right: 20;
-    }
-
-</style>
-
-<x-app-layout>
-    @include('partials.header')
     <main>
         <div class="container">
             <section id="destaque" class="row w-100 d-flex align-items-center min-vh-100">
@@ -68,6 +42,7 @@
                 </div>
               </div>
             </section>
+
             <section id="carrosel-categoria" class="mt-4">
                 <h2 class="d-flex align-items-center justify-content-center">Estilos feitos para você</h2>
                 <div id="categorias" class="d-flex align-items-center justify-content-center">
@@ -218,5 +193,4 @@
             </section>
         </div>
     </main>
-    @include('partials.footer')
-</x-app-layout>
+
