@@ -1,81 +1,89 @@
-@extends('layouts.app') {{-- herança --}}
+@extends('layouts.app') {{-- Certifique-se de que o caminho do layout esteja correto --}}
 
-@section('titulo', 'Flor de Pitanga')
+@section('titulo', 'Home') {{-- Define o título da página --}}
 
 @section('content')
-
     <main>
         <div class="container">
             <section id="destaque" class="row w-100 d-flex align-items-center min-vh-100">
-              <!-- Text Section -->
-              <div class="col-md-6 d-flex flex-column justify-content-center">
+                <div class="col-md-6 d-flex flex-column justify-content-center">
                     <p class="text-pink-500 fw-bold fs-2 mb-0">- Novidades</p>
                     <h1 class="fw-bold text-black text-3xl md:text-4xl">Vestidos Noturnos<br>
                         <span class="text-pink-500">de Primavera</span>
                     </h1>
-                    <a href="#" class="btn btn-link flex align-self-start text-decoration-none mt-3 text-dark fw-bold p-0">COMPRE AGORA</a>
-
-                    <!-- Pagination -->
+                    <a href="#"
+                        class="btn btn-link flex align-self-start text-decoration-none mt-3 text-dark fw-bold p-0">COMPRE AGORA</a>
                     <div class="d-flex align-items-center mt-4">
                         <div class="carousel-indicators">
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1">01 -</button>
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2">02 -</button>
-                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3">03</button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                                class="active" aria-current="true" aria-label="Slide 1">01 -</button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                                aria-label="Slide 2">02 -</button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                                aria-label="Slide 3">03</button>
                         </div>
                     </div>
-              </div>
-
-              <!-- Image Section / images Carousel -->
-              <div class="col-md-6 d-flex justify-content-center image-container">
-                <div id="carouselExampleIndicators" class="carousel slide">
-                  <div class="carousel-inner">
-                        <div class="carousel-item active">
-                            <img src="{{ asset('assets/images/imageOne.png') }}" alt="Vestido Primavera 1" class="img-fluid">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ asset('assets/images/imageTwo.png') }}" alt="Vestido Primavera 2" class="img-fluid">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ asset('assets/images/imageTree.png') }}" alt="Vestido Primavera 3" class="img-fluid">
-                        </div>
-                  </div>
                 </div>
-              </div>
+                <div class="col-md-6 d-flex justify-content-center image-container">
+                    <div id="carouselExampleIndicators" class="carousel slide">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <img src="{{ asset('assets/images/imageOne.png') }}" alt="Vestido Primavera 1"
+                                    class="img-fluid">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ asset('assets/images/imageTwo.png') }}" alt="Vestido Primavera 2"
+                                    class="img-fluid">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="{{ asset('assets/images/imageTree.png') }}" alt="Vestido Primavera 3"
+                                    class="img-fluid">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
-
             <section id="carrosel-categoria" class="mt-4">
                 <h2 class="d-flex align-items-center justify-content-center">Estilos feitos para você</h2>
                 <div id="categorias" class="d-flex align-items-center justify-content-center">
                     <div class="d-block mt-5 mx-4">
-                        <img src="{{asset('assets/images/imagesCate/categoriaOne.png') }}" class="rounded-circle" alt="Categoria 1">
+                        <img src="{{ asset('assets/images/imagesCate/categoriaOne.png') }}" class="rounded-circle"
+                            alt="Categoria 1">
                         <p class="category-title mt-3">Categoria 1</p>
                     </div>
                     <div class="d-block mt-5 mx-4">
-                        <img src="{{asset('assets/images/imagesCate/categoriaTwo.png') }}" class="rounded-circle" alt="Categoria 2">
+                        <img src="{{ asset('assets/images/imagesCate/categoriaTwo.png') }}" class="rounded-circle"
+                            alt="Categoria 2">
                         <p class="category-title mt-3">Categoria 2</p>
                     </div>
                     <div class="d-block mt-5 mx-4">
-                        <img src="{{asset('assets/images/imagesCate/categoriaTree.png') }}" class="rounded-circle" alt="Categoria 3">
+                        <img src="{{ asset('assets/images/imagesCate/categoriaTree.png') }}" class="rounded-circle"
+                            alt="Categoria 3">
                         <p class="category-title mt-3">Categoria 3</p>
                     </div>
                     <div class="d-block mt-5 mx-4">
-                        <img src="{{asset('assets/images/imagesCate/categoriaFour.png') }}" class="rounded-circle" alt="Categoria 4">
+                        <img src="{{ asset('assets/images/imagesCate/categoriaFour.png') }}" class="rounded-circle"
+                            alt="Categoria 4">
                         <p class="category-title mt-3">Categoria 4</p>
                     </div>
                     <div class="d-block mt-5 mx-4">
-                        <img src="{{asset('assets/images/imagesCate/categoriaFive.png') }}" class="rounded-circle" alt="Categoria 5">
+                        <img src="{{ asset('assets/images/imagesCate/categoriaFive.png') }}" class="rounded-circle"
+                            alt="Categoria 5">
                         <p class="category-title mt-3">Categoria 5</p>
                     </div>
                     <div class="d-block mt-5 mx-4">
-                        <img src="{{asset('assets/images/imagesCate/categoriaSix.png') }}" class="rounded-circle" alt="Categoria 6">
+                        <img src="{{ asset('assets/images/imagesCate/categoriaSix.png') }}" class="rounded-circle"
+                            alt="Categoria 6">
                         <p class="category-title mt-3">Categoria 6</p>
                     </div>
                     <div class="d-block mt-5 mx-4">
-                        <img src="{{asset('assets/images/imagesCate/categoriaSeven.png') }}" class="rounded-circle" alt="Categoria 7">
+                        <img src="{{ asset('assets/images/imagesCate/categoriaSeven.png') }}" class="rounded-circle"
+                            alt="Categoria 7">
                         <p class="category-title mt-3">Categoria 7</p>
                     </div>
                     <div class="d-block mt-5 mx-4">
-                        <img src="{{asset('assets/images/imagesCate/categoriaEight.png') }}" class="rounded-circle" alt="Categoria 8">
+                        <img src="{{ asset('assets/images/imagesCate/categoriaEight.png') }}" class="rounded-circle"
+                            alt="Categoria 8">
                         <p class="category-title mt-3">Categoria 8</p>
                     </div>
                 </div>
@@ -110,8 +118,10 @@
                 </div>
             </section>
             <section class="mt-5 row w-100 d-flex d-flex align-items-center justify-content-center">
-                <div id="destaque-promocao-1" class="bg-body-tertiary rounded imagem-relative" style="width: 400px; height: 500px; position: relative;">
-                    <div class="rounded-circle bg-danger d-flex align-items-center justify-content-center p-3 circulo-absolute">
+                <div id="destaque-promocao-1" class="bg-body-tertiary rounded imagem-relative"
+                    style="width: 400px; height: 500px; position: relative;">
+                    <div
+                        class="rounded-circle bg-danger d-flex align-items-center justify-content-center p-3 circulo-absolute">
                         <p class="text-white text-center">A partir<br>
                             <span>de R$ 20</span>
                         </p>
@@ -119,7 +129,8 @@
 
                     <img src="{{ asset('assets/images/homem.jpg') }}">
 
-                    <div class="bg-white position-absolute rounded w-60 p-3 d-flex flex-column align-items-center justify-content-center" style="margin-top: -75px; left: 20%;">
+                    <div class="bg-white position-absolute rounded w-60 p-3 d-flex flex-column align-items-center justify-content-center"
+                        style="margin-top: -75px; left: 20%;">
                         <div class="d-block">
                             <h3 class="text-black text-center fs-6 fw-bold">Promoção</h3>
                         </div>
@@ -128,8 +139,10 @@
                         </div>
                     </div>
                 </div>
-                <div id="destaque-promocao-2" class="bg-body-tertiary rounded imagem-relative" style="width: 400px; height: 500px; position: relative;">
-                    <div class="rounded-circle bg-danger d-flex align-items-center justify-content-center p-3 circulo-absolute">
+                <div id="destaque-promocao-2" class="bg-body-tertiary rounded imagem-relative"
+                    style="width: 400px; height: 500px; position: relative;">
+                    <div
+                        class="rounded-circle bg-danger d-flex align-items-center justify-content-center p-3 circulo-absolute">
                         <p class="text-white text-center">A partir<br>
                             <span>de R$ 20</span>
                         </p>
@@ -137,7 +150,8 @@
 
                     <img src="{{ asset('assets/images/mulher.jpg') }}">
 
-                    <div class="bg-white position-absolute rounded w-60 p-3 d-flex flex-column align-items-center justify-content-center" style="margin-top: -75px; left: 20%;">
+                    <div class="bg-white position-absolute rounded w-60 p-3 d-flex flex-column align-items-center justify-content-center"
+                        style="margin-top: -75px; left: 20%;">
                         <div class="d-block">
                             <h3 class="text-black text-center fs-6 fw-bold">Promoção</h3>
                         </div>
@@ -193,4 +207,4 @@
             </section>
         </div>
     </main>
-
+@endsection
