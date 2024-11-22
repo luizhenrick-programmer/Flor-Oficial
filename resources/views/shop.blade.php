@@ -144,7 +144,7 @@
                 </div>
                 <div class="flex flex-column justify-content-center w-75">
                     <div class="d-block me-2">
-                        <img src="https://via.placeholder.com/800x400" alt="Categoria 1">
+                        <img src="https://via.placeholder.com/1000x400" alt="Categoria 1">
                     </div>
                     <div class="mt-5">
                         <h5>Compre Agora</h5>

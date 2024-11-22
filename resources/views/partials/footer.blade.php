@@ -1,8 +1,16 @@
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-4">
-            <img src="{{ asset('assets/images/logoSite.png') }}" alt="Logo da Flor de Pitanga" class="mb-3"
-                style="width: 150px; height: 150px;">
+<hr>
+<div class="container mt-5 ">
+    <div class="row w-100">
+        <div class="col-md-4 w-50">
+            <div class="d-flex align-items-center">
+                <a href="{{ route('dashboard') }}" class="logo">
+                    <img src="{{ asset('assets/images/logoSite.png') }}" alt="Logo Flor Oficial" width="80" height="80">
+                </a>
+                <div>
+                    <span class="d-block" style="font-family: 'Roboto', sans-serif; font-weight: bold;">FLOR OFICIAL</span>
+                    <span class="d-block" style="font-family: 'Roboto', sans-serif;">BY Thays Conrado</span>
+                </div>
+            </div>
             <p>R. Visc. de Porto Seguro, 339 - Centro, Formosa-GO, 73801-010</p>
             <p>flordipintanga@gmail.com</p>
             <p>+55 61 99999-9999</p>
@@ -15,35 +23,40 @@
                 </li>
             </ul>
         </div>
-        <div class="col-md-2">
-            <h5>Compras</h5>
-            <ul class="list-unstyled">
-                <li><a href="#" class="">Exemplo</a></li>
-                <li><a href="#" class="">Exemplo</a></li>
-                <li><a href="#" class="">Exemplo</a></li>
-                <li><a href="#" class="">Exemplo</a></li>
-            </ul>
-        </div>
-        <div class="col-md-2">
-            <h5>Categorias</h5>
-            <ul class="list-unstyled">
-                <li><a href="#" class="">Exemplo</a></li>
-                <li><a href="#" class="">Exemplo</a></li>
-                <li><a href="#" class="">Exemplo</a></li>
-                <li><a href="#" class="">Exemplo</a></li>
-            </ul>
-        </div>
-        <div class="col-md-2">
-            <h5>Help</h5>
-            <ul class="list-unstyled">
-                <li><a href="#" class="">Exemplo</a></li>
-                <li><a href="#" class="">Exemplo</a></li>
-                <li><a href="#" class="">Exemplo</a></li>
-                <li><a href="#" class="">Exemplo</a></li>
-            </ul>
+        <div class="col-md-4 w-50 flex align-items-center justify-content-around">
+            <div class="flex flex-column me-3">
+                <h2>Compras</h2>
+                <ul class="list-unstyled">
+                    <li class="text-center"><a href="#" class="fw-bold fs-5">Exemplo</a></li>
+                    <li class="text-center"><a href="#" class="fw-bold fs-5">Exemplo</a></li>
+                    <li class="text-center"><a href="#" class="fw-bold fs-5">Exemplo</a></li>
+                    <li class="text-center"><a href="#" class="fw-bold fs-5">Exemplo</a></li>
+                </ul>
+            </div>
+            <div class="flex flex-column me-3">
+                <h2>Categoria</h2>
+                <ul class="list-unstyled">
+                    <li class="text-center"><a href="#" class="fw-bold fs-5">Exemplo</a></li>
+                    <li class="text-center"><a href="#" class="fw-bold fs-5">Exemplo</a></li>
+                    <li class="text-center"><a href="#" class="fw-bold fs-5">Exemplo</a></li>
+                    <li class="text-center"><a href="#" class="fw-bold fs-5">Exemplo</a></li>
+                </ul>
+            </div>
+            <div class="flex flex-column me-3">
+                <h2>Help</h2>
+                <ul class="list-unstyled">
+                    <li class="text-center"><a href="#" class="fw-bold fs-5">Exemplo</a></li>
+                    <li class="text-center"><a href="#" class="fw-bold fs-5">Exemplo</a></li>
+                    <li class="text-center"><a href="#" class="fw-bold fs-5">Exemplo</a></li>
+                    <li class="text-center"><a href="#" class="fw-bold fs-5">Exemplo</a></li>
+                </ul>
+            </div>
         </div>
     </div>
     <hr>
     <p class="text-center">&copy; 2024 Flor de Pitanga</p>
+    <p class="text-center">
+        Desenvolvido pela
+        <a href="https://nextlevelstartup.com.br" class="text-decoration-none fw-bold" target="_blank">Next Level Startup</a>
+    </p>
 </div>
-</footer>
