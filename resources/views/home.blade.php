@@ -1,6 +1,6 @@
 @extends('layouts.app') {{-- Certifique-se de que o caminho do layout esteja correto --}}
 
-@section('titulo', 'Home') {{-- Define o título da página --}}
+@section('titulo', 'Flor Oficial') {{-- Define o título da página --}}
 
 @section('content')
     <main>

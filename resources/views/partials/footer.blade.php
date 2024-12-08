@@ -23,7 +23,7 @@
                 </li>
             </ul>
         </div>
-        <div class="col-md-4 w-50 flex align-items-center justify-content-around">
+        <div class="col-md-4 w-50 flex justify-content-around">
             <div class="flex flex-column me-3">
                 <h2>Compras</h2>
                 <ul class="list-unstyled">

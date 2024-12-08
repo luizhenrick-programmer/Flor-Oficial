@@ -5,7 +5,7 @@
 @section('content')
     <main>
         <div class="container mt-5">
-            <h2 class="fw-bold fs-4">Nosso Contato</h2>
+            <h2 class="fw-bold fs-2">Nosso Contato</h2>
             <h3 class="fw-bold fs-5 mt-3">Fale com a gente</h3>
             <form class="mt-5">
                 <div>
