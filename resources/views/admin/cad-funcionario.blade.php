@@ -5,6 +5,7 @@
 
 @section('content')
     <div class="container-xl flex flex-col">
+        <h1>testandoooo</h1>
     </div>
 @endsection
 

@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use DB;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
@@ -14,7 +14,7 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             [
                 'name' => 'Thays Conrado',
-                'cpf' => '000.000.000.21',
+                'cpf' => '00000000021',
                 'telefone' => '+5561996543214',
                 'username' => 'admin.conrado',
                 'role' => 'admin',

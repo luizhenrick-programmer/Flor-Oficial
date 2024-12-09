@@ -1,4 +1,4 @@
-<header class="header d-flex justify-content-around align-items-center bg-white border-bottom shadow py-2 px-4">
+<!-- <header class="header d-flex justify-content-around align-items-center bg-white border-bottom shadow py-2 px-4">
         <div class="d-flex align-items-center">
             <a href="{{ route('dashboard') }}" class="logo">
                 <img src="{{ asset('assets/images/logoSite.png') }}" alt="Logo Flor Oficial" width="80" height="80">
@@ -42,4 +42,4 @@
                 <img src="{{ asset('assets/images/imagesIcons/cart_shop.svg') }}" alt="Carrinho de Compras" width="22" height="24">
             </a>
         </div>
-    </header>
+    </header> -->
