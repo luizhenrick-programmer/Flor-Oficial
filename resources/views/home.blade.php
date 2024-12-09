@@ -4,7 +4,7 @@
 
 @section('content')
     <main>
-        <div class="container">
+        <div class="container mt-5">
             <section id="destaque" class="row w-100 d-flex align-items-center min-vh-100">
                 <div class="col-md-6 d-flex flex-column justify-content-center">
                     <p class="text-pink-500 fw-bold fs-2 mb-0">- Novidades</p>
@@ -13,7 +13,7 @@
                     </h1>
                     <a href="#"
                         class="btn btn-link flex align-self-start text-decoration-none mt-3 text-dark fw-bold p-0">COMPRE AGORA</a>
-                    <div class="d-flex align-items-center mt-4">
+                    <div class="d-flex align-items-center mt-5">
                         <div class="carousel-indicators">
                             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
                                 class="active" aria-current="true" aria-label="Slide 1">01 -</button>
