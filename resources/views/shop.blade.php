@@ -78,27 +78,27 @@
                     <div class="mt-4">
                         <h5>Tamanho</h5>
                         <div class="d-flex flex-wrap mb-4">
-                            <label class="size-checkbox me-2">
+                            <label class="size-checkbox me-2 mt-4">
                                 <input type="checkbox" name="size" value="PP" />
                                 <span>PP</span>
                             </label>
-                            <label class="size-checkbox me-2">
+                            <label class="size-checkbox me-2 mt-4">
                                 <input type="checkbox" name="size" value="P" />
                                 <span>P</span>
                             </label>
-                            <label class="size-checkbox me-2">
+                            <label class="size-checkbox me-2 mt-4">
                                 <input type="checkbox" name="size" value="M" />
                                 <span>M</span>
                             </label>
-                            <label class="size-checkbox me-2">
+                            <label class="size-checkbox me-2 mt-4">
                                 <input type="checkbox" name="size" value="G" />
                                 <span>G</span>
                             </label>
-                            <label class="size-checkbox me-2">
+                            <label class="size-checkbox me-2 mt-4">
                                 <input type="checkbox" name="size" value="GG" />
                                 <span>GG</span>
                             </label>
-                            <label class="size-checkbox me-2">
+                            <label class="size-checkbox me-2 mt-4">
                                 <input type="checkbox" name="size" value="XG" />
                                 <span>XG</span>
                             </label>
