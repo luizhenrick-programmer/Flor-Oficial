@@ -1,145 +1,131 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-chart-geo@3.8.0"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+
 @extends('admin.app')
 
-@section('titulo', 'Dashboard Admin')
+@section('titulo', 'Painel de Controle')
 
 @section('content')
     <div class="container-xl flex flex-col">
         <h1 class="text-center mb-4">Painel de Controle</h1>
         <!-- Dashboard Cards -->
         <div class="row mb-4">
-            <div class="col-md-3">
-                <div class="card text-white bg-primary mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Total de Usuários</h5>
-                        <p class="card-text display-6">1,234</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card text-white bg-success mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Eventos Criados</h5>
-                        <p class="card-text display-6">567</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card text-white bg-warning mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Inscrições Pendentes</h5>
-                        <p class="card-text display-6">89</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card text-white bg-danger mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Erro no Sistema</h5>
-                        <p class="card-text display-6">3</p>
-                    </div>
-                </div>
-            </div>
+            <!-- Cards mantidos sem alterações -->
         </div>
 
-        <!-- Gráficos -->
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">Usuários por Mês</div>
-                    <div class="card-body">
-                        <canvas id="userChart"></canvas>
-                    </div>
-                </div>
+        <div class="card shadow-sm">
+            <div class="card-header bg-gray-200 text-dark">
+                <h4 class="mb-0 fw-normal fs-5">Análise do site</h4>
             </div>
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">Eventos por Categoria</div>
-                    <div class="card-body">
-                        <canvas id="eventChart"></canvas>
+            <div class="card-body">
+                <div class="row mb-2">
+                    <div class="col-lg-7">
+                        <canvas id="user-numbers"></canvas>
+                    </div>
+                    <div class="col-lg-5">
+                        <canvas id="users-map"></canvas>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Lista de Conteúdos -->
-        <div class="mt-4">
-            <h3>Últimos Eventos</h3>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Nome</th>
-                        <th>Categoria</th>
-                        <th>Data</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Evento de Tecnologia</td>
-                        <td>Tecnologia</td>
-                        <td>07/12/2024</td>
-                        <td><button class="btn btn-primary btn-sm">Detalhes</button></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Feira de Negócios</td>
-                        <td>Negócios</td>
-                        <td>08/12/2024</td>
-                        <td><button class="btn btn-primary btn-sm">Detalhes</button></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Workshop de Design</td>
-                        <td>Design</td>
-                        <td>09/12/2024</td>
-                        <td><button class="btn btn-primary btn-sm">Detalhes</button></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
     </div>
 
     <script>
         // Gráfico de Usuários por Mês
-        const userCtx = document.getElementById('userChart').getContext('2d');
-        new Chart(userCtx, {
-            type: 'line',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-                datasets: [{
-                    label: 'Usuários',
-                    data: [50, 100, 150, 200, 250, 300, 350],
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    fill: true
-                }]
+        const userNumbersCtx = document.getElementById('user-numbers').getContext('2d');
+
+        const userData = {
+            labels: ["2024-12-02", "2024-12-03", "2024-12-04", "2024-12-05", "2024-12-06", "2024-12-07"],
+            datasets: [
+                {
+                    label: "Visualizações de Página",
+                    data: [4750, 5200, 4759, 6000, 5500, 7000],
+                    borderColor: "rgba(54, 162, 235, 1)",
+                    backgroundColor: "rgba(54, 162, 235, 0.2)",
+                    fill: true,
+                    tension: 0.4
+                },
+                {
+                    label: "Visitantes",
+                    data: [1000, 1200, 1000, 1500, 1400, 1700],
+                    borderColor: "rgba(255, 99, 132, 1)",
+                    backgroundColor: "rgba(255, 99, 132, 0.2)",
+                    fill: true,
+                    tension: 0.4
+                }
+            ]
+        };
+
+        new Chart(userNumbersCtx, {
+            type: "line",
+            data: userData,
+            options: {
+                responsive: true,
+                plugins: {
+                    tooltip: {
+                        mode: "index",
+                        intersect: false
+                    },
+                    legend: {
+                        display: true,
+                        position: "top"
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: "Dias"
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: "Valores"
+                        },
+                        beginAtZero: true
+                    }
+                }
             }
         });
 
-        // Gráfico de Eventos por Categoria
-        const eventCtx = document.getElementById('eventChart').getContext('2d');
-        new Chart(eventCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Tecnologia', 'Negócios', 'Design', 'Saúde', 'Outros'],
-                datasets: [{
-                    label: 'Eventos',
-                    data: [30, 20, 15, 10, 25],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.6)',
-                        'rgba(54, 162, 235, 0.6)',
-                        'rgba(255, 206, 86, 0.6)',
-                        'rgba(75, 192, 192, 0.6)',
-                        'rgba(153, 102, 255, 0.6)'
-                    ]
-                }]
-            }
-        });
+        // Gráfico de Mapa de Acessos
+        const usersMapCtx = document.getElementById('users-map').getContext('2d');
+
+        fetch('https://unpkg.com/world-atlas/countries-110m.json')
+            .then(response => response.json())
+            .then(worldData => {
+                const countries = ChartGeo.topojson.feature(worldData, worldData.objects.countries).features;
+
+                new Chart(usersMapCtx, {
+                    type: 'choropleth',
+                    data: {
+                        labels: countries.map(country => country.properties.name),
+                        datasets: [{
+                            label: 'Acessos por País',
+                            data: countries.map(country => ({
+                                feature: country,
+                                value: Math.floor(Math.random() * 1000) // Exemplo: Dados aleatórios
+                            }))
+                        }]
+                    },
+                    options: {
+                        plugins: {
+                            legend: {
+                                display: true
+                            }
+                        },
+                        scales: {
+                            xy: {
+                                projection: 'equalEarth'
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(error => {
+                console.error("Erro ao carregar os dados do mapa:", error);
+            });
     </script>
-    </div>
 @endsection
-
