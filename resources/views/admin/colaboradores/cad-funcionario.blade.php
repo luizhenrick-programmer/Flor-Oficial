@@ -16,18 +16,18 @@
                 <!-- Nome Completo -->
                 <div class="mb-3">
                     <label for="nomeCompleto" class="form-label ms-2">Nome Completo</label>
-                    <input type="text" class="form-control" id="nomeCompleto" name="nomeCompleto" placeholder="Digite o nome completo" required>
+                    <input type="text" class="form-control" id="nomeCompleto" name="nomeCompleto" placeholder="Ex: João Silva" required>
                 </div>
 
                 <!-- CPF e RG -->
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="cpf" class="form-label ms-2">CPF</label>
-                        <input type="number" class="form-control" id="cpf" name="cpf" placeholder="000.000.000-00" required>
+                        <input type="text" class="form-control" id="cpf" name="cpf" placeholder="000.000.000-00" maxlength="14" required oninput="formatarCPF(this)">
                     </div>
                     <div class="col-md-6">
                         <label for="rg" class="form-label ms-2">RG</label>
-                        <input type="number" class="form-control" id="rg" name="rg" placeholder="Digite o RG" required>
+                        <input type="text" class="form-control" id="rg" name="rg" placeholder="Digite apenas números do RG" required>
                     </div>
                 </div>
 
@@ -46,7 +46,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="email" class="form-label ms-2">E-mail</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="exemplo@empresa.com" required>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="nome@empresa.com" required>
                     </div>
                     <div class="col-md-6">
                         <label for="telefone" class="form-label ms-2">Telefone</label>
@@ -56,28 +56,34 @@
 
                 <!-- Endereço -->
                 <h5 class="fw-bold text-success mb-4">Endereço</h5>
-                <div class="col-md-6">
-                    <label for="email" class="form-label ms-2">Cep</label>
-                    <input type="text" class="form-control" id="email" name="email" placeholder="00.000-000" required>
-                </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="email" class="form-label ms-2">Rua</label>
-                        <input type="text" class="form-control" id="email" name="email" placeholder="Número/Nome da rua" required>
+                        <label for="cep" class="form-label ms-2">CEP</label>
+                        <input type="text" class="form-control" id="cep" name="cep" placeholder="Insira o CEP" maxlength="10" onblur="pesquisacep(this.value);" required>
                     </div>
                     <div class="col-md-6">
-                        <label for="telefone" class="form-label ms-2">Número</label>
-                        <input type="number" class="form-control" id="telefone" name="telefone" placeholder="Número da casa/apartamento" required>
+                        <label for="rua" class="form-label ms-2">Rua</label>
+                        <input type="text" class="form-control" id="rua" name="rua" placeholder="Digite a rua" required>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="email" class="form-label ms-2">Bairro</label>
-                        <input type="text" class="form-control" id="email" name="email" placeholder="Bairro" required>
+                        <label for="numero" class="form-label ms-2">Número</label>
+                        <input type="text" class="form-control" id="numero" name="numero" placeholder="Digite a numeração da residência" required>
                     </div>
                     <div class="col-md-6">
-                        <label for="telefone" class="form-label ms-2">Cidade</label>
-                        <input type="text" class="form-control" id="telefone" name="telefone" placeholder="Cidade" required>
+                        <label for="bairro" class="form-label ms-2">Bairro</label>
+                        <input type="text" class="form-control" id="bairro" name="bairro" placeholder="Digite o bairro" required>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="cidade" class="form-label ms-2">Cidade</label>
+                        <input type="text" class="form-control" id="cidade" name="cidade" placeholder="Ex: São Paulo" required>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="cidade" class="form-label ms-2">Estado</label>
+                        <input type="text" class="form-control" id="uf" name="estado" placeholder="Ex: São Paulo" required>
                     </div>
                 </div>
 
@@ -90,4 +96,15 @@
         </div>
     </div>
 </div>
+
+<script>
+    function formatarCPF(campo) {
+        let cpf = campo.value.replace(/\D/g, '');
+        if (cpf.length > 11) cpf = cpf.slice(0, 11);
+        cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
+        cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
+        cpf = cpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+        campo.value = cpf;
+    }
+</script>
 @endsection

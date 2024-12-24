@@ -1,131 +1,80 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chartjs-chart-geo@3.8.0"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/topojson/3.0.2/topojson.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/jvectormap@3.0.0/jquery-jvectormap.css" rel="stylesheet" type="text/css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jvectormap@3.0.0/jquery-jvectormap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jvectormap@3.0.0/maps/jquery-jvectormap-br-mill.js"></script>
+
+<style>
+    #map-container, #chart-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px;
+    }
+    #brasil-map {
+      width: 600px;
+      height: 400px;
+    }
+    #line-chart {
+      width: 600px;
+      height: 400px;
+    }
+  </style>
 
 @extends('admin.app')
 
 @section('titulo', 'Painel de Controle')
 
 @section('content')
-    <div class="container-xl flex flex-col">
-        <h1 class="text-center mb-4">Painel de Controle</h1>
-        <!-- Dashboard Cards -->
-        <div class="row mb-4">
-            <!-- Cards mantidos sem alterações -->
+    <div class="container-xl flex flex-col py-5">
+        <x-text color='gray-200' size='xs' bold='true'>PAINEL DE CONTROLE</x-text>
+        <div class="bg-gray-700 rounded-lg border-l-4 border-violet-500 text-gray-200 mt-4 p-3" role="alert">
+            <div class="flex items-center">
+                <div class="mr-3">
+                    <svg class="icon alert-icon svg-icon-ti-ti-alert-circle" xmlns="http://www.w3.org/2000/svg"
+                        width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                        <path d="M12 8v4"></path>
+                        <path d="M12 16h.01"></path>
+                    </svg>
+                </div>
+                <x-text color="gray-200" size="md">Olá {{ Auth::user()->name }}, bem-vindo ao painel de controle! Use
+                    as ferramentas com responsabilidade e cuidado!</x-text>
+            </div>
         </div>
 
-        <div class="card shadow-sm">
-            <div class="card-header bg-gray-200 text-dark">
-                <h4 class="mb-0 fw-normal fs-5">Análise do site</h4>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
+            <!-- Pedidos -->
+            <div class="bg-gray-700 shadow-md rounded-lg p-4">
+                <h5 class="text-lg font-bold mb-3 text-white">Pedidos</h5>
+                <h1 class="text-4xl font-bold mt-2">0</h1>
+            </div>
+            <!-- Produtos -->
+            <div class="bg-gray-700 shadow-md rounded-lg p-4">
+                <h5 class="text-lg font-bold mb-2 text-white">Produtos</h5>
+                <h1 class="text-white" style="font-size: 4rem;">0</h1>
+            </div>
+            <!-- Clientes -->
+            <div class="bg-gray-700 shadow-md rounded-lg p-4">
+                <h5 class="text-lg font-bold mb-2 text-white">Clientes</h5>
+                <h1 class="text-white" style="font-size: 4rem;">0</h1>
+            </div>
+            <!-- Avaliações -->
+            <div class="bg-gray-700 shadow-md rounded-lg p-4">
+                <h5 class="text-lg font-bold mb-2 text-white">Avaliações</h5>
+                <h1 class="text-white" style="font-size: 4rem;">0</h1>
+            </div>
+        </div>
+
+        <div class="bg-gray-700 text-gray-200 mt-4">
+            <div class="">
+                <x-text color='purple-300' size="lg">Análise do site</x-text>
             </div>
             <div class="card-body">
-                <div class="row mb-2">
-                    <div class="col-lg-7">
-                        <canvas id="user-numbers"></canvas>
-                    </div>
-                    <div class="col-lg-5">
-                        <canvas id="users-map"></canvas>
-                    </div>
-                </div>
+                <canvas></canvas>
             </div>
         </div>
     </div>
-
-    <script>
-        // Gráfico de Usuários por Mês
-        const userNumbersCtx = document.getElementById('user-numbers').getContext('2d');
-
-        const userData = {
-            labels: ["2024-12-02", "2024-12-03", "2024-12-04", "2024-12-05", "2024-12-06", "2024-12-07"],
-            datasets: [
-                {
-                    label: "Visualizações de Página",
-                    data: [4750, 5200, 4759, 6000, 5500, 7000],
-                    borderColor: "rgba(54, 162, 235, 1)",
-                    backgroundColor: "rgba(54, 162, 235, 0.2)",
-                    fill: true,
-                    tension: 0.4
-                },
-                {
-                    label: "Visitantes",
-                    data: [1000, 1200, 1000, 1500, 1400, 1700],
-                    borderColor: "rgba(255, 99, 132, 1)",
-                    backgroundColor: "rgba(255, 99, 132, 0.2)",
-                    fill: true,
-                    tension: 0.4
-                }
-            ]
-        };
-
-        new Chart(userNumbersCtx, {
-            type: "line",
-            data: userData,
-            options: {
-                responsive: true,
-                plugins: {
-                    tooltip: {
-                        mode: "index",
-                        intersect: false
-                    },
-                    legend: {
-                        display: true,
-                        position: "top"
-                    }
-                },
-                scales: {
-                    x: {
-                        title: {
-                            display: true,
-                            text: "Dias"
-                        }
-                    },
-                    y: {
-                        title: {
-                            display: true,
-                            text: "Valores"
-                        },
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-
-        // Gráfico de Mapa de Acessos
-        const usersMapCtx = document.getElementById('users-map').getContext('2d');
-
-        fetch('https://unpkg.com/world-atlas/countries-110m.json')
-            .then(response => response.json())
-            .then(worldData => {
-                const countries = ChartGeo.topojson.feature(worldData, worldData.objects.countries).features;
-
-                new Chart(usersMapCtx, {
-                    type: 'choropleth',
-                    data: {
-                        labels: countries.map(country => country.properties.name),
-                        datasets: [{
-                            label: 'Acessos por País',
-                            data: countries.map(country => ({
-                                feature: country,
-                                value: Math.floor(Math.random() * 1000) // Exemplo: Dados aleatórios
-                            }))
-                        }]
-                    },
-                    options: {
-                        plugins: {
-                            legend: {
-                                display: true
-                            }
-                        },
-                        scales: {
-                            xy: {
-                                projection: 'equalEarth'
-                            }
-                        }
-                    }
-                });
-            })
-            .catch(error => {
-                console.error("Erro ao carregar os dados do mapa:", error);
-            });
-    </script>
 @endsection
