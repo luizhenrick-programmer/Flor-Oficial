@@ -1,145 +1,62 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-@extends('admin.app')
+<link href="https://cdn.jsdelivr.net/npm/jvectormap@3.0.0/jquery-jvectormap.css" rel="stylesheet" type="text/css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jvectormap@3.0.0/jquery-jvectormap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jvectormap@3.0.0/maps/jquery-jvectormap-br-mill.js"></script>
+
+<style>
+    #map-container, #chart-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px;
+    }
+    #brasil-map {
+      width: 600px;
+      height: 400px;
+    }
+    #line-chart {
+      width: 600px;
+      height: 400px;
+    }
+  </style>
+
+@extends('vendedor.app')
 
 @section('titulo', 'Dashboard Vendedor')
 
 @section('content')
-    <div class="container-xl flex flex-col">
-        <h1 class="text-center mb-4">Painel de Controle</h1>
-        <!-- Dashboard Cards -->
-        <div class="row mb-4">
-            <div class="col-md-3">
-                <div class="card text-white bg-primary mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Total de Usuários</h5>
-                        <p class="card-text display-6">1,234</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card text-white bg-success mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Eventos Criados</h5>
-                        <p class="card-text display-6">567</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card text-white bg-warning mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Inscrições Pendentes</h5>
-                        <p class="card-text display-6">89</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card text-white bg-danger mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Erro no Sistema</h5>
-                        <p class="card-text display-6">3</p>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- Gráficos -->
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">Usuários por Mês</div>
-                    <div class="card-body">
-                        <canvas id="userChart"></canvas>
-                    </div>
-                </div>
+<div class="container-xl flex flex-col py-5">
+    <x-text color='gray-200' size='xs' bold='true'>PAINEL DE VENDAS</x-text>
+    <div class="bg-gray-700 rounded-lg border-l-4 border-violet-500 text-gray-200 mt-4 p-3" role="alert">
+        <div class="flex items-center">
+            <div class="mr-3">
+                <svg class="icon alert-icon svg-icon-ti-ti-alert-circle" xmlns="http://www.w3.org/2000/svg"
+                    width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                    <path d="M12 8v4"></path>
+                    <path d="M12 16h.01"></path>
+                </svg>
             </div>
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">Eventos por Categoria</div>
-                    <div class="card-body">
-                        <canvas id="eventChart"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Lista de Conteúdos -->
-        <div class="mt-4">
-            <h3>Últimos Eventos</h3>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Nome</th>
-                        <th>Categoria</th>
-                        <th>Data</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Evento de Tecnologia</td>
-                        <td>Tecnologia</td>
-                        <td>07/12/2024</td>
-                        <td><button class="btn btn-primary btn-sm">Detalhes</button></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Feira de Negócios</td>
-                        <td>Negócios</td>
-                        <td>08/12/2024</td>
-                        <td><button class="btn btn-primary btn-sm">Detalhes</button></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Workshop de Design</td>
-                        <td>Design</td>
-                        <td>09/12/2024</td>
-                        <td><button class="btn btn-primary btn-sm">Detalhes</button></td>
-                    </tr>
-                </tbody>
-            </table>
+            <x-text color="gray-200" size="md">Olá {{ Auth::user()->name }}, bem-vindo ao painel de vendas! Use
+                as ferramentas com responsabilidade e cuidado!</x-text>
         </div>
     </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
+        <!-- Pedidos -->
+        <div class="bg-gray-700 shadow-md rounded-lg p-4">
+            <h5 class="text-lg font-bold mb-3 text-white">Vendas Concluidas</h5>
+            <h1 class="text-4xl font-bold mt-2">0</h1>
+        </div>
+        <!-- Clientes -->
+        <div class="bg-gray-700 shadow-md rounded-lg p-4">
+            <h5 class="text-lg font-bold mb-3 text-white">Clientes Atendidos</h5>
+            <h1 class="text-4xl font-bold mt-2">0</h1>
+        </div>
     </div>
-
-    <script>
-        // Gráfico de Usuários por Mês
-        const userCtx = document.getElementById('userChart').getContext('2d');
-        new Chart(userCtx, {
-            type: 'line',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-                datasets: [{
-                    label: 'Usuários',
-                    data: [50, 100, 150, 200, 250, 300, 350],
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    fill: true
-                }]
-            }
-        });
-
-        // Gráfico de Eventos por Categoria
-        const eventCtx = document.getElementById('eventChart').getContext('2d');
-        new Chart(eventCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Tecnologia', 'Negócios', 'Design', 'Saúde', 'Outros'],
-                datasets: [{
-                    label: 'Eventos',
-                    data: [30, 20, 15, 10, 25],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.6)',
-                        'rgba(54, 162, 235, 0.6)',
-                        'rgba(255, 206, 86, 0.6)',
-                        'rgba(75, 192, 192, 0.6)',
-                        'rgba(153, 102, 255, 0.6)'
-                    ]
-                }]
-            }
-        });
-    </script>
-    </div>
+</div>
 @endsection
 

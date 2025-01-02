@@ -26,6 +26,7 @@ Route::get('/contato', function () {
 
 
 
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -48,6 +49,8 @@ Route::middleware(['auth', 'gerente'])->group(function () {
 // Rotas para vendedores
 Route::middleware(['auth', 'vendedor'])->group(function () {
     Route::get('vendedor/dashboard', [VendedorController::class, 'dashboard'])->name('vendedor.dashboard');
+    //defini rota para vendas
+    Route::get('vendedor/vendas',[VendedorController::class, 'vendas'])->name('vendedor.vendas');
 });
 
 // Rotas para clientes

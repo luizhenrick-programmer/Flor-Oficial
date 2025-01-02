@@ -14,6 +14,7 @@
     <!-- Ícones -->
     <script src="https://kit.fontawesome.com/12004a6e82.js" crossorigin="anonymous"></script>
 </head>
+
 <body class="min-h-screen bg-gray-900 text-gray-200 flex">
     <!-- Navegação lateral -->
     @include('admin.partials-admin.navigation')
