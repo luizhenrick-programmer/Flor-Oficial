@@ -26,7 +26,7 @@
 
                     <!-- Relatório de Vendas -->
                     <li>
-                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline hover:bg-gray-700">
+                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
                             <div class="flex items-center gap-2">
                                 <i class="fa-solid fa-chart-pie text-lg"></i>
                                 <span class="text-sm font-bold truncate" title="Relatório de Vendas">Relatório de Vendas</span>
@@ -36,7 +36,7 @@
 
                     <!-- Pedidos Confirmados -->
                     <li>
-                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline hover:bg-gray-700">
+                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
                             <div class="flex items-center gap-2">
                                 <i class="fa-solid fa-shopping-bag text-lg"></i>
                                 <span class="text-sm font-bold truncate" title="Pedidos Confirmados">Pedidos Confirmados</span>
@@ -46,7 +46,7 @@
 
                     <!-- Pedidos Pendentes -->
                     <li>
-                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline hover:bg-gray-700">
+                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
                             <div class="flex items-center gap-2">
                                 <i class="fa-regular fa-hourglass-half text-lg"></i>
                                 <span class="text-sm font-bold truncate" title="Pedidos Pendentes">Pedidos Pendentes</span>
@@ -56,7 +56,7 @@
 
                     <!-- Pedidos Cancelados -->
                     <li>
-                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline hover:bg-gray-700">
+                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
                             <div class="flex items-center gap-2">
                                 <i class="fa-solid fa-ban text-lg"></i>
                                 <span class="text-sm font-bold truncate" title="Pedidos Cancelados">Pedidos Cancelados</span>
@@ -66,7 +66,7 @@
 
                     <!-- Produtos -->
                     <li>
-                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline hover:bg-gray-700">
+                        <a href="{{ route('admin.produtos') }}" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
                             <div class="flex items-center gap-2">
                                 <i class="fa-brands fa-product-hunt text-lg"></i>
                                 <span class="text-sm font-bold truncate" title="Produtos">Produtos</span>
@@ -76,7 +76,7 @@
 
                     <!-- Remessas -->
                     <li>
-                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline hover:bg-gray-700">
+                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
                             <div class="flex items-center gap-2">
                                 <i class="fa-solid fa-truck-fast text-lg"></i>
                                 <span class="text-sm font-bold truncate" title="Remessas">Remessas</span>
@@ -86,7 +86,7 @@
 
                     <!-- Faturas -->
                     <li>
-                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline hover:bg-gray-700">
+                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
                             <div class="flex items-center gap-2">
                                 <i class="fa-solid fa-file-invoice-dollar text-lg"></i>
                                 <span class="text-sm font-bold truncate" title="Faturas">Faturas</span>
@@ -96,7 +96,7 @@
 
                     <!-- Devoluções -->
                     <li>
-                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline hover:bg-gray-700">
+                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
                             <div class="flex items-center gap-2">
                                 <i class="fa-solid fa-triangle-exclamation text-lg"></i>
                                 <span class="text-sm font-bold truncate" title="Devoluções">Devoluções</span>
@@ -106,7 +106,7 @@
 
                     <!-- Inventário de Vendas -->
                     <li>
-                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline hover:bg-gray-700">
+                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
                             <div class="flex items-center gap-2">
                                 <i class="fa-solid fa-house-medical text-lg"></i>
                                 <span class="text-sm font-bold truncate" title="Inventário de Vendas">Inventário de Vendas</span>
@@ -116,7 +116,7 @@
 
                     <!-- Categorias de Produtos -->
                     <li>
-                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline hover:bg-gray-700">
+                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
                             <div class="flex items-center gap-2">
                                 <i class="fa-solid fa-tags text-lg"></i>
                                 <span class="text-sm font-bold truncate" title="Categorias de Produtos">Categorias de Produtos</span>
@@ -126,7 +126,7 @@
 
                     <!-- Marcas -->
                     <li>
-                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline hover:bg-gray-700">
+                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
                             <div class="flex items-center gap-2">
                                 <i class="fa-solid fa-registered text-lg"></i>
                                 <span class="text-sm font-bold truncate" title="Marcas">Marcas</span>
@@ -136,7 +136,7 @@
 
                     <!-- Avaliações -->
                     <li>
-                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline hover:bg-gray-700">
+                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
                             <div class="flex items-center gap-2">
                                 <i class="fa-solid fa-star text-lg"></i>
                                 <span class="text-sm font-bold truncate" title="Avaliações">Avaliações</span>
@@ -146,7 +146,7 @@
 
                     <!-- Clientes -->
                     <li>
-                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline hover:bg-gray-700">
+                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
                             <div class="flex items-center gap-2">
                                 <i class="fa-solid fa-users text-lg"></i>
                                 <span class="text-sm font-bold truncate" title="Clientes">Clientes</span>
@@ -172,9 +172,9 @@
 
                     <!-- Relatório de Funcionário -->
                     <li>
-                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline hover:bg-gray-700">
+                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
                             <div class="flex items-center gap-2">
-                                <i class="fa-solid fa-users text-lg"></i>
+                                <i class="fa-solid fa-file-pdf"></i>
                                 <span class="text-sm font-bold truncate" title="Relatório de Funcionário">Relatório de Funcionário</span>
                             </div>
                         </a>
@@ -182,9 +182,9 @@
 
                     <!-- Cadastro de Colaborador -->
                     <li>
-                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline hover:bg-gray-700">
+                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
                             <div class="flex items-center gap-2">
-                                <i class="fa-solid fa-users text-lg"></i>
+                                <i class="fa-solid fa-person-circle-plus"></i>
                                 <span class="text-sm font-bold truncate" title="Cadastro de Colaborador">Cadastro de Colaborador</span>
                             </div>
                         </a>
@@ -192,9 +192,9 @@
 
                     <!-- Todos os Funcionários -->
                     <li>
-                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline hover:bg-gray-700">
+                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
                             <div class="flex items-center gap-2">
-                                <i class="fa-solid fa-users text-lg"></i>
+                                <i class="fa-solid fa-address-card"></i>
                                 <span class="text-sm font-bold truncate" title="Todos os Funcionários">Todos os Funcionários</span>
                             </div>
                         </a>
@@ -214,9 +214,47 @@
                 <i class="fa-solid fa-chevron-down"></i>
             </button>
             <div id="financeiroMenu" class="collapse">
-                <ul class="pl-8">
-                    <li><a href="#" class="text-gray-300 hover:text-white">Relatórios</a></li>
-                    <li><a href="#" class="text-gray-300 hover:text-white">Pagamentos</a></li>
+                <ul class="w-full list-none mx-0 px-0">
+
+                    <!-- Controle de Receitas e Despesas -->
+                    <li>
+                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-address-card"></i>
+                                <span class="text-sm font-bold truncate" title="Controle de Receitas e Despesas">Controle de Receitas e Despesas</span>
+                            </div>
+                        </a>
+                    </li>
+
+                    <!-- Gerenciamento de Faturas -->
+                    <li>
+                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-address-card"></i>
+                                <span class="text-sm font-bold truncate" title="Gerenciamento de Faturas">Gerenciamento de Faturas</span>
+                            </div>
+                        </a>
+                    </li>
+
+                    <!-- Processamento de Reembolsos -->
+                    <li>
+                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-address-card"></i>
+                                <span class="text-sm font-bold truncate" title="Processamento de Reembolsos">Processamento de Reembolsos</span>
+                            </div>
+                        </a>
+                    </li>
+
+                    <!-- Controle de Fluxo de Caixa -->
+                    <li>
+                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-address-card"></i>
+                                <span class="text-sm font-bold truncate" title="Controle de Fluxo de Caixa">Controle de Fluxo de Caixa</span>
+                            </div>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </li>

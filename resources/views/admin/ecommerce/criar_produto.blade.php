@@ -28,59 +28,113 @@
                         class="mt-1 w-full px-2 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 h-28"></textarea>
                 </div>
 
-                <!-- Preço -->
+                <!-- Preço, Marca e Tamanho -->
                 <div class="mb-4">
-                    <label for="preco" class="block text-sm font-medium text-gray-700">Preço</label>
-                    <input id="preco" type="number" placeholder="Digite o preço"
-                        class="mt-1 w-full px-2 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <!-- Preço -->
+                        <div>
+                            <label for="preco" class="block text-sm font-medium text-gray-700">Preço</label>
+                            <input id="preco" type="number" placeholder="Digite o preço"
+                                class="mt-1 w-full px-2 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
+                        </div>
+                        <!-- Marca -->
+                        <div>
+                            <label for="marca" class="block text-sm font-medium text-gray-700">Marca</label>
+                            <select id="marca"
+                                class="mt-1 w-full px-2 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
+                                <option value="">Selecione a marca</option>
+                                <option value="marca1">Marca 1</option>
+                                <option value="marca2">Marca 2</option>
+                            </select>
+                        </div>
+                        <!-- Tamanho -->
+                        <div>
+                            <label for="tamanho" class="block text-sm font-medium text-gray-700">Tamanho</label>
+                            <select id="tamanho"
+                                class="mt-1 w-full px-2 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
+                                <option value="">Selecione o tamanho</option>
+                                <option value="pequeno">Pequeno</option>
+                                <option value="medio">Médio</option>
+                                <option value="grande">Grande</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Quantidade -->
+                <!-- Quantidade, Categoria e Cor -->
                 <div class="mb-4">
-                    <label for="quantidade" class="block text-sm font-medium text-gray-700">Quantidade</label>
-                    <input id="quantidade" type="number" placeholder="Digite a quantidade"
-                        class="mt-1 w-full px-2 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <!-- Quantidade -->
+                        <div>
+                            <label for="quantidade" class="block text-sm font-medium text-gray-700">Quantidade</label>
+                            <input id="quantidade" type="number" placeholder="Digite a quantidade"
+                                class="mt-1 w-full px-2 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
+                        </div>
+                        <!-- Categoria -->
+                        <div>
+                            <label for="categoria" class="block text-sm font-medium text-gray-700">Categoria</label>
+                            <select id="categoria"
+                                class="mt-1 w-full px-2 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
+                                <option value="">Selecione uma categoria</option>
+                                <option value="eletronicos">Eletrônicos</option>
+                                <option value="livros">Livros</option>
+                                <option value="roupas">Roupas</option>
+                            </select>
+                        </div>
+                        <!-- Cor -->
+                        <div>
+                            <label for="cor" class="block text-sm font-medium text-gray-700">Cor</label>
+                            <div class="flex items-center space-x-4">
+                                <div class="flex-1">
+                                    <select id="cor"
+                                        class="mt-1 w-full px-2 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
+                                        <option value="">Selecione uma cor</option>
+                                        <option value="vermelho">Vermelho</option>
+                                        <option value="azul">Azul</option>
+                                        <option value="verde">Verde</option>
+                                    </select>
+                                </div>
+                                <button type="button"
+                                    class="px-2 py-2 bg-gray-400 border rounded-full focus:ring-indigo-500 hover:bg-blue-300 focus:border-white text-gray-700">
+                                    <i class="fa-solid fa-circle-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
 
-                <!-- Categoria -->
                 <div class="mb-4">
-                    <label for="categoria" class="block text-sm font-medium text-gray-700">Categoria</label>
-                    <select id="categoria"
-                        class="mt-1 w-full px-2 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
-                        <option value="">Selecione uma categoria</option>
-                        <option value="eletronicos">Eletrônicos</option>
-                        <option value="livros">Livros</option>
-                        <option value="roupas">Roupas</option>
-                    </select>
+                    <label class="block text-sm font-medium text-gray-700">Cores selecionadas</label>
+
                 </div>
 
                 <!-- Imagem -->
                 <div class="mb-4 flex flex-col bg-gray-100">
                     <div class="w-full w-md-lg bg-white p-6 rounded-lg shadow-lg">
-                      <label for="file-upload" class="block text-sm font-medium text-gray-700 mb-2">Upload de Imagem</label>
+                        <label for="file-upload" class="block text-sm font-medium text-gray-700 mb-2">Upload de
+                            Imagem</label>
 
-                      <div class="flex items-center justify-center w-full">
-                        <label for="file-upload" class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-indigo-500 hover:bg-indigo-50 transition">
-                          <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-gray-500 mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-                          </svg>
-                          <span class="text-sm text-gray-500">Clique para selecionar um arquivo</span>
-                          <input id="file-upload" type="file" class="hidden">
-                        </label>
-                      </div>
+                        <div class="flex items-center justify-center w-full">
+                            <label for="file-upload"
+                                class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-indigo-500 hover:bg-indigo-50 transition">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-gray-500 mb-2" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 4v16m8-8H4" />
+                                </svg>
+                                <span class="text-sm text-gray-500">Clique para selecionar um arquivo</span>
+                                <input id="file-upload" type="file" class="hidden">
+                            </label>
+                        </div>
                     </div>
-                  </div>
+                </div>
 
 
                 <!-- Publicar -->
-                <div class="mb-6 flex items-center justify-between">
-                    <label for="publicar" class="text-sm font-medium text-gray-700">Publicar</label>
-                    <input id="publicar" type="checkbox" class="toggle-checkbox hidden">
-                    <label for="publicar"
-                        class="toggle-label block w-12 h-6 rounded-full bg-gray-300 cursor-pointer relative">
-                        <span
-                            class="toggle-circle absolute w-5 h-5 bg-white rounded-full shadow-md transform transition-transform"></span>
-                    </label>
+                <div class="form-check form-switch form-check-reverse">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckReverse">
+                    <label class="form-check-label" for="flexSwitchCheckReverse">Publicar</label>
                 </div>
 
                 <!-- Botão de Enviar -->

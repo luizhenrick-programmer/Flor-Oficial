@@ -18,7 +18,7 @@
     <script src="{{ asset('js/cep.js') }}"></script>
 
     <!-- App Principal -->
-    <div class="flex flex-col w-full h-full bg-gray-900">
+    <div class="flex flex-col w-full min-h-screen bg-gray-900">
         @include('admin.partials-admin.header')
         <div class="flex flex-row flex-grow min-h-screen bg-gray-900">
             <aside class="bg-gray-800 hidden lg:flex lg:w-64">
