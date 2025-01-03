@@ -9,9 +9,22 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'criado_por');
+    }
+
     protected $fillable = [
-        'name', 'cpf', 'telefone', 'username', 'role',
-        'endereco', 'email', 'status', 'password',
+        'name',
+        'cpf',
+        'telefone',
+        'username',
+        'role',
+        'endereco',
+        'email',
+        'status',
+        'password',
     ];
 
 

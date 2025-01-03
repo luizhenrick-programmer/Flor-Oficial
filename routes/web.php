@@ -36,6 +36,8 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('admin/cadastrar-funcionario', [AdminController::class, 'cadFuncionario'])->name('admin.cad-funcionario');
     Route::get('admin/e-commerce', [AdminController::class, 'ecommerce'])->name('admin.e-commerce');
+    Route::get('admin/produtos', [AdminController::class, 'produto'])->name('admin.produtos');
+    Route::get('admin/produtos/criar', [AdminController::class, 'criarProduto'])->name('admin.criarProduto');
     Route::get('admin/colaboradores', [AdminController::class, 'colaboradores'])->name('admin.colaboradores');
     Route::get('admin/financeiro', [AdminController::class, 'financeiro'])->name('admin.financeiro');
 });

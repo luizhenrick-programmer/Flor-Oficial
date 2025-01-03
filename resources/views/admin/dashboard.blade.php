@@ -54,17 +54,17 @@
             <!-- Produtos -->
             <div class="bg-gray-700 shadow-md rounded-lg p-4">
                 <h5 class="text-lg font-bold mb-2 text-white">Produtos</h5>
-                <h1 class="text-white" style="font-size: 4rem;">0</h1>
+                <h1 class="text-4xl font-bold mt-2">0</h1>
             </div>
             <!-- Clientes -->
             <div class="bg-gray-700 shadow-md rounded-lg p-4">
                 <h5 class="text-lg font-bold mb-2 text-white">Clientes</h5>
-                <h1 class="text-white" style="font-size: 4rem;">0</h1>
+                <h1 class="text-4xl font-bold mt-2">0</h1>
             </div>
             <!-- Avaliações -->
             <div class="bg-gray-700 shadow-md rounded-lg p-4">
                 <h5 class="text-lg font-bold mb-2 text-white">Avaliações</h5>
-                <h1 class="text-white" style="font-size: 4rem;">0</h1>
+                <h1 class="text-4xl font-bold mt-2">0</h1>
             </div>
         </div>
 

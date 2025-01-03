@@ -14,6 +14,7 @@ export default {
     blocklist: [
         'container',
         'collapse',
+        'offcanvas',
       ],
 
     plugins: [forms],
