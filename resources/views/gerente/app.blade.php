@@ -55,7 +55,7 @@
                         </a>
                         <div class="collapse" id="collapseFuncionarios">
                             <ul class="list-unstyled ps-4">
-                                <li><a class="nav-link text-light" href="{{ route('admin.cad-funcionario') }}">Adicionar Funcionário</a></li>
+                                <li><a class="nav-link text-light" href="#">Adicionar Funcionário</a></li>
                                 <li><a class="nav-link text-light" href="#">Listar Funcionários</a></li>
                             </ul>
                         </div>
