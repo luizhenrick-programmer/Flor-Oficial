@@ -51,8 +51,9 @@ Route::middleware(['auth', 'gerente'])->group(function () {
 // Rotas para vendedores
 Route::middleware(['auth', 'vendedor'])->group(function () {
     Route::get('vendedor/dashboard', [VendedorController::class, 'dashboard'])->name('vendedor.dashboard');
-    //defini rota para vendas
+    //define rota para vendas
     Route::get('vendedor/vendas',[VendedorController::class, 'vendas'])->name('vendedor.vendas');
+    //define rota para lista de produtos disponiveis 
     Route::get('vendedor/lista',[VendedorController::class, 'lista'])->name('vendedor.listaProd');
 });
 
