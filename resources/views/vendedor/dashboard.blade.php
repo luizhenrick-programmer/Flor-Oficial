@@ -23,7 +23,7 @@
 
 @extends('vendedor.app')
 
-@section('titulo', 'Dashboard Vendedor')
+@section('titulo', 'Painel Vendedor')
 
 @section('content')
 
