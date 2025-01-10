@@ -40,7 +40,7 @@
                         <i class="fa-solid fa-file-export"></i>
                         <span class="ms-2">Exportar</span>
                     </a>
-                    <a href="{{ route('admin.criarProduto') }}" class="btn bg-violet-600 text-white shadow-md rounded-md border border-gray-600 py-2 px-4 hover:bg-violet-800 hover:text-black">
+                    <a href="{{ route('e-commerce.criar_produto') }}" class="btn bg-violet-600 text-white shadow-md rounded-md border border-gray-600 py-2 px-4 hover:bg-violet-800 hover:text-black">
                         <i class="fa-solid fa-plus"></i>
                         <span class="ms-2">Criar Produto</span>
                     </a>

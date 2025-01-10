@@ -1,52 +1,91 @@
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
-<header class="header d-flex justify-content-around align-items-center bg-white border-bottom shadow-sm py-3 px-4">
-    <div class="d-flex align-items-center">
-        <a href="{{ route('dashboard') }}" class="logo">
-            <img src="{{ asset('assets/images/logoSite.png') }}" alt="Logo Flor Oficial" width="80" height="80">
-        </a>
-        <div>
-            <span class="d-block" style="font-family: 'Roboto', sans-serif; font-weight: bold;">FLOR OFICIAL</span>
-            <span class="d-block" style="font-family: 'Roboto', sans-serif;">BY Thays Conrado</span>
+<header class="flex items-center justify-stretch md:justify-around bg-white border-bottom shadow-sm px-3 py-3">
+    <div class="flex items-center justify-center hover:bg-gray-300 focus:hover:bg-violet-500 rounded lg:hidden ">
+        <button class="btn border-0 text-dark font-bold hover:text-violet-500 focus:text-violet-500" type="button"
+            data-bs-toggle="offcanvas" data-bs-target="#menu-princial" aria-controls="menu-princial">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="menu-princial" aria-labelledby="menu-principal-app">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title text-white font-bold mx-auto" id="offcanvasExampleLabel">Menu Principal</h5>
+                <button type="button" class="btn bg-transparent border font-bold text-white rounded-md mx-0"
+                    data-bs-dismiss="offcanvas" aria-label="Close">X</button>
+            </div>
+            <div class="offcanvas-body">
+
+            </div>
+        </div>
+    </div>
+    <div class="flex flex-row items-center justify-center">
+        <img class="rounded-full w-16 h-16 mx-2" src="https://via.placeholder.com/200x200" alt="Logo">
+        <div class="flex flex-col align-items">
+            <h1 class="text-lg font-bold text-dark mb-1">Flor Oficial</h1>
+            <p class="text-sm text-nowrap text-gray-400 mb-0">BY Thays Conrado</p>
         </div>
     </div>
 
-    <nav class="navbar">
-        <ul class="nav">
-            <li class="nav-item"><a class="nav-link text-dark" href="{{ route('dashboard') }}">Início</a></li>
-            <li class="nav-item"><a class="nav-link text-dark" href="{{ route('shopping') }}">Comprar</a></li>
-            <li class="nav-item"><a class="nav-link text-dark" href="{{ route('about') }}">Sobre</a></li>
-            <li class="nav-item"><a class="nav-link text-dark" href="{{ route('contact') }}">Contato</a></li>
+    <nav class="hidden items-center justify-center lg:flex">
+        <ul class="flex items-center justify-center mb-0 gap-8">
+            <!-- Item Início -->
+            <li class="group relative">
+                <a href="{{ route('home') }}"
+                    class="text-md font-semibold text-gray-700 transition no-underline hover:text-pink-500">
+                    INÍCIO
+                </a>
+                <span
+                    class="absolute left-0 right-0 h-0.5 bg-pink-500 scale-x-0 transition-transform ease-in duration-300 group-hover:scale-x-100"></span>
+            </li>
+            <!-- Item Comprar -->
+            <li class="group relative dropdown">
+                <a href="{{ route('shopping') }}"
+                    class="text-md font-semibold text-gray-700 transition no-underline hover:text-pink-700">
+                    LOJA
+                </a>
+                <span
+                    class="absolute left-0 right-0 h-0.5 bg-pink-700 scale-x-0 transition-transform ease-in duration-300 group-hover:scale-x-100"></span>
+            </li>
+            <!-- Item Sobre -->
+            <li class="group relative">
+                <a href="{{ route('about') }}"
+                    class="text-md font-semibold text-gray-700 transition no-underline hover:text-pink-800">
+                    SOBRE
+                </a>
+                <span
+                    class="absolute left-0 right-0 h-0.5 bg-pink-500 scale-x-0 transition-transform ease-in duration-300 group-hover:scale-x-100"></span>
+            </li>
+            <!-- Item Contato -->
+            <li class="group relative">
+                <a href="{{ route('contact') }}"
+                    class="text-md font-semibold text-gray-700 transition no-underline hover:text-pink-500">
+                    CONTATO
+                </a>
+                <span
+                    class="absolute left-0 right-0 h-0.5 bg-pink-500 scale-x-0 transition-transform ease-in duration-300 group-hover:scale-x-100"></span>
+            </li>
         </ul>
     </nav>
 
-    <div class="d-flex align-items-center">
-        <a class="btn border-0" role="button" data-bs-toggle="collapse" data-bs-target="#searchCollapse" aria-expanded="false" aria-controls="searchCollapse">
-            <i class="bi bi-search fs-5"></i>
+    <div class="hidden md:flex items-center justify-between gap-6 px-6 py-4">
+        @if (!Auth::check())
+            <a class="flex items-center justify-center text-dark no-underline text-2xl" href="{{ route('login') }}">
+                <i class="fa-solid fa-user"></i>
+            </a>
+        @endif
+        <a class="flex items-center justify-center text-dark no-underline text-2xl" href="{{ route('home') }}">
+            <i class="fa-regular fa-heart"></i>
         </a>
-        <a class="btn border-0" href="{{ route('login') }}">
-            <i class="bi bi-person fs-5"></i>
-        </a>
-        <a class="btn border-0" href="{{ route('dashboard') }}">
-            <i class="bi bi-heart fs-5"></i>
-        </a>
-        <a class="btn border-0" href="{{ route('dashboard') }}">
-            <i class="bi bi-cart fs-5"></i>
+        <a class="flex items-center justify-center text-dark no-underline text-2xl" href="{{ route('home') }}">
+            <i class="fa-solid fa-cart-plus"></i>
         </a>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-</header>
 
-<div class="collapse" id="searchCollapse">
-    <div class="container">
-        <div class="card card-body border-0">
-            <form action="" method="GET">
-                <h3 class="fw-bold fs-5">Encontre o que você precisa, de forma rápida e precisa!</h3>
-                <div class="flex mt-3">
-                    <input type="text" name="q" class="form-control" placeholder="Procurar Produtos">
-                    <button class="btn btn-primary mx-3" type="submit"><i class="bi bi-search fs-5"></i></button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
+    @if (Auth::check())
+        <a class="btn border-0" href="{{ route('login') }}">
+
+        </a>
+    @endif
+
+    <script src="https://kit.fontawesome.com/12004a6e82.js" crossorigin="anonymous"></script>
+</header>

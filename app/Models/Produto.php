@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Produto extends Model
 {
@@ -19,5 +20,16 @@ class Produto extends Model
     {
         return $this->belongsTo(User::class, 'criado_por');
     }
+
+    public function storeArquivo($arquivo)
+    {
+        if($arquivo) {
+            $path = $arquivo->store('arquivos', 'public');
+            $this->url = Storage::url($path);
+            $this->save();
+        }
+
+    }
+
 }
 

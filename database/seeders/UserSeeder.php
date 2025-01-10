@@ -44,11 +44,21 @@ class UserSeeder extends Seeder
             ],
             [
                 'name' => 'Jose Pinto',
-                'cpf' => '000.000.000.87',
+                'cpf' => '209.858.092-48',
                 'telefone' => '+5561998542748',
                 'username' => 'josepinto123',
                 'role' => 'cliente',
                 'email' => 'josepinto@gmail.com',
+                'status' => 'ativo',
+                'password' => Hash::make('password'),
+            ],
+            [
+                'name' => 'Luiz Henrick de Abreu Evangelista',
+                'cpf' => '09974181178',
+                'telefone' => '+5561999777155',
+                'username' => 'luiz_abreu',
+                'role' => 'cliente',
+                'email' => 'abreu@gmail.com',
                 'status' => 'ativo',
                 'password' => Hash::make('password'),
             ]

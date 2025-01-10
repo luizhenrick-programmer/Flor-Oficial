@@ -3,7 +3,7 @@
     <div class="row w-100">
         <div class="col-md-4 w-50">
             <div class="d-flex align-items-center">
-                <a href="{{ route('dashboard') }}" class="logo">
+                <a href="{{ route('home') }}" class="logo">
                     <img src="{{ asset('assets/images/logoSite.png') }}" alt="Logo Flor Oficial" width="80" height="80">
                 </a>
                 <div>
@@ -22,35 +22,6 @@
                 <li class="list-inline-item"><a href="#" class="text-white"><i class="fab fa-envelope"></i></a>
                 </li>
             </ul>
-        </div>
-        <div class="col-md-4 w-50 flex justify-content-around">
-            <div class="flex flex-column me-3">
-                <h2>Compras</h2>
-                <ul class="list-unstyled">
-                    <li class="text-center"><a href="#" class="fw-bold fs-5">Exemplo</a></li>
-                    <li class="text-center"><a href="#" class="fw-bold fs-5">Exemplo</a></li>
-                    <li class="text-center"><a href="#" class="fw-bold fs-5">Exemplo</a></li>
-                    <li class="text-center"><a href="#" class="fw-bold fs-5">Exemplo</a></li>
-                </ul>
-            </div>
-            <div class="flex flex-column me-3">
-                <h2>Categoria</h2>
-                <ul class="list-unstyled">
-                    <li class="text-center"><a href="#" class="fw-bold fs-5">Exemplo</a></li>
-                    <li class="text-center"><a href="#" class="fw-bold fs-5">Exemplo</a></li>
-                    <li class="text-center"><a href="#" class="fw-bold fs-5">Exemplo</a></li>
-                    <li class="text-center"><a href="#" class="fw-bold fs-5">Exemplo</a></li>
-                </ul>
-            </div>
-            <div class="flex flex-column me-3">
-                <h2>Help</h2>
-                <ul class="list-unstyled">
-                    <li class="text-center"><a href="#" class="fw-bold fs-5">Exemplo</a></li>
-                    <li class="text-center"><a href="#" class="fw-bold fs-5">Exemplo</a></li>
-                    <li class="text-center"><a href="#" class="fw-bold fs-5">Exemplo</a></li>
-                    <li class="text-center"><a href="#" class="fw-bold fs-5">Exemplo</a></li>
-                </ul>
-            </div>
         </div>
     </div>
     <hr>

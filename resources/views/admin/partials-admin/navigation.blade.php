@@ -2,7 +2,7 @@
     <ul class="w-full h-full list-none mx-0 px-0">
         <!-- Dashboard -->
         <li>
-            <button class="flex items-center justify-between w-full text-gray-300 px-3 py-2 transition no-underline
+            <a href="{{ route('admin.dashboard') }}" class="flex items-center justify-between w-full text-gray-300 px-3 py-2 transition no-underline
                     {{ request()->routeIs('admin.dashboard') ? 'bg-indigo-700 text-white' : '' }}" type="button">
                     <div class="flex items-center">
                         <i class="fa-solid fa-house text-lg"></i>
@@ -13,7 +13,8 @@
 
         <!-- E-commerce -->
         <li>
-            <button class="flex items-center justify-between w-full text-gray-300 px-3 py-2 transition no-underline"
+            <button class="flex items-center justify-between w-full text-gray-300 px-3 py-2 transition no-underline
+                    {{ request()->routeIs('e-commerce.*') ? 'bg-indigo-700 text-white' : '' }}"
                     type="button" data-bs-toggle="collapse" data-bs-target="#ecommerceMenu" aria-expanded="false" aria-controls="ecommerceMenu">
                 <div class="flex items-center">
                     <i class="fa-brands fa-shopify text-lg"></i>
@@ -66,7 +67,7 @@
 
                     <!-- Produtos -->
                     <li>
-                        <a href="{{ route('admin.produtos') }}" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
+                        <a href="{{ route('e-commerce.produtos') }}" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
                             <div class="flex items-center gap-2">
                                 <i class="fa-brands fa-product-hunt text-lg"></i>
                                 <span class="text-sm font-bold truncate" title="Produtos">Produtos</span>
@@ -159,7 +160,8 @@
 
         <!-- Colaboradores -->
         <li>
-            <button class="flex items-center justify-between w-full text-gray-300 px-3 py-2 transition no-underline"
+            <button class="flex items-center justify-between w-full text-gray-300 px-3 py-2 transition no-underline
+                    {{ request()->routeIs('colaboradores.*') ? 'bg-indigo-700 text-white' : '' }}"
                     type="button" data-bs-toggle="collapse" data-bs-target="#colaboradoresMenu" aria-expanded="false" aria-controls="colaboradoresMenu">
                 <div class="flex items-center">
                     <i class="fa-solid fa-box text-lg"></i>
@@ -182,7 +184,8 @@
 
                     <!-- Cadastro de Colaborador -->
                     <li>
-                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
+                        <a href="{{ route('colaboradores.cadastrar_funcionario') }}"
+                        class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
                             <div class="flex items-center gap-2">
                                 <i class="fa-solid fa-person-circle-plus"></i>
                                 <span class="text-sm font-bold truncate" title="Cadastro de Colaborador">Cadastro de Colaborador</span>

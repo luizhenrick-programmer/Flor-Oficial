@@ -5,12 +5,12 @@ use App\Http\Controllers\Backend\GerenteController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\VendedorController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\Backend\Pagamento;
+use App\Http\Controllers\Backend\PaymentController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');
-})->name('dashboard');
+})->name('home');
 
 Route::get('/comprar', function () {
     return view('shop');
@@ -24,9 +24,7 @@ Route::get('/contato', function () {
     return view('contact');
 })->name('contact');
 
-
-
-
+// CRUD USUÁRIO
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -35,29 +33,39 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
-    Route::get('admin/cadastrar-funcionario', [AdminController::class, 'cadFuncionario'])->name('admin.cad-funcionario');
-    Route::get('admin/e-commerce', [AdminController::class, 'ecommerce'])->name('admin.e-commerce');
-    Route::get('admin/produtos', [AdminController::class, 'produto'])->name('admin.produtos');
-    Route::get('admin/produtos/criar', [AdminController::class, 'criarProduto'])->name('admin.criarProduto');
-    Route::get('admin/colaboradores', [AdminController::class, 'colaboradores'])->name('admin.colaboradores');
-    Route::get('admin/financeiro', [AdminController::class, 'financeiro'])->name('admin.financeiro');
 });
 
-// Rotas para gerentes
 Route::middleware(['auth', 'gerente'])->group(function () {
     Route::get('gerente/dashboard', [GerenteController::class, 'dashboard'])->name('gerente.dashboard');
 });
 
-// Rotas para vendedores
 Route::middleware(['auth', 'vendedor'])->group(function () {
     Route::get('vendedor/dashboard', [VendedorController::class, 'dashboard'])->name('vendedor.dashboard');
-    //defini rota para vendas
-    Route::get('vendedor/vendas',[VendedorController::class, 'vendas'])->name('vendedor.vendas');
 });
 
-// Rotas para clientes
 Route::middleware(['auth', 'cliente'])->group(function () {
-    Route::get('dashboard', [UserController::class, 'dashboard'])->name('cliente.dashboard');
+    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('cliente.dashboard');
+    Route::get('/pagamento', [PaymentController::class, 'pagamento'])->name('cliente.pagamento');
+});
+
+
+
+
+// ROTAS E-COMMERCE
+Route::middleware(['auth', 'admin'])->prefix('e-commerce')->group(function () {
+    Route::get('/produtos', [AdminController::class, 'produto'])->name('e-commerce.produtos');
+    Route::get('/produtos/criar', [AdminController::class, 'criarProduto'])->name('e-commerce.criar_produto');
+    Route::post('/produtos/criar/enviar', [AdminController::class, 'store_produto'])->name('e-commerce.produto.store');
+});
+
+// ROTAS COLABORADORES
+Route::middleware(['auth', 'admin'])->prefix('colaboradores')->group(function () {
+    Route::get('/cadastrar-funcionario', [AdminController::class, 'cadastrar_funcionario'])->name('colaboradores.cadastrar_funcionario');
+});
+
+// ROTAS FINANCEIRO
+Route::middleware(['auth', 'admin'])->prefix('e-commerce')->group(function () {
+    Route::get('/produtos', [AdminController::class, 'produto'])->name('e-commerce.produtos');
 });
 
 require __DIR__.'/auth.php';

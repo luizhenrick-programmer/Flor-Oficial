@@ -9,6 +9,6 @@ class UserController extends Controller
 {
 
     public function dashboard() {
-        return view('cliente.dashboard');
+        return view('home');
     }
 }
