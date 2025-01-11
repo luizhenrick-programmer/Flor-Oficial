@@ -54,7 +54,6 @@ Route::middleware(['auth', 'cliente'])->group(function () {
 
 
 
-
 // ROTAS E-COMMERCE
 Route::middleware(['auth', 'admin'])->prefix('e-commerce')->group(function () {
     Route::get('/produtos', [AdminController::class, 'produto'])->name('e-commerce.produtos');
