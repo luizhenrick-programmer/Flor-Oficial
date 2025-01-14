@@ -19,7 +19,7 @@
         </div>
     </div>
     <div class="flex flex-row items-center justify-center">
-        <img class="rounded-full w-16 h-16 mx-2" src="https://via.placeholder.com/200x200" alt="Logo">
+        <img class="rounded-full w-16 h-16 mx-2" src="{{ ('assets/images/logoSite.png') }}" alt="Logo">
         <div class="flex flex-col align-items">
             <h1 class="text-lg font-bold text-dark mb-1">Flor Oficial</h1>
             <p class="text-sm text-nowrap text-gray-400 mb-0">BY Thays Conrado</p>
