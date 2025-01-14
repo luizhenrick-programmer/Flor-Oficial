@@ -19,7 +19,8 @@ return new class extends Migration
             $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('cascade');
             $table->json('cor');
             $table->text('tamanho');
-            $table->text('marca');
+            $table->unsignedBigInteger('marca_id');
+            $table->foreign('marca_id')->references('id')->on('marcas')->onDelete('cascade');
             $table->enum('status', ['publicado', 'inativo']);
             $table->unsignedBigInteger('criado_por')->nullable();
             $table->foreign('criado_por')->references('id')->on('users')->onDelete('set null');

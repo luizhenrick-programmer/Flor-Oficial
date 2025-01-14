@@ -40,29 +40,36 @@ class AdminController extends Controller
 
     public function store_produto(Request $request)
     {
-        $validated = $request->validate([
-            'nome' => 'required|string|max:255',
-            'url' => 'nullable|url',
-            'descricao' => 'required|string',
-            'preco' => 'required|integer|min:0',
-            'quantidade' => 'required|integer|min:0',
-            'categoria_id' => 'required|exists:categoria,id',
-            'cor' => 'required|array|min:1',
-            'tamanho' => 'required|string|max:255',
-            'marca' => 'required|string|max:255',
-            'status' => 'required|in:publicado,inativo',
-            'arquivo' => 'nullable|file|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        ]);
+        try {
+            $request->validate([
+                'nome' => 'required|string|max:255',
+                'url' => 'required|url',
+                'descricao' => 'nullable|string|max:1000',
+                'preco' => 'required|numeric|min:0',
+                'marca_id' => 'required|exists:marcas,id',
+                'quantidade' => 'required|integer|min:0',
+                'categoria_id' => 'required|exists:categorias,id',
+                'tamanho' => 'required|string|in:PP,P,M,G,GG,XG',
+                'cor' => 'required|array|min:1',
+                'arquivo' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
+                'status' => 'required|in:publicado,inativo',
+            ]);
 
-        if ($request->hasFile('arquivo')) {
-            $arquivoPath = $request->file('arquivo')->store('arquivos', 'public');
-            $validated['url'] = Storage::url($arquivoPath);
+
+            if ($request->hasFile('arquivo')) {
+                $arquivoPath = $request->file('arquivo')->store('arquivos', 'public');
+                $validated['url'] = Storage::url($arquivoPath);
+            }
+            $validated['criado_por'] = Auth::user()->id;
+
+            Produto::create($validated);
+
+            return redirect()->route('e-commerce.criar_produto')->with('success', 'Produto criado com sucesso!');
         }
-        $validated['criado_por'] = Auth::user()->id;
-
-        Produto::create($validated);
-
-        return redirect()->route('e-commerce.criar_produto')->with('success', 'Produto criado com sucesso!');
+        catch (\Exception $e) {
+            // Redirecionamento com mensagem de erro
+            return redirect()->route('e-commerce.criar_produto')->with('error', 'Ocorreu um erro ao criar o produto: ' . $e->getMessage());
+        }
     }
 
     public function store_categoria(Request $request)

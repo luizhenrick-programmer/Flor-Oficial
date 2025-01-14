@@ -6,6 +6,10 @@
             <div class="bg-gray-200 shadow-md rounded-lg p-8 w-full">
                 <h2 class="text-2xl font-semibold text-gray-800 mb-6">Cadastrar Produto</h2>
 
+                @if (session('error'))
+                    <p style="color: red;">{{ session('error') }}</p>
+                @endif
+
                 <!-- Formulário -->
                 <form action="{{ route('e-commerce.produto.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
@@ -13,7 +17,7 @@
                     <!-- Nome do Produto -->
                     <div class="mb-4">
                         <label for="nome" class="block text-sm font-medium text-gray-700">Nome do Produto</label>
-                        <input id="nome" type="text" name="nome_produto" placeholder="Digite o nome"
+                        <input id="nome" type="text" name="nome" placeholder="Digite o nome"
                             class="mt-1 w-full px-2 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
                     </div>
 
@@ -36,7 +40,7 @@
                             <!-- Marca -->
                             <div>
                                 <label for="marca" class="block text-sm font-medium text-gray-700">Marca</label>
-                                <select id="marca" name="marca"
+                                <select id="marca" name="marca_id"
                                     class="mt-1 w-full px-2 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
                                     <option value="">Selecione a marca</option>
                                     @foreach ($marcas as $marca)
@@ -50,9 +54,12 @@
                                 <select id="tamanho" name="tamanho"
                                     class="mt-1 w-full px-2 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
                                     <option value="">Selecione o tamanho</option>
-                                    <option value="pequeno">Pequeno</option>
-                                    <option value="medio">Médio</option>
-                                    <option value="grande">Grande</option>
+                                    <option value="PP">PP</option>
+                                    <option value="P">P</option>
+                                    <option value="M">M</option>
+                                    <option value="G">G</option>
+                                    <option value="GG">GG</option>
+                                    <option value="XG">XG</option>
                                 </select>
                             </div>
                         </div>
@@ -70,7 +77,7 @@
                             <!-- Categoria -->
                             <div>
                                 <label for="categoria" class="block text-sm font-medium text-gray-700">Categoria</label>
-                                <select id="categoria" name="categoria"
+                                <select id="categoria" name="categoria_id"
                                     class="mt-1 w-full px-2 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
                                     <option value="">Selecione uma categoria</option>
                                     @foreach ($categorias as $categoria)
@@ -83,7 +90,7 @@
                                 <label for="cor" class="block text-sm font-medium text-gray-700">Cor</label>
                                 <div class="flex items-center space-x-4">
                                     <div class="flex-1">
-                                        <select id="cor" name="cor"
+                                        <select id="cor" name="cor[]"
                                             class="mt-1 w-full px-2 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
                                             <option value="">Selecione uma cor</option>
                                             <option value="red">Vermelho</option>
@@ -170,7 +177,7 @@
 
                     <!-- Publicar -->
                     <label for="publicar" class="block text-sm font-medium text-gray-700">Publicar?</label>
-                    <select id="publicar" name="publicar"
+                    <select id="publicar" name="status"
                         class="mt-1 w-full px-2 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
                         <option value="">Selecione uma opção</option>
                         <option value="publicado">Publicar</option>
