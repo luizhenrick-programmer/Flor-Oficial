@@ -39,8 +39,9 @@
                                 <select id="marca" name="marca"
                                     class="mt-1 w-full px-2 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
                                     <option value="">Selecione a marca</option>
-                                    <option value="marca1">Marca 1</option>
-                                    <option value="marca2">Marca 2</option>
+                                    @foreach ($marcas as $marca)
+                                        <option value="{{ $marca->id }}">{{ $marca->nome }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <!-- Tamanho -->
@@ -72,9 +73,9 @@
                                 <select id="categoria" name="categoria"
                                     class="mt-1 w-full px-2 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
                                     <option value="">Selecione uma categoria</option>
-                                    <option value="eletronicos">Eletrônicos</option>
-                                    <option value="livros">Livros</option>
-                                    <option value="roupas">Roupas</option>
+                                    @foreach ($categorias as $categoria)
+                                        <option value="{{ $categoria->id }}">{{ $categoria->nome }}</option>
+                                    @endforeach
                                 </select>
                             </div>
                             <!-- Cor -->
@@ -142,25 +143,25 @@
 
 
                     <!-- Imagem
-                    <div class="mb-4 flex flex-col bg-gray-100">
-                        <div class="w-full w-md-lg bg-white p-6 rounded-lg shadow-lg">
-                            <label for="file-upload" class="block text-sm font-medium text-gray-700 mb-2">Upload de
-                                Imagem</label>
+                        <div class="mb-4 flex flex-col bg-gray-100">
+                            <div class="w-full w-md-lg bg-white p-6 rounded-lg shadow-lg">
+                                <label for="file-upload" class="block text-sm font-medium text-gray-700 mb-2">Upload de
+                                    Imagem</label>
 
-                            <div class="flex items-center justify-center w-full">
-                                <label for="file-upload"
-                                    class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-indigo-500 hover:bg-indigo-50 transition">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-gray-500 mb-2"
-                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M12 4v16m8-8H4" />
-                                    </svg>
-                                    <span class="text-sm text-gray-500">Clique para selecionar um arquivo</span>
-                                    <input id="file-upload" name="imagem" type="file" class="hidden">
-                                </label>
+                                <div class="flex items-center justify-center w-full">
+                                    <label for="file-upload"
+                                        class="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed border-gray-300 rounded-lg cursor-pointer hover:border-indigo-500 hover:bg-indigo-50 transition">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-gray-500 mb-2"
+                                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M12 4v16m8-8H4" />
+                                        </svg>
+                                        <span class="text-sm text-gray-500">Clique para selecionar um arquivo</span>
+                                        <input id="file-upload" name="imagem" type="file" class="hidden">
+                                    </label>
+                                </div>
                             </div>
-                        </div>
-                    </div> -->
+                        </div> -->
 
                     <div class="form-group">
                         <label for="url">Arquivo</label>

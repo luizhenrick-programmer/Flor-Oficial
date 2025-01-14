@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Categoria extends Model
+class Marcas extends Model
 {
     protected $fillable = [
         'nome',
         'descricao',
+        'criado_por'
     ];
 }

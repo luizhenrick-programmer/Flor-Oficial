@@ -10,7 +10,7 @@
             <h4 class="mb-0">Cadastro de Colaboradores</h4>
         </div>
         <div class="card-body">
-            <form action="{{ route('admin.cad-funcionario') }}" method="POST">
+            <form action="{{ route('colaboradores.cadastrar_funcionario') }}" method="POST">
                 @csrf
                 <h5 class="fw-bold text-success mb-4">Dados Pessoais</h5>
                 <!-- Nome Completo -->
@@ -96,15 +96,4 @@
         </div>
     </div>
 </div>
-
-<script>
-    function formatarCPF(campo) {
-        let cpf = campo.value.replace(/\D/g, '');
-        if (cpf.length > 11) cpf = cpf.slice(0, 11);
-        cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
-        cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2');
-        cpf = cpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-        campo.value = cpf;
-    }
-</script>
 @endsection

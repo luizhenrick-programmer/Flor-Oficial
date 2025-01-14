@@ -11,12 +11,12 @@ return new class extends Migration
         Schema::create('produto', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
-            $table->text('url');
+            $table->string('url');
             $table->text('descricao');
             $table->decimal('preco', 10, 2);
             $table->integer('quantidade');
             $table->unsignedBigInteger('categoria_id');
-            $table->foreign('categoria_id')->references('id')->on('categoria')->onDelete('cascade');
+            $table->foreign('categoria_id')->references('id')->on('categorias')->onDelete('cascade');
             $table->json('cor');
             $table->text('tamanho');
             $table->text('marca');

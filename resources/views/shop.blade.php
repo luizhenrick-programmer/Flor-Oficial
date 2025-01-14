@@ -1,30 +1,55 @@
 @extends('layouts.app')
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 @section('titulo', 'Compra de Vestuário')
 
 @section('content')
     @if (session('error'))
-        <div class="alert alert-danger text-center bg-red-100 text-red-700 p-4 rounded-lg">
-            <p>{{ session('error') }}</p>
+        <div class="relative flex w-full items-center justify-center py-3">
+            <div id="error-toast" class="bg-red-400 text-sm text-dark font-bold px-3 py-2 rounded-lg">
+                {{ session('error') }}
+            </div>
         </div>
     @endif
+
     <main>
         <div class="flex flex-col flex-grow items-center justify-around px-3 py-3">
             <section class="flex flex-col md:flex-row gap-6 mt-5">
-                <div class="hidden md:flex flex-col w-full md:w-1/4 p-6 rounded-lg">
+                <div class="hidden md:flex flex-col md:w-1/4 p-6 rounded-lg">
                     <div class="mb-6">
                         <h2 class="font-bold text-xl mb-4">Categorias</h2>
                         <ul class="space-y-2 px-3">
-                            <li><a href="#" class="text-md text-dark font-semibold no-underline mx-0 hover:text-pink-500 hover:underline hover:decoration-pink-500 hover:decoration-wavy transition">Vestidos</a></li>
-                            <li><a href="#" class="text-md text-dark font-semibold no-underline mx-0 hover:text-pink-500 hover:underline hover:decoration-pink-500 hover:decoration-wavy transition">Shorts</a></li>
-                            <li><a href="#" class="text-md text-dark font-semibold no-underline mx-0 hover:text-pink-500 hover:underline hover:decoration-pink-500 hover:decoration-wavy transition">Moletons</a></li>
-                            <li><a href="#" class="text-md text-dark font-semibold no-underline mx-0 hover:text-pink-500 hover:underline hover:decoration-pink-500 hover:decoration-wavy transition">Trajes de Banho</a></li>
-                            <li><a href="#" class="text-md text-dark font-semibold no-underline mx-0 hover:text-pink-500 hover:underline hover:decoration-pink-500 hover:decoration-wavy transition">Jaquetas</a></li>
-                            <li><a href="#" class="text-md text-dark font-semibold no-underline mx-0 hover:text-pink-500 hover:underline hover:decoration-pink-500 hover:decoration-wavy transition">Camisas e Tops</a></li>
-                            <li><a href="#" class="text-md text-dark font-semibold no-underline mx-0 hover:text-pink-500 hover:underline hover:decoration-pink-500 hover:decoration-wavy transition">Jeans</a></li>
-                            <li><a href="#" class="text-md text-dark font-semibold no-underline mx-0 hover:text-pink-500 hover:underline hover:decoration-pink-500 hover:decoration-wavy transition">Calças</a></li>
-                            <li><a href="#" class="text-md text-dark font-semibold no-underline mx-0 hover:text-pink-500 hover:underline hover:decoration-pink-500 hover:decoration-wavy transition">Homens</a></li>
-                            <li><a href="#" class="text-md text-dark font-semibold no-underline mx-0 hover:text-pink-500 hover:underline hover:decoration-pink-500 hover:decoration-wavy transition">Mulheres</a></li>
+                            <li><a href="#"
+                                    class="text-md text-dark font-semibold no-underline mx-0 hover:text-pink-500 hover:underline hover:decoration-wavy hover:decoration-pink-500 transition">Vestidos</a>
+                            </li>
+                            <li><a href="#"
+                                    class="text-md text-dark font-semibold no-underline mx-0 hover:text-pink-500 hover:underline hover:decoration-wavy hover:decoration-pink-500 transition">Shorts</a>
+                            </li>
+                            <li><a href="#"
+                                    class="text-md text-dark font-semibold no-underline mx-0 hover:text-pink-500 hover:underline hover:decoration-wavy hover:decoration-pink-500 transition">Moletons</a>
+                            </li>
+                            <li><a href="#"
+                                    class="text-md text-dark font-semibold no-underline mx-0 hover:text-pink-500 hover:underline hover:decoration-wavy hover:decoration-pink-500 transition">Trajes
+                                    de Banho</a></li>
+                            <li><a href="#"
+                                    class="text-md text-dark font-semibold no-underline mx-0 hover:text-pink-500 hover:underline hover:decoration-wavy hover:decoration-pink-500 transition">Jaquetas</a>
+                            </li>
+                            <li><a href="#"
+                                    class="text-md text-dark font-semibold no-underline mx-0 hover:text-pink-500 hover:underline hover:decoration-wavy hover:decoration-pink-500 transition">Camisas
+                                    e Tops</a></li>
+                            <li><a href="#"
+                                    class="text-md text-dark font-semibold no-underline mx-0 hover:text-pink-500 hover:underline hover:decoration-wavy hover:decoration-pink-500 transition">Jeans</a>
+                            </li>
+                            <li><a href="#"
+                                    class="text-md text-dark font-semibold no-underline mx-0 hover:text-pink-500 hover:underline hover:decoration-wavy hover:decoration-pink-500 transition">Calças</a>
+                            </li>
+                            <li><a href="#"
+                                    class="text-md text-dark font-semibold no-underline mx-0 hover:text-pink-500 hover:underline hover:decoration-wavy hover:decoration-pink-500 transition">Homens</a>
+                            </li>
+                            <li><a href="#"
+                                    class="text-md text-dark font-semibold no-underline mx-0 hover:text-pink-500 hover:underline hover:decoration-wavy hover:decoration-pink-500 transition">Mulheres</a>
+                            </li>
                         </ul>
                     </div>
                     <div class="mb-6">
@@ -47,20 +72,37 @@
                     </div>
                     <div class="mb-6">
                         <h2 class="font-bold text-xl mb-4">Tamanho</h2>
-                        <div class="flex flex-wrap gap-2">
+                        <div class="grid grid-cols-3 gap-2 w-2/3">
                             <label class="flex items-center cursor-pointer">
                                 <input type="checkbox" name="size" class="hidden">
-                                <span class="px-4 py-2 border rounded focus:bg-pink-500 focus:text-white active:bg-pink-500 active:text-white">PP</span>
+                                <span
+                                    class="flex items-center justify-center px-2 py-2 w-12 border rounded focus:bg-pink-500 focus:text-white active:bg-pink-500 active:text-white">PP</span>
                             </label>
                             <label class="flex items-center cursor-pointer">
                                 <input type="checkbox" name="size" class="hidden">
-                                <span class="px-4 py-2 border rounded focus:bg-pink-500 focus:text-white active:bg-pink-500 active:text-white">P</span>
+                                <span
+                                    class="flex items-center justify-center px-2 py-2 w-12 border rounded focus:bg-pink-500 focus:text-white active:bg-pink-500 active:text-white">P</span>
                             </label>
                             <label class="flex items-center cursor-pointer">
                                 <input type="checkbox" name="size" class="hidden">
-                                <span class="px-4 py-2 border rounded focus:bg-pink-500 focus:text-white active:bg-pink-500 active:text-white">M</span>
+                                <span
+                                    class="flex items-center justify-center px-2 py-2 w-12 border rounded focus:bg-pink-500 focus:text-white active:bg-pink-500 active:text-white">M</span>
                             </label>
-                            <!-- Adicione mais tamanhos -->
+                            <label class="flex items-center cursor-pointer">
+                                <input type="checkbox" name="size" class="hidden">
+                                <span
+                                    class="flex items-center justify-center px-2 py-2 w-12 border rounded focus:bg-pink-500 focus:text-white active:bg-pink-500 active:text-white">G</span>
+                            </label>
+                            <label class="flex items-center cursor-pointer">
+                                <input type="checkbox" name="size" class="hidden">
+                                <span
+                                    class="flex items-center justify-center px-2 py-2 w-12 border rounded focus:bg-pink-500 focus:text-white active:bg-pink-500 active:text-white">GG</span>
+                            </label>
+                            <label class="flex items-center cursor-pointer">
+                                <input type="checkbox" name="size" class="hidden">
+                                <span
+                                    class="flex items-center justify-center px-2 py-2 w-12 border rounded focus:bg-pink-500 focus:text-white active:bg-pink-500 active:text-white">XGG</span>
+                            </label>
                         </div>
                     </div>
                     <div>
@@ -89,75 +131,99 @@
                     </div>
                     <h5 class="text-xl font-semibold mb-4">Compre Agora</h5>
                     <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                        <div class="relative group flex flex-col items-center justify-center">
-                            <img src="https://via.placeholder.com/300x400" alt="Produto 1" class="rounded-lg shadow-lg">
-                            <p class="mt-2 font-semibold">Produto 1</p>
-                            <a href="{{ route('cliente.pagamento') }}"
-                               class="flex w-2/3 mt-2 bg-blue-500 items-center justify-center text-white no-underline text-center py-2 rounded hover:bg-blue-600 hover:underline transition">
-                               COMPRAR O ITEM
-                            </a>
+                        <div class="relative flex flex-col items-center justify-center">
+                            <div class="relative">
+                                <img src="https://via.placeholder.com/300x400" alt="Produto 1"
+                                    class="rounded-lg shadow-lg w-full">
+                                <a href="{{ route('cliente.pagamento') }}"
+                                    class="absolute bottom-0 left-0 w-full bg-pink-400 text-white text-center py-3 no-underline text-sm font-bold rounded-b-lg hover:bg-pink-600 hover:underline transition">
+                                    Vamos as compras
+                                </a>
+                            </div>
+                            <p class="flex items-center justify-start mt-2 w-full font-semibold">Produto 1</p>
                         </div>
-                        <div class="relative group flex flex-col items-center justify-center">
-                            <img src="https://via.placeholder.com/300x400" alt="Produto 1" class="rounded-lg shadow-lg">
-                            <p class="mt-2 font-semibold">Produto 2</p>
-                            <a href="{{ route('cliente.pagamento') }}"
-                               class="flex w-2/3 mt-2 bg-blue-500 items-center justify-center text-white no-underline text-center py-2 rounded hover:bg-blue-600 hover:underline transition">
-                               COMPRAR O ITEM
-                            </a>
+                        <div class="relative flex flex-col items-center justify-center">
+                            <div class="relative">
+                                <img src="https://via.placeholder.com/300x400" alt="Produto 1"
+                                    class="rounded-lg shadow-lg w-full">
+                                <a href="{{ route('cliente.pagamento') }}"
+                                    class="absolute bottom-0 left-0 w-full bg-pink-400 text-white text-center py-3 no-underline text-sm font-bold rounded-b-lg hover:bg-pink-600 hover:underline transition">
+                                    Vamos as compras
+                                </a>
+                            </div>
+                            <p class="flex items-center justify-start mt-2 w-full font-semibold">Produto 2</p>
                         </div>
-                        <div class="relative group flex flex-col items-center justify-center">
-                            <img src="https://via.placeholder.com/300x400" alt="Produto 1" class="rounded-lg shadow-lg">
-                            <p class="mt-2 font-semibold">Produto 3</p>
-                            <a href="{{ route('cliente.pagamento') }}"
-                               class="flex w-2/3 mt-2 bg-blue-500 items-center justify-center text-white no-underline text-center py-2 rounded hover:bg-blue-600 hover:underline transition">
-                               COMPRAR O ITEM
-                            </a>
+                        <div class="relative flex flex-col items-center justify-center">
+                            <div class="relative">
+                                <img src="https://via.placeholder.com/300x400" alt="Produto 1"
+                                    class="rounded-lg shadow-lg w-full">
+                                <a href="{{ route('cliente.pagamento') }}"
+                                    class="absolute bottom-0 left-0 w-full bg-pink-400 text-white text-center py-3 no-underline text-sm font-bold rounded-b-lg hover:bg-pink-600 hover:underline transition">
+                                    Vamos as compras
+                                </a>
+                            </div>
+                            <p class="flex items-center justify-start mt-2 w-full font-semibold">Produto 3</p>
                         </div>
-                        <div class="relative group flex flex-col items-center justify-center">
-                            <img src="https://via.placeholder.com/300x400" alt="Produto 1" class="rounded-lg shadow-lg">
-                            <p class="mt-2 font-semibold">Produto 4</p>
-                            <a href="{{ route('cliente.pagamento') }}"
-                               class="flex w-2/3 mt-2 bg-blue-500 items-center justify-center text-white no-underline text-center py-2 rounded hover:bg-blue-600 hover:underline transition">
-                               COMPRAR O ITEM
-                            </a>
+                        <div class="relative flex flex-col items-center justify-center">
+                            <div class="relative">
+                                <img src="https://via.placeholder.com/300x400" alt="Produto 1"
+                                    class="rounded-lg shadow-lg w-full">
+                                <a href="{{ route('cliente.pagamento') }}"
+                                    class="absolute bottom-0 left-0 w-full bg-pink-400 text-white text-center py-3 no-underline text-sm font-bold rounded-b-lg hover:bg-pink-600 hover:underline transition">
+                                    Vamos as compras
+                                </a>
+                            </div>
+                            <p class="flex items-center justify-start mt-2 w-full font-semibold">Produto 4</p>
                         </div>
-                        <div class="relative group flex flex-col items-center justify-center">
-                            <img src="https://via.placeholder.com/300x400" alt="Produto 1" class="rounded-lg shadow-lg">
-                            <p class="mt-2 font-semibold">Produto 5</p>
-                            <a href="{{ route('cliente.pagamento') }}"
-                               class="flex w-2/3 mt-2 bg-blue-500 items-center justify-center text-white no-underline text-center py-2 rounded hover:bg-blue-600 hover:underline transition">
-                               COMPRAR O ITEM
-                            </a>
+                        <div class="relative flex flex-col items-center justify-center">
+                            <div class="relative">
+                                <img src="https://via.placeholder.com/300x400" alt="Produto 1"
+                                    class="rounded-lg shadow-lg w-full">
+                                <a href="{{ route('cliente.pagamento') }}"
+                                    class="absolute bottom-0 left-0 w-full bg-pink-400 text-white text-center py-3 no-underline text-sm font-bold rounded-b-lg hover:bg-pink-600 hover:underline transition">
+                                    Vamos as compras
+                                </a>
+                            </div>
+                            <p class="flex items-center justify-start mt-2 w-full font-semibold">Produto 5</p>
                         </div>
-                        <div class="relative group flex flex-col items-center justify-center">
-                            <img src="https://via.placeholder.com/300x400" alt="Produto 1" class="rounded-lg shadow-lg">
-                            <p class="mt-2 font-semibold">Produto 6</p>
-                            <a href="{{ route('cliente.pagamento') }}"
-                               class="flex w-2/3 mt-2 bg-blue-500 items-center justify-center text-white no-underline text-center py-2 rounded hover:bg-blue-600 hover:underline transition">
-                               COMPRAR O ITEM
-                            </a>
+                        <div class="relative flex flex-col items-center justify-center">
+                            <div class="relative">
+                                <img src="https://via.placeholder.com/300x400" alt="Produto 1"
+                                    class="rounded-lg shadow-lg w-full">
+                                <a href="{{ route('cliente.pagamento') }}"
+                                    class="absolute bottom-0 left-0 w-full bg-pink-400 text-white text-center py-3 no-underline text-sm font-bold rounded-b-lg hover:bg-pink-600 hover:underline transition">
+                                    Vamos as compras
+                                </a>
+                            </div>
+                            <p class="flex items-center justify-start mt-2 w-full font-semibold">Produto 6</p>
                         </div>
-                        <div class="relative group flex flex-col items-center justify-center">
-                            <img src="https://via.placeholder.com/300x400" alt="Produto 1" class="rounded-lg shadow-lg">
-                            <p class="mt-2 font-semibold">Produto 7</p>
-                            <a href="{{ route('cliente.pagamento') }}"
-                               class="flex w-2/3 mt-2 bg-blue-500 items-center justify-center text-white no-underline text-center py-2 rounded hover:bg-blue-600 hover:underline transition">
-                               COMPRAR O ITEM
-                            </a>
+                        <div class="relative flex flex-col items-center justify-center">
+                            <div class="relative">
+                                <img src="https://via.placeholder.com/300x400" alt="Produto 1"
+                                    class="rounded-lg shadow-lg w-full">
+                                <a href="{{ route('cliente.pagamento') }}"
+                                    class="absolute bottom-0 left-0 w-full bg-pink-400 text-white text-center py-3 no-underline text-sm font-bold rounded-b-lg hover:bg-pink-600 hover:underline transition">
+                                    Vamos as compras
+                                </a>
+                            </div>
+                            <p class="flex items-center justify-start mt-2 w-full font-semibold">Produto 7</p>
                         </div>
-                        <div class="relative group flex flex-col items-center justify-center">
-                            <img src="https://via.placeholder.com/300x400" alt="Produto 1" class="rounded-lg shadow-lg">
-                            <p class="mt-2 font-semibold">Produto 8</p>
-                            <a href="{{ route('cliente.pagamento') }}"
-                               class="flex w-2/3 mt-2 bg-blue-500 items-center justify-center text-white no-underline text-center py-2 rounded hover:bg-blue-600 hover:underline transition">
-                               COMPRAR O ITEM
-                            </a>
+                        <div class="relative flex flex-col items-center justify-center">
+                            <div class="relative">
+                                <img src="https://via.placeholder.com/300x400" alt="Produto 1"
+                                    class="rounded-lg shadow-lg w-full">
+                                <a href="{{ route('cliente.pagamento') }}"
+                                    class="absolute bottom-0 left-0 w-full bg-pink-400 text-white text-center py-3 no-underline text-sm font-bold rounded-b-lg hover:bg-pink-600 hover:underline transition">
+                                    Vamos as compras
+                                </a>
+                            </div>
+                            <p class="flex items-center justify-start mt-2 w-full font-semibold">Produto 8</p>
                         </div>
                     </div>
                     <div class="mt-8 flex justify-center">
                         <a href="{{ route('shopping') }}"
-                           class="bg-gray-800 text-white py-2 px-6 rounded-lg hover:bg-gray-700 transition">
-                           Ver tudo
+                            class="bg-gray-800 text-white py-2 px-6 rounded-lg hover:bg-gray-700 transition">
+                            Ver tudo
                         </a>
                     </div>
                 </div>

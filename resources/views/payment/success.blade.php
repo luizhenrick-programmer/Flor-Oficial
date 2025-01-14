@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,8 +9,8 @@
 </head>
 <body>
     @if (session('error'))
-    <p style="color: red;">{{ session('error') }}</p>
-@endif
+        <p style="color: red;">{{ session('error') }}</p>
+    @endif
 
     <h1>Pagamento Pix</h1>
     <p>Use o QR Code abaixo para realizar o pagamento:</p>

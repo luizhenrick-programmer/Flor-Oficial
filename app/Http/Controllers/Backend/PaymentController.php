@@ -14,20 +14,21 @@ class PaymentController extends Controller
             $pixService = new PixPaymentService();
 
             $paymentData = [
-                'description' => 'Payment for product',
-                'external_reference' => 'MP0001',
-                'payer' => [
-                    'email' => 'test_user_123@testuser.com',
-                    'identification' => [
-                        'type' => 'CPF',
-                        'number' => '95749019047',
+                "description" => "Payment for product",
+                "external_reference" => "MP0001",
+                "payer" => [
+                    "email" => "test_user_123@testuser.com",
+                    "identification" => [
+                        "type" => "CPF",
+                        "number" => "95749019047",
                     ],
                 ],
-                'payment_method_id' => 'pix',
-                'transaction_amount' => 58.00
+                "payment_method_id" => "pix",
+                "transaction_amount" => 58.00,
             ];
 
-            $pagamento = $pixService->createPayment($paymentData);
+
+            $pagamento = $pixService->createPixPayment($paymentData);
 
             if (isset($pagamento->id)) {
                 return view('payment.success', [

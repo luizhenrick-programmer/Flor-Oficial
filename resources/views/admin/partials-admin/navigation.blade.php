@@ -117,7 +117,7 @@
 
                     <!-- Categorias de Produtos -->
                     <li>
-                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
+                        <a href="{{ route('e-commerce.categorias') }}" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
                             <div class="flex items-center gap-2">
                                 <i class="fa-solid fa-tags text-lg"></i>
                                 <span class="text-sm font-bold truncate" title="Categorias de Produtos">Categorias de Produtos</span>
@@ -127,7 +127,7 @@
 
                     <!-- Marcas -->
                     <li>
-                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
+                        <a href="{{ route('e-commerce.marcas') }}" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
                             <div class="flex items-center gap-2">
                                 <i class="fa-solid fa-registered text-lg"></i>
                                 <span class="text-sm font-bold truncate" title="Marcas">Marcas</span>

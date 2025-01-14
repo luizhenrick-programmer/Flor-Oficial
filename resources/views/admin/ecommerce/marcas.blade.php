@@ -5,12 +5,9 @@
 
 @extends('admin.app')
 
-@section('titulo', 'Produtos Flor Oficial')
+@section('titulo', 'Categorias Flor Oficial')
 
 @section('content')
-    @if (session('error'))
-        <p style="color: red;">{{ session('error') }}</p>
-    @endif
     <div class="container-xl flex flex-col py-5">
         <x-text color='gray-200' size='xs' bold='true'>PRODUTOS</x-text>
         <div class="bg-gray-700 rounded-lg border-l-4 border-violet-500 text-gray-200 my-4 p-3" role="alert">
@@ -39,24 +36,21 @@
                     </button>
                 </div>
                 <div class="flex items-center gap-1">
-                    <a
-                        class="btn bg-gray-800 text-white shadow-md rounded-md border border-gray-600 py-2 px-4 hover:bg-gray-400 hover:text-black">
+                    <a class="btn bg-gray-800 text-white shadow-md rounded-md border border-gray-600 py-2 px-4 hover:bg-gray-400 hover:text-black">
                         <i class="fa-solid fa-file-export"></i>
                         <span class="ms-2">Exportar</span>
                     </a>
-                    <a href="{{ route('e-commerce.criar_produto') }}"
-                        class="btn bg-violet-600 text-white shadow-md rounded-md border border-gray-600 py-2 px-4 hover:bg-violet-800 hover:text-black">
+                    <a href="{{ route('e-commerce.criar_marcas') }}" class="btn bg-violet-600 text-white shadow-md rounded-md border border-gray-600 py-2 px-4 hover:bg-violet-800 hover:text-black">
                         <i class="fa-solid fa-plus"></i>
-                        <span class="ms-2">Criar Produto</span>
+                        <span class="ms-2">Criar Categoria</span>
                     </a>
-                    <a
-                        class="btn bg-gray-800 text-white shadow-md rounded-md border border-gray-600 py-2 px-4 hover:bg-gray-400 hover:text-black">
+                    <a class="btn bg-gray-800 text-white shadow-md rounded-md border border-gray-600 py-2 px-4 hover:bg-gray-400 hover:text-black">
                         <i class="fa-solid fa-rotate"></i>
                         <span class="ms-2">Atualizar</span>
                     </a>
                 </div>
             </div>
-            @if ($produtos->count())
+            @if ($marcas->count())
                 <table
                     class="bg-gray-600 rounded table table-hover table-striped table-bordered text-center align-middle mt-4">
                     <thead class="thead-dark">
@@ -75,47 +69,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($produtos as $produto)
+                        @foreach ($marcas as $marca)
                             <tr>
-                                <td>{{ $produto->id }}</td>
-                                <td>{{ $produto->url }}</td>
-                                <td>{{ $produto->nome }}</td>
-                                <td>{{ $produto->preco }}</td>
-                                <td>
-                                    @if ($produto->quantidade >= 1)
-                                        <span class="bg-green-500 rounded-lg p-2">Sim</span>
-                                    @else
-                                        <span class="bg-red-500 rounded-lg p-2">Não</span>
-                                    @endif
-                                </td>
-                                <td>{{ $produto->quantidade }}</td>
-                                <td>{{ $produto->categoria_id }}</td>
-                                <td>{{ $produto->criado_por }}</td>
-                                <td>{{ $produto->status }}</td>
-                                <td>
-                                    <form action="{{ route('organizador.deletarEvento', $produto->id) }}" method="post">
-                                        <a class="btn btn-info btn-sm"
-                                            href="{{ route('organizador.showEvento', $produto->id) }}">
-                                            <i class="bi bi-eye-fill"></i>
-                                        </a>
-                                        <a class="btn btn-primary btn-sm"
-                                            href="{{ route('organizador.editarEvento', $produto->id) }}">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </a>
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm"
-                                            onclick="return confirm('Tem certeza que deseja excluir este evento?')">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </button>
-                                    </form>
-                                </td>
+                                <td>{{ $marca->id }}</td>
+                                <td>{{ $marca->nome }}</td>
+                                <td>{{ $marca->criado_por }}</td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             @else
-                <p class="mt-4 alert alert-warning">Nenhum produto cadastrado</p>
+                <p class="mt-4 alert alert-warning">Nenhuma marca cadastrada</p>
             @endif
 
             <nav>

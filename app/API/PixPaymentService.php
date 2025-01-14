@@ -6,21 +6,28 @@ use Exception;
 
 class PixPaymentService
 {
-    public function createPayment($data)
+    public function createPixPayment($data)
     {
-        $accessToken = config('pix.access_token');
+        $accessToken = env('MERCADO_PAGO_ACCESS_TOKEN');
+        $idempotencyKey = uniqid();
 
         $curl = curl_init();
 
         curl_setopt_array($curl, [
             CURLOPT_URL => 'https://api.mercadopago.com/v1/payments',
             CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'POST',
+            CURLOPT_POSTFIELDS => json_encode($data),
             CURLOPT_HTTPHEADER => [
                 'Content-Type: application/json',
-                'Authorization: Bearer ' . $accessToken,
+                'X-Idempotency-Key: '.$idempotencyKey,
+                'Authorization: Bearer '.$accessToken,
             ],
-            CURLOPT_POST => true,
-            CURLOPT_POSTFIELDS => json_encode($data),
         ]);
 
         $response = curl_exec($curl);
@@ -30,7 +37,7 @@ class PixPaymentService
         if ($error) {
             throw new Exception('Erro ao processar o pagamento: ' . $error);
         }
-
-        return json_decode($response);
+        return json_decode($response, true);
     }
 }
+

@@ -52,14 +52,17 @@ Route::middleware(['auth', 'cliente'])->group(function () {
     Route::get('/pagamento', [PaymentController::class, 'pagamento'])->name('cliente.pagamento');
 });
 
-
-
-
 // ROTAS E-COMMERCE
 Route::middleware(['auth', 'admin'])->prefix('e-commerce')->group(function () {
     Route::get('/produtos', [AdminController::class, 'produto'])->name('e-commerce.produtos');
     Route::get('/produtos/criar', [AdminController::class, 'criarProduto'])->name('e-commerce.criar_produto');
     Route::post('/produtos/criar/enviar', [AdminController::class, 'store_produto'])->name('e-commerce.produto.store');
+    Route::get('/categorias', [AdminController::class, 'categoria'])->name('e-commerce.categorias');
+    Route::get('/categorias/criar', [AdminController::class, 'criarCategoria'])->name('e-commerce.criar_categoria');
+    Route::post('/categorias/criar/enviar', [AdminController::class, 'store_categoria'])->name('e-commerce.categoria.store');
+    Route::get('/marcas', [AdminController::class, 'marcas'])->name('e-commerce.marcas');
+    Route::get('/marcas/criar', [AdminController::class, 'criarMarcas'])->name('e-commerce.criar_marcas');
+    Route::post('/marcas/criar/enviar', [AdminController::class, 'store_marcas'])->name('e-commerce.marcas.store');
 });
 
 // ROTAS COLABORADORES
