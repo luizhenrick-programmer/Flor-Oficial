@@ -1,3 +1,8 @@
+@extends('layouts.app') {{-- herança --}}
+
+@section('titulo', 'CLiente')
+
+@section('content')
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,3 +15,5 @@
     <h1>Página do Cliente</h1>
 </body>
 </html>
+
+@endsection
