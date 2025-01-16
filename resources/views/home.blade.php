@@ -57,7 +57,7 @@
                         Ofertas Primavera<br>
                         <span class="font-bold text-pink-500 text-2xl">até 60% de desconto</span>
                     </h3>
-                    <a href="#"
+                    <a href="{{ route('shopping') }}"
                         class="mt-6 px-4 py-2 bg-pink-500 text-white font-bold rounded-lg no-underline w-32 text-center hover:bg-pink-600 hover:underline transition">
                         VER TUDO
                     </a>
