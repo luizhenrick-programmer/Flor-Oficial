@@ -127,13 +127,13 @@
                 <!-- Main Content -->
                 <div class="flex flex-col w-full md:w-3/4">
                     <div class="w-full mb-6">
-                        <img src="https://via.placeholder.com/900x400" alt="Banner" class="rounded-lg shadow-lg">
+                        <img src="https://picsum.photos/1200/400" alt="Banner" class="rounded-lg shadow-lg">
                     </div>
                     <h5 class="text-xl font-semibold mb-4">Compre Agora</h5>
                     <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                         <div class="relative flex flex-col items-center justify-center">
                             <div class="relative">
-                                <img src="https://via.placeholder.com/300x400" alt="Produto 1"
+                                <img src="https://picsum.photos/300/400" alt="Produto 1"
                                     class="rounded-lg shadow-lg w-full">
                                 <a href="{{ route('cliente.pagamento') }}"
                                     class="absolute bottom-0 left-0 w-full bg-pink-400 text-white text-center py-3 no-underline text-sm font-bold rounded-b-lg hover:bg-pink-600 hover:underline transition">
@@ -144,7 +144,7 @@
                         </div>
                         <div class="relative flex flex-col items-center justify-center">
                             <div class="relative">
-                                <img src="https://via.placeholder.com/300x400" alt="Produto 1"
+                                <img src="https://picsum.photos/300/400" alt="Produto 1"
                                     class="rounded-lg shadow-lg w-full">
                                 <a href="{{ route('cliente.pagamento') }}"
                                     class="absolute bottom-0 left-0 w-full bg-pink-400 text-white text-center py-3 no-underline text-sm font-bold rounded-b-lg hover:bg-pink-600 hover:underline transition">
@@ -155,7 +155,7 @@
                         </div>
                         <div class="relative flex flex-col items-center justify-center">
                             <div class="relative">
-                                <img src="https://via.placeholder.com/300x400" alt="Produto 1"
+                                <img src="https://picsum.photos/300/400" alt="Produto 1"
                                     class="rounded-lg shadow-lg w-full">
                                 <a href="{{ route('cliente.pagamento') }}"
                                     class="absolute bottom-0 left-0 w-full bg-pink-400 text-white text-center py-3 no-underline text-sm font-bold rounded-b-lg hover:bg-pink-600 hover:underline transition">
@@ -166,7 +166,7 @@
                         </div>
                         <div class="relative flex flex-col items-center justify-center">
                             <div class="relative">
-                                <img src="https://via.placeholder.com/300x400" alt="Produto 1"
+                                <img src="https://picsum.photos/300/400" alt="Produto 1"
                                     class="rounded-lg shadow-lg w-full">
                                 <a href="{{ route('cliente.pagamento') }}"
                                     class="absolute bottom-0 left-0 w-full bg-pink-400 text-white text-center py-3 no-underline text-sm font-bold rounded-b-lg hover:bg-pink-600 hover:underline transition">
@@ -177,7 +177,7 @@
                         </div>
                         <div class="relative flex flex-col items-center justify-center">
                             <div class="relative">
-                                <img src="https://via.placeholder.com/300x400" alt="Produto 1"
+                                <img src="https://picsum.photos/300/400" alt="Produto 1"
                                     class="rounded-lg shadow-lg w-full">
                                 <a href="{{ route('cliente.pagamento') }}"
                                     class="absolute bottom-0 left-0 w-full bg-pink-400 text-white text-center py-3 no-underline text-sm font-bold rounded-b-lg hover:bg-pink-600 hover:underline transition">
@@ -188,7 +188,7 @@
                         </div>
                         <div class="relative flex flex-col items-center justify-center">
                             <div class="relative">
-                                <img src="https://via.placeholder.com/300x400" alt="Produto 1"
+                                <img src="https://picsum.photos/300/400" alt="Produto 1"
                                     class="rounded-lg shadow-lg w-full">
                                 <a href="{{ route('cliente.pagamento') }}"
                                     class="absolute bottom-0 left-0 w-full bg-pink-400 text-white text-center py-3 no-underline text-sm font-bold rounded-b-lg hover:bg-pink-600 hover:underline transition">
@@ -199,7 +199,7 @@
                         </div>
                         <div class="relative flex flex-col items-center justify-center">
                             <div class="relative">
-                                <img src="https://via.placeholder.com/300x400" alt="Produto 1"
+                                <img src="https://picsum.photos/300/400" alt="Produto 1"
                                     class="rounded-lg shadow-lg w-full">
                                 <a href="{{ route('cliente.pagamento') }}"
                                     class="absolute bottom-0 left-0 w-full bg-pink-400 text-white text-center py-3 no-underline text-sm font-bold rounded-b-lg hover:bg-pink-600 hover:underline transition">
@@ -210,7 +210,7 @@
                         </div>
                         <div class="relative flex flex-col items-center justify-center">
                             <div class="relative">
-                                <img src="https://via.placeholder.com/300x400" alt="Produto 1"
+                                <img src="https://picsum.photos/300/400" alt="Produto 1"
                                     class="rounded-lg shadow-lg w-full">
                                 <a href="{{ route('cliente.pagamento') }}"
                                     class="absolute bottom-0 left-0 w-full bg-pink-400 text-white text-center py-3 no-underline text-sm font-bold rounded-b-lg hover:bg-pink-600 hover:underline transition">

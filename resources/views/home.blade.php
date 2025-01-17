@@ -1,6 +1,6 @@
-@extends('layouts.app') {{-- Certifique-se de que o caminho do layout esteja correto --}}
+@extends('layouts.app')
 
-@section('titulo', 'Flor Oficial') {{-- Define o título da página --}}
+@section('titulo', 'Flor Oficial')
 
 @section('content')
     <div class="flex flex-col flex-grow items-center justify-around px-3 py-3">
@@ -19,28 +19,25 @@
                     COMPRE AGORA
                 </a>
                 <div class="flex items-center mt-8 space-x-4">
-                    <button type="button" class="text-gray-600 font-bold text-lg hover:text-pink-500">01</button>
+                    <button type="button" class="text-gray-600 font-bold text-lg hover:text-pink-500" onclick="changeSlide(0)">01</button>
                     <span class="text-gray-600 text-2xl">—</span>
-                    <button type="button" class="text-gray-600 font-bold text-lg hover:text-pink-500">02</button>
+                    <button type="button" class="text-gray-600 font-bold text-lg hover:text-pink-500" onclick="changeSlide(1)">02</button>
                     <span class="text-gray-600 text-2xl">—</span>
-                    <button type="button" class="text-gray-600 font-bold text-lg hover:text-pink-500">03</button>
+                    <button type="button" class="text-gray-600 font-bold text-lg hover:text-pink-500" onclick="changeSlide(2)">03</button>
                 </div>
             </div>
 
             <div class="flex justify-center">
-                <div id="carouselExampleIndicators mt-3" class="relative w-4/5">
+                <div id="carouselExampleIndicators" class="relative w-4/5 mt-3">
                     <div class="carousel-inner space-y-6">
                         <div class="carousel-item active">
-                            <img src="{{ asset('assets/images/imageOne.png') }}" alt="Vestido Primavera 1"
-                                class="w-full rounded-lg shadow-lg">
+                            <img src="{{ asset('assets/images/fotoInicio.png') }}" alt="Vestido Primavera 1" class="w-full rounded-lg">
                         </div>
                         <div class="carousel-item">
-                            <img src="{{ asset('assets/images/imageTwo.png') }}" alt="Vestido Primavera 2"
-                                class="w-full rounded-lg shadow-lg">
+                            <img src="{{ asset('assets/images/agoraVai.png') }}" alt="Vestido Primavera 2" class="w-full rounded-lg">
                         </div>
                         <div class="carousel-item">
-                            <img src="{{ asset('assets/images/imageTree.png') }}" alt="Vestido Primavera 3"
-                                class="w-full rounded-lg shadow-lg">
+                            <img src="{{ asset('assets/images/free3.png') }}" alt="Vestido Primavera 3" class="w-full rounded-lg">
                         </div>
                     </div>
                 </div>
@@ -149,49 +146,49 @@
             <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
                 <!-- Produto 1 -->
                 <div class="flex flex-col items-center">
-                    <img src="https://via.placeholder.com/300x400" alt="Categoria 1" class="w-full rounded-lg shadow-md">
+                    <img src="https://picsum.photos/300/400" alt="Categoria 1" class="w-full rounded-lg shadow-md">
                     <p class="w-full mt-2 text-gray-700 font-semibold text-start">Produto 1</p>
                 </div>
 
                 <!-- Produto 2 -->
                 <div class="flex flex-col items-center">
-                    <img src="https://via.placeholder.com/300x400" alt="Categoria 2" class="w-full rounded-lg shadow-md">
+                    <img src="https://picsum.photos/300/400" alt="Categoria 2" class="w-full rounded-lg shadow-md">
                     <p class="w-full mt-2 text-gray-700 font-semibold text-start">Produto 2</p>
                 </div>
 
                 <!-- Produto 3 -->
                 <div class="flex flex-col items-center">
-                    <img src="https://via.placeholder.com/300x400" alt="Categoria 3" class="w-full rounded-lg shadow-md">
+                    <img src="https://picsum.photos/300/400" alt="Categoria 3" class="w-full rounded-lg shadow-md">
                     <p class="w-full mt-2 text-gray-700 font-semibold text-start">Produto 3</p>
                 </div>
 
                 <!-- Produto 4 -->
                 <div class="flex flex-col items-center">
-                    <img src="https://via.placeholder.com/300x400" alt="Categoria 4" class="w-full rounded-lg shadow-md">
+                    <img src="https://picsum.photos/300/400" alt="Categoria 4" class="w-full rounded-lg shadow-md">
                     <p class="w-full mt-2 text-gray-700 font-semibold text-start">Produto 4</p>
                 </div>
 
                 <!-- Produto 5 -->
                 <div class="flex flex-col items-center">
-                    <img src="https://via.placeholder.com/300x400" alt="Categoria 5" class="w-full rounded-lg shadow-md">
+                    <img src="https://picsum.photos/300/400" alt="Categoria 5" class="w-full rounded-lg shadow-md">
                     <p class="w-full mt-2 text-gray-700 font-semibold text-start">Produto 5</p>
                 </div>
 
                 <!-- Produto 6 -->
                 <div class="flex flex-col items-center">
-                    <img src="https://via.placeholder.com/300x400" alt="Categoria 6" class="w-full rounded-lg shadow-md">
+                    <img src="https://picsum.photos/300/400" alt="Categoria 6" class="w-full rounded-lg shadow-md">
                     <p class="w-full mt-2 text-gray-700 font-semibold text-start">Produto 6</p>
                 </div>
 
                 <!-- Produto 7 -->
                 <div class="flex flex-col items-center">
-                    <img src="https://via.placeholder.com/300x400" alt="Categoria 7" class="w-full rounded-lg shadow-md">
+                    <img src="https://picsum.photos/300/400" alt="Categoria 7" class="w-full rounded-lg shadow-md">
                     <p class="w-full mt-2 text-gray-700 font-semibold text-start">Produto 7</p>
                 </div>
 
                 <!-- Produto 8 -->
                 <div class="flex flex-col items-center">
-                    <img src="https://via.placeholder.com/300x400" alt="Categoria 8" class="w-full rounded-lg shadow-md">
+                    <img src="https://picsum.photos/300/400" alt="Categoria 8" class="w-full rounded-lg shadow-md">
                     <p class="w-full mt-2 text-gray-700 font-semibold text-start">Produto 8</p>
                 </div>
             </div>
@@ -213,4 +210,13 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function changeSlide(slideIndex) {
+            const items = document.querySelectorAll('.carousel-item');
+            items.forEach(item => item.classList.remove('active'));
+
+            items[slideIndex].classList.add('active');
+        }
+    </script>
 @endsection

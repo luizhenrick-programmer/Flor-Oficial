@@ -10,4 +10,5 @@ class Pedido extends Model
         'user_id', 'data-pedido',
         'status', 'total',
     ];
+
 }

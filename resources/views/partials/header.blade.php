@@ -76,16 +76,13 @@
         <a class="flex items-center justify-center text-dark no-underline text-2xl" href="{{ route('home') }}">
             <i class="fa-regular fa-heart"></i>
         </a>
-        <a class="flex items-center justify-center text-dark no-underline text-2xl" href="{{ route('home') }}">
+        <a class="flex items-center justify-center text-dark no-underline text-2xl" href="{{ route('cart') }}">
             <i class="fa-solid fa-cart-plus"></i>
         </a>
-    </div>
-
-    @if (Auth::check())
-        <a class="btn border-0" href="{{ route('login') }}">
-
+        <a class="flex items-center justify-center text-dark no-underline text-2xl" href="{{ route('profile.edit') }}">
+            <i class="fa-solid fa-user"></i>
         </a>
-    @endif
+    </div>
 
     <script src="https://kit.fontawesome.com/12004a6e82.js" crossorigin="anonymous"></script>
 </header>

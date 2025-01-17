@@ -25,7 +25,7 @@
         <!-- Imagem principal 1200x400 -->
         <div class="row mb-4">
             <div class="col-12">
-                <img src="{{ asset('assets/images/fashion.jpg' )}}" alt="Imagem Sobre" class="img-fluid">
+                <img src="https://picsum.photos/1400/400" alt="Imagem Sobre" class="img-fluid">
             </div>
         </div>
 
