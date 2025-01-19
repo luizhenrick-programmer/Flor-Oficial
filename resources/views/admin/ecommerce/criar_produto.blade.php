@@ -6,9 +6,18 @@
             <div class="bg-gray-200 shadow-md rounded-lg p-8 w-full">
                 <h2 class="text-2xl font-semibold text-gray-800 mb-6">Cadastrar Produto</h2>
 
-                @if (session('error'))
-                    <p style="color: red;">{{ session('error') }}</p>
+                @if (session('success'))
+                    <div class="bg-green-100 text-green-700 p-2 rounded">
+                        {{ session('success') }}
+                    </div>
                 @endif
+
+                @if (session('error'))
+                    <div class="bg-red-100 text-red-700 p-2 rounded">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
 
                 <!-- Formulário -->
                 <form action="{{ route('e-commerce.produto.store') }}" method="POST" enctype="multipart/form-data">

@@ -17,7 +17,8 @@
                     <!-- Nome do Produto -->
                     <div class="mb-4">
                         <label for="nome" class="block text-sm font-medium text-gray-700">Nome do Categoria</label>
-                        <input id="nome" type="text" name="nome" placeholder="Digite o nome"
+                        <input id="nome" type="text" name="nome"
+                        placeholder="Digite o nome"
                             class="mt-1 w-full px-2 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
                     </div>
 

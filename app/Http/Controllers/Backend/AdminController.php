@@ -43,7 +43,6 @@ class AdminController extends Controller
         try {
             $request->validate([
                 'nome' => 'required|string|max:255',
-                'url' => 'required|url',
                 'descricao' => 'nullable|string|max:1000',
                 'preco' => 'required|numeric|min:0',
                 'marca_id' => 'required|exists:marcas,id',
@@ -53,7 +52,48 @@ class AdminController extends Controller
                 'cor' => 'required|array|min:1',
                 'arquivo' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
                 'status' => 'required|in:publicado,inativo',
+            ], [
+                'nome.required' => 'O campo nome é obrigatório.',
+                'nome.string' => 'O campo nome deve ser um texto.',
+                'nome.max' => 'O nome não pode ter mais que 255 caracteres.',
+
+                'url.required' => 'O campo URL é obrigatório.',
+                'url.url' => 'O campo URL deve conter um endereço válido.',
+
+                'descricao.string' => 'O campo descrição deve ser um texto.',
+                'descricao.max' => 'A descrição não pode ter mais que 1000 caracteres.',
+
+                'preco.required' => 'O campo preço é obrigatório.',
+                'preco.numeric' => 'O campo preço deve ser um número.',
+                'preco.min' => 'O campo preço deve ser no mínimo 0.',
+
+                'marca_id.required' => 'O campo marca é obrigatório.',
+                'marca_id.exists' => 'A marca selecionada não é válida.',
+
+                'quantidade.required' => 'O campo quantidade é obrigatório.',
+                'quantidade.integer' => 'O campo quantidade deve ser um número inteiro.',
+                'quantidade.min' => 'A quantidade deve ser no mínimo 0.',
+
+                'categoria_id.required' => 'O campo categoria é obrigatório.',
+                'categoria_id.exists' => 'A categoria selecionada não é válida.',
+
+                'tamanho.required' => 'O campo tamanho é obrigatório.',
+                'tamanho.string' => 'O campo tamanho deve ser um texto.',
+                'tamanho.in' => 'O tamanho deve ser um dos seguintes valores: PP, P, M, G, GG ou XG.',
+
+                'cor.required' => 'O campo cor é obrigatório.',
+                'cor.array' => 'O campo cor deve ser uma lista de cores.',
+                'cor.min' => 'Selecione pelo menos uma cor.',
+
+                'arquivo.required' => 'O campo arquivo é obrigatório.',
+                'arquivo.file' => 'O arquivo enviado deve ser válido.',
+                'arquivo.mimes' => 'O arquivo deve ser dos tipos: jpg, jpeg, png ou pdf.',
+                'arquivo.max' => 'O arquivo não pode ter mais que 2 MB.',
+
+                'status.required' => 'O campo status é obrigatório.',
+                'status.in' => 'O status deve ser "publicado" ou "inativo".',
             ]);
+
 
 
             if ($request->hasFile('arquivo')) {
