@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\VendedorController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Backend\PaymentController;
+use App\Http\Controllers\CarrinhoController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -23,6 +24,12 @@ Route::get('/sobre', function () {
 Route::get('/contato', function () {
     return view('contact');
 })->name('contact');
+
+//Route::get('/carrinho', function () {
+//    return view('carrinho.cart');
+//})->name('cart');
+
+Route::get('/carrinho', [CarrinhoController::class, 'showCart'])->name('cart');
 
 // CRUD USUÁRIO
 Route::middleware('auth')->group(function () {
