@@ -15,7 +15,8 @@
             <p>flordipintanga@gmail.com</p>
             <p>+55 61 99999-9999</p>
             <ul class="list-inline">
-                <li class="list-inline-item"><a href="https://www.instagram.com/flordi.oficial/"><i class="fab fa-instagram"></i></a>
+                <li class="list-inline-item">
+                    <a href="https://www.instagram.com/flordi.oficial/"><i class="fab fa-instagram"></i></a>
                 </li>
             </ul>
         </div>

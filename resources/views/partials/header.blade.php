@@ -68,19 +68,34 @@
     </nav>
 
     <div class="hidden md:flex items-center justify-between gap-6 px-6 py-4">
-        @if (!Auth::check())
+        @if (Auth::check())
+            <!-- Ícone de perfil para usuários autenticados -->
+            <a class="flex items-center justify-center text-dark no-underline text-2xl" href="{{ route('profile.edit') }}">
+                <i class="fa-solid fa-user"></i>
+            </a>
+
+            <!-- Formulário de logout -->
+            <form method="POST" action="{{ route('logout') }}" class="inline">
+                @csrf
+                <button type="submit" class="flex items-center justify-center text-dark no-underline text-2xl">
+                    <i class="fa-solid fa-sign-out-alt"></i>
+                </button>
+            </form>
+        @else
+            <!-- Ícone de login para usuários não autenticados -->
             <a class="flex items-center justify-center text-dark no-underline text-2xl" href="{{ route('login') }}">
                 <i class="fa-solid fa-user"></i>
             </a>
         @endif
+
+        <!-- Ícone de coração -->
         <a class="flex items-center justify-center text-dark no-underline text-2xl" href="{{ route('home') }}">
             <i class="fa-regular fa-heart"></i>
         </a>
+
+        <!-- Ícone de carrinho -->
         <a class="flex items-center justify-center text-dark no-underline text-2xl" href="{{ route('cart') }}">
             <i class="fa-solid fa-cart-plus"></i>
-        </a>
-        <a class="flex items-center justify-center text-dark no-underline text-2xl" href="{{ route('profile.edit') }}">
-            <i class="fa-solid fa-user"></i>
         </a>
     </div>
 

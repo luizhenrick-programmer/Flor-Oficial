@@ -15,7 +15,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="flex flex-row items-center justify-center">
         <img class="rounded-full w-16 h-16 mx-2" src="{{ asset('assets/images/logoSite.png') }}" alt="Logo">
         <div class="flex flex-col align-items">
@@ -26,10 +26,10 @@
     <div class="hidden flex-row items-center justify-center lg:flex">
         <input type="text" placeholder="Faça uma pesquisa..."
             class="border rounded-lg shadow-sm mx-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
-    
+
 
         <div class="flex items-center space-x-4">
-            <a href="{{ route('dashboard') }}" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center">
+            <a href="{{ route('home') }}" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center">
                 <i class="fas fa-globe mr-2"></i> Flor Oficial
             </a>
         </div>
