@@ -11,7 +11,7 @@
                     <span class="d-block" style="font-family: 'Roboto', sans-serif;">BY Thays Conrado</span>
                 </div>
             </div>
-            <p>R. Visc. de Porto Seguro, 339 - Centro, Formosa-GO, 73801-010</p>
+            <p>R. Visc. de Porto Seguro, 740 - Centro, Formosa-GO, 73801-670</p>
             <p>flordipintanga@gmail.com</p>
             <p>+55 61 99999-9999</p>
             <ul class="list-inline">
