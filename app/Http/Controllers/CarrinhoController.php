@@ -15,5 +15,4 @@ class CarrinhoController extends Controller
 
         return view('carrinho.cart', compact('cartItems', 'total'));
     }
-//Função para teste de visualização do carrinho, mas necessario fazer outro
 }

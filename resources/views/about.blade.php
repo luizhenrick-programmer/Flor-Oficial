@@ -87,17 +87,19 @@
         <div class="row about-row text-center">
             <div class="col-md-4">
                 <h3>Nossa Missão</h3>
-                <p class="about-text">Oferecer roupas de qualidade, que sejam modernas e acessíveis, sem nunca comprometer o conforto e o estilo. Queremos que cada peça reflita a individualidade de quem a veste e se conecte com a natureza.</p>
+                <p class="about-text">Inspirar e empoderar nossas clientes através da moda, oferecendo produtos que combinam estilo, conforto e identidade, sempre com um atendimento acolhedor e personalizado.</p>
                 <img src="{{ asset('assets/images/fotoSobreFour.jpg') }}" alt="Imagem Missão" class="img-fluid rounded shadow">
             </div>
             <div class="col-md-4">
                 <h3>Nossa Visão</h3>
-                <p class="about-text">Ser referência no mercado da moda sustentável, criando produtos que inspirem uma conexão mais profunda com a natureza e promovam um estilo de vida mais consciente. Nosso objetivo é aliar inovação, elegância e responsabilidade ambiental, oferecendo peças que valorizem a essência de quem as veste e contribuam para um mundo mais equilibrado e harmônico.</p>
+                <p class="about-text">Ser referência em moda em Formosa e região, proporcionando uma experiência única de compra, com qualidade, exclusividade e um atendimento próximo e diferenciado.
+                </p>
                 <img src="{{ asset('assets/images/fotoSobre.jpg') }}" alt="Imagem Visão" class="img-fluid rounded shadow">
             </div>
             <div class="col-md-4">
                 <h3>A Empresa</h3>
-                <p class="about-text">A Flor de Pitanga é mais do que uma marca – é um estilo de vida que preza pela elegância natural. Nossa dedicação à moda sustentável é a nossa forma de honrar a terra, trazendo a beleza das plantas para o dia a dia.</p>
+                <p class="about-text">Localizada no coração de Formosa, Goiás, nossa loja oferece peças, unindo tendências e conforto para valorizar sua personalidade. Aqui, moda é mais do que vestir — é se expressar!
+                </p>
                 <img src="{{ asset('assets/images/fotoSobreTree.jpg') }}" alt="Imagem Empresa" class="img-fluid rounded shadow">
             </div>
         </div>
