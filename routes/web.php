@@ -13,9 +13,7 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::get('/comprar', function () {
-    return view('shop');
-})->name('shopping');
+Route::get('comprar', [UserController::class, 'comprar'])->name('shopping');
 
 Route::get('/sobre', function () {
     return view('about');

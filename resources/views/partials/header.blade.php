@@ -1,6 +1,14 @@
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+    </script>
+    
 <header class="flex items-center justify-stretch md:justify-around bg-white border-bottom shadow-sm px-3 py-3">
     <div class="flex items-center justify-center hover:bg-gray-300 focus:hover:bg-violet-500 rounded lg:hidden ">
         <button class="btn border-0 text-dark font-bold hover:text-violet-500 focus:text-violet-500" type="button"
@@ -84,7 +92,7 @@
         @else
             <!-- Ícone de login para usuários não autenticados -->
             <a class="flex items-center justify-center text-dark no-underline text-2xl" href="{{ route('login') }}">
-                <i class="fa-solid fa-user"></i>
+                <i class="fa-solid fa-right-to-bracket fs-3" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Entrar"></i>
             </a>
         @endif
 

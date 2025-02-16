@@ -43,7 +43,7 @@
                             <!-- Preço -->
                             <div>
                                 <label for="preco" class="block text-sm font-medium text-gray-700">Preço</label>
-                                <input id="preco" name="preco" type="number" placeholder="Digite o preço"
+                                <input id="preco" name="preco" type="number" step="0.01" min="0" placeholder="Digite o preço"
                                     class="mt-1 w-full px-2 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
                             </div>
                             <!-- Marca -->

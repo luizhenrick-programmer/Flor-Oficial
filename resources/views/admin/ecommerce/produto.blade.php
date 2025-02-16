@@ -93,22 +93,24 @@
                                 <td>{{ $produto->criado_por }}</td>
                                 <td>{{ $produto->status }}</td>
                                 <td>
-                                    <form action="{{ route('organizador.deletarEvento', $produto->id) }}" method="post">
-                                        <a class="btn btn-info btn-sm"
-                                            href="{{ route('organizador.showEvento', $produto->id) }}">
-                                            <i class="bi bi-eye-fill"></i>
-                                        </a>
-                                        <a class="btn btn-primary btn-sm"
-                                            href="{{ route('organizador.editarEvento', $produto->id) }}">
-                                            <i class="bi bi-pencil-square"></i>
-                                        </a>
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm"
-                                            onclick="return confirm('Tem certeza que deseja excluir este evento?')">
-                                            <i class="bi bi-trash-fill"></i>
-                                        </button>
-                                    </form>
+                                    {{--
+                                        <form action="{{ route('ecommerce.deletarEvento', $produto->id) }}" method="post">
+                                            <a class="btn btn-info btn-sm"
+                                                href="{{ route('organizador.showEvento', $produto->id) }}">
+                                                <i class="bi bi-eye-fill"></i>
+                                            </a>
+                                            <a class="btn btn-primary btn-sm"
+                                                href="{{ route('organizador.editarEvento', $produto->id) }}">
+                                                <i class="bi bi-pencil-square"></i>
+                                            </a>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm"
+                                                onclick="return confirm('Tem certeza que deseja excluir este evento?')">
+                                                <i class="bi bi-trash-fill"></i>
+                                            </button>
+                                        </form>
+                                    --}}
                                 </td>
                             </tr>
                         @endforeach
