@@ -118,16 +118,23 @@
                             <div class="relative flex flex-col items-center justify-center bg-white p-4 rounded-lg shadow-lg">
                                 <div class="relative w-full">
                                     <img src="{{ asset($produto->url) }}" alt="{{ $produto->nome }}"
-                                        class="rounded-lg shadow-lg w-full object-cover aspect-[4/3]">
+                                        class="rounded-lg shadow-lg w-full object-cover aspect-[9/12]">
 
-                                    <a href="{{ route('cliente.pagamento') }}"
-                                        class="absolute bottom-0 left-0 w-full bg-pink-400 text-white text-center py-3 text-sm font-bold rounded-b-lg hover:bg-pink-600 hover:underline transition">
-                                        Vamos às compras
-                                    </a>
+                                    <form action="{{ route('addCart') }}" method="POST" enctype="multipart/form-data">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{ $produto->id }}">
+                                        <input type="hidden" name="nome" value="{{ $produto->nome }}">
+                                        <input type="hidden" name="preco" value="{{ $produto->preco }}">
+                                        <input type="hidden" name="url" value="{{ $produto->url }}">
+                                        <input type="number" name="quantidade" value="1" min="1" class="hidden"> <!-- Quantidade padrão -->
+
+                                        <button type="submit" class="absolute bottom-0 left-0 w-full bg-pink-400 text-white text-center py-3 text-sm font-bold rounded-b-lg hover:bg-pink-600 hover:underline transition">
+                                            Adicionar no carrinho
+                                        </button>
+                                    </form>
                                 </div>
-                                <p class="mt-2 w-full text-center font-semibold text-gray-800">
-                                    {{ $produto->nome }}
-                                </p>
+                                <p class="mt-3 w-full text-center font-semibold text-gray-800">{{ $produto->nome }}</p>
+                                <p class="w-full text-center font-semibold text-gray-800">R$ {{ $produto->preco }}</p>
                             </div>
                         @endforeach
                     </div>

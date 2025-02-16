@@ -27,8 +27,8 @@ Route::get('/contato', function () {
 Route::get('/carrinho', [CarrinhoController::class, 'carrinhoLista'])->name('cart');
 Route::post('/carrinho', [CarrinhoController::class, 'adicionaCarrinho'])->name('addCart');
 Route::post('/remove', [CarrinhoController::class, 'removeCarrinho'])->name('removerCart');
-Route::post('/atualiza', [CarrinhoController::class, 'atulizaCarrinho'])->name('updateCart');
-Route::post('/limpa', [CarrinhoController::class, 'limpaCarrinho'])->name('cleanCart');
+Route::post('/atualiza', [CarrinhoController::class, 'atualizaCarrinho'])->name('updateCart');
+Route::post('/limpa', [CarrinhoController::class, 'clearCarrinho'])->name('cleanCart');
 
 // CRUD USUÁRIO
 Route::middleware('auth')->group(function () {
