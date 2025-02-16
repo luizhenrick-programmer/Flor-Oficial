@@ -82,7 +82,7 @@
 
                 <div class="flex flex-col w-full md:w-3/4">
                     <div class="w-full mb-6">
-                        <img src="https://picsum.photos/1200/400" alt="Banner" class="rounded-lg shadow-lg">
+                        <img src="{{ asset('assets/images/banner1200x400.png') }}" alt="Banner" class="rounded-lg shadow-lg">
                     </div>
                     <h5 class="text-xl font-semibold mb-4">Compre Agora</h5>
 

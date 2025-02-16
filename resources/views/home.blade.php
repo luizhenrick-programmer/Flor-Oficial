@@ -14,7 +14,7 @@
                     especiais, esses vestidos foram pensados para quem valoriza conforto e estilo em qualquer ocasião.
                     Explore agora e encontre a peça ideal para brilhar nas noites desta temporada.
                 </p>
-                <a href="#"
+                <a href="{{ route('shopping') }}"
                     class="flex items-center justify-center px-6 py-3 bg-pink-500 text-white font-bold rounded-lg w-64 no-underline hover:bg-pink-600 hover:underline transition">
                     COMPRE AGORA
                 </a>
