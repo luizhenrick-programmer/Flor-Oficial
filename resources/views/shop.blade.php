@@ -108,6 +108,13 @@
                             <p class="text-sm font-semibold">Não há produtos cadastrados no momento!</p>
                         </div>
                     @endif
+                    @if(session('message'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <i class="fa-solid fa-check-circle"></i>
+                            {{ session('message') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
 
                     <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                         @foreach ($produtos as $produto)
@@ -140,6 +147,7 @@
     </main>
 
     {{-- Importando Bootstrap --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 @endsection

@@ -9,13 +9,26 @@
             <div class="col-md-8">
                 <h2 class="mb-4">Carrinho de Compras</h2>
 
-                @if(session('mensage'))
-                    <div class="alert alert-success">
-                        {{ session('mensage') }}
+                @if(session('message'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <i class="fa-solid fa-check-circle"></i>
+                        {{ session('message') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif
 
-                @foreach($itens as $item)
+                @if (!$itens->count())
+                    <div class="flex flex-col justify-center bg-blue-100 px-2 text-blue-800 rounded-lg shadow-lg w-96 mb-6">
+                    <div class="flex flex-row pt-2 gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+                                <path fill-rule="evenodd" d="M12 2a1 1 0 0 1 .866.5l10 17A1 1 0 0 1 22 21H2a1 1 0 0 1-.866-1.5l10-17A1 1 0 0 1 12 2zm0 4a1 1 0 0 0-.993.883L11 7v6a1 1 0 0 0 1.993.117L13 13V7a1 1 0 0 0-1-1zm0 10a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
+                            </svg>
+                            <h3 class="text-lg font-bold">Oops! Seu carrinho está vazio.</h3>
+                        </div>
+                    </div>
+                @endif
+
+            @foreach($itens as $item)
                     <div class="card mb-3 p-3">
                         <div class="row g-3 align-items-center">
                             <!-- Imagem do Produto -->
@@ -23,12 +36,9 @@
                                 <img src="{{ asset($item->attributes->image) }}" alt="{{ $item->nome }}"
                                      class="rounded-lg shadow-lg w-full object-cover aspect-[3/4]">
                             </div>
-
-
                             <div class="col-md-6">
                                 <h5>{{ $item->name }}</h5>
                                 <p class="text-success">Quantidade no carrinho: {{ $item->quantity }}</p>
-
                                 <div class="d-flex align-items-center mt-2">
                                     {{-- Botão de diminuir quantidade --}}
                                     <form action="{{ route('updateCart') }}" method="POST" enctype="multipart/form-data">
@@ -89,6 +99,6 @@
                 </div>
             </div>
         </div>
-
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 @endsection

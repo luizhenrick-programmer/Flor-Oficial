@@ -16,7 +16,7 @@
         </div>
     </div>
     <div class="flex flex-row items-center justify-center">
-        <img class="rounded-full w-16 h-16 mx-2" src="https://via.placeholder.com/200x200" alt="Logo">
+        <img class="rounded-full w-16 h-16 mx-2" src="{{ asset('assets/images/logoSite.png')}}" alt="Logo">
         <div class="flex flex-col align-items">
             <h1 class="text-lg font-bold text-white mb-1">Flor Oficial</h1>
             <p class="text-sm text-nowrap text-gray-400 mb-0">BY Thays Conrado</p>
@@ -25,11 +25,13 @@
     <div class="hidden flex-row items-center justify-center lg:flex">
         <input type="text" placeholder="Faça uma pesquisa..."
             class="border rounded-lg shadow-sm mx-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
-        <button type="button"
-            class="flex items-center px-4 py-2 text-white bg-blue-600 rounded-lg shadow-sm hover:bg-blue-700 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-            <i class="fa-solid fa-globe mr-2"></i>
-            Ver Flor Oficial
-        </button>
+        <a href="{{route('home')}}">
+            <button type="button"
+                class="flex items-center px-4 py-2 text-white bg-blue-600 rounded-lg shadow-sm hover:bg-blue-700 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                <i class="fa-solid fa-globe mr-2"></i>
+                Ver Flor Oficial
+            </button>
+        </a>
     </div>
 
     <div class="flex items-center justify-between gap-6 px-6 py-4 text-white">

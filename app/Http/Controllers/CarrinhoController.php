@@ -27,7 +27,7 @@ class CarrinhoController extends Controller
             ]
         ]);
 
-        return redirect()->back()->with('message', 'Produto adicionado com sucesso!');
+        return redirect()->route('shopping')->with('message', 'Produto adicionado com sucesso!');
     }
 
     public function removeCarrinho(Request $request)
@@ -45,7 +45,7 @@ class CarrinhoController extends Controller
             ],
         ]);
 
-        return redirect()->back()->with('message', 'Produto atualizado com sucesso!');
+        return redirect()->route('cart')->with('message', 'Produto atualizado com sucesso!');
     }
 
     public function clearCarrinho()
