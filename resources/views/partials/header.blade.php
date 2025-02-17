@@ -8,7 +8,7 @@
             });
         });
     </script>
-    
+
 <header class="flex items-center justify-stretch md:justify-around bg-white border-bottom shadow-sm px-3 py-3">
     <div class="flex items-center justify-center hover:bg-gray-300 focus:hover:bg-violet-500 rounded lg:hidden ">
         <button class="btn border-0 text-dark font-bold hover:text-violet-500 focus:text-violet-500" type="button"
@@ -75,37 +75,39 @@
         </ul>
     </nav>
 
-    <div class="hidden md:flex items-center justify-between gap-6 px-6 py-4">
+    <div class="hidden md:flex items-center gap-6 px-6 py-4">
         @if (Auth::check())
-            <!-- Ícone de perfil para usuários autenticados -->
-            <a class="flex items-center justify-center text-dark no-underline text-2xl" href="{{ route('profile.edit') }}">
+            <!-- Ícone de perfil -->
+            <a class="flex items-center justify-center text-dark no-underline text-2xl h-full" href="{{ route('profile.edit') }}">
                 <i class="fa-solid fa-user"></i>
             </a>
 
-            <!-- Formulário de logout -->
-            <form method="POST" action="{{ route('logout') }}" class="inline">
+            <!-- Formulário de logout corrigido -->
+            <form method="POST" action="{{ route('logout') }}" class="inline-flex items-center justify-center h-full">
                 @csrf
-                <button type="submit" class="flex items-center justify-center text-dark no-underline text-2xl">
+                <button type="submit" class="flex items-center justify-center text-dark no-underline text-2xl h-full">
                     <i class="fa-solid fa-sign-out-alt"></i>
                 </button>
             </form>
         @else
-            <!-- Ícone de login para usuários não autenticados -->
-            <a class="flex items-center justify-center text-dark no-underline text-2xl" href="{{ route('login') }}">
-                <i class="fa-solid fa-right-to-bracket fs-3" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Entrar"></i>
+            <!-- Ícone de login -->
+            <a class="flex items-center justify-center text-dark no-underline text-2xl h-full" href="{{ route('login') }}">
+                <i class="fa-solid fa-user" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Entrar"></i>
             </a>
         @endif
 
         <!-- Ícone de coração -->
-        <a class="flex items-center justify-center text-dark no-underline text-2xl" href="{{ route('home') }}">
+        <a class="flex items-center justify-center text-dark no-underline text-2xl h-full" href="{{ route('home') }}">
             <i class="fa-regular fa-heart"></i>
         </a>
 
         <!-- Ícone de carrinho -->
-        <a class="flex items-center justify-center text-dark no-underline text-2xl" href="{{ route('cart') }}">
+        <a class="flex items-center justify-center text-dark no-underline text-2xl h-full" href="{{ route('cart') }}">
             <i class="fa-solid fa-cart-plus"></i>
         </a>
     </div>
+
+
 
     <script src="https://kit.fontawesome.com/12004a6e82.js" crossorigin="anonymous"></script>
 </header>

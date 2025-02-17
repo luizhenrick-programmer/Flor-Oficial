@@ -7,13 +7,15 @@ use Illuminate\Http\Request;
 
 class CarrinhoController extends Controller
 {
-    public function carrinhoLista(){
+    public function carrinhoLista()
+    {
         $itens = \Cart::getContent();
         $subtotal = \Cart::getSubTotal();
         return view('carrinho.cart', compact('itens', 'subtotal'));
     }
 
-    public function adicionaCarrinho(Request $request){
+    public function adicionaCarrinho(Request $request)
+    {
         \Cart::add([
             'id' => $request->id,
             'name' => $request->nome,
@@ -28,12 +30,14 @@ class CarrinhoController extends Controller
         return redirect()->back()->with('message', 'Produto adicionado com sucesso!');
     }
 
-    public function removeCarrinho(Request $request){
+    public function removeCarrinho(Request $request)
+    {
         \Cart::remove($request->id);
         return redirect()->route('cart')->with('message', 'Produto removido com sucesso!');
     }
 
-    public function atualizaCarrinho(Request $request){
+    public function atualizaCarrinho(Request $request)
+    {
         \Cart::update($request->id, [
             'quantity' => [
                 'relative' => false,
@@ -44,7 +48,8 @@ class CarrinhoController extends Controller
         return redirect()->back()->with('message', 'Produto atualizado com sucesso!');
     }
 
-    public function clearCarrinho(){
+    public function clearCarrinho()
+    {
         \Cart::clear();
         return redirect()->route('cart')->with('message', 'O Carrinho está vazio!');
     }

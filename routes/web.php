@@ -30,6 +30,7 @@ Route::post('/remove', [CarrinhoController::class, 'removeCarrinho'])->name('rem
 Route::post('/atualiza', [CarrinhoController::class, 'atualizaCarrinho'])->name('updateCart');
 Route::post('/limpa', [CarrinhoController::class, 'clearCarrinho'])->name('cleanCart');
 
+
 // CRUD USUÁRIO
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
