@@ -10,9 +10,6 @@
                 <button type="button" class="btn bg-transparent border font-bold text-white rounded-md mx-0"
                     data-bs-dismiss="offcanvas" aria-label="Close">X</button>
             </div>
-            <div class="offcanvas-body">
-
-            </div>
         </div>
     </div>
 
@@ -23,32 +20,13 @@
             <p class="text-sm text-nowrap text-gray-400 mb-0">BY Thays Conrado</p>
         </div>
     </div>
-    <div class="hidden flex-row items-center justify-center lg:flex">
-        <input type="text" placeholder="Faça uma pesquisa..."
-            class="border rounded-lg shadow-sm mx-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
 
-
+    <div class="flex items-center justify-between gap-6 px-6 py-4 text-white">
         <div class="flex items-center space-x-4">
             <a href="{{ route('home') }}" target="_blank" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center">
                 <i class="fas fa-globe mr-2"></i> Flor Oficial
             </a>
         </div>
-    </div>
-
-
-    <div class="flex items-center justify-between gap-6 px-6 py-4 text-white">
-        <!-- Notificações -->
-        <div class="hidden items-center gap-6 lg:flex">
-            <button class="relative flex items-center justify-center p-2 rounded-full hover:bg-gray-600">
-                <i class="fas fa-bell text-lg"></i>
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
-            </button>
-            <button class="relative flex items-center justify-center p-2 rounded-full hover:bg-gray-600">
-                <i class="fas fa-shopping-cart text-lg"></i>
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
-            </button>
-        </div>
-
         <!-- Usuário -->
         <div class="flex items-center gap-4">
             <x-dropdown>

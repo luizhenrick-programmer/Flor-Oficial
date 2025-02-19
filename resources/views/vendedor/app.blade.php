@@ -21,7 +21,9 @@
                     @yield('content')
                 </main>
             </div>
+
         </div>
+        @include('vendedor.partials-vendedor.footer')
     </div>
 </body>
 </html>
