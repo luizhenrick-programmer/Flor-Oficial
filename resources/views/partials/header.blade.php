@@ -47,7 +47,7 @@
             </a>
 
             <!-- Meu carrinho -->
-            <a href="{{ route('home') }}" class="flex flex-col items-center text-dark no-underline relative">
+            <a href="{{ route('cart') }}" class="flex flex-col items-center text-dark no-underline relative">
                 <i class="fa-solid fa-cart-shopping text-3xl mb-1"></i>
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
                 <span class="text-sm">Carrinho</span>

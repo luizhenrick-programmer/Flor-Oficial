@@ -89,15 +89,17 @@
             </div>
 
             <!-- Resumo do Pedido -->
-            <div class="col-md-4">
-                <div class="border p-3 rounded shadow-sm bg-light position-sticky" style="top: 20px;">
-                    <h5>Subtotal ({{ count($itens) }} produtos): <strong>R$ {{ number_format($subtotal, 2, ',', '.') }}</strong></h5>
-                    {{-- pagamento--}}
-                    <a href="{{ route('cliente.pagamento') }}">
-                        <button class="btn w-100 btn-primary btn-lg" style="background-color: #FF69B4">Fechar pedido</button>
-                    </a>
+            @if(count($itens) > 0)
+                <div class="col-md-4">
+                    <div class="border p-3 rounded shadow-sm bg-light position-sticky" style="top: 20px;">
+                        <h5>Subtotal ({{ count($itens) }} produtos): <strong>R$ {{ number_format($subtotal, 2, ',', '.') }}</strong></h5>
+                        {{-- pagamento--}}
+                        <a href="{{ route('cliente.pagamento') }}">
+                            <button class="btn w-100 btn-primary btn-lg" style="background-color: #FF69B4">Fechar pedido</button>
+                        </a>
+                    </div>
                 </div>
-            </div>
+            @endif
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
