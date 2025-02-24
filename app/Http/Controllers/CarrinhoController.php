@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Carrinho;
+use Darryldecode\Cart\Cart;
 use Illuminate\Http\Request;
 
 class CarrinhoController extends Controller
@@ -27,7 +28,7 @@ class CarrinhoController extends Controller
             ]
         ]);
 
-        return redirect()->route('shopping')->with('message', 'Produto adicionado com sucesso!');
+        return redirect()->route('shopping')->with('message', 'Produto adicionado ao carrinho com sucesso!');
     }
 
     public function removeCarrinho(Request $request)

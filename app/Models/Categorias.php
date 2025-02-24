@@ -12,4 +12,9 @@ class Categorias extends Model
         'descricao',
         'criado_por'
     ];
+
+    public function produtos()
+    {
+        return $this->hasMany(Produto::class, 'categoria_id');
+    }
 }

@@ -9,6 +9,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Backend\PaymentController;
 use App\Http\Controllers\CarrinhoController;
 use App\Http\Controllers\SearchController;
+use App\Http\Middleware\Admin;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -54,8 +55,8 @@ Route::middleware(['auth', 'gerente'])->group(function () {
 
 Route::middleware(['auth', 'vendedor'])->group(function () {
     Route::get('vendedor/dashboard', [VendedorController::class, 'dashboard'])->name('vendedor.dashboard');
-    Route::get('vendedor/vendas',[VendedorController::class, 'vendas'])->name('vendedor.vendas');
-    Route::get('vendedor/lista',[VendedorController::class, 'lista'])->name('vendedor.listaProd');
+    Route::get('vendedor/vendas', [VendedorController::class, 'vendas'])->name('vendedor.vendas');
+    Route::get('vendedor/lista', [VendedorController::class, 'lista'])->name('vendedor.listaProd');
 });
 
 Route::middleware(['auth', 'cliente'])->group(function () {
@@ -69,6 +70,7 @@ Route::middleware(['auth', 'admin'])->prefix('e-commerce')->group(function () {
     Route::get('/produto/{id}', [AdminController::class, 'showProduto'])->name('produto.show');
     Route::get('/produtos/criar', [AdminController::class, 'criarProduto'])->name('e-commerce.criar_produto');
     Route::post('/produtos/criar/enviar', [AdminController::class, 'store_produto'])->name('e-commerce.produto.store');
+    Route::get('/produtos/filtrar', [AdminController::class, 'filtrar'])->name('produtos.filtrar');
     Route::get('/categorias', [AdminController::class, 'categoria'])->name('e-commerce.categorias');
     Route::get('/categorias/criar', [AdminController::class, 'criarCategoria'])->name('e-commerce.criar_categoria');
     Route::post('/categorias/criar/enviar', [AdminController::class, 'store_categoria'])->name('e-commerce.categoria.store');
@@ -87,4 +89,4 @@ Route::middleware(['auth', 'admin'])->prefix('e-commerce')->group(function () {
     Route::get('/produtos', [AdminController::class, 'produto'])->name('e-commerce.produtos');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

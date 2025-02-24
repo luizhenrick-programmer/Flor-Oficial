@@ -85,16 +85,50 @@ class AdminController extends Controller
 
     public function showProduto($id)
     {
-        // Busca o produto pelo ID
-        $produto = Produto::find($id);
 
-        // Verifica se o produto existe
-        if (!$produto) {
-            return redirect()->route('home')->with('error', 'Produto não encontrado.');
+        $produto = Produto::with('categoria')->findOrFail($id);
+
+        // Produtos da mesma categoria (exceto o atual)
+        $relacionados = Produto::where('categoria_id', $produto->categoria_id)
+            ->where('id', '!=', $produto->id)
+            ->inRandomOrder()
+            ->take(4)
+            ->get();
+
+        return view('produto.show', compact('produto', 'relacionados'));
+    }
+
+    public function filtrar(Request $request)
+    {
+        $query = Produto::query();
+
+        // Filtrar por categoria
+        if ($request->has('categorias')) {
+            $query->whereIn('categoria_id', $request->categorias);
         }
 
-        // Retorna a view com o produto
-        return view('produto.show', compact('produto'));
+        // Filtrar por cor
+        if ($request->has('cores')) {
+            foreach ($request->cores as $cor) {
+                $query->whereJsonContains('cor', $cor);
+            }
+        }
+
+        // Filtrar por tamanho
+        if ($request->has('tamanhos')) {
+            foreach ($request->tamanhos as $tamanho) {
+                $query->where('tamanho', 'LIKE', '%' . $tamanho . '%');
+            }
+        }
+
+        // Filtrar por marca
+        if ($request->has('marcas')) {
+            $query->whereIn('marca_id', $request->marcas);
+        }
+
+        $produtos = $query->get();
+
+        return view('partials.produtos', compact('produtos'))->render();
     }
 
 
