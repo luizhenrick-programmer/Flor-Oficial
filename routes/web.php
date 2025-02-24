@@ -4,9 +4,11 @@ use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\GerenteController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\VendedorController;
+use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Backend\PaymentController;
 use App\Http\Controllers\CarrinhoController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -29,6 +31,10 @@ Route::post('/carrinho', [CarrinhoController::class, 'adicionaCarrinho'])->name(
 Route::post('/remove', [CarrinhoController::class, 'removeCarrinho'])->name('removerCart');
 Route::post('/atualiza', [CarrinhoController::class, 'atualizaCarrinho'])->name('updateCart');
 Route::post('/limpa', [CarrinhoController::class, 'clearCarrinho'])->name('cleanCart');
+
+
+// rota de pesquisa
+Route::get('/search', [SearchController::class, 'index'])->name('search');
 
 
 // CRUD USUÁRIO
@@ -60,6 +66,7 @@ Route::middleware(['auth', 'cliente'])->group(function () {
 // ROTAS E-COMMERCE
 Route::middleware(['auth', 'admin'])->prefix('e-commerce')->group(function () {
     Route::get('/produtos', [AdminController::class, 'produto'])->name('e-commerce.produtos');
+    Route::get('/produto/{id}', [AdminController::class, 'showProduto'])->name('produto.show');
     Route::get('/produtos/criar', [AdminController::class, 'criarProduto'])->name('e-commerce.criar_produto');
     Route::post('/produtos/criar/enviar', [AdminController::class, 'store_produto'])->name('e-commerce.produto.store');
     Route::get('/categorias', [AdminController::class, 'categoria'])->name('e-commerce.categorias');

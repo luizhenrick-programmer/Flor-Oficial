@@ -86,3 +86,11 @@
     display: inline-block;
     padding: 5px 10px; /* Reaplica padding ao span para cobrir toda a área */
 }
+
+.montserrat {
+    font-family: "Montserrat", serif;
+    font-optical-sizing: auto;
+    font-weight: bold;
+    font-style: normal;
+  }
+

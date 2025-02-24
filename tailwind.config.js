@@ -15,6 +15,7 @@ export default {
         'container',
         'collapse',
         'offcanvas',
+        'dropdown'
       ],
 
     plugins: [forms],

@@ -39,49 +39,63 @@ class AdminController extends Controller
     }
 
     public function store_produto(Request $request)
-{
-    try {
-        $validated = $request->validate([
-            'nome' => 'required|string|max:255',
-            'descricao' => 'nullable|string|max:1000',
-            'preco' => 'required|decimal:2|min:1',
-            'marca_id' => 'required|exists:marcas,id',
-            'quantidade' => 'required|integer|min:0',
-            'categoria_id' => 'required|exists:categorias,id',
-            'tamanho' => 'required|string|in:PP,P,M,G,GG,XG',
-            'cor' => 'required|array|min:1',
-            'arquivo' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
-            'status' => 'required|in:publicado,inativo',
-        ]);
+    {
+        try {
+            $validated = $request->validate([
+                'nome' => 'required|string|max:255',
+                'descricao' => 'nullable|string|max:1000',
+                'preco' => 'required|decimal:2|min:1',
+                'marca_id' => 'required|exists:marcas,id',
+                'quantidade' => 'required|integer|min:0',
+                'categoria_id' => 'required|exists:categorias,id',
+                'tamanho' => 'required|string|in:PP,P,M,G,GG,XG',
+                'cor' => 'required|array|min:1',
+                'arquivo' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
+                'status' => 'required|in:publicado,inativo',
+            ]);
 
-        if ($request->hasFile('arquivo')) {
-            $arquivoPath = $request->file('arquivo')->store('arquivos', 'public');
-            $validated['url'] = Storage::url($arquivoPath);
+            if ($request->hasFile('arquivo')) {
+                $arquivoPath = $request->file('arquivo')->store('arquivos', 'public');
+                $validated['url'] = Storage::url($arquivoPath);
+            }
+
+            // Adiciona o campo criado_por manualmente
+            $validated['criado_por'] = Auth::id(); // Forma simplificada de pegar o usuário autenticado
+
+            // Criar o produto com todos os campos necessários
+            Produto::create([
+                'nome' => $validated['nome'],
+                'descricao' => $validated['descricao'] ?? null,
+                'preco' => $validated['preco'],
+                'marca_id' => $validated['marca_id'],
+                'quantidade' => $validated['quantidade'],
+                'categoria_id' => $validated['categoria_id'],
+                'tamanho' => $validated['tamanho'],
+                'cor' => json_encode($validated['cor']), // Converte array de cores para JSON
+                'url' => $validated['url'] ?? null,
+                'status' => $validated['status'],
+                'criado_por' => $validated['criado_por'],
+            ]);
+
+            return redirect()->route('e-commerce.criar_produto')->with('success', 'Produto criado com sucesso!');
+        } catch (\Exception $e) {
+            return redirect()->route('e-commerce.criar_produto')->with('error', 'Ocorreu um erro ao criar o produto: ' . $e->getMessage());
+        }
+    }
+
+    public function showProduto($id)
+    {
+        // Busca o produto pelo ID
+        $produto = Produto::find($id);
+
+        // Verifica se o produto existe
+        if (!$produto) {
+            return redirect()->route('home')->with('error', 'Produto não encontrado.');
         }
 
-        // Adiciona o campo criado_por manualmente
-        $validated['criado_por'] = Auth::id(); // Forma simplificada de pegar o usuário autenticado
-
-        // Criar o produto com todos os campos necessários
-        Produto::create([
-            'nome' => $validated['nome'],
-            'descricao' => $validated['descricao'] ?? null,
-            'preco' => $validated['preco'],
-            'marca_id' => $validated['marca_id'],
-            'quantidade' => $validated['quantidade'],
-            'categoria_id' => $validated['categoria_id'],
-            'tamanho' => $validated['tamanho'],
-            'cor' => json_encode($validated['cor']), // Converte array de cores para JSON
-            'url' => $validated['url'] ?? null,
-            'status' => $validated['status'],
-            'criado_por' => $validated['criado_por'],
-        ]);
-
-        return redirect()->route('e-commerce.criar_produto')->with('success', 'Produto criado com sucesso!');
-    } catch (\Exception $e) {
-        return redirect()->route('e-commerce.criar_produto')->with('error', 'Ocorreu um erro ao criar o produto: ' . $e->getMessage());
+        // Retorna a view com o produto
+        return view('produto.show', compact('produto'));
     }
-}
 
 
     public function store_categoria(Request $request)
@@ -148,8 +162,7 @@ class AdminController extends Controller
             Marcas::create($validated);
 
             return redirect()->route('e-commerce.criar_marcas')->with('success', 'Produto criado com sucesso!');
-        }
-        catch (\Exception $e) {
+        } catch (\Exception $e) {
             return redirect()->route('e-commerce.criar_marcas')->with('error', 'Ocorreu um erro ao criar a marca: ' . $e->getMessage());
         }
     }

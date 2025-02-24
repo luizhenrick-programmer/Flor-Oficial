@@ -81,24 +81,8 @@
                         <img src="{{ asset('assets/images/banner1200x400.png') }}" alt="Banner" class="rounded-lg shadow-lg">
                     </div>
                     <h5 class="text-xl font-semibold mb-4">Compre Agora</h5>
-
-                    <div class="flex items-center w-full mb-6">
-                        <div class="flex border border-gray-300 rounded-lg overflow-hidden shadow-sm">
-                            <input type="text" placeholder="Buscar produtos..."
-                                class="w-full px-4 py-2 outline-none text-gray-700">
-                            <button class="px-4 bg-blue-600 text-white font-semibold hover:bg-blue-700 transition">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5">
-                                    <path fill-rule="evenodd"
-                                        d="M10 2a8 8 0 1 1-5.293 14.293l-4.22 4.22a1 1 0 0 1-1.415-1.414l4.22-4.22A8 8 0 0 1 10 2zm0 2a6 6 0 1 0 4.243 10.243A6 6 0 0 0 10 4z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-
-
                     @if (!$produtos->count())
-                        <div class="flex flex-col justify-center bg-yellow-100 px-2 text-yellow-800 rounded-lg shadow-lg w-96 mb-6">
+                        <div class="flex flex-col justify-center bg-yellow-100 px-2 text-yellow-800 rounded-lg shadow-lg w-full mb-6">
                             <div class="flex flex-row pt-2 gap-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
                                     <path fill-rule="evenodd" d="M12 2a1 1 0 0 1 .866.5l10 17A1 1 0 0 1 22 21H2a1 1 0 0 1-.866-1.5l10-17A1 1 0 0 1 12 2zm0 4a1 1 0 0 0-.993.883L11 7v6a1 1 0 0 0 1.993.117L13 13V7a1 1 0 0 0-1-1zm0 10a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
@@ -118,26 +102,46 @@
 
                     <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                         @foreach ($produtos as $produto)
-                            <div class="relative flex flex-col items-center justify-center bg-white p-4 rounded-lg shadow-lg">
+                            <div class="relative flex flex-col items-center text-dark overflow-hidden w-full max-w-xs">
                                 <div class="relative w-full">
-                                    <img src="{{ asset($produto->url) }}" alt="{{ $produto->nome }}"
-                                        class="rounded-lg shadow-lg w-full object-cover aspect-[9/12]">
+                                    <img src="{{ asset($produto->url) }}" alt="{{ $produto->nome }}" class="w-full object-cover aspect-square border rounded-lg">
 
-                                    <form action="{{ route('addCart') }}" method="POST" enctype="multipart/form-data">
-                                        @csrf
-                                        <input type="hidden" name="id" value="{{ $produto->id }}">
-                                        <input type="hidden" name="nome" value="{{ $produto->nome }}">
-                                        <input type="hidden" name="preco" value="{{ $produto->preco }}">
-                                        <input type="hidden" name="url" value="{{ $produto->url }}">
-                                        <input type="number" name="quantidade" value="1" min="1" class="hidden"> <!-- Quantidade padrão -->
-
-                                        <button type="submit" class="absolute bottom-0 left-0 w-full bg-pink-400 text-white text-center py-3 text-sm font-bold rounded-b-lg hover:bg-pink-600 hover:underline transition">
-                                            Adicionar no carrinho
-                                        </button>
-                                    </form>
+                                    @if($produto->desconto > 0)
+                                        <div class="absolute top-2 left-2 bg-pink-400 text-white text-xs font-bold px-3 py-1 rounded-full">
+                                            {{ $produto->desconto }}% OFF
+                                        </div>
+                                    @endif
                                 </div>
-                                <p class="mt-3 w-full text-center font-semibold text-gray-800">{{ $produto->nome }}</p>
-                                <p class="w-full text-center font-semibold text-gray-800">R$ {{ $produto->preco }}</p>
+
+                                <div class="w-full py-2">
+                                    <p class="text-base font-medium">{{ $produto->nome }}</p>
+
+                                    <div class="flex items-center gap-2 mt-1">
+                                        @if($produto->desconto > 0)
+                                            <span class="text-gray-400 text-sm line-through">R$ {{ number_format($produto->preco_antigo, 2, ',', '.') }}</span>
+                                        @endif
+                                        <span class="text-pink-400 text-lg font-bold">R$ {{ number_format($produto->preco, 2, ',', '.') }}</span>
+                                    </div>
+
+                                    <div class="flex justify-center gap-3 mt-4 w-full">
+                                        <form action="{{ route('addCart') }}" method="POST">
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{ $produto->id }}">
+                                            <input type="hidden" name="nome" value="{{ $produto->nome }}">
+                                            <input type="hidden" name="preco" value="{{ $produto->preco }}">
+                                            <input type="hidden" name="url" value="{{ $produto->url }}">
+                                            <input type="number" name="quantidade" value="1" min="1" class="hidden">
+
+                                            <button type="submit" class="bg-pink-400 text-white text-lg font-bold py-2 px-4 rounded-full hover:bg-pink-600 transition w-full">
+                                                COMPRAR
+                                            </button>
+                                        </form>
+
+                                        <a href="{{ route('produto.show', $produto->id) }}" class="border text-dark text-lg font-bold py-2 px-4 rounded-full hover:bg-gray-200 transition w-full text-center">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
                         @endforeach
                     </div>
@@ -150,4 +154,5 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/12004a6e82.js" crossorigin="anonymous"></script>
 @endsection
