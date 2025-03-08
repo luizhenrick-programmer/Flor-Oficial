@@ -1,7 +1,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-<header class="w-full bg-pink-200 shadow-sm">
+<header class="w-full bg-gray-800 shadow-sm">
     <div class="flex items-center justify-between w-full px-4">
         <div class="flex items-center justify-center hover:bg-gray-300 focus:hover:bg-violet-500 lg:hidden ">
             <button class="btn border-0 text-dark font-bold hover:text-violet-500 focus:text-violet-500" type="button"
@@ -20,10 +20,10 @@
             </div>
         </div>
         <div class="flex flex-row items-center">
-            <img class="rounded-full w-16 h-16 mx-2" src="{{ ('assets\images\Logotipo Flor Oficial.png') }}" alt="Logo">
+            <img class="rounded-full w-16 h-16 mx-2" src="{{ ('assets\images\Flor Oficial.png') }}" alt="Logo">
             <div class="flex flex-col align-items">
-                <h1 class="text-lg font-bold text-dark montserrat mb-0">Flor Oficial</h1>
-                <p class="text-sm text-nowrap text-dark mb-0">BY Thays Conrado</p>
+                <h1 class="text-lg font-bold text-orange-100 montserrat mb-0">Flor Oficial</h1>
+                <p class="text-sm text-nowrap text-orange-100 mb-0">BY Thays Conrado</p>
             </div>
         </div>
 
@@ -33,23 +33,23 @@
             </form>
         </div>
 
-        <div class="flex items-center justify-center gap-8 bg-pink-200 py-4">
+        <div class="flex items-center justify-center gap-8 py-4">
             <!-- Atendimento -->
-            <a href="https://api.whatsapp.com/send?phone=5561981011498&text=" target="_blank" class="flex flex-col items-center text-dark no-underline">
+            <a href="https://api.whatsapp.com/send?phone=5561981011498&text=" target="_blank" class="flex flex-col items-center text-orange-100 no-underline">
                 <i class="fa-solid fa-comments text-3xl mb-1"></i>
                 <span class="text-sm">Atendimento</span>
             </a>
 
             <!-- Minha conta -->
-            <a href="{{ Auth::check() ? route('profile.edit') : route('login') }}" class="flex flex-col items-center text-dark no-underline">
+            <a href="{{ Auth::check() ? route('profile.edit') : route('login') }}" class="flex flex-col items-center text-orange-100 no-underline">
                 <i class="fa-regular fa-user text-3xl mb-1"></i>
                 <span class="text-sm">Minha conta</span>
             </a>
 
             <!-- Meu carrinho -->
-            <a href="{{ route('cart') }}" class="flex flex-col items-center text-dark no-underline relative">
+            <a href="{{ route('cart') }}" class="flex flex-col items-center text-orange-100 no-underline relative">
                 <i class="fa-solid fa-cart-shopping text-3xl mb-1"></i>
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-orange-100 text-dark">0</span>
                 <span class="text-sm">Carrinho</span>
             </a>
         </div>
@@ -60,7 +60,7 @@
                 <!-- Item Início -->
                 <li class="group relative">
                     <a href="{{ route('home') }}"
-                        class="text-md font-semibold text-gray-700 transition no-underline hover:text-pink-500">
+                        class="text-md font-semibold text-orange-100 transition no-underline hover:text-pink-500">
                         INÍCIO
                     </a>
                     <span
@@ -69,7 +69,7 @@
                 <!-- Item Comprar -->
                 <li class="group relative dropdown">
                     <a href="{{ route('shopping') }}"
-                        class="text-md font-semibold text-gray-700 transition no-underline hover:text-pink-700">
+                        class="text-md font-semibold text-orange-100 transition no-underline hover:text-pink-700">
                         LOJA
                     </a>
                     <span
@@ -78,7 +78,7 @@
                 <!-- Item Sobre -->
                 <li class="group relative">
                     <a href="{{ route('about') }}"
-                        class="text-md font-semibold text-gray-700 transition no-underline hover:text-pink-800">
+                        class="text-md font-semibold text-orange-100 transition no-underline hover:text-pink-800">
                         SOBRE
                     </a>
                     <span
@@ -87,7 +87,7 @@
                 <!-- Item Contato -->
                 <li class="group relative">
                     <a href="{{ route('contact') }}"
-                        class="text-md font-semibold text-gray-700 transition no-underline hover:text-pink-500">
+                        class="text-md font-semibold text-orange-100 transition no-underline hover:text-pink-500">
                         CONTATO
                     </a>
                     <span

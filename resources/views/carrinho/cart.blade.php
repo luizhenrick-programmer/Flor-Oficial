@@ -18,12 +18,12 @@
                 @endif
 
                 @if (!$itens->count())
-                    <div class="flex flex-col justify-center bg-blue-100 px-2 text-blue-800 rounded-lg shadow-lg w-96 mb-6">
+                    <div class="flex flex-col justify-center bg-orange-100 px-2 text-amber-700 rounded-lg shadow-lg w-2/3 mb-6">
                     <div class="flex flex-row pt-2 gap-2">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
                                 <path fill-rule="evenodd" d="M12 2a1 1 0 0 1 .866.5l10 17A1 1 0 0 1 22 21H2a1 1 0 0 1-.866-1.5l10-17A1 1 0 0 1 12 2zm0 4a1 1 0 0 0-.993.883L11 7v6a1 1 0 0 0 1.993.117L13 13V7a1 1 0 0 0-1-1zm0 10a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
                             </svg>
-                            <h3 class="text-lg font-bold">Oops! Seu carrinho está vazio.</h3>
+                            <h3 class="text-lg font-bold">Seu carrinho está vazio... Vamos às compras?</h3>
                         </div>
                     </div>
                 @endif

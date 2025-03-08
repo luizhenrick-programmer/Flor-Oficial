@@ -54,14 +54,7 @@
         <div class="about-header text-center">
             <h2 class="display-4">SOBRE NÓS</h2>
         </div>
-
-        <!-- Imagem principal -->
-        <div class="row justify-content-center mb-5 text-center">
-            <div class="col-md-4">
-                <img src="{{ asset('assets/images/logoSite.png') }}" alt="Logo Flor di Pitanga" class="img-fluid logo-custom">
-            </div>
-        </div>
-
+        
         <!-- Seção de Texto e Imagens -->
         <div class="row align-items-start my-5">
             <div class="col-md-6">

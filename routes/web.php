@@ -61,7 +61,7 @@ Route::middleware(['auth', 'vendedor'])->group(function () {
 
 Route::middleware(['auth', 'cliente'])->group(function () {
     Route::get('/dashboard', [UserController::class, 'dashboard'])->name('cliente.dashboard');
-    Route::get('/pagamento', [PaymentController::class, 'pagamento'])->name('cliente.pagamento');
+    Route::get('/pagamento', [PaymentController::class, 'create'])->name('cliente.pagamento');
 });
 
 // ROTAS E-COMMERCE
