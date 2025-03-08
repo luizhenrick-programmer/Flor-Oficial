@@ -49,9 +49,14 @@
             <!-- Meu carrinho -->
             <a href="{{ route('cart') }}" class="flex flex-col items-center text-orange-100 no-underline relative">
                 <i class="fa-solid fa-cart-shopping text-3xl mb-1"></i>
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-orange-100 text-dark">0</span>
+                @if(Cart::getTotalQuantity() > 0)
+                    <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-orange-100 text-dark">
+                        {{ Cart::getTotalQuantity() }}
+                    </span>
+                @endif
                 <span class="text-sm">Carrinho</span>
             </a>
+
         </div>
     </div>
     <div class="flex items-center justify-center w-full pb-4">
