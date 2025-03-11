@@ -3,6 +3,7 @@
 @section('titulo', 'Flor Oficial')
 
 @section('content')
+
     <div class="container mx-auto my-10 p-6 bg-white shadow-lg rounded-lg max-w-3xl">
         <h2 class="text-2xl font-bold text-center text-gray-700 mb-6">Escolha seu método de pagamento</h2>
 
@@ -66,3 +67,4 @@
             document.getElementById(method).classList.remove('hidden');
         }
     </script>
+@endsection
