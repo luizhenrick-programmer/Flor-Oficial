@@ -6,7 +6,7 @@
     <div class="flex flex-col flex-grow items-center justify-around px-3 py-3">
         <section id="destaque" class="mt-8 grid grid-cols-1 md:grid-cols-2 w-full items-center justify-center">
             <div class="flex flex-col justify-center items-start px-6 md:px-12">
-                <h1 class="text-3xl md:text-4xl text-stone-700 font-bold mb-4">Descubra a Elegância da Primavera!</h1>
+                <h1 class="text-3xl md:text-4xl font-bold mb-4 color-tercery">Descubra a Elegância da Primavera!</h1>
                 <p class="text-justify font-semibold text-gray-700 mb-6">
                     Vestidos noturnos criados para quem deseja unir sofisticação e leveza. Nossa nova coleção de
                     primavera traz designs exclusivos que realçam sua beleza, com cortes elegantes, tecidos delicados e
@@ -15,15 +15,16 @@
                     Explore agora e encontre a peça ideal para brilhar nas noites desta temporada.
                 </p>
                 <a href="{{ route('shopping') }}"
-                    class="flex items-center justify-center px-6 py-3 bg-stone-400 text-orange-100 font-bold rounded-lg w-64 no-underline hover:bg-stone-600 hover:text-orange-100 transition">
-                    COMPRE AGORA
-                </a>
+    class="flex items-center justify-center px-6 py-3 color-fundo color-secundary font-bold rounded-lg w-64 no-underline hover:bg-gray-800 transition">
+    COMPRE AGORA
+</a>
+
                 <div class="flex items-center mt-8 space-x-4">
-                    <button type="button" class="text-gray-600 font-bold text-lg hover:text-pink-500" onclick="changeSlide(0)">01</button>
+                    <button type="button" class="font-bold text-lg hover:color-secundary" onclick="changeSlide(0)">01</button>
                     <span class="text-gray-600 text-2xl">—</span>
-                    <button type="button" class="text-gray-600 font-bold text-lg hover:text-pink-500" onclick="changeSlide(1)">02</button>
+                    <button type="button" class="font-bold text-lg hover:color-secundary" onclick="changeSlide(1)">02</button>
                     <span class="text-gray-600 text-2xl">—</span>
-                    <button type="button" class="text-gray-600 font-bold text-lg hover:text-pink-500" onclick="changeSlide(2)">03</button>
+                    <button type="button" class="font-bold text-lg hover:color-secundary" onclick="changeSlide(2)">03</button>
                 </div>
             </div>
 

@@ -94,3 +94,19 @@
     font-style: normal;
   }
 
+.color-primary {
+    color: #F0E1CD;
+}
+
+.color-secundary {
+    color: #FFCE8E;
+}
+
+.color-tercery {
+    color: #573E1E;
+}
+
+
+.color-fundo {
+    background-color: #140c08;
+}
