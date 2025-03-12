@@ -10,7 +10,7 @@
             <h4 class="mb-0">Cadastro de Colaboradores</h4>
         </div>
         <div class="card-body">
-            <form action="{{ route('colaboradores.cadastrar_funcionario') }}" method="POST">
+            <form action="{{ route('colaboradores.cadastrar_funcionario.post') }}" method="POST">
                 @csrf
                 <h5 class="fw-bold text-success mb-4">Dados Pessoais</h5>
                 <!-- Nome Completo -->

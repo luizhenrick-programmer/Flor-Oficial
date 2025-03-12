@@ -71,22 +71,28 @@ Route::middleware(['auth', 'admin'])->prefix('e-commerce')->group(function () {
     Route::get('/produtos/criar', [AdminController::class, 'criarProduto'])->name('e-commerce.criar_produto');
     Route::post('/produtos/criar/enviar', [AdminController::class, 'store_produto'])->name('e-commerce.produto.store');
     Route::get('/produtos/filtrar', [AdminController::class, 'filtrar'])->name('produtos.filtrar');
+    Route::get('/produto/editar/{id}', [AdminController::class, 'editProduto'])->name('e-commerce.produto.editar');
+    Route::put('/produto/atualizar/{id}', [AdminController::class, 'updateProduto'])->name('e-commerce.produto.atualizar');
+    Route::delete('/e-commerce/produto/deletar/{id}', [AdminController::class, 'destroyProduto'])->name('e-commerce.produto.deletar');
     Route::get('/categorias', [AdminController::class, 'categoria'])->name('e-commerce.categorias');
     Route::get('/categorias/criar', [AdminController::class, 'criarCategoria'])->name('e-commerce.criar_categoria');
     Route::post('/categorias/criar/enviar', [AdminController::class, 'store_categoria'])->name('e-commerce.categoria.store');
     Route::get('/marcas', [AdminController::class, 'marcas'])->name('e-commerce.marcas');
     Route::get('/marcas/criar', [AdminController::class, 'criarMarcas'])->name('e-commerce.criar_marcas');
     Route::post('/marcas/criar/enviar', [AdminController::class, 'store_marcas'])->name('e-commerce.marcas.store');
+    Route::get('/clientes', [AdminController::class, 'clientes'])->name('e-commerce.clientes');
 });
 
 // ROTAS COLABORADORES
 Route::middleware(['auth', 'admin'])->prefix('colaboradores')->group(function () {
     Route::get('/cadastrar-funcionario', [AdminController::class, 'cadastrar_funcionario'])->name('colaboradores.cadastrar_funcionario');
+    Route::post('/cadastrar-funcionario', [AdminController::class, 'salvarFuncionario'])->name('colaboradores.cadastrar_funcionario.post');
+    Route::get('/listar-funcionarios', [AdminController::class, 'listarFuncionarios'])->name('colaboradores.listar');
 });
 
 // ROTAS FINANCEIRO
-Route::middleware(['auth', 'admin'])->prefix('e-commerce')->group(function () {
-    Route::get('/produtos', [AdminController::class, 'produto'])->name('e-commerce.produtos');
+Route::middleware(['auth', 'admin'])->prefix('financeiro')->group(function () {
+    Route::get('/receitas-despesas', [AdminController::class, 'ReceitasDespesas'])->name('financeiro.receitas-despesas');
 });
 
 require __DIR__ . '/auth.php';

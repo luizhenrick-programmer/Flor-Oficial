@@ -37,4 +37,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function endereco() {
+        return $this->belongsTo(Endereco::class, 'endereco_id');
+    }
+
 }

@@ -1,18 +1,15 @@
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.js"></script>
-
 @extends('admin.app')
 
 @section('titulo', 'Produtos Flor Oficial')
 
 @section('content')
     @if (session('error'))
-        <p style="color: red;">{{ session('error') }}</p>
+        <p class="text-red-500">{{ session('error') }}</p>
     @endif
-    <div class="container-xl flex flex-col py-5">
-        <x-text color='gray-200' size='xs' bold='true'>PRODUTOS</x-text>
+
+    <div class="container mx-auto p-6">
+        <h1 class="text-xl font-bold text-gray-200 mb-4">PRODUTOS</h1>
+
         <div class="bg-gray-700 rounded-lg border-l-4 border-violet-500 text-gray-200 my-4 p-3" role="alert">
             <div class="flex items-center">
                 <div class="mr-3">
@@ -29,107 +26,96 @@
                     as ferramentas com responsabilidade e cuidado!</x-text>
             </div>
         </div>
-        <div class="flex flex-col bg-gray-800 shadow-md rounded-lg p-2">
-            <div class="w-full flex items-center justify-between flex-wrap gap-1">
-                <div class="flex flex-wrap flex-nowrap tems-center gap-1">
-                    <input type="text" placeholder="Pesquisar..." class="px-3 py-2 rounded-md bg-gray-700 text-white">
-                    <button
-                        class="btn bg-gray-800 text-white text-center shadow-md rounded-md border border-gray-600 py-2 px-4">
-                        <span>Filtros</span>
-                    </button>
-                </div>
-                <div class="flex items-center gap-1">
-                    <a
-                        class="btn bg-gray-800 text-white shadow-md rounded-md border border-gray-600 py-2 px-4 hover:bg-gray-400 hover:text-black">
-                        <i class="fa-solid fa-file-export"></i>
-                        <span class="ms-2">Exportar</span>
-                    </a>
-                    <a href="{{ route('e-commerce.criar_produto') }}"
-                        class="btn bg-violet-600 text-white shadow-md rounded-md border border-gray-600 py-2 px-4 hover:bg-violet-800 hover:text-black">
-                        <i class="fa-solid fa-plus"></i>
-                        <span class="ms-2">Criar Produto</span>
-                    </a>
-                    <a
-                        class="btn bg-gray-800 text-white shadow-md rounded-md border border-gray-600 py-2 px-4 hover:bg-gray-400 hover:text-black">
-                        <i class="fa-solid fa-rotate"></i>
-                        <span class="ms-2">Atualizar</span>
-                    </a>
-                </div>
+
+        <!-- Barra de ações -->
+        <div class="flex flex-col md:flex-row justify-between bg-gray-800 p-4 rounded-lg shadow-md">
+            <div class="flex items-center gap-2">
+                <input type="text" placeholder="Pesquisar..."
+                    class="px-3 py-2 bg-gray-700 text-white rounded-md focus:outline-none focus:ring focus:border-violet-500">
+                <button class="bg-gray-700 text-white px-4 py-2 rounded-md hover:bg-gray-600">Filtros</button>
             </div>
-            @if ($produtos->count())
-                <table
-                    class="bg-gray-600 rounded table table-hover table-striped table-bordered text-center align-middle mt-4">
-                    <thead class="thead-dark">
-                        <tr class="bg-dark text-white">
-                            <th>ID</th>
-                            <th>Imagem</th>
-                            <th>Produto</th>
-                            <th>Preço</th>
-                            <th>Em estoque?</th>
-                            <th>Quantidade</th>
-                            <th>Cod. Categoria</th>
-                            <th>Criado em</th>
-                            <th>Criado por</th>
-                            <th>Status</th>
-                            <th>Operações</th>
+
+            <div class="flex items-center gap-2 mt-3 md:mt-0">
+                <a class="bg-gray-700 text-white px-4 py-2 rounded-md no-underline hover:bg-gray-600 flex items-center gap-1">
+                    <i class="fa-solid fa-file-export"></i> Exportar
+                </a>
+                <a href="{{ route('e-commerce.criar_produto') }}"
+                    class="bg-violet-600 text-white px-4 py-2 rounded-md no-underline hover:bg-violet-800 flex items-center gap-1">
+                    <i class="fa-solid fa-plus"></i> Criar Produto
+                </a>
+                <a class="bg-gray-700 text-white px-4 py-2 rounded-md no-underline hover:bg-gray-600 flex items-center gap-1">
+                    <i class="fa-solid fa-rotate"></i> Atualizar
+                </a>
+            </div>
+        </div>
+
+        <!-- Tabela -->
+        @if ($produtos->count())
+            <div class="overflow-x-auto mt-6">
+                <table class="w-full border-collapse bg-gray-700 rounded-lg text-white text-center">
+                    <thead>
+                        <tr class="bg-gray-800 text-gray-300">
+                            <th class="p-3">ID</th>
+                            <th class="p-3">Imagem</th>
+                            <th class="p-3">Produto</th>
+                            <th class="p-3">Preço</th>
+                            <th class="p-3">Em estoque?</th>
+                            <th class="p-3">Quantidade</th>
+                            <th class="p-3">Categoria</th>
+                            <th class="p-3">Criado em</th>
+                            <th class="p-3">Criado por</th>
+                            <th class="p-3">Status</th>
+                            <th class="p-3">Ações</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($produtos as $produto)
-                            <tr>
-                                <td>{{ $produto->id }}</td>
-                                <td>{{ $produto->url }}</td>
-                                <td>{{ $produto->nome }}</td>
-                                <td>{{ $produto->preco }}</td>
-                                <td>
+                            <tr class="border-t border-gray-600 hover:bg-gray-800 transition">
+                                <td class="p-3">{{ $produto->id }}</td>
+                                <td class="p-3">
+                                    <img src="{{ $produto->url }}" alt="{{ $produto->nome }}" class="h-12 w-12 object-cover rounded-md mx-auto">
+                                </td>
+                                <td class="p-3">{{ $produto->nome }}</td>
+                                <td class="p-3">R$ {{ number_format($produto->preco, 2, ',', '.') }}</td>
+                                <td class="p-3">
                                     @if ($produto->quantidade >= 1)
-                                        <span class="bg-green-500 rounded-lg p-2">Sim</span>
+                                        <span class="bg-green-500 text-white px-3 py-1 rounded">Sim</span>
                                     @else
-                                        <span class="bg-red-500 rounded-lg p-2">Não</span>
+                                        <span class="bg-red-500 text-white px-3 py-1 rounded">Não</span>
                                     @endif
                                 </td>
-                                <td>{{ $produto->quantidade }}</td>
-                                <td>{{ $produto->categoria_id }}</td>
-                                <td>{{ $produto->criado_por }}</td>
-                                <td>{{ $produto->status }}</td>
-                                <td>
-                                    {{--
-                                        <form action="{{ route('ecommerce.deletarEvento', $produto->id) }}" method="post">
-                                            <a class="btn btn-info btn-sm"
-                                                href="{{ route('organizador.showEvento', $produto->id) }}">
-                                                <i class="bi bi-eye-fill"></i>
-                                            </a>
-                                            <a class="btn btn-primary btn-sm"
-                                                href="{{ route('organizador.editarEvento', $produto->id) }}">
-                                                <i class="bi bi-pencil-square"></i>
-                                            </a>
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm"
-                                                onclick="return confirm('Tem certeza que deseja excluir este evento?')">
-                                                <i class="bi bi-trash-fill"></i>
-                                            </button>
-                                        </form>
-                                    --}}
+                                <td class="p-3">{{ $produto->quantidade }}</td>
+                                <td class="p-3">{{ $produto->categoria_id }}</td>
+                                <td class="p-3">{{ $produto->created_at->format('d/m/Y') }}</td>
+                                <td class="p-3">{{ $produto->criado_por }}</td>
+                                <td class="p-3">{{ ucfirst($produto->status) }}</td>
+                                <td class="p-3 flex justify-center gap-2">
+                                    <a href="{{ route('e-commerce.produto.editar', $produto->id) }}"
+                                        class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-700 transition">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+                                    <form action="{{ route('e-commerce.produto.deletar', $produto->id) }}" method="POST"
+                                        onsubmit="return confirm('Tem certeza que deseja excluir este produto?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit"
+                                            class="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-700 transition">
+                                            <i class="bi bi-trash-fill"></i>
+                                        </button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
-            @else
-                <p class="mt-4 alert alert-warning">Nenhum produto cadastrado</p>
-            @endif
+            </div>
+        @else
+            <p class="mt-4 text-yellow-400">Nenhum produto cadastrado</p>
+        @endif
 
-            <nav>
-                <ul class="pagination">
-                    <li class="page-item disabled"><a class="page-link" href="#">Anterior</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Próximo</a></li>
-                </ul>
-            </nav>
+        <!-- Paginação -->
+        <div class="mt-6 flex justify-center">
+            {{ $produtos->links('pagination::tailwind') }}
         </div>
-    </div>
     </div>
 @endsection

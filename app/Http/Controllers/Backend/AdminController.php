@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Categorias;
+use App\Models\Endereco;
 use App\Models\Marcas;
 use Illuminate\Http\Request;
 use App\Models\Produto;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
 
@@ -27,7 +29,7 @@ class AdminController extends Controller
 
     public function produto()
     {
-        $produtos = Produto::all();
+        $produtos = Produto::paginate(10);
         return view('admin.ecommerce.produto', compact('produtos'));
     }
 
@@ -45,11 +47,11 @@ class AdminController extends Controller
                 'nome' => 'required|string|max:255',
                 'descricao' => 'nullable|string|max:1000',
                 'preco' => 'required|decimal:2|min:1',
-                'marca_id' => 'required|exists:marcas,id',
+                'marca_id' => 'nullable|exists:marcas,id',
                 'quantidade' => 'required|integer|min:0',
                 'categoria_id' => 'required|exists:categorias,id',
                 'tamanho' => 'required|string|in:PP,P,M,G,GG,XG',
-                'cor' => 'required|array|min:1',
+                'cor' => 'nullable|array|min:1',
                 'arquivo' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
                 'status' => 'required|in:publicado,inativo',
             ]);
@@ -131,6 +133,23 @@ class AdminController extends Controller
         return view('partials.produtos', compact('produtos'))->render();
     }
 
+    public function editProduto($id)
+    {
+        $produto = Produto::findOrFail($id);
+        $categorias = Categorias::all();
+        $marcas = Marcas::all();
+        return view('admin.ecommerce.produto_editar', compact('produto', 'categorias', 'marcas'));
+    }
+
+    public function updateProduto(Request $request, $id)
+    {
+        $produto = Produto::findOrFail($id);
+
+        $produto->update($request->all());
+
+        return redirect()->route('e-commerce.produtos')->with('success', 'Produto atualizado com sucesso!');
+    }
+
 
     public function store_categoria(Request $request)
     {
@@ -205,6 +224,48 @@ class AdminController extends Controller
     {
         return view('admin.colaboradores.index');
     }
+public function salvarFuncionario(Request $request) {
+    // Validação
+    $request->validate([
+        'nomeCompleto' => 'required|string|max:255',
+        'cpf' => 'required|string|max:14|unique:users,cpf',
+        'rg' => 'required|string|max:20',
+        'cargo' => 'required|string|in:admin,gerente,vendedor',
+        'email' => 'required|email|unique:users,email',
+        'telefone' => 'required|string|max:20',
+        'cep' => 'required|string|max:10',
+        'rua' => 'required|string|max:255',
+        'numero' => 'required|string|max:10',
+        'bairro' => 'required|string|max:255',
+        'cidade' => 'required|string|max:255',
+        'estado' => 'required|string|max:255',
+    ]);
+
+    // Criar endereço e salvar no banco
+    $endereco = Endereco::create([
+        'cep' => $request->cep,
+        'rua' => $request->rua,
+        'numero' => $request->numero,
+        'bairro' => $request->bairro,
+        'cidade' => $request->cidade,
+        'estado' => $request->estado,
+    ]);
+
+    // Criar usuário e associar endereço
+    User::create([
+        'name' => $request->nomeCompleto,
+        'cpf' => $request->cpf,
+        'telefone' => $request->telefone,
+        'role' => $request->cargo,
+        'email' => $request->email,
+        'password' => Hash::make('123456'), // Defina uma senha padrão
+        'endereco_id' => $endereco->id, // Relacionamento correto
+    ]);
+
+    return redirect()->route('colaboradores.listar')->with('success', 'Funcionário cadastrado com sucesso!');
+}
+
+
 
     public function financeiro()
     {
@@ -212,4 +273,19 @@ class AdminController extends Controller
     }
 
     public function pagamento() {}
+
+    public function clientes()
+    {
+        $clientes = User::where('role', 'cliente')->paginate(10); // Paginação opcional
+        return view('admin.ecommerce.clientes', compact('clientes'));
+    }
+
+    public function listarFuncionarios() {
+        $colaboradores = User::whereIn('role', ['gerente', 'vendedor'])->paginate(10);
+        return view('admin.colaboradores.listar-funcionarios', compact('colaboradores'));
+    }
+
+    public function ReceitasDespesas() {
+        return view('admin.financeiro.receitas-despesas');
+    }
 }

@@ -147,7 +147,7 @@
 
                     <!-- Clientes -->
                     <li>
-                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
+                        <a href='{{ route('e-commerce.clientes') }}' class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
                             <div class="flex items-center gap-2">
                                 <i class="fa-solid fa-users text-lg"></i>
                                 <span class="text-sm font-bold truncate" title="Clientes">Clientes</span>
@@ -195,7 +195,7 @@
 
                     <!-- Todos os Funcionários -->
                     <li>
-                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
+                        <a href='{{ route('colaboradores.listar') }}' class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
                             <div class="flex items-center gap-2">
                                 <i class="fa-solid fa-address-card"></i>
                                 <span class="text-sm font-bold truncate" title="Todos os Funcionários">Todos os Funcionários</span>
@@ -221,10 +221,10 @@
 
                     <!-- Controle de Receitas e Despesas -->
                     <li>
-                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
+                        <a href='{{ route('financeiro.receitas-despesas') }}' class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
                             <div class="flex items-center gap-2">
                                 <i class="fa-solid fa-address-card"></i>
-                                <span class="text-sm font-bold truncate" title="Controle de Receitas e Despesas">Controle de Receitas e Despesas</span>
+                                <span class="text-sm font-bold truncate" title="Controle de Receitas e Despesas">Receitas e Despesas</span>
                             </div>
                         </a>
                     </li>
@@ -244,17 +244,7 @@
                         <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
                             <div class="flex items-center gap-2">
                                 <i class="fa-solid fa-address-card"></i>
-                                <span class="text-sm font-bold truncate" title="Processamento de Reembolsos">Processamento de Reembolsos</span>
-                            </div>
-                        </a>
-                    </li>
-
-                    <!-- Controle de Fluxo de Caixa -->
-                    <li>
-                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
-                            <div class="flex items-center gap-2">
-                                <i class="fa-solid fa-address-card"></i>
-                                <span class="text-sm font-bold truncate" title="Controle de Fluxo de Caixa">Controle de Fluxo de Caixa</span>
+                                <span class="text-sm font-bold truncate" title="Processamento de Reembolsos">Reembolsos</span>
                             </div>
                         </a>
                     </li>

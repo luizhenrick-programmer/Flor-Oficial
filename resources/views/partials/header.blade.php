@@ -8,9 +8,11 @@
                 data-bs-toggle="offcanvas" data-bs-target="#menu-princial" aria-controls="menu-princial">
                 <i class="fa-solid fa-bars"></i>
             </button>
-            <div class="offcanvas offcanvas-start" tabindex="-1" id="menu-princial" aria-labelledby="menu-principal-app">
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="menu-princial"
+                aria-labelledby="menu-principal-app">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title text-white font-bold mx-auto" id="offcanvasExampleLabel">Menu Principal</h5>
+                    <h5 class="offcanvas-title text-white font-bold mx-auto" id="offcanvasExampleLabel">Menu Principal
+                    </h5>
                     <button type="button" class="btn bg-transparent border font-bold text-white rounded-md mx-0"
                         data-bs-dismiss="offcanvas" aria-label="Close">X</button>
                 </div>
@@ -19,38 +21,66 @@
                 </div>
             </div>
         </div>
-        <div class="flex flex-row items-center">
+        <div class="flex flex-row items-center ">
             <img class="rounded-full w-16 h-16 mx-2" src="{{ ('assets\images\Flor Oficial.png') }}" alt="Logo">
-            <div class="flex flex-col align-items">
-                <h1 class="text-lg font-bold text-orange-100 montserrat mb-0">Flor Oficial</h1>
-                <p class="text-sm text-nowrap text-orange-100 mb-0">BY Thays Conrado</p>
-            </div>
+            <h1 class="text-lg font-bold text-orange-100 montserrat">Flor Oficial</h1>
         </div>
 
         <div class="flex flex-grow items-center mx-4">
             <form action="{{ route('search') }}" method="GET" class="w-full">
-                <input type="text" name="query" class="w-full px-4 py-2 border border-gray-300 rounded-full shadow-sm focus:ring-2 focus:ring-pink-500 focus:outline-none" placeholder="Busque aqui o que deseja...">
+                <input type="text" name="query"
+                    class="w-full px-4 py-2 border border-gray-300 rounded-full shadow-sm focus:ring-2 focus:ring-pink-500 focus:outline-none"
+                    placeholder="Busque aqui o que deseja...">
             </form>
         </div>
 
         <div class="flex items-center justify-center gap-8 py-4">
             <!-- Atendimento -->
-            <a href="https://api.whatsapp.com/send?phone=5561981011498&text=" target="_blank" class="flex flex-col items-center text-orange-100 no-underline">
+            <a href="https://api.whatsapp.com/send?phone=5561981011498&text=" target="_blank"
+                class="flex flex-col items-center text-orange-100 no-underline">
                 <i class="fa-solid fa-comments text-3xl mb-1"></i>
                 <span class="text-sm">Atendimento</span>
             </a>
 
-            <!-- Minha conta -->
-            <a href="{{ Auth::check() ? route('profile.edit') : route('login') }}" class="flex flex-col items-center text-orange-100 no-underline">
-                <i class="fa-regular fa-user text-3xl mb-1"></i>
-                <span class="text-sm">Minha conta</span>
-            </a>
+            @auth
+                <x-dropdown align="center" width="46">
+                    <x-slot name="trigger">
+                        <button class="flex flex-col items-center text-orange-100 no-underline focus:outline-none">
+                            <i class="fa-regular fa-user text-3xl mb-1"></i>
+                            <span class="text-sm">Minha conta</span>
+                        </button>
+                    </x-slot>
+
+                    <x-slot name="content">
+                        <x-dropdown-link :href="route('profile.edit')">
+                            {{ __('Perfil') }}
+                        </x-dropdown-link>
+
+                        <!-- Logout -->
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <x-dropdown-link :href="route('logout')"
+                                onclick="event.preventDefault(); this.closest('form').submit();">
+                                {{ __('Sair') }}
+                            </x-dropdown-link>
+                        </form>
+                    </x-slot>
+                </x-dropdown>
+            @else
+                <a href="{{ route('login') }}" class="flex flex-col items-center text-orange-100 no-underline">
+                    <i class="fa-regular fa-user text-3xl mb-1"></i>
+                    <span class="text-sm">Minha conta</span>
+                </a>
+            @endauth
+
+
 
             <!-- Meu carrinho -->
             <a href="{{ route('cart') }}" class="flex flex-col items-center text-orange-100 no-underline relative">
                 <i class="fa-solid fa-cart-shopping text-3xl mb-1"></i>
                 @if(Cart::getTotalQuantity() > 0)
-                    <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-orange-100 text-dark">
+                    <span id="cart-count"
+                        class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-orange-100 text-dark">
                         {{ Cart::getTotalQuantity() }}
                     </span>
                 @endif
