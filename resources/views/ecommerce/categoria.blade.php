@@ -56,16 +56,8 @@
                     <thead class="thead-dark">
                         <tr class="bg-dark text-white">
                             <th>ID</th>
-                            <th>Imagem</th>
-                            <th>Produto</th>
-                            <th>Preço</th>
-                            <th>Em estoque?</th>
-                            <th>Quantidade</th>
-                            <th>Cod. Categoria</th>
-                            <th>Criado em</th>
+                            <th>Nome da Categoria</th>
                             <th>Criado por</th>
-                            <th>Status</th>
-                            <th>Operações</th>
                         </tr>
                     </thead>
                     <tbody>

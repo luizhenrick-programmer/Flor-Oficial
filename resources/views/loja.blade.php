@@ -155,7 +155,7 @@
                                             </button>
                                         </form>
 
-                                        <a href="{{ route('produto.show', $produto->id) }}"
+                                        <a href="{{ route('produtos.show', $produto->id) }}"
                                             class="border text-dark text-lg font-bold py-2 px-4 rounded-full hover:bg-gray-200 transition w-full text-center">
                                             <i class="fa-solid fa-eye"></i>
                                         </a>
@@ -175,54 +175,5 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/12004a6e82.js" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-    <script>
-        $(document).ready(function () {
-            $('.filter-checkbox').on('change', function () {
-                filtrarProdutos();
-            });
-
-            function filtrarProdutos() {
-                let categorias = [];
-                let cores = [];
-                let tamanhos = [];
-                let marcas = [];
-
-                // Captura as categorias selecionadas
-                $('input[name="categoria"]:checked').each(function () {
-                    categorias.push($(this).val());
-                });
-
-                // Captura as cores selecionadas
-                $('input[name="cor"]:checked').each(function () {
-                    cores.push($(this).val());
-                });
-
-                // Captura os tamanhos selecionados
-                $('input[name="size"]:checked').each(function () {
-                    tamanhos.push($(this).val());
-                });
-
-                // Captura as marcas selecionadas
-                $('input[name="brand"]:checked').each(function () {
-                    marcas.push($(this).val());
-                });
-
-                $.ajax({
-                    url: "{{ route('produtos.filtrar') }}",
-                    method: "GET",
-                    data: {
-                        categorias: categorias,
-                        cores: cores,
-                        tamanhos: tamanhos,
-                        marcas: marcas
-                    },
-                    success: function (response) {
-                        $('.grid').html(response);
-                    }
-                });
-            }
-        });
-    </script>
 
 @endsection

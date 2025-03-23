@@ -1,27 +1,35 @@
-<nav class="hidden flex-col bg-gray-800 w-full lg:flex">
+<nav class="hidden flex-col w-full lg:flex">
     <ul class="w-full h-full list-none mx-0 px-0">
         <!-- Dashboard -->
-        <li>
-            <a href="{{ route('admin.dashboard') }}" class="flex items-center justify-between w-full text-gray-300 px-3 py-2 transition no-underline
-                    {{ request()->routeIs('admin.dashboard') ? 'bg-indigo-700 text-white' : '' }}" type="button">
-                    <div class="flex items-center">
-                        <i class="fa-solid fa-house text-lg"></i>
-                        <span class="text-sm mx-3 font-bold">Dashboard</span>
-                    </div>
+        <x-text color='gray-200' size='xs' bold='true' class="px-3 py-4">FERRAMENTAS DE INBOX</x-text>
+        <li class="mt-3">
+            <a href="{{ route('admin.dashboard') }}" class="flex items-center justify-between w-full px-3 py-2 transition no-underline" type="button"
+            {{ request()->routeIs('admin.dashboard') ? 'bg-indigo-700 text-white' : '' }}>
+                <div class="flex items-center">
+                    <i class="fa-solid fa-house tw-bg-tertiary text-lg text-gray-300 p-3 rounded-lg"></i>
+                    <span class="text-md mx-3 font-bold
+                        {{ request()->routeIs('admin.dashboard') ? 'tw-text-accent-1' : 'text-gray-300' }}">
+                        Dashboard
+                    </span>
+                </div>
+                <i class="{{ request()->routeIs('admin.dashboard') ? 'fa-solid fa-chevron-right tw-text-accent-1' : ''}}"></i>
             </a>
         </li>
 
+
         <!-- E-commerce -->
         <li>
-            <button class="flex items-center justify-between w-full text-gray-300 px-3 py-2 transition no-underline
-                    {{ request()->routeIs('e-commerce.*') ? 'bg-indigo-700 text-white' : '' }}"
+            <a class="flex items-center justify-between w-full text-gray-300 px-3 py-2 transition  no-underline "
                     type="button" data-bs-toggle="collapse" data-bs-target="#ecommerceMenu" aria-expanded="false" aria-controls="ecommerceMenu">
                 <div class="flex items-center">
-                    <i class="fa-brands fa-shopify text-lg"></i>
-                    <span class="text-sm mx-3 font-bold">E-commerce</span>
+                    <i class="fa-brands fa-shopify tw-bg-tertiary text-2xl text-gray-300 p-3 rounded-lg"></i>
+                    <span class="text-md mx-3 font-bold
+                        {{ request()->routeIs('e-commerce.*') ? 'tw-text-accent-1' : 'text-gray-300' }}">
+                        E-commerce
+                    </span>
                 </div>
-                <i class="fa-solid fa-chevron-down"></i>
-            </button>
+                <i class="{{ request()->routeIs('e-commerce.*') ? 'fa-solid fa-chevron-right tw-text-accent-1' : ''}}"></i>
+            </a>
             <div id="ecommerceMenu" class="collapse">
                 <ul class="w-full list-none mx-0 px-0">
 
@@ -67,7 +75,7 @@
 
                     <!-- Produtos -->
                     <li>
-                        <a href="{{ route('e-commerce.produtos') }}" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
+                        <a href="{{ route('produtos.index') }}" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
                             <div class="flex items-center gap-2">
                                 <i class="fa-brands fa-product-hunt text-lg"></i>
                                 <span class="text-sm font-bold truncate" title="Produtos">Produtos</span>
@@ -160,96 +168,44 @@
 
         <!-- Colaboradores -->
         <li>
-            <button class="flex items-center justify-between w-full text-gray-300 px-3 py-2 transition no-underline
-                    {{ request()->routeIs('colaboradores.*') ? 'bg-indigo-700 text-white' : '' }}"
-                    type="button" data-bs-toggle="collapse" data-bs-target="#colaboradoresMenu" aria-expanded="false" aria-controls="colaboradoresMenu">
+            <a href="{{ route('colaboradores.index') }}" class="flex items-center justify-between w-full text-gray-300 px-3 py-2 text-gray-300 transition no-underline"
+                    type="button">
                 <div class="flex items-center">
-                    <i class="fa-solid fa-box text-lg"></i>
-                    <span class="text-sm mx-3 font-bold">Colaboradores</span>
+                    <i class="fa-solid fa-box tw-bg-tertiary text-lg text-gray-300 p-3 rounded-lg"></i>
+                    <span class="text-md mx-3 font-bold
+                        {{ request()->routeIs('colaboradores.*') ? 'tw-text-accent-1' : 'text-gray-300' }}">
+                        Colaboradores
+                    </span>
                 </div>
-                <i class="fa-solid fa-chevron-down"></i>
-            </button>
-            <div id="colaboradoresMenu" class="collapse">
-                <ul class="w-full list-none mx-0 px-0">
-
-                    <!-- Relatório de Funcionário -->
-                    <li>
-                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
-                            <div class="flex items-center gap-2">
-                                <i class="fa-solid fa-file-pdf"></i>
-                                <span class="text-sm font-bold truncate" title="Relatório de Funcionário">Relatório de Funcionário</span>
-                            </div>
-                        </a>
-                    </li>
-
-                    <!-- Cadastro de Colaborador -->
-                    <li>
-                        <a href="{{ route('colaboradores.cadastrar_funcionario') }}"
-                        class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
-                            <div class="flex items-center gap-2">
-                                <i class="fa-solid fa-person-circle-plus"></i>
-                                <span class="text-sm font-bold truncate" title="Cadastro de Colaborador">Cadastro de Colaborador</span>
-                            </div>
-                        </a>
-                    </li>
-
-                    <!-- Todos os Funcionários -->
-                    <li>
-                        <a href='{{ route('colaboradores.listar') }}' class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
-                            <div class="flex items-center gap-2">
-                                <i class="fa-solid fa-address-card"></i>
-                                <span class="text-sm font-bold truncate" title="Todos os Funcionários">Todos os Funcionários</span>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+                <i class="{{ request()->routeIs('colaboradores.*') ? 'fa-solid fa-chevron-right tw-text-accent-1' : ''}}"></i>
+            </a>
         </li>
 
         <!-- Financeiro -->
-        <li>
-            <button class="flex items-center justify-between w-full text-gray-300 px-3 py-2 transition no-underline"
-                    type="button" data-bs-toggle="collapse" data-bs-target="#financeiroMenu" aria-expanded="false" aria-controls="financeiroMenu">
+        <li class="mb-4">
+            <a href="{{ route('financeiro') }}" class="flex items-center justify-between w-full text-gray-300 px-3 py-2 transition no-underline"
+                    type="button">
                 <div class="flex items-center">
-                    <i class="fa-solid fa-sack-dollar text-lg"></i>
-                    <span class="text-sm mx-3 font-bold">Financeiro</span>
+                    <i class="fa-solid fa-sack-dollar tw-bg-tertiary text-lg text-gray-300 p-3 rounded-lg"></i>
+                    <span class="text-md mx-3 font-bold
+                        {{ request()->routeIs('financeiro') ? 'tw-text-accent-1' : 'text-gray-300' }}">
+                        Financeiro
+                    </span>
                 </div>
-                <i class="fa-solid fa-chevron-down"></i>
-            </button>
-            <div id="financeiroMenu" class="collapse">
-                <ul class="w-full list-none mx-0 px-0">
+                <i class="{{ request()->routeIs('financeiro') ? 'fa-solid fa-chevron-right tw-text-accent-1' : ''}}"></i>
+            </a>
+        </li>
 
-                    <!-- Controle de Receitas e Despesas -->
-                    <li>
-                        <a href='{{ route('financeiro.receitas-despesas') }}' class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
-                            <div class="flex items-center gap-2">
-                                <i class="fa-solid fa-address-card"></i>
-                                <span class="text-sm font-bold truncate" title="Controle de Receitas e Despesas">Receitas e Despesas</span>
-                            </div>
-                        </a>
-                    </li>
-
-                    <!-- Gerenciamento de Faturas -->
-                    <li>
-                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
-                            <div class="flex items-center gap-2">
-                                <i class="fa-solid fa-address-card"></i>
-                                <span class="text-sm font-bold truncate" title="Gerenciamento de Faturas">Gerenciamento de Faturas</span>
-                            </div>
-                        </a>
-                    </li>
-
-                    <!-- Processamento de Reembolsos -->
-                    <li>
-                        <a href="#" class="flex items-center justify-between w-full text-gray-300 px-12 py-2 transition no-underline truncate hover:bg-gray-700">
-                            <div class="flex items-center gap-2">
-                                <i class="fa-solid fa-address-card"></i>
-                                <span class="text-sm font-bold truncate" title="Processamento de Reembolsos">Reembolsos</span>
-                            </div>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+        <x-text color='gray-200' size='xs' bold='true' class="px-3 py-4">FERRAMENTAS ADICIONAIS</x-text>
+        <li class="mt-3">
+            <a href="https://www.instagram.com/flordi.oficial" target=_blank class="flex items-center justify-between w-full text-gray-300 px-3 py-2 transition no-underline" type="button">
+                <div class="flex items-center">
+                    <i class="bi bi-instagram tw-bg-tertiary text-2xl text-gray-300 p-3 rounded-lg"></i>
+                    <span class="text-md mx-3 text-gray-300 font-bold">
+                        Instagram
+                    </span>
+                </div>
+            </a>
         </li>
     </ul>
 </nav>

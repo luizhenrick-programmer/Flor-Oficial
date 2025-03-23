@@ -2,23 +2,38 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
 class Produto extends Model
 {
-    protected $table = 'produto';
+    use HasFactory;
+
+    protected $table = 'produtos';
 
     protected $fillable = [
-        'nome', 'url', 'descricao', 'preco', 'quantidade',
-        'categoria_id', 'cor', 'marca_id', 'status', 'tamanho',
-        'criado_por'
+        'nome', 'descricao', 'preco', 'desconto', 'categoria_id', 'marca_id', 'status', 'criado_por',
     ];
 
-    // Relacionamento com o modelo User
-    public function user()
+    public function variacoes()
     {
-        return $this->belongsTo(User::class, 'criado_por');
+        return $this->hasMany(ProdutoVariacao::class, 'produto_id');
+    }
+
+    public function imagens()
+    {
+        return $this->hasMany(ProdutoImagem::class, 'produto_id');
+    }
+
+    public function categoria()
+    {
+        return $this->belongsTo(Categorias::class, 'categoria_id');
+    }
+
+    public function marca()
+    {
+        return $this->belongsTo(Marcas::class, 'marca_id');
     }
 
     public function storeArquivo($arquivo)
@@ -31,10 +46,10 @@ class Produto extends Model
 
     }
 
-    public function categoria()
+    public function usuario()
     {
-        return $this->belongsTo(Categorias::class, 'categoria_id');
+        return $this->belongsTo(User::class, 'criado_por');
     }
 
-}
 
+}

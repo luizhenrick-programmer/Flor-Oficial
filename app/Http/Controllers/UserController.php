@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Backend;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Produto;
@@ -15,6 +15,6 @@ class UserController extends Controller
 
     public function comprar() {
         $produtos = Produto::all();
-        return view("shop", compact('produtos'));
+        return view("loja", compact('produtos'));
     }
 }

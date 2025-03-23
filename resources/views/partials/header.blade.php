@@ -38,7 +38,7 @@
             <!-- Atendimento -->
             <a href="https://api.whatsapp.com/send?phone=5561981011498&text=" target="_blank"
                 class="flex flex-col items-center text-orange-100 no-underline">
-                <i class="fa-solid fa-comments text-3xl mb-1"></i>
+                <i class="fa-solid fa-comments text-2xl mb-1"></i>
                 <span class="text-sm">Atendimento</span>
             </a>
 
@@ -46,21 +46,30 @@
                 <x-dropdown align="center" width="46">
                     <x-slot name="trigger">
                         <button class="flex flex-col items-center text-orange-100 no-underline focus:outline-none">
-                            <i class="fa-regular fa-user text-3xl mb-1"></i>
+                            <i class="fa-regular fa-user text-2xl mb-1"></i>
                             <span class="text-sm">Minha conta</span>
                         </button>
                     </x-slot>
 
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
+                            <i class="fa-solid fa-user-pen"></i>
                             {{ __('Perfil') }}
                         </x-dropdown-link>
+
+                        @if (Auth::user()->role === 'admin')
+                            <x-dropdown-link :href="route('admin.dashboard')">
+                                <i class="fa-solid fa-briefcase"></i>
+                                {{ __('Dashboard') }}
+                            </x-dropdown-link>
+                        @endif
 
                         <!-- Logout -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <x-dropdown-link :href="route('logout')"
                                 onclick="event.preventDefault(); this.closest('form').submit();">
+                                <i class="fa-solid fa-right-from-bracket"></i>
                                 {{ __('Sair') }}
                             </x-dropdown-link>
                         </form>
@@ -68,7 +77,7 @@
                 </x-dropdown>
             @else
                 <a href="{{ route('login') }}" class="flex flex-col items-center text-orange-100 no-underline">
-                    <i class="fa-regular fa-user text-3xl mb-1"></i>
+                    <i class="fa-regular fa-user text-2xl mb-1"></i>
                     <span class="text-sm">Minha conta</span>
                 </a>
             @endauth
@@ -77,7 +86,7 @@
 
             <!-- Meu carrinho -->
             <a href="{{ route('cart') }}" class="flex flex-col items-center text-orange-100 no-underline relative">
-                <i class="fa-solid fa-cart-shopping text-3xl mb-1"></i>
+                <i class="fa-solid fa-cart-shopping text-2xl mb-1"></i>
                 @if(Cart::getTotalQuantity() > 0)
                     <span id="cart-count"
                         class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-orange-100 text-dark">

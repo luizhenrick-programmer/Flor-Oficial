@@ -3,9 +3,9 @@
 @section('titulo', 'Painel de Controle')
 
 @section('content')
-<div class="container-xl flex flex-col py-5">
+<div class="container-xl flex flex-col">
     <x-text color='gray-200' size='xs' bold='true'>PAINEL DE CONTROLE</x-text>
-    <div class="bg-gray-700 rounded-lg border-l-4 border-violet-500 text-gray-200 mt-4 p-3" role="alert">
+    <div class="tw-bg-secondary rounded-lg border-l-4 border-violet-500 text-gray-200 mt-4 p-3" role="alert">
         <div class="flex items-center">
             <div class="mr-3">
                 <svg class="icon alert-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -20,25 +20,30 @@
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
-        <div class="bg-gray-700 shadow-md rounded-lg p-4">
-            <h5 class="text-lg font-bold mb-3 text-white">Pedidos</h5>
-            <h1 class="text-4xl font-bold mt-2">0</h1>
+        <div class="tw-bg-secondary shadow-md rounded-lg p-4">
+            <h5 class="text-lg font-bold mb-3 text-gray-200">Pedidos</h5>
+            <h1 class="text-4xl text-gray-200 font-bold mt-2">0</h1>
         </div>
-        <div class="bg-gray-700 shadow-md rounded-lg p-4">
-            <h5 class="text-lg font-bold mb-2 text-white">Produtos</h5>
-            <h1 class="text-4xl font-bold mt-2">0</h1>
+        <div class="tw-bg-secondary shadow-md rounded-lg p-4">
+            <h5 class="text-lg font-bold mb-2 text-gray-200">Produtos</h5>
+            <h1 class="text-4xl text-gray-200 font-bold mt-2">
+                {{ $produtos->count() ?? 0 }}
+            </h1>
         </div>
-        <div class="bg-gray-700 shadow-md rounded-lg p-4">
-            <h5 class="text-lg font-bold mb-2 text-white">Clientes</h5>
-            <h1 class="text-4xl font-bold mt-2">0</h1>
+
+        <div class="tw-bg-secondary shadow-md rounded-lg p-4">
+            <h5 class="text-lg font-bold mb-2 text-gray-200">Clientes</h5>
+            <h1 class="text-4xl text-gray-200 font-bold mt-2">
+                {{ $usuarios->count() ?? 0 }}
+            </h1>
         </div>
-        <div class="bg-gray-700 shadow-md rounded-lg p-4">
-            <h5 class="text-lg font-bold mb-2 text-white">Avaliações</h5>
-            <h1 class="text-4xl font-bold mt-2">0</h1>
+        <div class="tw-bg-secondary shadow-md rounded-lg p-4">
+            <h5 class="text-lg font-bold mb-2 text-gray-200">Avaliações</h5>
+            <h1 class="text-4xl text-gray-200 font-bold mt-2">0</h1>
         </div>
     </div>
 
-    <div class="bg-gray-700 text-gray-200 mt-4 p-5 rounded-lg">
+    <div class="tw-bg-secondary text-gray-200 mt-4 p-5 rounded-lg">
         <x-text color='purple-300' size="lg">Análise do site</x-text>
 
         <div class="flex justify-between mt-4 relative gap-4">

@@ -1,4 +1,4 @@
-<header class="flex items-center justify-between shadow-md bg-gray-800 p-2">
+<header class="flex items-center justify-between p-2">
     <div class="flex items-center justify-center hover:bg-violet-500 focus:hover:bg-violet-500 rounded lg:hidden ">
         <button class="btn border-0 text-white font-bold hover:text-violet-500 focus:text-violet-500" type="button"
             data-bs-toggle="offcanvas" data-bs-target="#menu-princial" aria-controls="menu-princial">
@@ -15,34 +15,20 @@
             </div>
         </div>
     </div>
-    <div class="flex flex-row items-center justify-center">
-        <img class="rounded-full w-16 h-16 mx-2" src="{{ asset('assets/images/logoSite.png')}}" alt="Logo">
-        <div class="flex flex-col align-items">
-            <h1 class="text-lg font-bold text-white mb-1">Flor Oficial</h1>
-            <p class="text-sm text-nowrap text-gray-400 mb-0">BY Thays Conrado</p>
-        </div>
-    </div>
-    <div class="hidden flex-row items-center justify-center lg:flex">
-        <input type="text" placeholder="Faça uma pesquisa..."
-            class="border rounded-lg shadow-sm mx-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" />
-        <a href="{{route('home')}}">
-            <button type="button"
-                class="flex items-center px-4 py-2 text-white bg-blue-600 rounded-lg shadow-sm hover:bg-blue-700 hover:underline focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
-                <i class="fa-solid fa-globe mr-2"></i>
-                Ver Flor Oficial
-            </button>
-        </a>
+    <div class="flex flex-row items-center ">
+        <img class="rounded-full w-16 h-16 mx-2" src="{{ asset('assets\images\Flor Oficial.png') }}" alt="Logo">
+        <h1 class="text-lg font-bold text-orange-100 montserrat mb-0">Flor Oficial</h1>
     </div>
 
     <div class="flex items-center justify-between gap-6 px-6 py-4 text-white">
         <!-- Notificações -->
         <div class="hidden items-center gap-6 lg:flex">
             <button class="relative flex items-center justify-center p-2 rounded-full hover:bg-gray-600">
-                <i class="fas fa-bell text-lg"></i>
+                <i class="fas fa-bell text-2xl"></i>
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
             </button>
             <button class="relative flex items-center justify-center p-2 rounded-full hover:bg-gray-600">
-                <i class="fas fa-shopping-cart text-lg"></i>
+                <i class="fas fa-shopping-cart text-2xl"></i>
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
             </button>
         </div>

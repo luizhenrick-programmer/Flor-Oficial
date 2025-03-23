@@ -7,9 +7,8 @@
         <p class="text-red-500">{{ session('error') }}</p>
     @endif
 
-    <div class="container mx-auto p-6">
-        <h1 class="text-xl font-bold text-gray-200 mb-4">PRODUTOS</h1>
-
+    <div class="container-xl">
+        <x-text color='gray-200' size='sm' bold='true'>PRODUTOS</x-text>
         <div class="bg-gray-700 rounded-lg border-l-4 border-violet-500 text-gray-200 my-4 p-3" role="alert">
             <div class="flex items-center">
                 <div class="mr-3">
@@ -22,8 +21,7 @@
                         <path d="M12 16h.01"></path>
                     </svg>
                 </div>
-                <x-text color="gray-200" size="md">Olá {{ Auth::user()->name }}, bem-vindo ao painel de controle! Use
-                    as ferramentas com responsabilidade e cuidado!</x-text>
+                <x-text color="gray-200" size="md">Olá {{ Auth::user()->name }}, bem-vindo ao painel de controle!</x-text>
             </div>
         </div>
 
@@ -39,7 +37,7 @@
                 <a class="bg-gray-700 text-white px-4 py-2 rounded-md no-underline hover:bg-gray-600 flex items-center gap-1">
                     <i class="fa-solid fa-file-export"></i> Exportar
                 </a>
-                <a href="{{ route('e-commerce.criar_produto') }}"
+                <a href="{{ route('produtos.create') }}"
                     class="bg-violet-600 text-white px-4 py-2 rounded-md no-underline hover:bg-violet-800 flex items-center gap-1">
                     <i class="fa-solid fa-plus"></i> Criar Produto
                 </a>
@@ -62,6 +60,7 @@
                             <th class="p-3">Em estoque?</th>
                             <th class="p-3">Quantidade</th>
                             <th class="p-3">Categoria</th>
+                            <th class="p-3">Marca</th>
                             <th class="p-3">Criado em</th>
                             <th class="p-3">Criado por</th>
                             <th class="p-3">Status</th>
@@ -78,23 +77,27 @@
                                 <td class="p-3">{{ $produto->nome }}</td>
                                 <td class="p-3">R$ {{ number_format($produto->preco, 2, ',', '.') }}</td>
                                 <td class="p-3">
-                                    @if ($produto->quantidade >= 1)
+                                    @php
+                                        $estoqueTotal = $produto->variacoes->sum('estoque');
+                                    @endphp
+                                    @if ($estoqueTotal > 0)
                                         <span class="bg-green-500 text-white px-3 py-1 rounded">Sim</span>
                                     @else
                                         <span class="bg-red-500 text-white px-3 py-1 rounded">Não</span>
                                     @endif
                                 </td>
-                                <td class="p-3">{{ $produto->quantidade }}</td>
-                                <td class="p-3">{{ $produto->categoria_id }}</td>
+                                <td class="p-3">{{ $estoqueTotal }}</td>
+                                <td class="p-3">{{ $produto->categoria ? $produto->categoria->nome : 'Sem categoria' }}</td>
+                                <td class="p-3">{{ $produto->marca ? $produto->marca : 'Sem Marca' }}</td>
                                 <td class="p-3">{{ $produto->created_at->format('d/m/Y') }}</td>
-                                <td class="p-3">{{ $produto->criado_por }}</td>
+                                <td class="p-3">{{ $produto->usuario->name ?? 'Desconhecido' }}</td>
                                 <td class="p-3">{{ ucfirst($produto->status) }}</td>
                                 <td class="p-3 flex justify-center gap-2">
-                                    <a href="{{ route('e-commerce.produto.editar', $produto->id) }}"
+                                    <a href="{{ route('produtos.edit', $produto->id) }}"
                                         class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-700 transition">
                                         <i class="bi bi-pencil-square"></i>
                                     </a>
-                                    <form action="{{ route('e-commerce.produto.deletar', $produto->id) }}" method="POST"
+                                    <form action="{{ route('produtos.destroy', $produto->id) }}" method="POST"
                                         onsubmit="return confirm('Tem certeza que deseja excluir este produto?')">
                                         @csrf
                                         @method('DELETE')
