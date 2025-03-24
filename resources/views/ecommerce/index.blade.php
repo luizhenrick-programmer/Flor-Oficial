@@ -4,7 +4,8 @@
 
 @section('content')
 <div class="container-xl flex flex-col py-5">
-    <x-text color='gray-200' size='xs' bold='true'>E-COMMERCE</x-text>
+
+    <x-text color='gray-200' size='sm' bold='true'>E-COMMERCE</x-text>
     <div class="bg-gray-700 rounded-lg border-l-4 border-violet-500 text-gray-200 my-4 p-3" role="alert">
         <div class="flex items-center">
             <div class="mr-3">
@@ -17,165 +18,52 @@
                     <path d="M12 16h.01"></path>
                 </svg>
             </div>
-            <x-text color="gray-200" size="md">Olá {{ Auth::user()->name }}, bem-vindo ao painel de controle! Use as ferramentas com responsabilidade e cuidado!</x-text>
+            <x-text color="gray-200" size="md">Olá {{ Auth::user()->name }}, bem-vindo ao Painel de Vendas!</x-text>
         </div>
     </div>
-    <x-text color='gray-200' size='xs' bold='true' class="mt-8">ACESSO RÁPIDO</x-text>
-    <div class="grid gap-4 grid-cols-2 mt-8 md:grid-cols-4 lg:grid-cols-4">
-        <a href="{{ route('admin.e-commerce') }}"
-            class="block rounded-lg p-2 text-gray-300 hover:text-yellow-500">
-            <div class="flex flex-col items-center">
-                <div class="bg-violet-500 rounded-lg p-2 mb-2">
-                    <i class="fa-solid fa-chart-pie"></i>
-                </div>
-                <div class="text-xs sm:text-sm	text-nowrap">
-                    Relatório de Vendas
-                </div>
-            </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <!-- Botões de acesso -->
+        <a href="#" class="flex flex-col gap-2 items-center px-3 py-5 bg-gray-800 text-white rounded-lg no-underline hover:bg-indigo-600 transition shadow-lg">
+            <i class="fa-solid fa-chart-pie text-2xl "></i>
+            <span class="text-lg font-semibold">Relatório de Vendas</span>
         </a>
-        <a href="{{ route('admin.e-commerce') }}"
-            class="block rounded-lg p-2 text-gray-300 hover:text-yellow-500">
-            <div class="flex flex-col items-center">
-                <div class="bg-violet-500 rounded-lg p-2 mb-2">
-                    <i class="fa-solid fa-thumbs-up"></i>
-                </div>
-                <div class="text-xs sm:text-sm	text-nowrap">
-                    Pedidos Confirmados
-                </div>
-            </div>
+
+        <a href="#" class="flex flex-col gap-2 items-center px-3 py-5 bg-gray-800 text-white rounded-lg no-underline hover:bg-indigo-600 transition shadow-lg">
+            <i class="fa-solid fa-shopping-bag text-2xl "></i>
+            <span class="text-lg font-semibold">Pedidos Confirmados</span>
         </a>
-        <a href="{{ route('admin.e-commerce') }}"
-            class="block rounded-lg p-2 text-gray-300 hover:text-yellow-500">
-            <div class="flex flex-col items-center">
-                <div class="bg-violet-500 rounded-lg p-2 mb-2">
-                    <i class="fa-regular fa-clock"></i>
-                </div>
-                <div class="text-xs sm:text-sm	text-nowrap">
-                    Pedidos Pendentes
-                </div>
-            </div>
+
+        <a href="#" class="flex flex-col gap-2 items-center px-3 py-5 bg-gray-800 text-white rounded-lg no-underline hover:bg-indigo-600 transition shadow-lg">
+            <i class="fa-regular fa-hourglass-half text-2xl "></i>
+            <span class="text-lg font-semibold">Pedidos Pendentes</span>
         </a>
-        <a href="{{ route('admin.e-commerce') }}"
-            class="block rounded-lg p-2 text-gray-300 hover:text-yellow-500">
-            <div class="flex flex-col items-center">
-                <div class="bg-violet-500 rounded-lg p-2 mb-2">
-                    <i class="fa-solid fa-thumbs-down"></i>
-                </div>
-                <div class="text-xs sm:text-sm	text-nowrap">
-                    Pedidos Cancelados
-                </div>
-            </div>
+
+        <a href="#" class="flex flex-col gap-2 items-center px-3 py-5 bg-gray-800 text-white rounded-lg no-underline hover:bg-indigo-600 transition shadow-lg">
+            <i class="fa-solid fa-ban text-2xl "></i>
+            <span class="text-lg font-semibold">Pedidos Cancelados</span>
         </a>
-        <a href="{{ route('admin.produtos') }}"
-            class="block rounded-lg p-2 text-gray-300 hover:text-yellow-500">
-            <div class="flex flex-col items-center">
-                <div class="bg-violet-500 rounded-lg p-2 mb-2">
-                    <i class="fa-solid fa-bag-shopping"></i>
-                </div>
-                <div class="text-xs sm:text-sm	text-nowrap">
-                    Produtos
-                </div>
-            </div>
+
+        <a href="{{ route('produtos.index') }}" class="flex flex-col gap-2 items-center px-3 py-5 bg-gray-800 text-white rounded-lg no-underline hover:bg-indigo-600 transition shadow-lg">
+            <i class="fa-brands fa-product-hunt text-2xl "></i>
+            <span class="text-lg font-semibold">Produtos</span>
         </a>
-        <a href="{{ route('admin.e-commerce') }}"
-            class="block rounded-lg p-2 text-gray-300 hover:text-yellow-500">
-            <div class="flex flex-col items-center">
-                <div class="bg-violet-500 rounded-lg p-2 mb-2">
-                    <i class="fa-solid fa-truck-fast"></i>
-                </div>
-                <div class="text-xs sm:text-sm	text-nowrap">
-                    Remessas
-                </div>
-            </div>
+
+        <a href="#" class="flex flex-col gap-2 items-center px-3 py-5 bg-gray-800 text-white rounded-lg no-underline hover:bg-indigo-600 transition shadow-lg">
+            <i class="fa-solid fa-truck-fast text-2xl "></i>
+            <span class="text-lg font-semibold">Remessas</span>
         </a>
-        <a href="{{ route('admin.e-commerce') }}"
-            class="block rounded-lg p-2 text-gray-300 hover:text-yellow-500">
-            <div class="flex flex-col items-center">
-                <div class="bg-violet-500 rounded-lg p-2 mb-2">
-                    <i class="fa-solid fa-file-invoice-dollar"></i>
-                </div>
-                <div class="text-xs sm:text-sm	text-nowrap">
-                    Faturas
-                </div>
-            </div>
+
+        <a href="#" class="flex flex-col gap-2 items-center px-3 py-5 bg-gray-800 text-white rounded-lg no-underline hover:bg-indigo-600 transition shadow-lg">
+            <i class="fa-solid fa-star text-2xl "></i>
+            <span class="text-lg font-semibold">Avaliações</span>
         </a>
-        <a href="{{ route('admin.e-commerce') }}"
-            class="block rounded-lg p-2 text-gray-300 hover:text-yellow-500">
-            <div class="flex flex-col items-center">
-                <div class="bg-violet-500 rounded-lg p-2 mb-2">
-                    <i class="fa-solid fa-cart-arrow-down"></i>
-                </div>
-                <div class="text-xs sm:text-sm	text-nowrap">
-                    Devoluções
-                </div>
-            </div>
-        </a>
-        <a href="{{ route('admin.e-commerce') }}"
-            class="block rounded-lg p-2 text-gray-300 hover:text-yellow-500">
-            <div class="flex flex-col items-center">
-                <div class="bg-violet-500 rounded-lg p-2 mb-2">
-                    <i class="fa-solid fa-house-medical"></i>
-                </div>
-                <div class="text-xs sm:text-sm	text-nowrap">
-                    Inventário de Vendas
-                </div>
-            </div>
-        </a>
-        <a href="{{ route('admin.e-commerce') }}"
-            class="block rounded-lg p-2 text-gray-300 hover:text-yellow-500">
-            <div class="flex flex-col items-center">
-                <div class="bg-violet-500 rounded-lg p-2 mb-2">
-                    <i class="fa-solid fa-tags"></i>
-                </div>
-                <div class="text-xs sm:text-sm	text-nowrap">
-                    Categorias de Produtos
-                </div>
-            </div>
-        </a>
-        <a href="{{ route('admin.e-commerce') }}"
-            class="block rounded-lg p-2 text-gray-300 hover:text-yellow-500">
-            <div class="flex flex-col items-center">
-                <div class="bg-violet-500 rounded-lg p-2 mb-2">
-                    <i class="fa-solid fa-layer-group"></i>
-                </div>
-                <div class="text-xs sm:text-sm	text-nowrap">
-                    Coleções de Produtos
-                </div>
-            </div>
-        </a>
-        <a href="{{ route('admin.e-commerce') }}"
-            class="block rounded-lg p-2 text-gray-300 hover:text-yellow-500">
-            <div class="flex flex-col items-center">
-                <div class="bg-violet-500 rounded-lg p-2 mb-2">
-                    <i class="fa-solid fa-registered"></i>
-                </div>
-                <div class="text-xs sm:text-sm	text-nowrap">
-                    Marcas
-                </div>
-            </div>
-        </a>
-        <a href="{{ route('admin.e-commerce') }}"
-            class="block rounded-lg p-2 text-gray-300 hover:text-yellow-500">
-            <div class="flex flex-col items-center">
-                <div class="bg-violet-500 rounded-lg p-2 mb-2">
-                    <i class="fa-solid fa-star"></i>
-                </div>
-                <div class="text-xs sm:text-sm	text-nowrap">
-                    Avaliações
-                </div>
-            </div>
-        </a>
-        <a href="{{ route('admin.e-commerce') }}"
-            class="block rounded-lg p-2 text-gray-300 hover:text-yellow-500">
-            <div class="flex flex-col items-center">
-                <div class="bg-violet-500 rounded-lg p-2 mb-2">
-                    <i class="fa-solid fa-users"></i>
-                </div>
-                <div class="text-xs sm:text-sm	text-xs sm:text-sm	text-nowrap">
-                    Clientes
-                </div>
-            </div>
+
+        <a href="{{ route('e-commerce.clientes') }}" class="flex flex-col gap-2 items-center px-3 py-5 bg-gray-800 text-white rounded-lg no-underline hover:bg-indigo-600 transition shadow-lg">
+            <i class="fa-solid fa-users text-2xl "></i>
+            <span class="text-lg font-semibold">Clientes</span>
         </a>
     </div>
+
 </div>
 @endsection

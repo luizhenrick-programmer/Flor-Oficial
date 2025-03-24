@@ -2,8 +2,7 @@
 @section('titulo', 'Cadastrar Produto')
 @section('content')
 
-    <div class="flex flex-col flex-grow justify-center">
-        <h2 class="text-2xl font-semibold text-indigo-600 mb-6">Cadastrar Produto</h2>
+    <div class="container-xl">
 
         @if (session('success'))
             <div class="bg-green-100 text-green-700 p-2 rounded">
@@ -17,14 +16,13 @@
             </div>
         @endif
 
-
         <!-- Formulário -->
         <form action="{{ route('produtos.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
 
             <!-- Nome do Produto -->
             <div class="mb-4">
-                <label for="nome" class="block text-sm font-medium text-gray-700">Nome do Produto</label>
+                <label for="nome" class="block text-sm font-medium text-white">Nome do Produto</label>
                 <input id="nome" type="text" name="nome" placeholder="Digite o nome" value="{{ old('nome') }}"
                     class="mt-1 w-full px-2 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
             </div>
@@ -82,9 +80,9 @@
             <!-- Variações de Produto -->
             <div class="mb-4">
                 <div id="variacoes-container">
-                    <div class="variacao-item grid grid-cols-1 md:grid-cols-4 gap-3 items-center border rounded">
+                    <div class="variacao-item grid grid-cols-1 md:grid-cols-4 gap-3 items-center rounded">
                         <!-- Tamanho -->
-                        <div class="col-span-1">
+                        <div>
                             <label class="block text-sm font-medium text-gray-700">Tamanho</label>
                             <select name="variacoes[0][tamanho]"
                                 class="tamanho px-2 py-2 border rounded-lg text-gray-700 w-full">
@@ -99,14 +97,14 @@
                         </div>
 
                         <!-- Estoque -->
-                        <div class="col-span-1">
+                        <div>
                             <label class="block text-sm font-medium text-gray-700">Estoque</label>
                             <input type="number" name="variacoes[0][estoque]" placeholder="Estoque" min="0"
                                 class="estoque px-2 py-2 border rounded-lg text-gray-700 w-full" />
                         </div>
 
                         <!-- Cores -->
-                        <div class="col-span-1">
+                        <div>
                             <label class="block text-sm font-medium text-gray-700 mb-3">Cores</label>
                             <div class="flex gap-2">
                                 @foreach (['blue', 'pink', 'purple', 'yellow', 'green', 'red', 'orange', 'cyan', 'gray', 'teal'] as $cores)
@@ -125,9 +123,8 @@
 
 
                         <!-- Remover -->
-                        <div class=" mt-3 col-span-1">
-                            <button type="button"
-                                class="remove-variacao bg-red-500 text-white px-3 py-2 rounded"><i class="fa-solid fa-trash-can"></i></button>
+                        <div>
+                            <button type="button" class="remove-variacao bg-red-500 text-white px-3 py-2 rounded">Remover</button>
                         </div>
                     </div>
                 </div>
@@ -145,12 +142,12 @@
                     document.getElementById("add-variacao").addEventListener("click", function () {
                         let container = document.getElementById("variacoes-container");
                         let newVariacao = document.createElement("div");
-                        newVariacao.classList.add("variacao-item", "grid", "grid-cols-4", "gap-4", "items-center", "p-3", "border", "rounded");
+                        newVariacao.classList.add("variacao-item", "grid", "grid-cols-4", "gap-4", "items-center", "py-3","rounded");
 
                         newVariacao.innerHTML = `
                     <div>
                         <label class="block text-sm font-medium text-gray-700">Tamanho</label>
-                        <select name="variacoes[${index}][tamanho]" class="tamanho px-2 py-2 border rounded-lg text-gray-700 w-full">
+                        <select name="variacoes[${index}][tamanho]" class="tamanho px-2 py-2 rounded-lg text-gray-700 w-full">
                             <option value="">Selecione</option>
                             <option value="PP">PP</option>
                             <option value="P">P</option>
@@ -159,6 +156,12 @@
                             <option value="GG">GG</option>
                             <option value="XG">XG</option>
                         </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">Estoque</label>
+                        <input type="number" name="variacoes[${index}][estoque]" placeholder="Estoque" min="0"
+                            class="estoque px-2 py-2 border rounded-lg text-gray-700 w-full" />
                     </div>
 
                     <div>
@@ -178,12 +181,6 @@
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700">Estoque</label>
-                        <input type="number" name="variacoes[${index}][estoque]" placeholder="Estoque" min="0"
-                            class="estoque px-2 py-2 border rounded-lg text-gray-700 w-full" />
-                    </div>
-
-                    <div class="flex justify-end">
                         <button type="button" class="remove-variacao bg-red-500 text-white px-3 py-2 rounded">Remover</button>
                     </div>
                 `;

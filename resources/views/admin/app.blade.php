@@ -19,15 +19,11 @@
     <!-- Layout Principal -->
     <div class="tw-bg-primary flex flex-col w-full min-h-screen">
         @include('admin.partials-admin.header')
-        <div class="flex flex-row flex-grow min-h-screen">
+        <div class="flex flex-grow">
             <aside class="hidden lg:flex lg:w-64">
                 @include('admin.partials-admin.navigation')
             </aside>
-            <div class="flex flex-col flex-grow">
-                <main>
-                    @yield('content')
-                </main>
-            </div>
+            @yield('content')
         </div>
     </div>
 </body>

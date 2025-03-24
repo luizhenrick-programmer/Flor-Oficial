@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="container-xl flex flex-col">
-    <x-text color='gray-200' size='xs' bold='true'>PAINEL DE CONTROLE</x-text>
+    <x-text color='gray-200' size='sm' bold='true'>PAINEL DE CONTROLE</x-text>
     <div class="tw-bg-secondary rounded-lg border-l-4 border-violet-500 text-gray-200 mt-4 p-3" role="alert">
         <div class="flex items-center">
             <div class="mr-3">

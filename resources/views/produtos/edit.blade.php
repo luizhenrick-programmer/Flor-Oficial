@@ -70,10 +70,9 @@
 
             <!-- Variações de Produto -->
             <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-700">Variações</label>
                 <div id="variacoes-container">
                     @foreach ($produto->variacoes as $index => $variacao)
-                        <div class="variacao-item grid grid-cols-4 gap-3 border rounded p-3">
+                        <div class="variacao-item grid grid-cols-4 gap-3 rounded py-3">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700">Tamanho</label>
                                 <input type="text" name="variacoes[{{ $index }}][tamanho]" value="{{ $variacao->tamanho }}"

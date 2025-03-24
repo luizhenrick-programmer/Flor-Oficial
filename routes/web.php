@@ -67,6 +67,7 @@ Route::middleware(['auth', 'cliente'])->group(function () {
 
 // ROTAS E-COMMERCE
 Route::middleware(['auth', 'admin'])->prefix('e-commerce')->group(function () {
+    Route::get('/index', [AdminController::class, 'ecommerce'])->name('e-commerce.index');
     Route::get('/categorias', [AdminController::class, 'categoria'])->name('e-commerce.categorias');
     Route::get('/categorias/criar', [AdminController::class, 'criarCategoria'])->name('e-commerce.criar_categoria');
     Route::post('/categorias/criar/enviar', [AdminController::class, 'store_categoria'])->name('e-commerce.categoria.store');
