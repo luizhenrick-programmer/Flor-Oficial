@@ -30,8 +30,7 @@
             <!-- Descrição -->
             <div class="mb-4">
                 <label for="descricao" class="block text-sm font-medium text-gray-700">Descrição</label>
-                <textarea id="descricao" name="descricao" placeholder="Digite a descrição"
-                    value="{{ old('descricao') }}"
+                <textarea id="descricao" name="descricao" placeholder="Digite a descrição" value="{{ old('descricao') }}"
                     class="mt-1 w-full px-2 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 h-28"></textarea>
             </div>
 
@@ -40,16 +39,16 @@
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                     <!-- Preço -->
                     <div>
-                        <label for="preco" class="block text-sm font-medium text-gray-700">Preço</label>
+                        <label for="preco" class="block text-sm font-medium text-gray-700">Preço Original</label>
                         <input id="preco" name="preco" type="number" step="0.01" min="0" value="{{ old('preco') }}"
                             placeholder="Digite o preço"
                             class="mt-1 w-full px-2 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
                     </div>
                     <!-- Desconto -->
                     <div>
-                        <label for="preco" class="block text-sm font-medium text-gray-700">Desconto</label>
-                        <input id="desconto" name="desconto" type="number" step="0.01" min="0"
-                            value="{{ old('desconto') }}" placeholder="Digite o preço"
+                        <label for="preco" class="block text-sm font-medium text-gray-700">Valor de Desconto</label>
+                        <input id="desconto" name="desconto" type="number" step="0.01" min="0" value="{{ old('desconto') }}"
+                            placeholder="Digite o preço"
                             class="mt-1 w-full px-2 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
                     </div>
                     <!-- Marca -->
@@ -113,7 +112,7 @@
                                             class="peer hidden">
                                         <span
                                             class="w-5 h-5 rounded-full block transition-all
-                                                    peer-checked:ring-2 peer-checked:ring-indigo-500 peer-checked:ring-offset-1"
+                                                            peer-checked:ring-2 peer-checked:ring-indigo-500 peer-checked:ring-offset-1"
                                             style="background-color: {{ $cores }}">
                                         </span>
                                     </label>
@@ -124,13 +123,14 @@
 
                         <!-- Remover -->
                         <div>
-                            <button type="button" class="remove-variacao bg-red-500 text-white px-3 py-2 rounded">Remover</button>
+                            <button type="button"
+                                class="remove-variacao bg-red-500 text-white px-3 py-2 rounded">Remover</button>
                         </div>
                     </div>
                 </div>
 
-                <button type="button" id="add-variacao"
-                    class="mt-2 bg-blue-500 text-white px-4 py-2 rounded">Adicionar Variação</button>
+                <button type="button" id="add-variacao" class="mt-2 bg-blue-500 text-white px-4 py-2 rounded">Adicionar
+                    Variação</button>
             </div>
 
 
@@ -142,48 +142,48 @@
                     document.getElementById("add-variacao").addEventListener("click", function () {
                         let container = document.getElementById("variacoes-container");
                         let newVariacao = document.createElement("div");
-                        newVariacao.classList.add("variacao-item", "grid", "grid-cols-4", "gap-4", "items-center", "py-3","rounded");
+                        newVariacao.classList.add("variacao-item", "grid", "grid-cols-4", "gap-4", "items-center", "py-3", "rounded");
 
                         newVariacao.innerHTML = `
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">Tamanho</label>
-                        <select name="variacoes[${index}][tamanho]" class="tamanho px-2 py-2 rounded-lg text-gray-700 w-full">
-                            <option value="">Selecione</option>
-                            <option value="PP">PP</option>
-                            <option value="P">P</option>
-                            <option value="M">M</option>
-                            <option value="G">G</option>
-                            <option value="GG">GG</option>
-                            <option value="XG">XG</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">Estoque</label>
-                        <input type="number" name="variacoes[${index}][estoque]" placeholder="Estoque" min="0"
-                            class="estoque px-2 py-2 border rounded-lg text-gray-700 w-full" />
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">Cores</label>
-                        <div class="flex flex-wrap gap-2">
-                            ${['blue', 'pink', 'purple', 'yellow', 'green', 'red', 'orange', 'cyan', 'gray', 'teal'].map(cores => `
-                                <label class="cursor-pointer">
-                                    <input type="checkbox" name="variacoes[${index}][cores][]" value="${cores}" class="peer hidden">
-                                    <span class="w-5 h-5 rounded-full block transition-all
-                                        peer-checked:ring-2 peer-checked:ring-indigo-500 peer-checked:ring-offset-1"
-                                        style="background-color: ${cores}">
-                                    </span>
-
-                                </label>
-                            `).join('')}
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Tamanho</label>
+                            <select name="variacoes[${index}][tamanho]" class="tamanho px-2 py-2 rounded-lg text-gray-700 w-full">
+                                <option value="">Selecione</option>
+                                <option value="PP">PP</option>
+                                <option value="P">P</option>
+                                <option value="M">M</option>
+                                <option value="G">G</option>
+                                <option value="GG">GG</option>
+                                <option value="XG">XG</option>
+                            </select>
                         </div>
-                    </div>
 
-                    <div>
-                        <button type="button" class="remove-variacao bg-red-500 text-white px-3 py-2 rounded">Remover</button>
-                    </div>
-                `;
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Estoque</label>
+                            <input type="number" name="variacoes[${index}][estoque]" placeholder="Estoque" min="0"
+                                class="estoque px-2 py-2 border rounded-lg text-gray-700 w-full" />
+                        </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">Cores</label>
+                            <div class="flex flex-wrap gap-2">
+                                ${['blue', 'pink', 'purple', 'yellow', 'green', 'red', 'orange', 'cyan', 'gray', 'teal'].map(cores => `
+                                    <label class="cursor-pointer">
+                                        <input type="checkbox" name="variacoes[${index}][cores][]" value="${cores}" class="peer hidden">
+                                        <span class="w-5 h-5 rounded-full block transition-all
+                                            peer-checked:ring-2 peer-checked:ring-indigo-500 peer-checked:ring-offset-1"
+                                            style="background-color: ${cores}">
+                                        </span>
+
+                                    </label>
+                                `).join('')}
+                            </div>
+                        </div>
+
+                        <div>
+                            <button type="button" class="remove-variacao bg-red-500 text-white px-3 py-2 rounded">Remover</button>
+                        </div>
+                    `;
 
                         container.appendChild(newVariacao);
 
@@ -204,18 +204,43 @@
 
 
             <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-700" for="arquivos">Arquivos</label>
+                <label class="block text-sm font-medium text-gray-700">Arquivos</label>
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-2">
-                    <!-- Imagem 1 -->
-                    <div class="mt-3">
-                        <input type="file" class="hidden" id="arquivos" name="arquivos[]">
-                        <div class="flex items-center justify-center w-64 h-64 border-2 border-dashed border-gray-300 cursor-pointer rounded-lg hover:bg-gray-100 transition"
-                            onclick="document.getElementById('arquivos').click()">
-                            <p class="text-gray-500">Clique ou arraste as imagens aqui</p>
+                    <!-- Criando 4 inputs de imagem -->
+                    @for ($i = 0; $i < 4; $i++)
+                        <div class="mt-3">
+                            <label for="arquivos-{{ $i }}" class="cursor-pointer">
+                                <input type="file" class="hidden" id="arquivos-{{ $i }}" name="arquivos[]"
+                                    onchange="previewImage(event, 'preview-{{ $i }}')">
+                                <div
+                                    class="flex items-center justify-center w-64 h-64 border-2 border-dashed border-gray-300 rounded-lg hover:bg-gray-100 transition">
+                                    <img id="preview-{{ $i }}" class="hidden w-full h-full object-cover" />
+                                    <p class="text-gray-500" id="text-{{ $i }}">Clique ou arraste a imagem {{ $i + 1 }}</p>
+                                </div>
+                            </label>
                         </div>
-                    </div>
+                    @endfor
                 </div>
             </div>
+
+            <script>
+                function previewImage(event, previewId) {
+                    const input = event.target;
+                    const preview = document.getElementById(previewId);
+                    const text = preview.nextElementSibling;
+
+                    if (input.files && input.files[0]) {
+                        const reader = new FileReader();
+                        reader.onload = function (e) {
+                            preview.src = e.target.result;
+                            preview.classList.remove('hidden');
+                            text.classList.add('hidden');
+                        };
+                        reader.readAsDataURL(input.files[0]);
+                    }
+                }
+            </script>
+
 
             <!-- Publicar -->
             <div class="mb-4">

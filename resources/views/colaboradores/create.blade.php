@@ -57,9 +57,6 @@
                         <select id="marca" name="marca_id"
                             class="mt-1 w-full px-2 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
                             <option value="">Selecione a marca</option>
-                            @foreach ($marcas as $marca)
-                                <option value="{{ $marca->id }}">{{ $marca->nome }}</option>
-                            @endforeach
                         </select>
                     </div>
                     <!-- Categoria -->
@@ -68,9 +65,6 @@
                         <select id="categoria" name="categoria_id" value="{{ old('categoria') }}"
                             class="mt-1 w-full px-2 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
                             <option value="">Selecione uma categoria</option>
-                            @foreach ($categorias as $categoria)
-                                <option value="{{ $categoria->id }}">{{ $categoria->nome }}</option>
-                            @endforeach
                         </select>
                     </div>
                 </div>
@@ -133,76 +127,6 @@
                     class="mt-2 bg-blue-500 text-white px-4 py-2 rounded">Adicionar Variação</button>
             </div>
 
-
-            <!-- Script para adicionar/remover variações -->
-            <script>
-                document.addEventListener("DOMContentLoaded", function () {
-                    let index = 1;
-
-                    document.getElementById("add-variacao").addEventListener("click", function () {
-                        let container = document.getElementById("variacoes-container");
-                        let newVariacao = document.createElement("div");
-                        newVariacao.classList.add("variacao-item", "grid", "grid-cols-4", "gap-4", "items-center", "p-3", "border", "rounded");
-
-                        newVariacao.innerHTML = `
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">Tamanho</label>
-                        <select name="variacoes[${index}][tamanho]" class="tamanho px-2 py-2 border rounded-lg text-gray-700 w-full">
-                            <option value="">Selecione</option>
-                            <option value="PP">PP</option>
-                            <option value="P">P</option>
-                            <option value="M">M</option>
-                            <option value="G">G</option>
-                            <option value="GG">GG</option>
-                            <option value="XG">XG</option>
-                        </select>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">Cores</label>
-                        <div class="flex flex-wrap gap-2">
-                            ${['blue', 'pink', 'purple', 'yellow', 'green', 'red', 'orange', 'cyan', 'gray', 'teal'].map(cores => `
-                                <label class="cursor-pointer">
-                                    <input type="checkbox" name="variacoes[${index}][cores][]" value="${cores}" class="peer hidden">
-                                    <span class="w-5 h-5 rounded-full block transition-all
-                                        peer-checked:ring-2 peer-checked:ring-indigo-500 peer-checked:ring-offset-1"
-                                        style="background-color: ${cores}">
-                                    </span>
-
-                                </label>
-                            `).join('')}
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700">Estoque</label>
-                        <input type="number" name="variacoes[${index}][estoque]" placeholder="Estoque" min="0"
-                            class="estoque px-2 py-2 border rounded-lg text-gray-700 w-full" />
-                    </div>
-
-                    <div class="flex justify-end">
-                        <button type="button" class="remove-variacao bg-red-500 text-white px-3 py-2 rounded">Remover</button>
-                    </div>
-                `;
-
-                        container.appendChild(newVariacao);
-
-                        newVariacao.querySelector(".remove-variacao").addEventListener("click", function () {
-                            container.removeChild(newVariacao);
-                        });
-
-                        index++;
-                    });
-
-                    document.querySelectorAll(".remove-variacao").forEach(button => {
-                        button.addEventListener("click", function () {
-                            this.parentElement.parentElement.remove();
-                        });
-                    });
-                });
-            </script>
-
-
             <div class="mb-4">
                 <label class="block text-sm font-medium text-gray-700" for="arquivos">Arquivos</label>
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-2">
@@ -230,6 +154,7 @@
                         </span>
                         <span class="ml-2 text-gray-700 peer-checked:text-indigo-600 font-medium">Publicar</span>
                     </label>
+                    <label for="ml-2 "></label>
 
                     <label class="flex items-center cursor-pointer">
                         <input type="radio" name="status" value="inativo" class="peer hidden">

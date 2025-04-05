@@ -52,7 +52,13 @@
                             <tr class="border-t border-gray-600 hover:bg-gray-800 transition">
                                 <td class="p-3">{{ $produto->id }}</td>
                                 <td class="p-3">
-                                    <img src="{{ $produto->url }}" alt="{{ $produto->nome }}" class="h-12 w-12 object-cover rounded-md mx-auto">
+                                    @if ($produto->imagens->isNotEmpty())
+                                        <img src="{{ asset('storage/' . $produto->imagens->first()->url) }}"
+                                             class="w-16 h-16 object-cover rounded-md border border-gray-300"
+                                             alt="Imagem do produto">
+                                    @else
+                                        <span class="text-light">Sem imagem</span>
+                                    @endif
                                 </td>
                                 <td class="p-3">{{ $produto->nome }}</td>
                                 <td class="p-3">R$ {{ number_format($produto->preco, 2, ',', '.') }}</td>
@@ -71,7 +77,8 @@
                                 <td class="p-3">{{ $produto->marca ? $produto->marca : 'Sem Marca' }}</td>
                                 <td class="p-3">{{ $produto->created_at->format('d/m/Y') }}</td>
                                 <td class="p-3">{{ $produto->usuario->name ?? 'Desconhecido' }}</td>
-                                <td class="p-3">{{ ucfirst($produto->status) }}</td>
+                                <td class="p-3">
+                                    <span class="bg-green-500 text-white px-2 py-1 rounded">{{ ucfirst($produto->status) }}</span>
                                 <td class="p-3 flex justify-center gap-2">
                                     <a href="{{ route('produtos.edit', $produto->id) }}"
                                         class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-700 transition">

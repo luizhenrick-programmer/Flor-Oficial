@@ -39,7 +39,6 @@
                 <table class="w-full border-collapse bg-gray-700 rounded-lg text-white text-center">
                     <thead>
                         <tr class="bg-gray-800 text-gray-300">
-                            <th class="p-3">ID</th>
                             <th class="p-3">Nome</th>
                             <th class="p-3">CPF</th>
                             <th class="p-3">Telefone</th>
@@ -53,7 +52,6 @@
                     <tbody>
                         @foreach ($clientes as $cliente)
                             <tr class="border-t border-gray-600 hover:bg-gray-800 transition">
-                                <td class="p-3">{{ $cliente->id }}</td>
                                 <td class="p-3">{{ $cliente->name }}</td>
                                 <td class="p-3">{{ $cliente->cpf }}</td>
                                 <td class="p-3">{{ $cliente->telefone }}</td>

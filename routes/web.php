@@ -27,14 +27,6 @@ Route::get('/contato', function () {
     return view('contact');
 })->name('contact');
 
-//rotas do carrinho
-Route::get('/carrinho', [CarrinhoController::class, 'carrinhoLista'])->name('cart');
-Route::post('/carrinho', [CarrinhoController::class, 'adicionaCarrinho'])->name('addCart');
-Route::post('/remove', [CarrinhoController::class, 'removeCarrinho'])->name('removerCart');
-Route::post('/atualiza', [CarrinhoController::class, 'atualizaCarrinho'])->name('updateCart');
-Route::post('/limpa', [CarrinhoController::class, 'clearCarrinho'])->name('cleanCart');
-
-
 // rota de pesquisa
 Route::get('/search', [SearchController::class, 'index'])->name('search');
 
@@ -60,8 +52,7 @@ Route::middleware(['auth', 'vendedor'])->group(function () {
     Route::get('vendedor/lista', [VendedorController::class, 'lista'])->name('vendedor.listaProd');
 });
 
-Route::middleware(['auth', 'cliente'])->group(function () {
-    Route::get('/dashboard', [UserController::class, 'dashboard'])->name('cliente.dashboard');
+Route::middleware(['auth'])->group(function () {
     Route::get('/pagamento', [PaymentController::class, 'create'])->name('cliente.pagamento');
 });
 
@@ -90,6 +81,13 @@ Route::middleware(['auth'])->group(function () {
 // ROTAS FINANCEIRO
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/financeiro', [AdminController::class, 'ReceitasDespesas'])->name('financeiro');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::resource('carrinho', CarrinhoController::class);
+    Route::post('carrinho/add', [CarrinhoController::class, 'add'])->name('carrinho.add');
+    Route::resource('pedido', PedidoController::class);
+    Route::resource('pagamento', PagamentoController::class);
 });
 
 require __DIR__ . '/auth.php';

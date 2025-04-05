@@ -2,56 +2,90 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Carrinho;
-use Darryldecode\Cart\Cart;
 use Illuminate\Http\Request;
+use App\Models\Carrinho;
+use App\Models\ItemCarrinho;
+use Illuminate\Support\Facades\Auth;
+
+use function Pest\Laravel\call;
 
 class CarrinhoController extends Controller
 {
-    public function carrinhoLista()
+    public function index()
     {
-        $itens = \Cart::getContent();
-        $subtotal = \Cart::getSubTotal();
-        return view('carrinho.cart', compact('itens', 'subtotal'));
+        $carrinho = Carrinho::with('itens')->where('user_id', Auth::id())->first();
+
+        return view('carrinho.cart', compact('carrinho'));
     }
 
-    public function adicionaCarrinho(Request $request)
-    {
-        \Cart::add([
-            'id' => $request->id,
-            'name' => $request->nome,
-            'price' => $request->preco,
-            'stock' => $request->estoque,
-            'quantity' => abs($request->quantidade),
-            'attributes' => [
-                'image' => $request->url
-            ]
-        ]);
 
-        return redirect()->route('shopping')->with('message', 'Produto adicionado ao carrinho com sucesso!');
+    public function add(Request $request)
+    {
+        $userId = Auth::id();
+
+        if (!$userId) {
+            return response()->json(['error' => 'Usuário não autenticado.'], 401);
+        }
+
+        $carrinho = Carrinho::firstOrCreate(['user_id' => $userId]);
+
+        $item = ItemCarrinho::where('carrinho_id', $carrinho->id)
+            ->where('produto_id', $request->produto_id)
+            ->first();
+
+        if ($item) {
+            $item->increment('quantidade', $request->quantidade);
+        } else {
+            $item = ItemCarrinho::create([
+                'carrinho_id' => $carrinho->id,
+                'produto_id' => $request->produto_id,
+                'quantidade' => $request->quantidade,
+                'preco_unitario' => $request->preco_unitario
+            ]);
+        }
+
+
+        return response()->json($item);
     }
 
-    public function removeCarrinho(Request $request)
+
+    public function removeItem($id)
     {
-        \Cart::remove($request->id);
-        return redirect()->route('cart')->with('message', 'Produto removido com sucesso!');
+        $item = ItemCarrinho::findOrFail($id);
+        $item->delete();
+        return response()->json(['message' => 'Item removido do carrinho']);
     }
 
-    public function atualizaCarrinho(Request $request)
-    {
-        \Cart::update($request->id, [
-            'quantity' => [
-                'relative' => false,
-                'value' => abs($request->quantity),
-            ],
-        ]);
 
-        return redirect()->route('cart')->with('message', 'Produto atualizado com sucesso!');
+    public function store(Request $request)
+    {
+        $carrinho = Carrinho::create(['user_id' => $request->user_id]);
+        return response()->json($carrinho, 201);
     }
 
-    public function clearCarrinho()
+    public function show($id)
     {
-        \Cart::clear();
-        return redirect()->route('cart')->with('message', 'O Carrinho está vazio!');
+        $carrinho = Carrinho::with('itens')->where('user_id', $id)->first();
+        return response()->json($carrinho);
+    }
+
+    public function destroy($id)
+    {
+        ItemCarrinho::findOrFail($id)->delete();
+        return response()->json(['message' => 'Item removido com sucesso']);
+    }
+
+    public function itens()
+    {
+        // Busca o carrinho do usuário logado
+        $carrinho = Carrinho::with('itens')->where('user_id', Auth::id())->first();
+
+        // Verifica se o carrinho existe e conta os itens
+        $quantidade = $carrinho ? $carrinho->itens->sum('quantidade') : 0;
+
+        // Armazena a quantidade na sessão para ser usada na view
+        session(['cart_count' => $quantidade]);
+
+        return response()->json(['quantidade' => $quantidade]);
     }
 }

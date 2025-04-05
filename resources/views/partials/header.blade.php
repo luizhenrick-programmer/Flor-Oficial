@@ -82,19 +82,25 @@
                 </a>
             @endauth
 
-
-
             <!-- Meu carrinho -->
-            <a href="{{ route('cart') }}" class="flex flex-col items-center text-orange-100 no-underline relative">
+            <a href="{{ route('carrinho.index') }}"
+                class="flex flex-col items-center text-orange-100 no-underline relative">
                 <i class="fa-solid fa-cart-shopping text-2xl mb-1"></i>
-                @if(Cart::getTotalQuantity() > 0)
+
+                @php
+                    $quantidadeCarrinho = session('cart_count', 0); // Pega a quantidade salva na sessão
+                @endphp
+
+                @if($quantidadeCarrinho > 0)
                     <span id="cart-count"
                         class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-orange-100 text-dark">
-                        {{ Cart::getTotalQuantity() }}
+                        {{ $quantidadeCarrinho }}
                     </span>
                 @endif
+
                 <span class="text-sm">Carrinho</span>
             </a>
+
 
         </div>
     </div>

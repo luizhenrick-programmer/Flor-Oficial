@@ -117,13 +117,23 @@
                         @foreach ($produtos as $produto)
                             <div class="relative flex flex-col items-center text-dark overflow-hidden w-full max-w-xs">
                                 <div class="relative w-full">
-                                    <img src="{{ asset($produto->url) }}" alt="{{ $produto->nome }}"
-                                        class="w-full object-cover aspect-square border rounded-lg">
+                                    @if ($produto->imagens->isNotEmpty())
+                                        <img src="{{ asset('storage/' . $produto->imagens->first()->url) }}"
+                                             class="w-full object-cover aspect-square border rounded-lg"
+                                             alt="Imagem do produto">
+                                    @else
+                                    <img src="{{ asset('storage/produtos/sem-imagem.png') }}"
+                                    class="w-full object-cover aspect-square border rounded-lg"
+                                    alt="Imagem do produto">
+                                    @endif
 
                                     @if($produto->desconto > 0)
+                                        @php
+                                            $porcentagem = round(($produto->desconto / $produto->preco) * 100);
+                                        @endphp
                                         <div
                                             class="absolute top-2 left-2 bg-pink-400 text-white text-xs font-bold px-3 py-1 rounded-full">
-                                            {{ $produto->desconto }}% OFF
+                                            {{ $porcentagem }}% OFF
                                         </div>
                                     @endif
                                 </div>
@@ -133,20 +143,21 @@
 
                                     <div class="flex items-center gap-2 mt-1">
                                         @if($produto->desconto > 0)
+                                            @php
+                                                $preco_desconto = $produto->preco  - $produto->desconto;
+                                            @endphp
                                             <span class="text-gray-400 text-sm line-through">R$
-                                                {{ number_format($produto->preco_antigo, 2, ',', '.') }}</span>
+                                                {{ number_format($produto->preco, 2, ',', '.') }}</span>
                                         @endif
                                         <span class="text-pink-400 text-lg font-bold">R$
-                                            {{ number_format($produto->preco, 2, ',', '.') }}</span>
+                                            {{ number_format($preco_desconto, 2, ',', '.') }}</span>
                                     </div>
 
                                     <div class="flex justify-center gap-3 mt-4 w-full">
-                                        <form action="{{ route('addCart') }}" method="POST">
+                                        <form action="{{ route('carrinho.add') }}" method="POST">
                                             @csrf
-                                            <input type="hidden" name="id" value="{{ $produto->id }}">
-                                            <input type="hidden" name="nome" value="{{ $produto->nome }}">
-                                            <input type="hidden" name="preco" value="{{ $produto->preco }}">
-                                            <input type="hidden" name="url" value="{{ $produto->url }}">
+                                            <input type="hidden" name="produto_id" value="{{ $produto->id }}">
+                                            <input type="hidden" name="preco_unitario" value="{{ $produto->preco }}">
                                             <input type="number" name="quantidade" value="1" min="1" class="hidden">
 
                                             <button type="submit"

@@ -32,7 +32,7 @@ class AdminController extends Controller
     public function showProduto($id)
     {
 
-        $produto = Produto::with('categoria')->findOrFail($id);
+        $produto = Produto::with('categoria', 'imagens')->findOrFail($id);
 
         // Produtos da mesma categoria (exceto o atual)
         $relacionados = Produto::where('categoria_id', $produto->categoria_id)
@@ -41,7 +41,7 @@ class AdminController extends Controller
             ->take(4)
             ->get();
 
-        return view('produto.show', compact('produto', 'relacionados'));
+        return view('produtos.show', compact('produto', 'relacionados'));
     }
 
     public function filtrar(Request $request)

@@ -18,9 +18,10 @@ class ProdutoController extends Controller
 {
     public function index()
     {
-        $produtos = Produto::with(['variacoes', 'categoria'])->paginate(10);
+        $produtos = Produto::with(['variacoes', 'categoria', 'imagens'])->paginate(10);
         return view('produtos.index', compact('produtos'));
     }
+
 
 
     public function create()
@@ -34,7 +35,7 @@ class ProdutoController extends Controller
             'nome' => 'required|string|max:255',
             'descricao' => 'nullable|string|max:1000',
             'preco' => 'required|numeric|min:1',
-            'desconto' => 'required|numeric|min:1',
+            'desconto' => 'nullable|numeric|min:0',
             'marca_id' => 'nullable|exists:marcas,id',
             'categoria_id' => 'required|exists:categorias,id',
             'status' => 'required|in:publicado,inativo',
@@ -52,7 +53,7 @@ class ProdutoController extends Controller
                 'nome' => $validated['nome'],
                 'descricao' => $validated['descricao'],
                 'preco' => $validated['preco'],
-                'desconto' => $validated['desconto'],
+                'desconto' => $validated['desconto'] ?? 0.00,
                 'marca_id' => $validated['marca_id'] ?? null,
                 'categoria_id' => $validated['categoria_id'],
                 'status' => $validated['status'],
@@ -77,6 +78,7 @@ class ProdutoController extends Controller
                     ]);
                 }
             }
+
 
             DB::commit();
             return redirect()->route('produtos.create')->with('success', 'Produto cadastrado com sucesso!');
