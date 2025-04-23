@@ -88,7 +88,7 @@
                 <i class="fa-solid fa-cart-shopping text-2xl mb-1"></i>
 
                 @php
-                    $quantidadeCarrinho = session('cart_count', 0); // Pega a quantidade salva na sessão
+                    $quantidadeCarrinho = session('cart_count', 0);
                 @endphp
 
                 @if($quantidadeCarrinho > 0)

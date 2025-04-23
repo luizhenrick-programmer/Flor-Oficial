@@ -148,9 +148,12 @@
                                             @endphp
                                             <span class="text-gray-400 text-sm line-through">R$
                                                 {{ number_format($produto->preco, 2, ',', '.') }}</span>
+                                            <span class="text-pink-400 text-lg font-bold">R$
+                                                {{ number_format($preco_desconto, 2, ',', '.') }}</span>
+                                        @else
+                                            <span class="text-pink-400 text-lg font-bold">R$
+                                                {{ number_format($produto->preco, 2, ',', '.') }}</span>
                                         @endif
-                                        <span class="text-pink-400 text-lg font-bold">R$
-                                            {{ number_format($preco_desconto, 2, ',', '.') }}</span>
                                     </div>
 
                                     <div class="flex justify-center gap-3 mt-4 w-full">

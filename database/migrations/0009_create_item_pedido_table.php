@@ -10,7 +10,7 @@ return new class extends Migration {
         Schema::create('item_pedido', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('pedido_id');
-            $table->unsignedBigInteger('produto_id'); // Adicionando relação com os produtos
+            $table->unsignedBigInteger('produto_id');
             $table->foreign('pedido_id')->references('id')->on('pedido')->onDelete('cascade');
             $table->foreign('produto_id')->references('id')->on('produtos')->onDelete('cascade');
             $table->integer('quantidade');

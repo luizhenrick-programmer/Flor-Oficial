@@ -5,14 +5,27 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Pagamento;
 use App\Models\Pedido;
+use Illuminate\Support\Facades\Auth;
 
 class PagamentoController extends Controller
 {
     public function index()
-    {
-        $carrinho = Pagamento::with('carrinho')->get();
-        return view('pagamento.index', compact('carrinho'));
+{
+    // Busca o pedido do usuário autenticado
+    $pedido = Pedido::where('user_id', Auth::id())->latest()->first();
+
+
+    if (!$pedido) {
+        return view('pagamento.index', ['pagamento' => null]);
     }
+
+    // Busca o pagamento relacionado a esse pedido
+    $pagamento = Pagamento::where('pedido_id', $pedido->id)->with('pedido')->latest()->first();
+
+    return view('pagamento.index', compact('pagamento'));
+}
+
+
 
 
     public function store(Request $request)

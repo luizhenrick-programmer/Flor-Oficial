@@ -70,7 +70,8 @@
 
         <section id="cartaoContainer" class="hidden">
             <div class="flex items-center justify-center">
-                <div class="relative w-80 h-40 bg-gray-800 rounded-lg mb-6 p-4 text-white shadow-md transition-transform transform hover:scale-105">
+                <div
+                    class="relative w-80 h-40 bg-gray-800 rounded-lg mb-6 p-4 text-white shadow-md transition-transform transform hover:scale-105">
                     <div class="absolute top-4 left-4 w-12 h-8 bg-gray-400 rounded"></div>
                     <div class="mt-12 text-lg font-mono tracking-widest">**** **** **** ****</div>
                     <div class="mt-2 flex justify-between text-sm">
@@ -124,7 +125,8 @@
                     <p class="text-gray-700">Curso Gateways de Pagamentos com PHP8</p>
                     <p class="text-gray-900 font-semibold">12x de R$ 12,50</p>
                 </div>
-                <button class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition">Comprar agora</button>
+                <button class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition">Comprar
+                    agora</button>
             </form>
         </section>
 
@@ -132,10 +134,16 @@
             <div class="mb-4 p-4 border rounded-lg bg-gray-100">
                 <p class="font-semibold">Detalhes da compra</p>
                 <p class="text-gray-700">Curso Gateways de Pagamentos com PHP8</p>
-                <p class="text-gray-900 font-semibold">R$ 150,00</p>
+
+                @if($pagamento && $pagamento->pedido)
+                    <p class="text-gray-900 font-semibold">R$ {{ number_format($pagamento->pedido->total, 2, ',', '.') }}</p>
+                @else
+                    <p class="text-gray-500">Nenhum pagamento encontrado.</p>
+                @endif
             </div>
             <button class="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition">Gerar QRCode</button>
         </section>
+
 
         <section id="linkContainer" class="hidden">
             <div class="mb-4 p-4 border rounded-lg bg-gray-100">
@@ -143,7 +151,8 @@
                 <p class="text-gray-700">Curso Gateways de Pagamentos com PHP8</p>
                 <p class="text-gray-900 font-semibold">R$ 150,00</p>
             </div>
-            <button class="w-full bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition">Gerar Link de Pagamento</button>
+            <button class="w-full bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition">Gerar Link de
+                Pagamento</button>
         </section>
     </div>
 @endsection

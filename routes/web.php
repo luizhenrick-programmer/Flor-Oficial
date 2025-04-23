@@ -6,9 +6,10 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\VendedorController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PagamentoController;
 use App\Http\Controllers\CarrinhoController;
 use App\Http\Controllers\ColaboradorController;
+use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\SearchController;
 use App\Http\Middleware\Admin;
 use Illuminate\Support\Facades\Route;
@@ -52,9 +53,6 @@ Route::middleware(['auth', 'vendedor'])->group(function () {
     Route::get('vendedor/lista', [VendedorController::class, 'lista'])->name('vendedor.listaProd');
 });
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/pagamento', [PaymentController::class, 'create'])->name('cliente.pagamento');
-});
 
 // ROTAS E-COMMERCE
 Route::middleware(['auth', 'admin'])->prefix('e-commerce')->group(function () {
@@ -83,11 +81,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/financeiro', [AdminController::class, 'ReceitasDespesas'])->name('financeiro');
 });
 
-Route::middleware('auth')->group(function () {
-    Route::resource('carrinho', CarrinhoController::class);
-    Route::post('carrinho/add', [CarrinhoController::class, 'add'])->name('carrinho.add');
-    Route::resource('pedido', PedidoController::class);
-    Route::resource('pagamento', PagamentoController::class);
-});
+Route::resource('carrinho', CarrinhoController::class);
+Route::post('carrinho/add', [CarrinhoController::class, 'add'])->name('carrinho.add');
+Route::post('carrinho/remove', [CarrinhoController::class, 'removeItem'])->name('carrinho.removeItem');
+Route::put('/carrinho/atualizar-quantidade', [CarrinhoController::class, 'update'])->name('carrinho.update');
+Route::resource('pedido', PedidoController::class);
+Route::resource('pagamento', PagamentoController::class);
 
 require __DIR__ . '/auth.php';

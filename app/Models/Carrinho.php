@@ -17,4 +17,3 @@ class Carrinho extends Model
         return $this->hasMany(ItemCarrinho::class, 'carrinho_id');
     }
 }
-

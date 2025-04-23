@@ -13,10 +13,19 @@ class CarrinhoController extends Controller
 {
     public function index()
     {
-        $carrinho = Carrinho::with('itens')->where('user_id', Auth::id())->first();
+        $carrinho = Carrinho::with('itens.produto')->where('user_id', Auth::id())->first();
 
-        return view('carrinho.cart', compact('carrinho'));
+        // calcular subtotal (opcional, caso use isso)
+        $subtotal = 0;
+        if ($carrinho) {
+            foreach ($carrinho->itens as $item) {
+                $subtotal += $item->quantidade * $item->preco_unitario;
+            }
+        }
+
+        return view('carrinho.cart', compact('carrinho', 'subtotal'));
     }
+
 
 
     public function add(Request $request)
@@ -43,9 +52,7 @@ class CarrinhoController extends Controller
                 'preco_unitario' => $request->preco_unitario
             ]);
         }
-
-
-        return response()->json($item);
+        return redirect()->route('shopping');
     }
 
 
@@ -68,6 +75,33 @@ class CarrinhoController extends Controller
         $carrinho = Carrinho::with('itens')->where('user_id', $id)->first();
         return response()->json($carrinho);
     }
+
+    public function update(Request $request)
+{
+    $userId = Auth::id();
+
+    if (!$userId) {
+        return response()->json(['error' => 'Não autenticado'], 401);
+    }
+
+    $item = ItemCarrinho::where('id', $request->id)
+        ->whereHas('carrinho', function ($q) use ($userId) {
+            $q->where('user_id', $userId);
+        })
+        ->first();
+
+    if (!$item) {
+        return response()->json(['error' => 'Item não encontrado'], 404);
+    }
+
+    $item->quantidade = max(1, (int)$request->quantity);
+    $item->save();
+
+    return redirect()->back()->with('message', 'Quantidade atualizada!');
+}
+
+
+
 
     public function destroy($id)
     {

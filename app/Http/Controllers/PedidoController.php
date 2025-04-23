@@ -15,37 +15,43 @@ class PedidoController extends Controller
         //
     }
 
-    public function create(Request $request)
+    public function store(Request $request)
     {
         $carrinho = Carrinho::with('itens')->where('user_id', $request->user_id)->first();
 
-        if (!$carrinho || $carrinho->itens->isEmpty()) {
-            return response()->json(['message' => 'Carrinho vazio'], 400);
+        if (!$carrinho) {
+            return response()->json(['message' => 'Carrinho não encontrado'], 404);
         }
+
+        $itensSelecionados = $request->input('itensSelecionados', []);
+
+        if (empty($itensSelecionados)) {
+            return back()->with('message', 'Nenhum item selecionado.');
+        }
+
+        $itens = $carrinho->itens->whereIn('id', $itensSelecionados);
 
         $pedido = Pedido::create([
             'user_id' => $request->user_id,
             'data_pedido' => now(),
             'status' => 'pendente',
-            'total' => $carrinho->itens->sum(fn($item) => $item->quantidade * $item->preco_unitario),
-            'tipo_entrega' => $request->tipo_entrega
+            'total' => $itens->sum(fn($item) => $item->quantidade * $item->preco_unitario),
+            'tipo_entrega' => 'entrega_domicilio'
         ]);
 
-        foreach ($carrinho->itens as $item) {
+        foreach ($itens as $item) {
             ItemPedido::create([
                 'pedido_id' => $pedido->id,
+                'produto_id' => $item->produto_id, 
                 'quantidade' => $item->quantidade,
                 'preco_unitario' => $item->preco_unitario
             ]);
         }
 
-        $carrinho->itens()->delete();
-        return response()->json($pedido);
-    }
+        // Remove apenas os selecionados
+        $carrinho->itens()->whereIn('id', $itensSelecionados)->delete();
 
-    public function store(Request $request)
-    {
-        //
+        return redirect()->route('pagamento.index');
     }
 
     public function show(string $id)
