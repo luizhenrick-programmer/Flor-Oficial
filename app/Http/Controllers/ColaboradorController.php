@@ -12,6 +12,7 @@ class ColaboradorController extends Controller
     {
         $this->middleware('auth');
         $this->middleware('admin');
+
     }
 
     public function index()

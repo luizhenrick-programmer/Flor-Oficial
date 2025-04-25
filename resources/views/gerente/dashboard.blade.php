@@ -1,145 +1,122 @@
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-@extends('admin.app')
+@extends('gerente.app')
 
-@section('titulo', 'Dashboard Gerente')
+@section('titulo', 'Painel de Controle')
 
 @section('content')
-    <div class="container-xl flex flex-col">
-        <h1 class="text-center mb-4">Painel de Controle</h1>
-        <!-- Dashboard Cards -->
-        <div class="row mb-4">
-            <div class="col-md-3">
-                <div class="card text-white bg-primary mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Total de Usuários</h5>
-                        <p class="card-text display-6">1,234</p>
-                    </div>
-                </div>
+<div class="container-xl flex flex-col">
+    <x-text color='gray-200' size='sm' bold='true'>PAINEL DE CONTROLE</x-text>
+    <div class="tw-bg-secondary rounded-lg border-l-4 border-violet-500 text-gray-200 mt-4 p-3" role="alert">
+        <div class="flex items-center">
+            <div class="mr-3">
+                <svg class="icon alert-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path>
+                    <path d="M12 8v4"></path>
+                    <path d="M12 16h.01"></path>
+                </svg>
             </div>
-            <div class="col-md-3">
-                <div class="card text-white bg-success mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Eventos Criados</h5>
-                        <p class="card-text display-6">567</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card text-white bg-warning mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Inscrições Pendentes</h5>
-                        <p class="card-text display-6">89</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card text-white bg-danger mb-3">
-                    <div class="card-body">
-                        <h5 class="card-title">Erro no Sistema</h5>
-                        <p class="card-text display-6">3</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Gráficos -->
-        <div class="row">
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">Usuários por Mês</div>
-                    <div class="card-body">
-                        <canvas id="userChart"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">Eventos por Categoria</div>
-                    <div class="card-body">
-                        <canvas id="eventChart"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Lista de Conteúdos -->
-        <div class="mt-4">
-            <h3>Últimos Eventos</h3>
-            <table class="table table-striped">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Nome</th>
-                        <th>Categoria</th>
-                        <th>Data</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Evento de Tecnologia</td>
-                        <td>Tecnologia</td>
-                        <td>07/12/2024</td>
-                        <td><button class="btn btn-primary btn-sm">Detalhes</button></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Feira de Negócios</td>
-                        <td>Negócios</td>
-                        <td>08/12/2024</td>
-                        <td><button class="btn btn-primary btn-sm">Detalhes</button></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Workshop de Design</td>
-                        <td>Design</td>
-                        <td>09/12/2024</td>
-                        <td><button class="btn btn-primary btn-sm">Detalhes</button></td>
-                    </tr>
-                </tbody>
-            </table>
+            <x-text color="gray-200" size="md">Olá {{ Auth::user()->name }}, bem-vindo ao painel de controle!</x-text>
         </div>
     </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
+        <div class="tw-bg-secondary shadow-md rounded-lg p-4">
+            <h5 class="text-lg font-bold mb-3 text-gray-200">Pedidos</h5>
+            <h1 class="text-4xl text-gray-200 font-bold mt-2">0</h1>
+        </div>
+        <div class="tw-bg-secondary shadow-md rounded-lg p-4">
+            <h5 class="text-lg font-bold mb-2 text-gray-200">Produtos</h5>
+            <h1 class="text-4xl text-gray-200 font-bold mt-2">
+                    {{ $produtos->count() ?? 0 }}
+            </h1>
+        </div>
+
+        <div class="tw-bg-secondary shadow-md rounded-lg p-4">
+            <h5 class="text-lg font-bold mb-2 text-gray-200">Clientes</h5>
+            <h1 class="text-4xl text-gray-200 font-bold mt-2">
+                    {{ $usuarios->count() ?? 0 }}
+            </h1>
+        </div>
+        <div class="tw-bg-secondary shadow-md rounded-lg p-4">
+            <h5 class="text-lg font-bold mb-2 text-gray-200">Avaliações</h5>
+            <h1 class="text-4xl text-gray-200 font-bold mt-2">0</h1>
+        </div>
     </div>
 
-    <script>
-        // Gráfico de Usuários por Mês
-        const userCtx = document.getElementById('userChart').getContext('2d');
-        new Chart(userCtx, {
-            type: 'line',
-            data: {
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-                datasets: [{
-                    label: 'Usuários',
-                    data: [50, 100, 150, 200, 250, 300, 350],
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                    fill: true
-                }]
+    <div class="tw-bg-secondary text-gray-200 mt-4 p-5 rounded-lg">
+        <x-text color='purple-300' size="lg">Análise do site</x-text>
+
+        <div class="flex justify-between mt-4 relative gap-4">
+            <select id="filter" class="p-2 bg-gray-800 text-white rounded appearance-none pr-8">
+                <option value="7">Últimos 7 dias  </option>
+                <option value="15">Últimos 15 dias  </option>
+                <option value="30">Últimos 30 dias  </option>
+                <option value="90">Últimos 3 meses  </option>
+                <option value="180">Últimos 6 meses  </option>
+                <option value="270">Últimos 9 meses  </option>
+                <option value="365">Último 1 ano  </option>
+            </select>
+        </div>
+
+
+        <div class="mt-5">
+            <canvas id="line-chart"></canvas>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const ctx = document.getElementById("line-chart").getContext("2d");
+        let chart;
+
+        function generateRandomData(days) {
+            let labels = [];
+            let data = [];
+            let today = new Date();
+            for (let i = days - 1; i >= 0; i--) {
+                let date = new Date();
+                date.setDate(today.getDate() - i);
+                labels.push(date.toLocaleDateString("pt-BR"));
+                data.push(Math.floor(Math.random() * 100));
             }
+            return { labels, data };
+        }
+
+        function updateChart(days) {
+            let dataset = generateRandomData(days);
+            if (chart) chart.destroy();
+            chart = new Chart(ctx, {
+                type: "line",
+                data: {
+                    labels: dataset.labels,
+                    datasets: [{
+                        label: "Visitas ao site",
+                        data: dataset.data,
+                        borderColor: "#8b5cf6",
+                        backgroundColor: "rgba(139, 92, 246, 0.2)",
+                        borderWidth: 2,
+                        fill: true,
+                    }],
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                        },
+                    },
+                },
+            });
+        }
+
+        document.getElementById("filter").addEventListener("change", function() {
+            updateChart(parseInt(this.value));
         });
 
-        // Gráfico de Eventos por Categoria
-        const eventCtx = document.getElementById('eventChart').getContext('2d');
-        new Chart(eventCtx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Tecnologia', 'Negócios', 'Design', 'Saúde', 'Outros'],
-                datasets: [{
-                    label: 'Eventos',
-                    data: [30, 20, 15, 10, 25],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.6)',
-                        'rgba(54, 162, 235, 0.6)',
-                        'rgba(255, 206, 86, 0.6)',
-                        'rgba(75, 192, 192, 0.6)',
-                        'rgba(153, 102, 255, 0.6)'
-                    ]
-                }]
-            }
-        });
-    </script>
-    </div>
+        updateChart(7); // Carregar gráfico inicial com 7 dias
+    });
+</script>
 @endsection
-
