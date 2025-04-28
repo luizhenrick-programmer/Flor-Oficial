@@ -43,7 +43,8 @@
                                             <input type="hidden" name="id" value="{{ $item->id }}">
                                             <input type="hidden" name="quantity" value="{{ $item->quantidade - 1 }}">
                                             <button class="btn btn-outline-secondary btn-sm" type="submit"><i
-                                                    class="fa-solid fa-minus"></i></button>
+                                                    class="fa-solid fa-minus"></i>
+                                            </button>
                                         </form>
 
                                         <!-- Exibe a quantidade atual -->
@@ -54,13 +55,16 @@
                                             @method('PUT')
                                             <input type="hidden" name="id" value="{{ $item->id }}">
                                             <input type="hidden" name="quantity" value="{{ $item->quantidade + 1 }}">
-                                            <button class="btn btn-outline-secondary btn-sm" type="submit"><i
-                                                    class="fa-solid fa-plus"></i></button>
+                                            <button class="btn btn-outline-secondary btn-sm" type="submit">
+                                                <i class="fa-solid fa-plus"></i>
+                                            </button>
                                         </form>
 
+
                                         <!-- Botão de remover item -->
-                                        <form action="{{ route('carrinho.destroy', ['carrinho' => $carrinho->id]) }}" method="POST">
+                                        <form action="{{ route('carrinho.destroy', $item->id) }}" method="POST">
                                             @csrf
+                                            @method('DELETE')
                                             <input type="hidden" name="id" value="{{ $item->id }}">
                                             <button class="btn btn-outline-danger btn-sm ms-3" type="submit">
                                                 <i class="bi bi-trash"></i>
@@ -132,7 +136,7 @@
 
                         <form action="{{ route('pedido.store') }}" method="POST" id="formFecharPedido">
                             @csrf
-                            <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
+                            <input type="hidden" name="user_id" value="{{ Auth::check() ? auth()->user()->id : redirect()->route('login') }}">
                             <input type="hidden" name="tipo_entrega" value="normal">
 
                             <!-- Os checkboxes já estão no loop, então não precisa repetir aqui -->
@@ -141,7 +145,6 @@
                                 Fechar Pedido
                             </button>
                         </form>
-
                     </div>
                 </div>
             @endif

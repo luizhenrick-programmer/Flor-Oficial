@@ -1,5 +1,4 @@
 @extends('admin.app')
-
 @section('titulo', 'E-commerce')
 
 @section('content')

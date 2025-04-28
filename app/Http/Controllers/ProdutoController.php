@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Carrinho;
+use App\Models\ItemCarrinho;
 use Illuminate\Http\Request;
 use App\Models\Categorias;
 use App\Models\Marcas;
@@ -19,6 +21,7 @@ class ProdutoController extends Controller
     public function index()
     {
         $produtos = Produto::with(['variacoes', 'categoria', 'imagens'])->paginate(10);
+        $carrinho = Carrinho::with('itens.produto')->where('user_id', Auth::user())->first();
         return view('produtos.index', compact('produtos'));
     }
 
@@ -93,8 +96,17 @@ class ProdutoController extends Controller
 
     public function show($id)
     {
-        return view('produtos.show', ['produto' => Produto::findOrFail($id)]);
+        $produto = Produto::with('variacoes')->findOrFail($id);
+
+        // Busca produtos da mesma categoria, mas exclui o próprio produto atual
+        $relacionados = Produto::where('categoria_id', $produto->categoria_id)
+                                        ->where('id', '!=', $produto->id)
+                                        ->limit(8)
+                                        ->get();
+
+        return view('produtos.show', compact('produto', 'relacionados'));
     }
+
 
     public function edit($id)
     {

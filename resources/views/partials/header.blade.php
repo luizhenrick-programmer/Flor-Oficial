@@ -58,11 +58,12 @@
                         </x-dropdown-link>
 
                         @if (Auth::user()->role === 'admin')
-                            <x-dropdown-link :href="route('admin.dashboard')">
+                            <x-dropdown-link href="{{ route('admin.dashboard') }}" target="_blank">
                                 <i class="fa-solid fa-briefcase"></i>
                                 {{ __('Dashboard') }}
                             </x-dropdown-link>
                         @endif
+
 
                         <!-- Logout -->
                         <form method="POST" action="{{ route('logout') }}">
@@ -87,19 +88,16 @@
                 class="flex flex-col items-center text-orange-100 no-underline relative">
                 <i class="fa-solid fa-cart-shopping text-2xl mb-1"></i>
 
-                @php
-                    $quantidadeCarrinho = session('cart_count', 0);
-                @endphp
-
-                @if($quantidadeCarrinho > 0)
+                @if ($carrinho && $carrinho->itens->count() > 0)
                     <span id="cart-count"
                         class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-orange-100 text-dark">
-                        {{ $quantidadeCarrinho }}
+                        {{ $carrinho->itens->sum('quantidade') }}
                     </span>
                 @endif
 
                 <span class="text-sm">Carrinho</span>
             </a>
+
 
 
         </div>
@@ -110,38 +108,38 @@
                 <!-- Item Início -->
                 <li class="group relative">
                     <a href="{{ route('home') }}"
-                        class="text-md font-semibold text-orange-100 transition no-underline hover:text-pink-500">
+                        class="text-md font-semibold text-orange-100 transition no-underline hover:text-orange-300">
                         INÍCIO
                     </a>
                     <span
-                        class="absolute left-0 right-0 h-0.5 bg-pink-500 scale-x-0 transition-transform ease-in duration-300 group-hover:scale-x-100"></span>
+                        class="absolute left-0 right-0 h-0.5 text-orange-300 scale-x-0 transition-transform ease-in duration-300 group-hover:scale-x-100"></span>
                 </li>
                 <!-- Item Comprar -->
                 <li class="group relative dropdown">
                     <a href="{{ route('shopping') }}"
-                        class="text-md font-semibold text-orange-100 transition no-underline hover:text-pink-700">
+                        class="text-md font-semibold text-orange-100 transition no-underline hover:text-orange-300">
                         LOJA
                     </a>
                     <span
-                        class="absolute left-0 right-0 h-0.5 bg-pink-700 scale-x-0 transition-transform ease-in duration-300 group-hover:scale-x-100"></span>
+                        class="absolute left-0 right-0 h-0.5 text-orange-300 scale-x-0 transition-transform ease-in duration-300 group-hover:scale-x-100"></span>
                 </li>
                 <!-- Item Sobre -->
                 <li class="group relative">
                     <a href="{{ route('about') }}"
-                        class="text-md font-semibold text-orange-100 transition no-underline hover:text-pink-800">
+                        class="text-md font-semibold text-orange-100 transition no-underline hover:text-orange-300">
                         SOBRE
                     </a>
                     <span
-                        class="absolute left-0 right-0 h-0.5 bg-pink-500 scale-x-0 transition-transform ease-in duration-300 group-hover:scale-x-100"></span>
+                        class="absolute left-0 right-0 h-0.5 text-orange-300 scale-x-0 transition-transform ease-in duration-300 group-hover:scale-x-100"></span>
                 </li>
                 <!-- Item Contato -->
                 <li class="group relative">
                     <a href="{{ route('contact') }}"
-                        class="text-md font-semibold text-orange-100 transition no-underline hover:text-pink-500">
+                        class="text-md font-semibold text-orange-100 transition no-underline hover:text-orange-300">
                         CONTATO
                     </a>
                     <span
-                        class="absolute left-0 right-0 h-0.5 bg-pink-500 scale-x-0 transition-transform ease-in duration-300 group-hover:scale-x-100"></span>
+                        class="absolute left-0 right-0 h-0.5 text-orange-300 scale-x-0 transition-transform ease-in duration-300 group-hover:scale-x-100"></span>
                 </li>
             </ul>
         </nav>

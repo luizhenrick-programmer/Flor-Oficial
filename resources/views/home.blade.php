@@ -15,7 +15,7 @@
                     Explore agora e encontre a peça ideal para brilhar nas noites desta temporada.
                 </p>
                 <a href="{{ route('shopping') }}"
-    class="flex items-center justify-center px-6 py-3 color-fundo color-secundary font-bold rounded-lg w-64 no-underline hover:bg-gray-800 transition">
+    class="flex items-center justify-center px-6 py-3 bg-stone-400 color-secundary font-bold rounded-lg w-64 no-underline hover:bg-black hover:text-orange-300 transition">
     COMPRE AGORA
 </a>
 
@@ -56,7 +56,7 @@
                         <span class="font-bold text-dark text-2xl">até 60% de desconto</span>
                     </h3>
                     <a href="{{ route('shopping') }}"
-                        class="mt-6 px-4 py-2 bg-stone-400 text-neutral-100 font-bold rounded-lg no-underline w-32 text-center hover:bg-stone-600 transition">
+                        class="mt-6 px-4 py-2 bg-stone-400 color-secundary font-bold rounded-lg no-underline w-32 text-center hover:bg-black hover:text-orange-300 transition">
                         VER TUDO
                     </a>
                 </div>
@@ -106,7 +106,7 @@
                     class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-4 lg:translate-y-1 bg-white rounded-lg shadow-lg py-2 px-3 w-3/4 text-center">
                     <h3 class="text-black text-lg font-bold mb-0">Promoção</h3>
                     <a href="#"
-                        class="mt-3 inline-block bg-pink-500 text-white font-semibold px-4 py-2 mb-4 rounded-lg no-underline hover:bg-pink-600 transition">
+                        class="mt-3 inline-block bg-stone-400 text-white font-semibold px-4 py-2 mb-4 rounded-lg no-underline hover:bg-stone-800 hover:text-orange-800 transition">
                         Compre Agora
                     </a>
                 </div>
@@ -131,7 +131,7 @@
                     class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-4 lg:translate-y-1 bg-white rounded-lg shadow-lg py-2 px-3 w-3/4 text-center">
                     <h3 class="text-black text-lg font-bold mb-0">Promoção</h3>
                     <a href="#"
-                        class="mt-3 inline-block bg-pink-500 text-white font-semibold px-4 py-2 mb-4 rounded-lg no-underline hover:bg-pink-600 transition">
+                        class="mt-3 inline-block bg-stone-400 text-white font-semibold px-4 py-2 mb-4 rounded-lg no-underline hover:bg-stone-800 hover:text-orange-200 transition">
                         Compre Agora
                     </a>
                 </div>
@@ -196,7 +196,7 @@
 
             <div class="mt-8 flex justify-center">
                 <a href="{{ route('shopping') }}"
-                    class="text-white bg-pink-500 px-6 py-3 rounded-lg shadow-lg font-semibold no-underline hover:bg-pink-600 transition">
+                    class="text-white bg-stone-400 px-6 py-3 rounded-lg shadow-lg font-semibold no-underline hover:bg-stone-800 hover:text-orange-300 transition">
                     Ver tudo
                 </a>
             </div>

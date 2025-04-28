@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Carrinho;
 use App\Models\ItemCarrinho;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 use function Pest\Laravel\call;
 
@@ -13,11 +14,31 @@ class CarrinhoController extends Controller
 {
     public function index()
     {
-        $carrinho = Carrinho::with('itens.produto')->where('user_id', Auth::id())->first();
+        $userId = Auth::id();
 
-        // calcular subtotal (opcional, caso use isso)
+        // Se o usuário não estiver autenticado, usa a sessão
+        if (!$userId) {
+            $session_id = Session::getId();
+            // Busca o carrinho pela sessão ou cria um novo carrinho vazio
+            $carrinho = Carrinho::with('itens.produto')->where('session_id', $session_id)->first();
+            if (!$carrinho) {
+                $carrinho = new Carrinho();
+                $carrinho->session_id = $session_id;
+                $carrinho->save();
+            }
+        } else {
+            // Busca o carrinho do usuário logado ou cria um novo carrinho vazio
+            $carrinho = Carrinho::with('itens.produto')->where('user_id', $userId)->first();
+            if (!$carrinho) {
+                $carrinho = new Carrinho();
+                $carrinho->user_id = $userId;
+                $carrinho->save();
+            }
+        }
+
+        // Calcular subtotal
         $subtotal = 0;
-        if ($carrinho) {
+        if ($carrinho && $carrinho->itens->isNotEmpty()) {
             foreach ($carrinho->itens as $item) {
                 $subtotal += $item->quantidade * $item->preco_unitario;
             }
@@ -28,40 +49,41 @@ class CarrinhoController extends Controller
 
 
 
-    public function add(Request $request)
-    {
-        $userId = Auth::id();
 
-        if (!$userId) {
-            return response()->json(['error' => 'Usuário não autenticado.'], 401);
-        }
 
+public function add(Request $request)
+{
+    $userId = Auth::id();
+    $session_id = Session::getId();
+
+    // Verifica se o usuário está logado
+    if ($userId) {
         $carrinho = Carrinho::firstOrCreate(['user_id' => $userId]);
-
-        $item = ItemCarrinho::where('carrinho_id', $carrinho->id)
-            ->where('produto_id', $request->produto_id)
-            ->first();
-
-        if ($item) {
-            $item->increment('quantidade', $request->quantidade);
-        } else {
-            $item = ItemCarrinho::create([
-                'carrinho_id' => $carrinho->id,
-                'produto_id' => $request->produto_id,
-                'quantidade' => $request->quantidade,
-                'preco_unitario' => $request->preco_unitario
-            ]);
-        }
-        return redirect()->route('shopping');
+    } else {
+        // Se não estiver logado, usa o session_id para criar ou buscar o carrinho
+        $carrinho = Carrinho::firstOrCreate(['session_id' => $session_id]);
     }
 
+    // Verifica se o item já existe no carrinho
+    $item = ItemCarrinho::where('carrinho_id', $carrinho->id)
+                        ->where('produto_id', $request->produto_id)
+                        ->first();
 
-    public function removeItem($id)
-    {
-        $item = ItemCarrinho::findOrFail($id);
-        $item->delete();
-        return response()->json(['message' => 'Item removido do carrinho']);
+    // Se o item existir, incrementa a quantidade
+    if ($item) {
+        $item->increment('quantidade', $request->quantidade);
+    } else {
+        // Caso contrário, cria um novo item no carrinho
+        ItemCarrinho::create([
+            'carrinho_id' => $carrinho->id,
+            'produto_id' => $request->produto_id,
+            'quantidade' => $request->quantidade,
+            'preco_unitario' => $request->preco_unitario
+        ]);
     }
+
+    return redirect()->route('shopping');
+}
 
 
     public function store(Request $request)
@@ -106,7 +128,7 @@ class CarrinhoController extends Controller
     public function destroy($id)
     {
         ItemCarrinho::findOrFail($id)->delete();
-        return response()->json(['message' => 'Item removido com sucesso']);
+        return redirect()->route('carrinho.index');
     }
 
     public function itens()

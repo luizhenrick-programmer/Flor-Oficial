@@ -141,7 +141,8 @@
                     <p class="text-gray-500">Nenhum pagamento encontrado.</p>
                 @endif
             </div>
-            <button class="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition">Gerar QRCode</button>
+            <button class="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition">Gerar
+                QRCode</button>
         </section>
 
 
@@ -155,4 +156,83 @@
                 Pagamento</button>
         </section>
     </div>
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+    <script>
+        const mp = new MercadoPago('TEST-a0e51111-d22d-41d0-ae5d-aff5d520f3d7', {
+            locale: 'pt-BR'
+        });
+
+        // Função para criar a cobrança de cartão de crédito
+        function handleCardPayment() {
+            const form = document.querySelector('#cartaoContainer form');
+            const card = {
+                card_number: form.querySelector('input[name="card_number"]').value,
+                cardholder_name: form.querySelector('input[name="cardholder_name"]').value,
+                expiration_month: form.querySelector('select[name="expiration_month"]').value,
+                expiration_year: form.querySelector('select[name="expiration_year"]').value,
+                security_code: form.querySelector('input[name="security_code"]').value,
+                installments: form.querySelector('select[name="installments"]').value,
+                payer_email: form.querySelector('input[name="payer_email"]').value,
+            };
+
+            mp.card.createToken(card).then(function (response) {
+                if (response.status === 200) {
+                    // Token gerado com sucesso, você pode enviar o token para o backend
+                    const token = response.response.id;
+                    console.log('Token gerado:', token);
+                    // Enviar o token para o backend para processar o pagamento
+                } else {
+                    console.error('Erro ao gerar token:', response);
+                }
+            }).catch(function (error) {
+                console.error('Erro:', error);
+            });
+        }
+
+        // Adiciona o evento de envio do formulário
+        document.querySelector('#cartaoContainer form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            handleCardPayment();
+        });
+    </script>
+    <script>
+        document.querySelector("#pixContainer button").addEventListener("click", function () {
+            fetch('/pix/payment', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    payer_email: 'email@dominio.com'  // Pegar o e-mail do formulário ou session
+                })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    const qrCodeUrl = data.qr_code;
+                    // Mostrar o QR Code no front-end
+                    console.log("QR Code URL:", qrCodeUrl);
+                })
+                .catch(error => {
+                    console.error('Erro ao gerar o pagamento Pix:', error);
+                });
+        });
+    </script>
+    <script>
+        document.querySelector("#linkContainer button").addEventListener("click", function () {
+            fetch('/link/payment', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    window.location.href = data.payment_link;
+                })
+                .catch(error => {
+                    console.error('Erro ao gerar o link de pagamento:', error);
+                });
+        });
+    </script>
+
 @endsection
