@@ -100,7 +100,14 @@
                 </table>
             </div>
         @else
-            <p class="mt-4 text-yellow-400">Nenhum produto cadastrado</p>
+        <div class="flex flex-col items-center justify-center h-96 tw-bg-secondary rounded-2xl shadow-inner p-8">
+            <i class="fa-solid fa-bullhorn text-6xl text-gray-400 py-3"></i>
+            <h2 class="text-xl font-semibold text-light mb-2">Nenhum produto cadastrado</h2>
+            <p class="text-gray-500 text-center max-w-md">
+              Parece que ainda não há produtos disponíveis no momento. Cadastre os produtos no sistema para vê-los!
+            </p>
+          </div>
+
         @endif
 
         <!-- Paginação -->

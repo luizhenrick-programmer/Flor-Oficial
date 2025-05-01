@@ -22,15 +22,13 @@
 
             <!-- Nome do Produto -->
             <div class="mb-4">
-                <label for="nome" class="block text-sm font-medium text-white">Nome do Produto</label>
-                <input id="nome" type="text" name="nome" placeholder="Digite o nome" value="{{ old('nome') }}"
+                <input id="nome" type="text" name="nome" placeholder="Digite o Nome do Produto" value="{{ old('nome') }}"
                     class="mt-1 w-full px-2 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
             </div>
 
             <!-- Descrição -->
             <div class="mb-4">
-                <label for="descricao" class="block text-sm font-medium text-gray-700">Descrição</label>
-                <textarea id="descricao" name="descricao" placeholder="Digite a descrição" value="{{ old('descricao') }}"
+                <textarea id="descricao" name="descricao" placeholder="Digite a descrição desse produto..." value="{{ old('descricao') }}"
                     class="mt-1 w-full px-2 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 h-28"></textarea>
             </div>
 
@@ -39,24 +37,21 @@
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                     <!-- Preço -->
                     <div>
-                        <label for="preco" class="block text-sm font-medium text-gray-700">Preço Original</label>
                         <input id="preco" name="preco" type="number" step="0.01" min="0" value="{{ old('preco') }}"
-                            placeholder="Digite o preço"
+                            placeholder="Digite o Preço Original"
                             class="mt-1 w-full px-2 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
                     </div>
                     <!-- Desconto -->
                     <div>
-                        <label for="preco" class="block text-sm font-medium text-gray-700">Valor de Desconto</label>
                         <input id="desconto" name="desconto" type="number" step="0.01" min="0" value="{{ old('desconto') }}"
-                            placeholder="Digite o preço"
+                            placeholder="Digite o Preço de Desconto"
                             class="mt-1 w-full px-2 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
                     </div>
                     <!-- Marca -->
                     <div>
-                        <label for="marca" class="block text-sm font-medium text-gray-700">Marca</label>
                         <select id="marca" name="marca_id"
                             class="mt-1 w-full px-2 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
-                            <option value="">Selecione a marca</option>
+                            <option value="">Selecione a Marca</option>
                             @foreach ($marcas as $marca)
                                 <option value="{{ $marca->id }}">{{ $marca->nome }}</option>
                             @endforeach
@@ -64,10 +59,9 @@
                     </div>
                     <!-- Categoria -->
                     <div>
-                        <label for="categoria" class="block text-sm font-medium text-gray-700">Categoria</label>
                         <select id="categoria" name="categoria_id" value="{{ old('categoria') }}"
                             class="mt-1 w-full px-2 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
-                            <option value="">Selecione uma categoria</option>
+                            <option value="">Selecione a Categoria</option>
                             @foreach ($categorias as $categoria)
                                 <option value="{{ $categoria->id }}">{{ $categoria->nome }}</option>
                             @endforeach
@@ -82,10 +76,9 @@
                     <div class="variacao-item grid grid-cols-1 md:grid-cols-4 gap-3 items-center rounded">
                         <!-- Tamanho -->
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">Tamanho</label>
                             <select name="variacoes[0][tamanho]"
                                 class="tamanho px-2 py-2 border rounded-lg text-gray-700 w-full">
-                                <option value="">Selecione</option>
+                                <option value="" class="hidden" disabled selected>Selecione o tamanho</option>
                                 <option value="PP">PP</option>
                                 <option value="P">P</option>
                                 <option value="M">M</option>
@@ -97,14 +90,12 @@
 
                         <!-- Estoque -->
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">Estoque</label>
-                            <input type="number" name="variacoes[0][estoque]" placeholder="Estoque" min="0"
+                            <input type="number" name="variacoes[0][estoque]" placeholder="Digite a quantidade de estoque" min="0"
                                 class="estoque px-2 py-2 border rounded-lg text-gray-700 w-full" />
                         </div>
 
                         <!-- Cores -->
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 mb-3">Cores</label>
                             <div class="flex gap-2">
                                 @foreach (['blue', 'pink', 'purple', 'yellow', 'green', 'red', 'orange', 'cyan', 'gray', 'teal'] as $cores)
                                     <label class="cursor-pointer">
@@ -271,7 +262,7 @@
 
             <!-- Botão de Enviar -->
             <button type="submit"
-                class="w-full bg-indigo-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none">
+                class="w-full bg-indigo-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none mb-4">
                 Criar Produto
             </button>
         </form>

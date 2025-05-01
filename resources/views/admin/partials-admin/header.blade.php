@@ -27,10 +27,32 @@
                 <i class="fas fa-bell text-2xl"></i>
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
             </button>
-            <button class="relative flex items-center justify-center p-2 rounded-full hover:bg-gray-600">
-                <i class="fas fa-shopping-cart text-2xl"></i>
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
-            </button>
+            <div x-data="{ open: false }" class="relative">
+                <button @click="open = !open" class="relative flex items-center justify-center p-2 rounded-full hover:bg-gray-600">
+                    <i class="fas fa-shopping-cart text-2xl"></i>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                        {{ $carrinhos?->count() ?? 0 }}
+                    </span>
+                </button>
+
+                <!-- Dropdown -->
+                <div x-show="open" @click.away="open = false" class="absolute right-0 mt-2 w-64 bg-white border rounded shadow-lg z-50">
+                    <div class="p-2 max-h-60 overflow-y-auto">
+                        @forelse($carrinhos as $item)
+                            <div class="flex items-center justify-between p-2 border-b">
+                                <span>{{ $item->produto->nome }}</span>
+                                <span class="text-sm text-gray-600">x{{ $item->quantidade }}</span>
+                            </div>
+                        @empty
+                            <div class="p-2 text-gray-500">Carrinho vazio.</div>
+                        @endforelse
+                    </div>
+                    <div class="p-2 text-center">
+                        <a href="{{ route('carrinho.index') }}" class="text-blue-500 hover:underline">Ver carrinho completo</a>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <!-- Usuário -->
