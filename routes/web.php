@@ -46,16 +46,6 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 });
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('gerente/dashboard', [GerenteController::class, 'dashboard'])->name('gerente.dashboard');
-});
-
-Route::middleware(['auth', 'vendedor'])->group(function () {
-    Route::get('vendedor/dashboard', [VendedorController::class, 'dashboard'])->name('vendedor.dashboard');
-    Route::get('vendedor/vendas', [VendedorController::class, 'vendas'])->name('vendedor.vendas');
-    Route::get('vendedor/lista', [VendedorController::class, 'lista'])->name('vendedor.listaProd');
-});
-
 
 // ROTAS E-COMMERCE
 Route::middleware(['auth'])->prefix('e-commerce')->group(function () {
