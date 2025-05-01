@@ -64,6 +64,16 @@
 
         <x-text color='gray-200' size='xs' bold='true' class="px-3 py-4">FERRAMENTAS ADICIONAIS</x-text>
         <li class="mt-3">
+            <a href="{{ route('home') }}" target=_blank class="flex items-center justify-between w-full text-gray-300 px-3 py-2 transition no-underline" type="button">
+                <div class="flex items-center">
+                    <i class="fa-solid fa-store tw-bg-tertiary text-2xl text-gray-300 p-3 rounded-lg"></i>
+                    <span class="text-md mx-3 text-gray-300 font-bold">
+                        Flor Oficial
+                    </span>
+                </div>
+            </a>
+        </li>
+        <li>
             <a href="https://www.instagram.com/flordi.oficial" target=_blank class="flex items-center justify-between w-full text-gray-300 px-3 py-2 transition no-underline" type="button">
                 <div class="flex items-center">
                     <i class="bi bi-instagram tw-bg-tertiary text-2xl text-gray-300 p-3 rounded-lg"></i>

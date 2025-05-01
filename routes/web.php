@@ -59,8 +59,9 @@ Route::middleware(['auth'])->prefix('e-commerce')->group(function () {
     Route::get('/clientes', [EcommerceController::class, 'clientes'])->name('e-commerce.clientes');
 });
 
-
-Route::resource('produtos', ProdutoController::class);
+Route::middleware(['auth', 'admin'])->prefix('e-commerce')->group(function () {
+    Route::resource('produtos', ProdutoController::class);
+});
 
 
 // ROTAS COLABORADORES

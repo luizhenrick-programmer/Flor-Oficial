@@ -15,7 +15,7 @@
                     <path d="M12 16h.01"></path>
                 </svg>
             </div>
-            <x-text color="gray-200" size="md">Olá {{ Auth::user()->name }}, bem-vindo ao painel de controle!</x-text>
+            <x-text color="gray-200" size="md">Olá {{ Auth::user()->name }}, bem-vindo ao Painel de Controle!</x-text>
         </div>
     </div>
 
