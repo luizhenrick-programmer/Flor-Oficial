@@ -38,8 +38,12 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function endereco() {
+    public function endereco()
+    {
         return $this->belongsTo(Endereco::class, 'endereco_id');
     }
-
+    public function getIsAdminAttribute()
+    {
+        return $this->role === 'admin';
+    }
 }

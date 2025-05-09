@@ -6,50 +6,75 @@ use Illuminate\Http\Request;
 use App\Models\Pagamento;
 use App\Models\Pedido;
 use Illuminate\Support\Facades\Auth;
+use MercadoPago\SDK;
+use MercadoPago\Payment;
+use MercadoPago\Payer;
 
 class PagamentoController extends Controller
 {
     public function index()
-{
-    // Busca o pedido do usuário autenticado
-    $pedido = Pedido::where('user_id', Auth::id())->latest()->first();
+    {
+        $pedido = Pedido::where('user_id', Auth::id())->latest()->first();
 
-
-    if (!$pedido) {
-        return view('pagamento.index', ['pagamento' => null]);
+        return view('pagamento.index', compact('pedido'));
     }
 
-    // Busca o pagamento relacionado a esse pedido
-    $pagamento = Pagamento::where('pedido_id', $pedido->id)->with('pedido')->latest()->first();
-
-    return view('pagamento.index', compact('pagamento'));
-}
-
-
-
-
     public function store(Request $request)
-    {
-        $request->validate([
-            'pedido_id' => 'required|exists:pedidos,id',
-            'valor' => 'required|numeric|min:0',
-        ]);
+{
+    $request->validate([
+        'pedido_id' => 'required|exists:pedidos,id',
+        'valor' => 'required|numeric|min:0',
+        'token' => 'required|string',
+        'metodo_pagamento' => 'required|string',
+        'parcelas' => 'required|integer|min:1',
+        'email' => 'required|email',
+        'identificacao_tipo' => 'required|string',
+        'identificacao_numero' => 'required|string',
+        'descricao' => 'required|string',
+    ]);
 
-        $pedido = Pedido::findOrFail($request->pedido_id);
+    $pedido = Pedido::findOrFail($request->pedido_id);
 
-        if ($pedido->status !== 'pendente') {
-            return response()->json(['message' => 'Este pedido já foi processado'], 400);
-        }
+    if ($pedido->status !== 'pendente') {
+        return response()->json(['message' => 'Este pedido já foi processado'], 400);
+    }
 
+    // Integração Mercado Pago
+    SDK::setAccessToken(config('services.mercadopago.access_token'));
+
+    $payment = new Payment();
+    $payment->transaction_amount = (float) $request->valor;
+    $payment->token = $request->token;
+    $payment->description = $request->descricao;
+    $payment->installments = (int) $request->parcelas;
+    $payment->payment_method_id = $request->metodo_pagamento;
+
+    $payer = new Payer();
+    $payer->email = $request->email;
+    $payer->identification = [
+        "type" => $request->identificacao_tipo,
+        "number" => $request->identificacao_numero
+    ];
+
+    $payment->payer = $payer;
+    $payment->save();
+
+    if ($payment->status === 'approved') {
         $pagamento = Pagamento::create([
             'pedido_id' => $pedido->id,
             'valor' => $request->valor,
-            'status' => 'pendente',
+            'status' => 'aprovado',
             'data_pagamento' => now(),
         ]);
 
-        return response()->json(['message' => 'Pagamento criado', 'pagamento' => $pagamento], 201);
+        $pedido->update(['status' => 'pago']);
+
+        return response()->json(['message' => 'Pagamento aprovado', 'pagamento' => $pagamento]);
+    } else {
+        return response()->json(['message' => 'Pagamento recusado', 'status_detail' => $payment->status_detail], 400);
     }
+}
+
 
     public function show($id)
     {

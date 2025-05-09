@@ -1,10 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\GerenteController;
-use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\VendedorController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PagamentoController;
@@ -14,7 +11,6 @@ use App\Http\Controllers\EcommerceController;
 use App\Http\Controllers\FinanceiroController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\SearchController;
-use App\Http\Middleware\Admin;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {

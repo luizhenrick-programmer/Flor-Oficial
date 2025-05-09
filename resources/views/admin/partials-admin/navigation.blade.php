@@ -32,21 +32,6 @@
             </a>
         </li>
 
-        <!-- Colaboradores -->
-        <li>
-            <a href="{{ route('colaboradores.index') }}" class="flex items-center justify-between w-full text-gray-300 px-3 py-2 text-gray-300 transition no-underline"
-                    type="button">
-                <div class="flex items-center">
-                    <i class="fa-solid fa-box tw-bg-tertiary text-lg text-gray-300 p-3 rounded-lg"></i>
-                    <span class="text-md mx-3 font-bold
-                        {{ request()->routeIs('colaboradores.*') ? 'text-orange-100' : 'text-gray-300' }}">
-                        Colaboradores
-                    </span>
-                </div>
-                <i class="{{ request()->routeIs('colaboradores.*') ? 'fa-solid fa-chevron-right text-orange-100' : ''}}"></i>
-            </a>
-        </li>
-
         <!-- Financeiro -->
         <li class="mb-4">
             <a href="{{ route('financeiro') }}" class="flex items-center justify-between w-full text-gray-300 px-3 py-2 transition no-underline"

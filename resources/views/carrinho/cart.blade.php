@@ -106,7 +106,7 @@
                                     <div>
                                         <span class="fw-semibold">{{ $item->produto->nome }}</span>
                                         <br>
-                                        <small class="text-muted">Qtd: {{ $item->quantidade }}</small>
+                                        <small class="text-muted">Quantidade: <strong>{{ $item->quantidade }}</strong></small>
                                     </div>
                                     <span class="fw-bold">R$
                                         {{ number_format($item->produto->preco * $item->quantidade, 2, ',', '.') }}</span>

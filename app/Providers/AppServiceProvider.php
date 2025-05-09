@@ -10,31 +10,36 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
     public function register(): void
     {
         //
     }
 
-    /**
-     * Bootstrap any application services.
-     */
+
+
     public function boot()
-{
-    View::composer('*', function ($view) {
-        $user = Auth::user();
-        $carrinho = null;
+    {
+        View::composer('*', function ($view) {
+            $user = Auth::user();
 
-        if ($user) {
-            $carrinho = Carrinho::with('itens')->where('user_id', $user->id)->first();
-        }
-        $carrinhos = ItemCarrinho::with('user', 'produto')->latest()->get();
+            // Carrinho do usuário logado (para exibir no ícone dele, se quiser)
+            $carrinho = null;
+            if ($user) {
+                $carrinho = Carrinho::with('itens')->where('user_id', $user->id)->first();
+            }
+            $view->with('carrinho', $carrinho);
 
+            // Se for admin, carrega todos os carrinhos com itens
+            if ($user && $user->is_admin) {
+                $carrinhosAtivos = Carrinho::with(['itens.produto', 'user'])
+                    ->whereHas('itens') // Apenas carrinhos com itens
+                    ->latest()
+                    ->get();
 
-        $view->with('carrinho', $carrinho);
-        $view->with('carrinhos', $carrinhos);
-    });
-}
+                $view->with('carrinhosAtivos', $carrinhosAtivos);
+            } else {
+                $view->with('carrinhosAtivos', null);
+            }
+        });
+    }
 }

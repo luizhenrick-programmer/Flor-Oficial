@@ -42,14 +42,11 @@ class PedidoController extends Controller
         foreach ($itens as $item) {
             ItemPedido::create([
                 'pedido_id' => $pedido->id,
-                'produto_id' => $item->produto_id, 
+                'produto_id' => $item->produto_id,
                 'quantidade' => $item->quantidade,
                 'preco_unitario' => $item->preco_unitario
             ]);
         }
-
-        // Remove apenas os selecionados
-        $carrinho->itens()->whereIn('id', $itensSelecionados)->delete();
 
         return redirect()->route('pagamento.index');
     }

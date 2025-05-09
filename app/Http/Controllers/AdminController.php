@@ -16,8 +16,7 @@ class AdminController extends Controller
     {
         $produtos = Produto::with(['variacoes', 'categoria'])->get();
         $usuarios = User::where('role', '=', 'cliente');
-        $carrinhos = ItemCarrinho::with('user', 'produto')->latest()->get();
-        return view('admin.dashboard', compact('produtos', 'usuarios', 'carrinhos'));
+        return view('admin.dashboard', compact('produtos', 'usuarios'));
     }
 
 }

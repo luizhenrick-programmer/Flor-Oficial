@@ -79,7 +79,7 @@
                                 <td class="p-3">{{ $produto->usuario->name ?? 'Desconhecido' }}</td>
                                 <td class="p-3">
                                     <span class="bg-green-500 text-white px-2 py-1 rounded">{{ ucfirst($produto->status) }}</span>
-                                <td class="p-3 flex justify-center gap-2">
+                                <td class="p-3 flex justify-center items-center gap-2">
                                     <a href="{{ route('produtos.edit', $produto->id) }}"
                                         class="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-700 transition">
                                         <i class="bi bi-pencil-square"></i>
