@@ -11,7 +11,11 @@ use App\Http\Controllers\EcommerceController;
 use App\Http\Controllers\FinanceiroController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\RelatorioController;
 use Illuminate\Support\Facades\Route;
+
+
+
 
 Route::get('/', function () {
     return view('home');
@@ -53,6 +57,13 @@ Route::middleware(['auth'])->prefix('e-commerce')->group(function () {
     Route::get('/marcas/criar', [EcommerceController::class, 'criarMarcas'])->name('e-commerce.criar_marcas');
     Route::post('/marcas/criar/enviar', [EcommerceController::class, 'store_marcas'])->name('e-commerce.marcas.store');
     Route::get('/clientes', [EcommerceController::class, 'clientes'])->name('e-commerce.clientes');
+
+     Route::get('/relatorio', [EcommerceController::class, 'relatorio'])->name('e-commerce.relatorio');
+
+    Route::get('/pedido/confirmado', [EcommerceController::class, 'pedidoConfirma'])->name('e-commerce.pedidos.confirma');
+    Route::get('/pedido/cancelado', [EcommerceController::class, 'pedidoCancelado'])->name('e-commerce.pedidos.cancelado');
+    Route::get('/pedido/pendente', [EcommerceController::class, 'pedidoPendente'])->name('e-commerce.pedidos.pendente');
+    Route::get('/pedido/remessas', [EcommerceController::class, 'remessas'])->name('e-commerce.pedidos.remessas');
 });
 
 Route::middleware(['auth', 'admin'])->prefix('e-commerce')->group(function () {

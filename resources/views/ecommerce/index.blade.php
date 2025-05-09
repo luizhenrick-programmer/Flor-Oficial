@@ -21,22 +21,22 @@
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 my-4">
         <!-- Botões de acesso -->
-        <a href="#" class="flex flex-col gap-2 items-center px-3 py-5 tw-bg-secondary text-white rounded-lg no-underline hover:bg-indigo-600 transition shadow-lg">
+        <a href="{{ route('e-commerce.relatorio') }}" class="flex flex-col gap-2 items-center px-3 py-5 tw-bg-secondary text-white rounded-lg no-underline hover:bg-indigo-600 transition shadow-lg">
             <i class="fa-solid fa-chart-pie text-2xl "></i>
             <span class="text-lg font-semibold">Relatório de Vendas</span>
         </a>
 
-        <a href="#" class="flex flex-col gap-2 items-center px-3 py-5 tw-bg-secondary text-white rounded-lg no-underline hover:bg-indigo-600 transition shadow-lg">
+        <a href="{{ route('e-commerce.pedidos.confirma') }}" class="flex flex-col gap-2 items-center px-3 py-5 tw-bg-secondary text-white rounded-lg no-underline hover:bg-indigo-600 transition shadow-lg">
             <i class="fa-solid fa-shopping-bag text-2xl "></i>
             <span class="text-lg font-semibold">Pedidos Confirmados</span>
         </a>
 
-        <a href="#" class="flex flex-col gap-2 items-center px-3 py-5 tw-bg-secondary text-white rounded-lg no-underline hover:bg-indigo-600 transition shadow-lg">
+        <a href="{{ route('e-commerce.pedidos.pendente') }}" class="flex flex-col gap-2 items-center px-3 py-5 tw-bg-secondary text-white rounded-lg no-underline hover:bg-indigo-600 transition shadow-lg">
             <i class="fa-regular fa-hourglass-half text-2xl "></i>
             <span class="text-lg font-semibold">Pedidos Pendentes</span>
         </a>
 
-        <a href="#" class="flex flex-col gap-2 items-center px-3 py-5 tw-bg-secondary text-white rounded-lg no-underline hover:bg-indigo-600 transition shadow-lg">
+        <a href="{{ route('e-commerce.pedidos.cancelado') }}" class="flex flex-col gap-2 items-center px-3 py-5 tw-bg-secondary text-white rounded-lg no-underline hover:bg-indigo-600 transition shadow-lg">
             <i class="fa-solid fa-ban text-2xl "></i>
             <span class="text-lg font-semibold">Pedidos Cancelados</span>
         </a>
@@ -46,7 +46,7 @@
             <span class="text-lg font-semibold">Produtos</span>
         </a>
 
-        <a href="#" class="flex flex-col gap-2 items-center px-3 py-5 tw-bg-secondary text-white rounded-lg no-underline hover:bg-indigo-600 transition shadow-lg">
+        <a href="{{ route('e-commerce.pedidos.remessas') }}" class="flex flex-col gap-2 items-center px-3 py-5 tw-bg-secondary text-white rounded-lg no-underline hover:bg-indigo-600 transition shadow-lg">
             <i class="fa-solid fa-truck-fast text-2xl "></i>
             <span class="text-lg font-semibold">Remessas</span>
         </a>

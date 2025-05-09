@@ -209,4 +209,31 @@ class EcommerceController extends Controller {
     {
         return view('financeiro.index');
     }
+
+    public function relatorio() {
+        
+        return view('ecommerce.relatorio');
+    }
+    
+
+    public function pedidoConfirma(){
+
+        return view('pedidos.confirma');
+
+    }
+    public function pedidoCancelado(){
+
+        return view('pedidos.cancelado');
+
+    }
+    public function pedidoPendente(){
+
+        return view('pedidos.pendente');
+
+    }
+     public function remessas(){
+
+        return view('pedidos.remessas');
+
+    }
 }
