@@ -117,7 +117,7 @@
                         <!-- Totais -->
                         <div class="mb-2 d-flex justify-content-between">
                             <span>Subtotal ({{ count($carrinho->itens) }} produtos):</span>
-                            <strong>R$ <span id="subtotalValor">0,00</span></strong>
+                            <strong>R$ {{ number_format($subtotal, 2, ',', '.') }}</strong>
                         </div>
 
                         {{-- Frete ou desconto pode entrar aqui futuramente --}}
