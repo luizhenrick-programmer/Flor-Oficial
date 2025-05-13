@@ -15,7 +15,7 @@
                     Explore agora e encontre a peça ideal para brilhar nas noites desta temporada.
                 </p>
                 <a href="{{ route('shopping') }}"
-    class="flex items-center justify-center px-6 py-3 bg-stone-400 color-secundary font-bold rounded-lg w-64 no-underline hover:bg-black hover:text-orange-300 transition">
+    class="flex items-center justify-center px-6 py-3 font-bold rounded-lg w-64 no-underline bg-black text-orange-300 transition">
     COMPRE AGORA
 </a>
 
@@ -51,12 +51,12 @@
             <div class="mt-8 grid grid-cols-1 lg:grid-cols-4 gap-6 w-full px-4">
                 <!-- Ofertas Primavera -->
                 <div class="lg:col-span-1 flex flex-col items-center justify-center">
-                    <h3 class="text-xl text-stone-400 text-center">
+                    <h3 class="text-xl text-dark text-center">
                         Ofertas Primavera<br>
                         <span class="font-bold text-dark text-2xl">até 60% de desconto</span>
                     </h3>
                     <a href="{{ route('shopping') }}"
-                        class="mt-6 px-4 py-2 bg-stone-400 color-secundary font-bold rounded-lg no-underline w-32 text-center hover:bg-black hover:text-orange-300 transition">
+                        class="mt-6 px-4 py-2 font-bold rounded-lg no-underline w-32 text-center bg-black text-orange-300 transition">
                         VER TUDO
                     </a>
                 </div>
@@ -106,7 +106,7 @@
                     class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-4 lg:translate-y-1 bg-white rounded-lg shadow-lg py-2 px-3 w-3/4 text-center">
                     <h3 class="text-black text-lg font-bold mb-0">Promoção</h3>
                     <a href="#"
-                        class="mt-3 inline-block bg-stone-400 text-white font-semibold px-4 py-2 mb-4 rounded-lg no-underline hover:bg-stone-800 hover:text-orange-800 transition">
+                        class="mt-3 inline-block bg-stone-400 text-white font-semibold px-4 py-2 mb-4 rounded-lg no-underline bg-stone-800 text-orange-900 transition">
                         Compre Agora
                     </a>
                 </div>
@@ -131,7 +131,7 @@
                     class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-4 lg:translate-y-1 bg-white rounded-lg shadow-lg py-2 px-3 w-3/4 text-center">
                     <h3 class="text-black text-lg font-bold mb-0">Promoção</h3>
                     <a href="#"
-                        class="mt-3 inline-block bg-stone-400 text-white font-semibold px-4 py-2 mb-4 rounded-lg no-underline hover:bg-stone-800 hover:text-orange-200 transition">
+                        class="mt-3 inline-block bg-stone-400 text-white font-semibold px-4 py-2 mb-4 rounded-lg no-underline bg-stone-800 text-orange-900 transition">
                         Compre Agora
                     </a>
                 </div>
@@ -144,59 +144,11 @@
                 Os queridinhos do momento
             </h2>
 
-            <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-                <!-- Produto 1 -->
-                <div class="flex flex-col items-center">
-                    <img src="{{ asset('assets\images\fashion.jpg') }}" alt="Categoria 1" class="w-full rounded-lg shadow-md">
-                    <p class="w-full mt-2 text-gray-700 font-semibold text-start">Produto 1</p>
-                </div>
-
-                <!-- Produto 2 -->
-                <div class="flex flex-col items-center">
-                    <img src="{{ asset('assets\images\fashion.jpg') }}" alt="Categoria 2" class="w-full rounded-lg shadow-md">
-                    <p class="w-full mt-2 text-gray-700 font-semibold text-start">Produto 2</p>
-                </div>
-
-                <!-- Produto 3 -->
-                <div class="flex flex-col items-center">
-                    <img src="{{ asset('assets\images\fashion.jpg') }}" alt="Categoria 3" class="w-full rounded-lg shadow-md">
-                    <p class="w-full mt-2 text-gray-700 font-semibold text-start">Produto 3</p>
-                </div>
-
-                <!-- Produto 4 -->
-                <div class="flex flex-col items-center">
-                    <img src="{{ asset('assets\images\fashion.jpg') }}" alt="Categoria 4" class="w-full rounded-lg shadow-md">
-                    <p class="w-full mt-2 text-gray-700 font-semibold text-start">Produto 4</p>
-                </div>
-
-                <!-- Produto 5 -->
-                <div class="flex flex-col items-center">
-                    <img src="{{ asset('assets\images\fashion.jpg') }}" alt="Categoria 5" class="w-full rounded-lg shadow-md">
-                    <p class="w-full mt-2 text-gray-700 font-semibold text-start">Produto 5</p>
-                </div>
-
-                <!-- Produto 6 -->
-                <div class="flex flex-col items-center">
-                    <img src="{{ asset('assets\images\fashion.jpg') }}" alt="Categoria 6" class="w-full rounded-lg shadow-md">
-                    <p class="w-full mt-2 text-gray-700 font-semibold text-start">Produto 6</p>
-                </div>
-
-                <!-- Produto 7 -->
-                <div class="flex flex-col items-center">
-                    <img src="{{ asset('assets\images\fashion.jpg') }}" alt="Categoria 7" class="w-full rounded-lg shadow-md">
-                    <p class="w-full mt-2 text-gray-700 font-semibold text-start">Produto 7</p>
-                </div>
-
-                <!-- Produto 8 -->
-                <div class="flex flex-col items-center">
-                    <img src="{{ asset('assets\images\fashion.jpg') }}" alt="Categoria 8" class="w-full rounded-lg shadow-md">
-                    <p class="w-full mt-2 text-gray-700 font-semibold text-start">Produto 8</p>
-                </div>
-            </div>
-
+        <!-- adicionar view de produtos -->
+            
             <div class="mt-8 flex justify-center">
                 <a href="{{ route('shopping') }}"
-                    class="text-white bg-stone-400 px-6 py-3 rounded-lg shadow-lg font-semibold no-underline hover:bg-stone-800 hover:text-orange-300 transition">
+                    class="text-white bg-stone-400 px-6 py-3 rounded-lg shadow-lg font-semibold no-underline bg-stone-800 text-orange-900 transition">
                     Ver tudo
                 </a>
             </div>
