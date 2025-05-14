@@ -6,9 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\Pagamento;
 use App\Models\Pedido;
 use Illuminate\Support\Facades\Auth;
+use MercadoPago\Client\Preference\PreferenceClient;
 use MercadoPago\SDK;
 use MercadoPago\Payment;
 use MercadoPago\Payer;
+use MercadoPago\MercadoPagoConfig;
+use MercadoPago\Resources\Preference;
 
 class PagamentoController extends Controller
 {
@@ -39,40 +42,30 @@ class PagamentoController extends Controller
         return response()->json(['message' => 'Este pedido já foi processado'], 400);
     }
 
-    // Integração Mercado Pago
-    SDK::setAccessToken(config('services.mercadopago.access_token'));
+    // Adicione credenciais
+    MercadoPagoConfig::setAccessToken(env('MERCADO_PAGO_ACESS_TOKEN'));
 
-    $payment = new Payment();
-    $payment->transaction_amount = (float) $request->valor;
-    $payment->token = $request->token;
-    $payment->description = $request->descricao;
-    $payment->installments = (int) $request->parcelas;
-    $payment->payment_method_id = $request->metodo_pagamento;
+    $client = new PreferenceClient();
+    $preference = $client->create([
+    "items"=> array(
+        array(
+        "title" => $pedido->itens->produto->name,
+        "quantity" => $pedido->itens->quantidade,
+        "unit_price" => $pedido->total
+        )
+    )
+    ]);
 
-    $payer = new Payer();
-    $payer->email = $request->email;
-    $payer->identification = [
-        "type" => $request->identificacao_tipo,
-        "number" => $request->identificacao_numero
-    ];
+    echo $preference;
 
-    $payment->payer = $payer;
-    $payment->save();
+    $preference = new Preference();
+    $preference->back_urls = array(
+        "success" => "https://www.tu-sitio/success",
+        "failure" => "http://www.tu-sitio/failure",
+        "pending" => "http://www.tu-sitio/pending"
+    );
+    $preference->auto_return = "approved";
 
-    if ($payment->status === 'approved') {
-        $pagamento = Pagamento::create([
-            'pedido_id' => $pedido->id,
-            'valor' => $request->valor,
-            'status' => 'aprovado',
-            'data_pagamento' => now(),
-        ]);
-
-        $pedido->update(['status' => 'pago']);
-
-        return response()->json(['message' => 'Pagamento aprovado', 'pagamento' => $pagamento]);
-    } else {
-        return response()->json(['message' => 'Pagamento recusado', 'status_detail' => $payment->status_detail], 400);
-    }
 }
 
 

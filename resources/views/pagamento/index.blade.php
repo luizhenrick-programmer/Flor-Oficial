@@ -86,8 +86,8 @@
                 <p class="text-gray-900 font-semibold">R$ {{ number_format($pedido->total, 2, ',', '.') }}</p>
             </div>
 
-            <button type="submit"
-                class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition">Comprar agora</button>
+            <a type="submit" href="{{ route('pagamento.store') }}"
+                class="w-full bg-blue-600 text-white py-3 rounded-lg hover:bg-blue-700 transition">Comprar agora</a>
         </form>
     </section>
 
@@ -110,6 +110,8 @@
         </div>
         <button class="w-full bg-purple-600 text-white py-3 rounded-lg hover:bg-purple-700 transition">Gerar Link de Pagamento</button>
     </section>
+
+    <div id="wallet_container"></div>
 </div>
 
 {{-- Scripts --}}
@@ -134,56 +136,15 @@
         atualizarExibicao();
     });
 
-    const mp = new MercadoPago('TEST-a0e51111-d22d-41d0-ae5d-aff5d520f3d7', {
-        locale: 'pt-BR'
+    // Inicialize o Mercado Pago com sua chave pública
+    const mp = new MercadoPago(env('NEXT_PUBLIC_MERCADO_PAGO_PUBLIC_KEY'));
+
+    // Crie o botão de pagamento no container especificado
+    mp.bricks().create("wallet", "wallet_container", {
+      initialization: {
+        preferenceId: "787997534-6dad21a1-6145-4f0d-ac21-66bf7a5e7a58", // Substitua com seu ID de preferência
+      }
     });
 
-    document.querySelector('#cartaoContainer form').addEventListener('submit', function (e) {
-        e.preventDefault();
-        const form = e.target;
-
-        const card = {
-            card_number: form.card_number.value,
-            cardholder_name: form.cardholder_name.value,
-            expiration_month: form.expiration_month.value,
-            expiration_year: form.expiration_year.value,
-            security_code: form.security_code.value,
-            installments: form.installments.value,
-            payer_email: form.payer_email.value,
-        };
-
-        mp.card.createToken({ card }).then(response => {
-            if (response.status === 200) {
-                const token = response.response.id;
-                console.log('Token gerado:', token);
-                // Envie `token` para o backend com AJAX ou form
-            } else {
-                console.error('Erro ao gerar token:', response);
-            }
-        }).catch(error => {
-            console.error('Erro:', error);
-        });
-    });
-
-    document.querySelector("#pixContainer button").addEventListener("click", function () {
-        fetch('/pix/payment', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ payer_email: 'email@dominio.com' })
-        })
-        .then(res => res.json())
-        .then(data => console.log("QR Code URL:", data.qr_code))
-        .catch(err => console.error('Erro ao gerar o pagamento Pix:', err));
-    });
-
-    document.querySelector("#linkContainer button").addEventListener("click", function () {
-        fetch('/link/payment', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' }
-        })
-        .then(res => res.json())
-        .then(data => window.location.href = data.payment_link)
-        .catch(err => console.error('Erro ao gerar o link de pagamento:', err));
-    });
 </script>
 @endsection
