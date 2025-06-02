@@ -48,7 +48,7 @@ class PedidoController extends Controller
             ]);
         }
 
-        return redirect()->route('pagamento.index');
+        return redirect()->route('pagamento.checkout');
     }
 
     public function show(string $id)

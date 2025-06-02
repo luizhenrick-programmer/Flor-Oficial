@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Carrinho;
+use App\Models\Categorias;
 use App\Models\ItemCarrinho;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\View;
@@ -40,6 +41,9 @@ class AppServiceProvider extends ServiceProvider
             } else {
                 $view->with('carrinhosAtivos', null);
             }
+
+            // teste
+            $categorias = Categorias::all();
         });
     }
 }

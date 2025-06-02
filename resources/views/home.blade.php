@@ -5,46 +5,45 @@
 @section('content')
     <div class="flex flex-col flex-grow items-center justify-around px-3 py-3">
         <section id="destaque" class="mt-8 grid grid-cols-1 md:grid-cols-2 w-full items-center justify-center">
-            <div class="flex flex-col justify-center items-start px-6 md:px-12">
-                <h1 class="text-3xl md:text-4xl font-bold mb-4 color-tercery">Descubra a Elegância da Primavera!</h1>
-                <p class="text-justify font-semibold text-gray-700 mb-6">
-                    Vestidos noturnos criados para quem deseja unir sofisticação e leveza. Nossa nova coleção de
-                    primavera traz designs exclusivos que realçam sua beleza, com cortes elegantes, tecidos delicados e
-                    cores inspiradas nas nuances da estação. Perfeitos para jantares, eventos formais ou celebrações
-                    especiais, esses vestidos foram pensados para quem valoriza conforto e estilo em qualquer ocasião.
-                    Explore agora e encontre a peça ideal para brilhar nas noites desta temporada.
-                </p>
-                <a href="{{ route('shopping') }}"
-    class="flex items-center justify-center px-6 py-3 font-bold rounded-lg w-64 no-underline bg-black text-orange-300 transition">
-    COMPRE AGORA
-</a>
-
-                <div class="flex items-center mt-8 space-x-4">
-                    <button type="button" class="font-bold text-lg hover:color-secundary" onclick="changeSlide(0)">01</button>
-                    <span class="text-gray-600 text-2xl">—</span>
-                    <button type="button" class="font-bold text-lg hover:color-secundary" onclick="changeSlide(1)">02</button>
-                    <span class="text-gray-600 text-2xl">—</span>
-                    <button type="button" class="font-bold text-lg hover:color-secundary" onclick="changeSlide(2)">03</button>
-                </div>
-            </div>
-
             <div class="flex justify-center">
-                <div id="carouselExampleIndicators" class="relative w-4/5 mt-3">
-                    <div class="carousel-inner space-y-6">
-                        <div class="carousel-item active">
-                            <img src="{{ asset('assets/images/fotoInicio.png') }}" alt="Vestido Primavera 1" class="w-full rounded-lg">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ asset('assets/images/agoraVai.png') }}" alt="Vestido Primavera 2" class="w-full rounded-lg">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="{{ asset('assets/images/free3.png') }}" alt="Vestido Primavera 3" class="w-full rounded-lg">
-                        </div>
-                    </div>
+                <img src="{{ asset('assets/images/agoraVai.png') }}" alt="Vestido Primavera 2"
+                    class="md:w-3xl rounded-lg">
+            </div>
+            <div class="flex flex-col justify-center items-start px-6 md:px-12 py-12 bg-white">
+
+
+
+                <h1 class="text-3xl md:text-5xl font-extrabold leading-tight text-gray-900 mb-6">
+                    Viva a Vida com Elegância. <br/>
+                    <span class="text-orange-300 indent-6">Brilhe com a Flor Oficial.</span>
+                </h1>
+
+                <div class="space-y-5 text-gray-700 text-base md:text-lg font-medium leading-relaxed">
+                    <p class="text-justify indent-6">
+                        Quando a primavera floresce, é tempo de se reinventar — com leveza, charme e atitude. A nova coleção
+                        <strong>Flor Oficial</strong> chegou para transformar suas noites em experiências inesquecíveis.
+                    </p>
+                    <p class="text-justify indent-6">
+                        São vestidos pensados para mulheres que querem mais que beleza: querem <strong>presença</strong>.
+                        Com cortes que valorizam suas curvas, tecidos que tocam a pele como pétalas e cores que traduzem a
+                        essência da estação, você não passa despercebida — <em>você marca.</em>
+                    </p>
+                    <p class="text-justify indent-6">
+                        Perfeitos para eventos especiais, jantares ou aquele momento único, nossos modelos unem elegância e
+                        autenticidade. <strong>Conforto, sofisticação e uma dose de ousadia</strong> na medida certa. Porque
+                        sua noite merece mais do que um look bonito — ela merece <span
+                            class="text-orange-500 font-semibold">uma Flor Oficial.</span>
+                    </p>
                 </div>
+
+                <a href="{{ route('shopping') }}"
+                    class="mt-8 inline-flex items-center justify-center px-8 py-3 text-base md:text-lg font-bold tracking-wide rounded-lg bg-gray-800  text-orange-300 shadow-lg no-underline hover:text-orange-400 transition duration-300 ease-in-out">
+                    COMPRE AGORA
+                </a>
             </div>
         </section>
-        <section id="ofertas" class="mt-32 flex flex-col items-center w-full">
+        <hr class="md:hidden">
+        <section id="ofertas" class="mt-10 flex flex-col items-center w-full">
             <h2 class="text-2xl font-bold text-center ">Para encher seu carrinho</h2>
 
             <!-- Grid Principal -->
@@ -52,43 +51,42 @@
                 <!-- Ofertas Primavera -->
                 <div class="lg:col-span-1 flex flex-col items-center justify-center">
                     <h3 class="text-xl text-dark text-center">
-                        Ofertas Primavera<br>
-                        <span class="font-bold text-dark text-2xl">até 60% de desconto</span>
+                        Confira as melhores ofertas de outono
+                        <span class="font-bold text-amber-800 text-lg">até 60% de desconto</span>
                     </h3>
-                    <a href="{{ route('shopping') }}"
-                        class="mt-6 px-4 py-2 font-bold rounded-lg no-underline w-32 text-center bg-black text-orange-300 transition">
-                        VER TUDO
-                    </a>
                 </div>
 
                 <!-- Produtos -->
                 <div class="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     <div class="flex flex-col items-center">
                         <img src="{{ asset('assets/images/imagesOferta/oferta-1.png') }}" alt="Categoria 1"
-                            class="w-full rounded-lg shadow-md">
-                        <p class="w-full mt-2 text-gray-700 font-semibold text-start">Produto 1</p>
+                            class="max-w-xs md:w-full rounded-lg shadow-md">
+                        <p class="w-3x1 mt-2 text-gray-700 font-semibold text-start">Produto 1</p>
                     </div>
                     <div class="flex flex-col items-center">
                         <img src="{{ asset('assets/images/imagesOferta/oferta-2.png') }}" alt="Categoria 2"
-                            class="w-full rounded-lg shadow-md">
-                        <p class="w-full mt-2 text-gray-700 font-semibold text-start">Produto 2</p>
+                            class="max-w-xs md:w-full rounded-lg shadow-md">
+                        <p class="w-3x1 mt-2 text-gray-700 font-semibold text-start">Produto 2</p>
                     </div>
                     <div class="flex flex-col items-center">
                         <img src="{{ asset('assets/images/imagesOferta/oferta-3.png') }}" alt="Categoria 3"
-                            class="w-full rounded-lg shadow-md">
-                        <p class="w-full mt-2 text-gray-700 font-semibold text-start">Produto 3</p>
+                            class="max-w-xs md:w-full rounded-lg shadow-md">
+                        <p class="w-3x1 mt-2 text-gray-700 font-semibold text-start">Produto 3</p>
                     </div>
                     <div class="flex flex-col items-center">
                         <img src="{{ asset('assets/images/imagesOferta/oferta-4.png') }}" alt="Categoria 4"
-                            class="w-full rounded-lg shadow-md">
-                        <p class="w-full mt-2 text-gray-700 font-semibold text-start">Produto 4</p>
+                            class="max-w-xs md:w-full rounded-lg shadow-md">
+                        <p class="w-3x1 mt-2 text-gray-700 font-semibold text-start">Produto 4</p>
                     </div>
                 </div>
             </div>
         </section>
         <section class="mt-10 flex flex-col md:flex-row gap-4 items-center justify-center w-full">
+
+            <h2 class="md:hidden flex text-2xl font-bold text-center">Mega Promoção Flor Oficial</h2>
+
             <!-- Card 1 -->
-            <div class="relative bg-gray-100 rounded-lg overflow-hidden">
+            <div class="max-w-xs md:max-w-md relative bg-gray-100 rounded-lg overflow-hidden">
                 <!-- Texto no canto superior direito -->
                 <div
                     class="absolute top-4 right-4 bg-red-500 text-white rounded-full py-4 px-2 flex flex-col items-center justify-center">
@@ -113,7 +111,7 @@
             </div>
 
             <!-- Card 2 -->
-            <div class="relative bg-gray-100 rounded-lg overflow-hidden">
+            <div class="max-w-xs md:max-w-md relative bg-gray-100 rounded-lg overflow-hidden">
                 <!-- Texto no canto superior direito -->
                 <div
                     class="absolute top-4 right-4 bg-red-500 text-white rounded-full py-4 px-2 flex flex-col items-center justify-center">
@@ -136,22 +134,6 @@
                     </a>
                 </div>
             </div>
-
-            <!-- Adicione mais cards aqui, se necessário -->
-        </section>
-        <section class="mt-32 flex flex-col items-center w-full">
-            <h2 class="text-2xl md:text-3xl font-bold text-center">
-                Os queridinhos do momento
-            </h2>
-
-        <!-- adicionar view de produtos -->
-            
-            <div class="mt-8 flex justify-center">
-                <a href="{{ route('shopping') }}"
-                    class="text-white bg-stone-400 px-6 py-3 rounded-lg shadow-lg font-semibold no-underline bg-stone-800 text-orange-900 transition">
-                    Ver tudo
-                </a>
-            </div>
         </section>
         <div class="offcanvas offcanvas-top" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel">
             <div class="offcanvas-header">
@@ -163,13 +145,4 @@
             </div>
         </div>
     </div>
-
-    <script>
-        function changeSlide(slideIndex) {
-            const items = document.querySelectorAll('.carousel-item');
-            items.forEach(item => item.classList.remove('active'));
-
-            items[slideIndex].classList.add('active');
-        }
-    </script>
 @endsection

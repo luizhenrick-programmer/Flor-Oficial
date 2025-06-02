@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "90d5b28f309a885a08e712d79bffa741",
+    "content-hash": "0ad4909b62ff822b09c6ba89214f9bb8",
     "packages": [
         {
             "name": "brick/math",
@@ -1890,16 +1890,16 @@
         },
         {
             "name": "mercadopago/dx-php",
-            "version": "3.3.0",
+            "version": "3.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mercadopago/sdk-php.git",
-                "reference": "de7466209efa6fdcc94e1d739e72062b1e93a349"
+                "reference": "8d4255e6e7cc2b4b3d9c9d75a7f8cebe11670e45"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mercadopago/sdk-php/zipball/de7466209efa6fdcc94e1d739e72062b1e93a349",
-                "reference": "de7466209efa6fdcc94e1d739e72062b1e93a349",
+                "url": "https://api.github.com/repos/mercadopago/sdk-php/zipball/8d4255e6e7cc2b4b3d9c9d75a7f8cebe11670e45",
+                "reference": "8d4255e6e7cc2b4b3d9c9d75a7f8cebe11670e45",
                 "shasum": ""
             },
             "require": {
@@ -1923,9 +1923,51 @@
             "description": "Mercado Pago PHP SDK",
             "homepage": "https://github.com/mercadopago/sdk-php",
             "support": {
-                "source": "https://github.com/mercadopago/sdk-php/tree/3.3.0"
+                "source": "https://github.com/mercadopago/sdk-php/tree/3.4.0"
             },
-            "time": "2025-04-29T17:32:41+00:00"
+            "time": "2025-05-15T21:33:26+00:00"
+        },
+        {
+            "name": "mercadopago/sdk",
+            "version": "v0.5.6",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mercadopago/DEPRECATED-sdk-php.git",
+                "reference": "67f65735d5d720a7fc2569163f5c7d150adc613d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mercadopago/DEPRECATED-sdk-php/zipball/67f65735d5d720a7fc2569163f5c7d150adc613d",
+                "reference": "67f65735d5d720a7fc2569163f5c7d150adc613d",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "lib/mercadopago.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "Horacio Casatti",
+                    "email": "horacio.casatti@mercadolibre.com"
+                }
+            ],
+            "description": "MercadoPago SDK module for Payments integration.",
+            "keywords": [
+                "mercadopago",
+                "sdk"
+            ],
+            "support": {
+                "issues": "https://github.com/mercadopago/DEPRECATED-sdk-php/issues",
+                "source": "https://github.com/mercadopago/DEPRECATED-sdk-php/tree/v0.5.6"
+            },
+            "abandoned": true,
+            "time": "2019-04-15T14:29:38+00:00"
         },
         {
             "name": "monolog/monolog",

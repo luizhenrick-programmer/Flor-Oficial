@@ -81,6 +81,13 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/financeiro', [FinanceiroController::class, 'index'])->name('financeiro');
 });
 
+
+Route::get('/checkout', [PagamentoController::class, 'checkout'])->name('pagamento.checkout');
+Route::get('/pagamento/sucesso', fn() => 'Pagamento aprovado')->name('pagamento.sucesso');
+Route::get('/pagamento/falha', fn() => 'Pagamento falhou')->name('pagamento.falha');
+Route::get('/pagamento/pendente', fn() => 'Pagamento pendente')->name('pagamento.pendente');
+
+
 Route::resource('carrinho', CarrinhoController::class);
 Route::post('carrinho/add', [CarrinhoController::class, 'add'])->name('carrinho.add');
 Route::put('/carrinho/atualizar-quantidade', [CarrinhoController::class, 'update'])->name('carrinho.update');

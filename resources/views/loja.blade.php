@@ -21,14 +21,14 @@
                 <div class="mb-6">
                     <h2 class="font-bold text-xl mb-4">Categorias</h2>
                     <ul class="space-y-2 px-3">
-                        @foreach (['Vestidos', 'Shorts', 'Moletons', 'Trajes de Banho', 'Jaquetas', 'Camisas e Tops', 'Jeans', 'Calças', 'Homens', 'Mulheres'] as $categoria)
+                        @foreach ($categorias as $categoria)
                             <li>
                                 <label class="cursor-pointer">
-                                    <input type="checkbox" name="categoria" value="{{ $categoria }}"
+                                    <input type="checkbox" name="categoria" value="{{ $categoria->id }}"
                                         class="filter-checkbox hidden">
                                     <span
                                         class="text-md text-dark font-semibold no-underline hover:text-pink-500 hover:underline transition">
-                                        {{ $categoria }}
+                                        {{ $categoria->nome }}
                                     </span>
                                 </label>
                             </li>
@@ -59,7 +59,7 @@
                             <label class="flex items-center cursor-pointer">
                                 <input type="checkbox" name="size" class="hidden">
                                 <span
-                                    class="flex items-center justify-center px-2 py-2 w-12 border rounded hover:bg-pink-500 hover:text-white transition">
+                                    class="flex items-center justify-center px-1 py-1 w-12 border rounded hover:bg-orange-300 hover:text-white transition">
                                     {{ $tamanho }}
                                 </span>
                             </label>
@@ -67,20 +67,22 @@
                     </div>
                 </div>
 
-                {{-- Marcas --}}
-                <div>
-                    <h2 class="font-bold text-xl mb-4">Marcas</h2>
-                    <ul class="space-y-2 px-2">
-                        @foreach (['Louis Vuitton', 'Adidas', 'Nike', 'Gucci', 'Prada'] as $marca)
-                            <li>
-                                <label class="flex items-center cursor-pointer">
-                                    <input type="checkbox" name="brand">
-                                    <span class="mx-2">{{ $marca }}</span>
-                                </label>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
+                @if (Count($marcas) > 0)
+                    {{-- Marcas --}}
+                    <div>
+                        <h2 class="font-bold text-xl mb-4">Marcas</h2>
+                        <ul class="space-y-2 px-2">
+                            @foreach ($marcas as $marca)
+                                <li>
+                                    <label class="flex items-center cursor-pointer">
+                                        <input type="checkbox" name="marcas" value="{{ $marca->id }}">
+                                        <span class="mx-2">{{ $marca->nome }}</span>
+                                    </label>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
             </div>
 
             <div class="flex flex-col w-full md:w-3/4">
@@ -110,9 +112,9 @@
                     </div>
                 @endif
 
-                <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 place-items-center">
                     @foreach ($produtos as $produto)
-                        <div class="relative flex flex-col bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition w-full">
+                        <div class="relative flex flex-col justify-center bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition w-full max-w-xs">
                             <div class="relative">
                                 <a href="{{ route('produtos.show', $produto->id) }}">
                                     @if ($produto->imagens->isNotEmpty())

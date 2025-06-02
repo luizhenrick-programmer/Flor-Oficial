@@ -1,40 +1,53 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-<header class="w-full color-fundo shadow-sm">
-    <div class="flex items-center justify-between w-full px-4">
-        <div class="flex items-center justify-center hover:bg-gray-300 focus:hover:bg-violet-500 lg:hidden ">
-            <button class="btn border-0 text-dark font-bold hover:text-violet-500 focus:text-violet-500" type="button"
-                data-bs-toggle="offcanvas" data-bs-target="#menu-princial" aria-controls="menu-princial">
+<header class="w-full color-fundo shadow-sm px-5">
+    <div class="flex flex-wrap lg:flex-nowrap items-center md:justify-between w-full gap-3">
+
+        <!-- Botão do menu (visível apenas no mobile) -->
+        <div class="lg:hidden">
+            <button type="button" class="text-white text-2xl" data-bs-toggle="offcanvas"
+                data-bs-target="#menu-princial" aria-controls="menu-princial">
                 <i class="fa-solid fa-bars"></i>
             </button>
+
             <div class="offcanvas offcanvas-start" tabindex="-1" id="menu-princial"
                 aria-labelledby="menu-principal-app">
                 <div class="offcanvas-header">
-                    <h5 class="offcanvas-title text-white font-bold mx-auto" id="offcanvasExampleLabel">Menu Principal
-                    </h5>
-                    <button type="button" class="btn bg-transparent border font-bold text-white rounded-md mx-0"
-                        data-bs-dismiss="offcanvas" aria-label="Close">X</button>
+                    <h5 class="offcanvas-title text-gray-800 font-bold mx-auto" id="offcanvasExampleLabel">Menu
+                        Principal</h5>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
+                        aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
-
+                    <!-- Conteúdo do menu -->
                 </div>
             </div>
         </div>
-        <div class="flex flex-row items-center ">
-            <img class="rounded-full w-16 h-16 mx-2" src="{{ ('assets\images\Flor Oficial.png') }}" alt="Logo">
-            <h1 class="text-lg font-bold text-orange-100 montserrat">Flor Oficial</h1>
+
+        <!-- Logo e Título -->
+        <div class="flex items-center gap-2 mx-auto">
+            <img src="{{ asset('assets/images/Flor Oficial.png') }}" alt="Logo"
+                class="w-14 h-14 rounded-full object-cover shadow" />
+            <h1 class="text-lg font-extrabold text-orange-100 font-montserratb mb-0">Flor Oficial</h1>
         </div>
 
-        <div class="flex flex-grow items-center mx-4">
-            <form action="{{ route('search') }}" method="GET" class="w-full">
-                <input type="text" name="query"
-                    class="w-full px-4 py-2 border border-gray-300 rounded-full shadow-sm focus:ring-2 focus:ring-pink-500 focus:outline-none"
-                    placeholder="Busque aqui o que deseja...">
-            </form>
+        <!-- Barra de pesquisa (visível apenas em telas médias ou maiores) -->
+        <div class="hidden md:flex flex-1 justify-center">
+            <div class="relative w-full max-w-xl">
+                <div class="absolute inset-y-0 left-3 flex items-center pointer-events-none text-gray-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd"
+                            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1111.19 3.26l4.42 4.42a1 1 0 01-1.42 1.42l-4.42-4.42A6 6 0 012 8z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <input type="text" placeholder="Pesquisar..."
+                    class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition" />
+            </div>
         </div>
 
-        <div class="flex items-center justify-center gap-8 py-4">
+        <div class="hidden lg:flex items-center justify-center gap-8 py-4">
             <!-- Atendimento -->
             <a href="https://api.whatsapp.com/send?phone=5561981011498&text=" target="_blank"
                 class="flex flex-col items-center text-orange-100 no-underline">
@@ -43,7 +56,7 @@
             </a>
 
             @auth
-                <x-dropdown align="center" width="46">
+                <x-dropdown align="center" width="48">
                     <x-slot name="trigger">
                         <button class="flex flex-col items-center text-orange-100 no-underline focus:outline-none">
                             <i class="fa-regular fa-user text-2xl mb-1"></i>
@@ -52,15 +65,15 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
+                        <x-dropdown-link class="no-underline" :href="route('profile.edit')">
                             <i class="fa-solid fa-user-pen"></i>
-                            {{ __('Perfil') }}
+                            {{ __('Meus Dados') }}
                         </x-dropdown-link>
 
                         @if (Auth::user()->role === 'admin')
-                            <x-dropdown-link href="{{ route('admin.dashboard') }}" target="_blank">
+                            <x-dropdown-link class="no-underline" href="{{ route('admin.dashboard') }}" target="_blank">
                                 <i class="fa-solid fa-briefcase"></i>
-                                {{ __('Dashboard') }}
+                                {{ __('Painel de Controle') }}
                             </x-dropdown-link>
                         @endif
 
@@ -68,10 +81,10 @@
                         <!-- Logout -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-                            <x-dropdown-link :href="route('logout')"
+                            <x-dropdown-link class="no-underline" :href="route('logout')"
                                 onclick="event.preventDefault(); this.closest('form').submit();">
                                 <i class="fa-solid fa-right-from-bracket"></i>
-                                {{ __('Sair') }}
+                                {{ __('Realizar Logout') }}
                             </x-dropdown-link>
                         </form>
                     </x-slot>
@@ -98,10 +111,10 @@
                 <span class="text-sm">Carrinho</span>
             </a>
 
-
-
         </div>
+
     </div>
+
     <div class="flex items-center justify-center w-full pb-4">
         <nav class="hidden items-center justify-center lg:flex">
             <ul class="flex items-center justify-center mb-0 gap-8">

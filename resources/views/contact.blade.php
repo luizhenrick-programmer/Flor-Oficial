@@ -44,7 +44,7 @@
             </div>
 
             {{-- Botão Enviar --}}
-            <div class="flex justify-end">
+            <div class="flex justify-end mb-5">
                 <button type="submit"
                     class="px-6 py-2 bg-indigo-600 text-white font-semibold rounded-md shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                     Enviar
