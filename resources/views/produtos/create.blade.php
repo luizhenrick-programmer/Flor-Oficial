@@ -202,11 +202,11 @@
                         <div class="mt-3">
                             <label for="arquivos-{{ $i }}" class="cursor-pointer">
                                 <input type="file" class="hidden" id="arquivos-{{ $i }}" name="arquivos[]"
-                                    onchange="previewImage(event, 'preview-{{ $i }}')">
+                                    onchange="previewImage(event, 'preview-{{ $i }}')" multiple>
                                 <div
                                     class="flex items-center justify-center w-64 h-64 border-2 border-dashed border-gray-300 rounded-lg hover:bg-gray-100 transition">
                                     <img id="preview-{{ $i }}" class="hidden w-full h-full object-cover" />
-                                    <p class="text-gray-500" id="text-{{ $i }}">Clique ou arraste a imagem {{ $i + 1 }}</p>
+                                    <p class="text-gray-500" id="text-{{ $i }}">Clique para adicionar a imagem {{ $i + 1 }}</p>
                                 </div>
                             </label>
                         </div>

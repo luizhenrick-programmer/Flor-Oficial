@@ -6,23 +6,99 @@
 
         <!-- Botão do menu (visível apenas no mobile) -->
         <div class="lg:hidden">
-            <button type="button" class="text-white text-2xl" data-bs-toggle="offcanvas"
-                data-bs-target="#menu-princial" aria-controls="menu-princial">
+            <button type="button" class="text-white text-2xl" data-bs-toggle="offcanvas" data-bs-target="#menu-princial"
+                aria-controls="menu-princial">
                 <i class="fa-solid fa-bars"></i>
             </button>
 
-            <div class="offcanvas offcanvas-start" tabindex="-1" id="menu-princial"
+            <!-- Mobile Offcanvas Menu -->
+            <div class="offcanvas offcanvas-start bg-light shadow" tabindex="-1" id="menu-princial"
                 aria-labelledby="menu-principal-app">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title text-gray-800 font-bold mx-auto" id="offcanvasExampleLabel">Menu
-                        Principal</h5>
+                <div class="offcanvas-header border-bottom">
+                    <h5 class="offcanvas-title text-dark fw-bold" id="menu-principal-app">Menu Principal</h5>
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"
-                        aria-label="Close"></button>
+                        aria-label="Fechar"></button>
                 </div>
-                <div class="offcanvas-body">
-                    <!-- Conteúdo do menu -->
+                <div class="offcanvas-body d-flex flex-column gap-3 px-3">
+
+                    <a href="{{ route('home') }}"
+                        class="d-flex align-items-center gap-2 text-decoration-none text-dark">
+                        <i class="fa-solid fa-house"></i>
+                        <span>Início</span>
+                    </a>
+
+                    <a href="{{ route('shopping') }}"
+                        class="d-flex align-items-center gap-2 text-decoration-none text-dark">
+                        <i class="fa-solid fa-store"></i>
+                        <span>Loja</span>
+                    </a>
+
+                    <a href="{{ route('about') }}"
+                        class="d-flex align-items-center gap-2 text-decoration-none text-dark">
+                        <i class="fa-solid fa-circle-info"></i>
+                        <span>Sobre</span>
+                    </a>
+
+                    <a href="{{ route('contact') }}"
+                        class="d-flex align-items-center gap-2 text-decoration-none text-dark">
+                        <i class="fa-solid fa-envelope"></i>
+                        <span>Contato</span>
+                    </a>
+
+                    <hr class="my-2">
+
+                    <a href="https://api.whatsapp.com/send?phone=5561981011498&text=" target="_blank"
+                        class="d-flex align-items-center gap-2 text-decoration-none text-success">
+                        <i class="fa-brands fa-whatsapp"></i>
+                        <span>Atendimento</span>
+                    </a>
+
+                    @auth
+                        <a href="{{ route('profile.edit') }}"
+                            class="d-flex align-items-center gap-2 text-decoration-none text-dark">
+                            <i class="fa-solid fa-user-pen"></i>
+                            <span>Meus Dados</span>
+                        </a>
+
+                        @if (Auth::user()->role === 'admin')
+                            <a href="{{ route('admin.dashboard') }}" target="_blank"
+                                class="d-flex align-items-center gap-2 text-decoration-none text-dark">
+                                <i class="fa-solid fa-briefcase"></i>
+                                <span>Painel Admin</span>
+                            </a>
+                        @endif
+
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit"
+                                class="btn btn-link d-flex align-items-center gap-2 text-decoration-none text-danger p-0">
+                                <i class="fa-solid fa-right-from-bracket"></i>
+                                <span>Sair</span>
+                            </button>
+                        </form>
+                    @else
+                        <a href="{{ route('login') }}"
+                            class="d-flex align-items-center gap-2 text-decoration-none text-dark">
+                            <i class="fa-regular fa-user"></i>
+                            <span>Entrar</span>
+                        </a>
+                    @endauth
+
+                    <a href="{{ route('carrinho.index') }}"
+                        class="flex items-center gap-2 no-underline text-dark">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span>Carrinho</span>
+                        @if ($carrinho && $carrinho->itens->count() > 0)
+                            <span
+                                class="badge rounded-pill bg-danger">
+                                {{ $carrinho->itens->sum('quantidade') }}
+                            </span>
+                        @endif
+                    </a>
+
                 </div>
             </div>
+
         </div>
 
         <!-- Logo e Título -->
@@ -100,14 +176,12 @@
             <a href="{{ route('carrinho.index') }}"
                 class="flex flex-col items-center text-orange-100 no-underline relative">
                 <i class="fa-solid fa-cart-shopping text-2xl mb-1"></i>
-
                 @if ($carrinho && $carrinho->itens->count() > 0)
                     <span id="cart-count"
                         class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-orange-100 text-dark">
                         {{ $carrinho->itens->sum('quantidade') }}
                     </span>
                 @endif
-
                 <span class="text-sm">Carrinho</span>
             </a>
 

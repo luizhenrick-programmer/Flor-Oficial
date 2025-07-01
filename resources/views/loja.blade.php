@@ -118,7 +118,7 @@
                             <div class="relative">
                                 <a href="{{ route('produtos.show', $produto->id) }}">
                                     @if ($produto->imagens->isNotEmpty())
-                                        <img src="{{ asset($produto->imagens->first()->url) }}" alt="Imagem do produto" class="w-full object-cover aspect-square">
+                                        <img src="{{ asset('storage/' . $produto->imagens->first()->url) }}" alt="Imagem do produto" class="w-full object-cover aspect-square">
                                     @else
                                         <img src="{{ asset('storage/produtos/sem-imagem.png') }}" alt="Imagem do produto" class="w-full object-cover aspect-square">
                                     @endif

@@ -22,7 +22,7 @@ class ProdutoController extends Controller
     {
         $produtos = Produto::with(['variacoes', 'categoria', 'imagens'])->paginate(10);
         $carrinho = Carrinho::with('itens.produto')->where('user_id', Auth::user())->first();
-        return view('produtos.index', compact('produtos'));
+        return view('produtos.index', compact('produtos', 'carrinho'));
     }
 
 
