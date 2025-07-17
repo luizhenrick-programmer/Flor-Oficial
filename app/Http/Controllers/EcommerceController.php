@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Categorias;
 use App\Models\Endereco;
 use App\Models\Marcas;
+use App\Models\Pedido;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -211,14 +212,14 @@ class EcommerceController extends Controller {
     }
 
     public function relatorio() {
-        
+
         return view('ecommerce.relatorio');
     }
-    
+
 
     public function pedidoConfirma(){
-
-        return view('pedidos.confirma');
+        $pedidos = Pedido::with('itens.produto')->where('user_id', Auth::id())->whereHas('itens')->first();
+        return view('pedidos.confirma', compact('pedidos'));
 
     }
     public function pedidoCancelado(){

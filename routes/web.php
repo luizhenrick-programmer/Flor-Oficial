@@ -1,12 +1,10 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PagamentoController;
 use App\Http\Controllers\CarrinhoController;
-use App\Http\Controllers\ColaboradorController;
 use App\Http\Controllers\EcommerceController;
 use App\Http\Controllers\FinanceiroController;
 use App\Http\Controllers\PedidoController;
@@ -21,7 +19,9 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::get('/flor-compras-oficial', [UserController::class, 'comprar'])->name('shopping');
+Route::get('/flor-compras-oficial', function () {
+    return view('loja');
+})->name('shopping');
 
 Route::get('/sobre-a-flor', function () {
     return view('about');
@@ -70,11 +70,6 @@ Route::middleware(['auth', 'admin'])->prefix('e-commerce')->group(function () {
     Route::resource('produtos', ProdutoController::class);
 });
 
-
-// ROTAS COLABORADORES
-Route::middleware(['auth'])->group(function () {
-    Route::resource('colaboradores', ColaboradorController::class);
-});
 
 // ROTAS FINANCEIRO
 Route::middleware(['auth', 'admin'])->group(function () {

@@ -16,35 +16,36 @@ class PagamentoController extends Controller
 
     public function checkout()
     {
-
         $pedido = Pedido::with('itens.produto')->where('user_id', Auth::id())->first();
-        // Define o access token da conta Mercado Pago
+
+        if (!$pedido || $pedido->itens->isEmpty()) {
+            echo 'DEU RUIM';
+        }
+
         MercadoPagoConfig::setAccessToken(env('MERCADO_PAGO_ACCESS_TOKEN'));
         $client = new PreferenceClient();
+
         $items = [];
+
         foreach ($pedido->itens as $item) {
             $items[] = [
                 "title" => $item->produto->nome,
                 "quantity" => $item->quantidade,
-                "unit_price" => 1,
+                "unit_price" => (float) $item->preco_unitario,
+                "currency_id" => "BRL"
             ];
         }
+
         $preference = $client->create([
             "items" => $items,
+            "back_urls" => [
+                "success" => route('pagamento.sucesso'),
+                "failure" => route('pagamento.falha'),
+                "pending" => route('pagamento.pendente')
+            ],
+            "auto_return" => "approved"
         ]);
 
-
         return redirect($preference->init_point);
-
-
-
-        $preference = new Preference();
-        //...
-        $preference->back_urls = array(
-            "success" => route('pagamento.sucesso'),
-            "failure" => route('pagamento.falha'),
-            "pending" => route('pagamento.pendente')
-        );
-        $preference->auto_return = "approved";
     }
 }

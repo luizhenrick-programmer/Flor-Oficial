@@ -12,12 +12,6 @@
                 </div>
                 <input type="text" placeholder="Pesquisar..."
                     class="w-full pl-10 pr-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <a href="{{ route('produtos.create') }}" class="bg-blue-600 text-white px-4 rounded-lg no-underline flex items-center gap-2 hover:bg-blue-700" type="button">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd" d="M10 2a1 1 0 011 1v6h6a1 1 0 110 2h-6v6a1 1 0 11-2 0v-6H3a1 1 0 110-2h6V3a1 1 0 011-1z" clip-rule="evenodd" />
-                    </svg>
-                    <span class="font-semibold text-md tracking-wide">Produto</span>
-                </a>
             </div>
         </div>
     <div class="overflow-x-auto">
