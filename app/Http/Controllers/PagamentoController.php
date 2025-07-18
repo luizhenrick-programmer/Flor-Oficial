@@ -6,6 +6,7 @@ use App\Models\Pedido;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use MercadoPago\Client\Preference\PreferenceClient;
+use MercadoPago\Exceptions\MPApiException;
 use MercadoPago\MercadoPagoConfig;
 use MercadoPago\Resources\Preference;
 
@@ -36,16 +37,25 @@ class PagamentoController extends Controller
             ];
         }
 
-        $preference = $client->create([
-            "items" => $items,
-            "back_urls" => [
-                "success" => route('pagamento.sucesso'),
-                "failure" => route('pagamento.falha'),
-                "pending" => route('pagamento.pendente')
-            ],
-            "auto_return" => "approved"
-        ]);
+        try {
+            $preference = $client->create([
+                "items" => $items,
+                "back_urls" => [
+                    "success" => route('pagamento.sucesso'),
+                    "failure" => route('pagamento.falha'),
+                    "pending" => route('pagamento.pendente')
+                ],
+                "auto_return" => "approved"
+            ]);
+        } catch (MPApiException $e) {
+            dd($e->getMessage(), $e->getApiResponse()->getContent());
+        }
 
         return redirect($preference->init_point);
+    }
+
+    public function aprovado()
+    {
+        return view('pagamento.sucess', ['sucesso' => true]);
     }
 }

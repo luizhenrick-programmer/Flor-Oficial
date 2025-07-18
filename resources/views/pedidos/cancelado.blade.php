@@ -1,9 +1,6 @@
 @extends('admin.app')
 
 @section('content')
-@extends('admin.app')
-
-@section('content')
 <div class="container-xl">
     <x-text color='gray-200' size='sm' bold='true'>PEDIDOS CANCELADOS</x-text>
         <div class="w-full flex justify-center items-center py-4">

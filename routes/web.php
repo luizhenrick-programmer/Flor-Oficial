@@ -78,7 +78,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 
 Route::get('/checkout', [PagamentoController::class, 'checkout'])->name('pagamento.checkout');
-Route::get('/pagamento/sucesso', fn() => 'Pagamento aprovado')->name('pagamento.sucesso');
+Route::get('/pagamento/sucesso', [PagamentoController::class, 'aprovado'])->name('pagamento.sucesso');
 Route::get('/pagamento/falha', fn() => 'Pagamento falhou')->name('pagamento.falha');
 Route::get('/pagamento/pendente', fn() => 'Pagamento pendente')->name('pagamento.pendente');
 
