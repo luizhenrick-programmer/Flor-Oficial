@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('register.one.post') }}">
         @csrf
 
         <!-- Name -->
@@ -45,7 +45,7 @@
             </a>
 
             <x-primary-button class="ms-4">
-                {{ __('Register') }}
+                {{ __('PRÓXIMO >') }}
             </x-primary-button>
         </div>
     </form>

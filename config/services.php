@@ -40,4 +40,11 @@ return [
     ],
 
 
+    'melhorenvio' => [
+        'base_url' => env('MELHOR_ENVIO_BASE_URL'),
+        'token'    => env('MELHOR_ENVIO_TOKEN'),
+    ],
+
+
+
 ];

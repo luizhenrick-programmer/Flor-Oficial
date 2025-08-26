@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('username');
             $table->string('cpf');
             $table->string('telefone');
-            $table->enum('role', ['admin', 'cliente']);
+            $table->enum('role', ['admin', 'cliente'])->default('cliente');
             $table->enum('status', ['ativo', 'inativo'])->default('ativo');
             $table->unsignedBigInteger('endereco_id')->nullable();
             $table->foreign('endereco_id')->references('id')->on('enderecos')->onDelete('cascade');

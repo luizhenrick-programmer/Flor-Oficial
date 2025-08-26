@@ -123,8 +123,9 @@
                         {{-- Frete ou desconto pode entrar aqui futuramente --}}
                         <div class="mb-2 d-flex justify-content-between">
                             <span>Frete:</span>
-                            <strong>R$ 10,00</strong>
+                            <strong>R$ {{ number_format($frete, 2, ',', '.') }}</strong>
                         </div>
+
 
                         <hr>
 
@@ -136,12 +137,14 @@
 
                         <form action="{{ route('pedido.store') }}" method="POST" id="formFecharPedido">
                             @csrf
-                            <input type="hidden" name="user_id" value="{{ Auth::check() ? auth()->user()->id : redirect()->route('login') }}">
+                            <input type="hidden" name="user_id"
+                                value="{{ Auth::check() ? auth()->user()->id : redirect()->route('login') }}">
                             <input type="hidden" name="tipo_entrega" value="normal">
 
                             <!-- Os checkboxes já estão no loop, então não precisa repetir aqui -->
 
-                            <button type="submit" class="btn btn-lg btn-block w-100 text-white fw-bold" style="background-color: #FF69B4">
+                            <button type="submit" class="btn btn-lg btn-block w-100 text-white fw-bold"
+                                style="background-color: #FF69B4">
                                 Fechar Pedido
                             </button>
                         </form>

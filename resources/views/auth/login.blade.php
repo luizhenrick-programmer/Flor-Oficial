@@ -53,7 +53,7 @@
                     @if (Route::has('register'))
                         <p class="text-sm text-gray-600">
                             {{ __('Ainda não tem uma conta?') }}
-                            <a class="text-indigo-600 hover:underline font-semibold" href="{{ route('register') }}">
+                            <a class="text-indigo-600 hover:underline font-semibold" href="{{ route('register.one') }}">
                                 {{ __('Cadastre-se') }}
                             </a>
                         </p>

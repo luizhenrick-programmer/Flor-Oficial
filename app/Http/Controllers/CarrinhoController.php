@@ -7,6 +7,7 @@ use App\Models\Carrinho;
 use App\Models\ItemCarrinho;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\FreteController;
 
 use function Pest\Laravel\call;
 
@@ -44,7 +45,21 @@ class CarrinhoController extends Controller
             }
         }
 
-        return view('carrinho.cart', compact('carrinho', 'subtotal'));
+        $frete = 0;
+
+        if ($carrinho && $carrinho->itens->isNotEmpty()) {
+            // Trata o FreteController como objeto normal
+            $freteController = new FreteController(app(\App\Services\MelhorEnvioFrete::class));
+
+            $resultado = $freteController->calcular("73801670", "73807270");
+
+            $dados = $resultado->getData(true);
+            if (!empty($dados[0]['price'])) {
+                $frete = $resultado[0]['price'];
+            }
+        }
+
+        return view('carrinho.cart', compact('carrinho', 'subtotal', 'frete'));
     }
 
 

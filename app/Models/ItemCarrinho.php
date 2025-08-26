@@ -22,6 +22,7 @@ class ItemCarrinho extends Model
     {
         return $this->belongsTo(Produto::class, 'produto_id');
     }
+    
     public function user()
     {
         return $this->belongsTo(User::class);

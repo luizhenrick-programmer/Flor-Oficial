@@ -20,7 +20,7 @@
 <body>
     @include('partials.header')
 
-    <main>
+    <main class="py-3">
         @yield('content')
     </main>
 
