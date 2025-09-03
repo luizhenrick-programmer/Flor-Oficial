@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomePageController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\ProfileController;
@@ -15,12 +16,7 @@ use App\Http\Controllers\FreteController;
 
 use Illuminate\Support\Facades\Route;
 
-
-
-
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/', [HomePageController::class, 'index'])->name('home');
 
 Route::get('/flor-compras-oficial', function () {
     return view('loja');
@@ -93,7 +89,8 @@ Route::resource('pagamento', PagamentoController::class);
 
 Route::post('/frete/calcular', [FreteController::class, 'calcular']);
 
-
+Route::get('/home-content/edit', [HomePageController::class, 'edit'])->name('home.edit');
+Route::post('/home-content/update', [HomePageController::class, 'update'])->name('home.update');
 
 
 require __DIR__ . '/auth.php';

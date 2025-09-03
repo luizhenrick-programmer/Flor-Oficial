@@ -60,6 +60,12 @@
             <i class="fa-solid fa-users text-2xl "></i>
             <span class="text-lg font-semibold">Clientes</span>
         </a>
+
+        <a href="{{ route('home.edit') }}" class="flex flex-col gap-2 items-center px-3 py-5 tw-bg-secondary text-white rounded-lg no-underline hover:bg-indigo-600 transition shadow-lg">
+            <i class="fa-solid fa-pencil text-2xl "></i>
+            <span class="text-lg font-semibold">Editar Home</span>
+        </a>
+
     </div>
 
 </div>

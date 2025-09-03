@@ -6,33 +6,19 @@
     <div class="flex flex-col flex-grow items-center justify-around px-3 py-3">
         <section id="destaque" class="mt-8 grid grid-cols-1 md:grid-cols-2 w-full items-center justify-center">
             <div class="flex justify-center">
-                <img src="{{ asset('assets/images/agoraVai.png') }}" alt="Vestido Primavera 2"
+                <img src="{{ asset('storage/' . $content->imagem) }}" alt="Vestido Primavera 2"
                     class="md:w-3xl rounded-lg">
             </div>
             <div class="flex flex-col justify-center items-start px-6 md:px-12 py-12 bg-white">
 
-
-
                 <h1 class="text-3xl md:text-5xl font-extrabold leading-tight text-gray-900 mb-6">
-                    Viva a Vida com Elegância. <br/>
-                    <span class="text-orange-300 indent-6">Brilhe com a Flor Oficial.</span>
+                    {{ $content->titulo }} <br/>
+                    <span class="text-orange-300 indent-6">{{ $content->subtitulo }}</span>
                 </h1>
 
                 <div class="space-y-5 text-gray-700 text-base md:text-lg font-medium leading-relaxed">
-                    <p class="text-justify indent-6">
-                        Quando a primavera floresce, é tempo de se reinventar — com leveza, charme e atitude. A nova coleção
-                        <strong>Flor Oficial</strong> chegou para transformar suas noites em experiências inesquecíveis.
-                    </p>
-                    <p class="text-justify indent-6">
-                        São vestidos pensados para mulheres que querem mais que beleza: querem <strong>presença</strong>.
-                        Com cortes que valorizam suas curvas, tecidos que tocam a pele como pétalas e cores que traduzem a
-                        essência da estação, você não passa despercebida — <em>você marca.</em>
-                    </p>
-                    <p class="text-justify indent-6">
-                        Perfeitos para eventos especiais, jantares ou aquele momento único, nossos modelos unem elegância e
-                        autenticidade. <strong>Conforto, sofisticação e uma dose de ousadia</strong> na medida certa. Porque
-                        sua noite merece mais do que um look bonito — ela merece <span
-                            class="text-orange-500 font-semibold">uma Flor Oficial.</span>
+                    <p class="text-justify indent-6 whitespace-pre-line">
+                        {{$content->descricao}}
                     </p>
                 </div>
 
