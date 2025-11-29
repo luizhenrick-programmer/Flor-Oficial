@@ -6,17 +6,17 @@
     <div class="flex flex-col flex-grow items-center justify-around px-3 py-3">
         <section id="destaque" class="mt-8 grid grid-cols-1 md:grid-cols-2 w-full items-center justify-center">
             <div class="flex justify-center">
-                <img src="{{ asset('storage/' . $content->imagem) }}" alt="Vestido Primavera 2"
+                <img src="{{ asset('storage/' . $content->imagem) }}" alt="Imagem da Home"
                     class="md:w-3xl rounded-lg">
             </div>
-            <div class="flex flex-col justify-center items-start px-6 md:px-12 py-12 bg-white">
+            <div class="flex flex-col justify-center items-start px-6 md:px-12 py-8 bg-white">
 
-                <h1 class="text-3xl md:text-5xl font-extrabold leading-tight text-gray-900 mb-6">
+                <h1 class="text-3xl  font-bold text-black">
                     {{ $content->titulo }} <br/>
-                    <span class="text-orange-300 indent-6">{{ $content->subtitulo }}</span>
+                    <span class="text-pink-300 indent-6 text-md">{{ $content->subtitulo }}</span>
                 </h1>
 
-                <div class="space-y-5 text-gray-700 text-base md:text-lg font-medium leading-relaxed">
+                <div class="text-gray-700 text-base md:text-lg font-medium leading-relaxed">
                     <p class="text-justify indent-6 whitespace-pre-line">
                         {{$content->descricao}}
                     </p>
@@ -45,24 +45,24 @@
                 <!-- Produtos -->
                 <div class="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     <div class="flex flex-col items-center">
-                        <img src="{{ asset('assets/images/imagesOferta/oferta-1.png') }}" alt="Categoria 1"
+                        <img src="{{ asset('storage/' . $content->produto1->imagens->first()->url) }}" alt="Categoria 1"
                             class="max-w-xs md:w-full rounded-lg shadow-md">
-                        <p class="w-3x1 mt-2 text-gray-700 font-semibold text-start">Produto 1</p>
+                        <p class="w-3x1 mt-2 text-gray-700 font-semibold text-start">{{ $content->produto1->nome }}</p>
                     </div>
                     <div class="flex flex-col items-center">
-                        <img src="{{ asset('assets/images/imagesOferta/oferta-2.png') }}" alt="Categoria 2"
+                        <img src="{{ asset('storage/' . $content->produto2->imagens->first()->url) }}" alt="Categoria 2"
                             class="max-w-xs md:w-full rounded-lg shadow-md">
-                        <p class="w-3x1 mt-2 text-gray-700 font-semibold text-start">Produto 2</p>
+                        <p class="w-3x1 mt-2 text-gray-700 font-semibold text-start">{{ $content->produto2->nome }}</p>
                     </div>
                     <div class="flex flex-col items-center">
-                        <img src="{{ asset('assets/images/imagesOferta/oferta-3.png') }}" alt="Categoria 3"
+                        <img src="{{ asset('storage/' . $content->produto3->imagens->first()->url) }}" alt="Categoria 3"
                             class="max-w-xs md:w-full rounded-lg shadow-md">
-                        <p class="w-3x1 mt-2 text-gray-700 font-semibold text-start">Produto 3</p>
+                        <p class="w-3x1 mt-2 text-gray-700 font-semibold text-start">{{ $content->produto3->nome }}</p>
                     </div>
                     <div class="flex flex-col items-center">
-                        <img src="{{ asset('assets/images/imagesOferta/oferta-4.png') }}" alt="Categoria 4"
+                        <img src="{{ asset('storage/' . $content->produto4->imagens->first()->url) }}" alt="Categoria 4"
                             class="max-w-xs md:w-full rounded-lg shadow-md">
-                        <p class="w-3x1 mt-2 text-gray-700 font-semibold text-start">Produto 4</p>
+                        <p class="w-3x1 mt-2 text-gray-700 font-semibold text-start">{{ $content->produto4->nome }}</p>
                     </div>
                 </div>
             </div>
