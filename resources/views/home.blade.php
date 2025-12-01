@@ -43,13 +43,14 @@
 
                 @php
                     $produto = $content->produto1;
-                    $url = optional(optional($produto)->imagens->first())->url;
+                    $imagem = optional($produto)->imagens ? $produto->imagens->first() : null;
+
                 @endphp
 
                 <!-- Produtos -->
                 <div class="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     <div class="flex flex-col items-center">
-                        @if ($url)
+                        @if ($imagem)
                             <img src="{{ asset('storage/' . $content->produto1->imagens->first()->url) }}" alt="Categoria 1"
                                 class="max-w-xs md:w-full rounded-lg shadow-md">
                             <p class="w-3x1 mt-2 text-gray-700 font-semibold text-start">{{ $content->produto1->nome }}</p>
