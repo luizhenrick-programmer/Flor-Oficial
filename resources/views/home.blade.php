@@ -60,7 +60,7 @@
                         @endif
                     </div>
                     <div class="flex flex-col items-center">
-                        @if ($url)
+                        @if ($imagem)
                             <img src="{{ asset('storage/' . $content->produto2->imagens->first()->url) }}" alt="Categoria 1"
                                 class="max-w-xs md:w-full rounded-lg shadow-md">
                             <p class="w-3x1 mt-2 text-gray-700 font-semibold text-start">{{ $content->produto2->nome }}</p>
@@ -70,7 +70,7 @@
                         @endif
                     </div>
                     <div class="flex flex-col items-center">
-                        @if ($url)
+                        @if ($imagem)
                             <img src="{{ asset('storage/' . $content->produto3->imagens->first()->url) }}" alt="Categoria 1"
                                 class="max-w-xs md:w-full rounded-lg shadow-md">
                             <p class="w-3x1 mt-2 text-gray-700 font-semibold text-start">{{ $content->produto3->nome }}</p>
@@ -80,7 +80,7 @@
                         @endif
                     </div>
                     <div class="flex flex-col items-center">
-                        @if ($url)
+                        @if ($imagem)
                             <img src="{{ asset('storage/' . $content->produto4->imagens->first()->url) }}" alt="Categoria 1"
                                 class="max-w-xs md:w-full rounded-lg shadow-md">
                             <p class="w-3x1 mt-2 text-gray-700 font-semibold text-start">{{ $content->produto4->nome }}</p>
