@@ -23,7 +23,7 @@
             class="py-6 rounded-lg shadow-md">
             @csrf
 
-            <div class="flex flex-grow gap-2">
+            <div class="flex flex-grow gap-2 w-full">
                 <div class="w-1/2 mb-4">
                     <label for="titulo" class="block text-sm font-medium text-white">Título</label>
                     <input id="titulo" type="text" name="titulo" value="{{ old('titulo', $content->titulo ?? '') }}"
