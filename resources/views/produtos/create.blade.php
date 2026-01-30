@@ -210,8 +210,8 @@
                     @for ($i = 0; $i < 4; $i++)
                         <div class="mt-3">
                             <label for="arquivos-{{ $i }}" class="cursor-pointer">
-                                <input type="file" class="hidden" id="arquivos-{{ $i }}" name="arquivos[]"
-                                    onchange="previewImage(event, 'preview-{{ $i }}')" multiple>
+                                <input type="file" class="hidden" id="arquivos-{{ $i }}" name="arquivos[]" accept="image/*"
+                                    onchange="previewImage(event, 'preview-{{ $i }}')">
                                 <div
                                     class="flex items-center justify-center w-64 h-64 border-2 border-dashed border-gray-300 rounded-lg hover:bg-gray-100 transition">
                                     <img id="preview-{{ $i }}" class="hidden w-full h-full object-cover" />
