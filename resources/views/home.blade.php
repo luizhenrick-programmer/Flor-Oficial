@@ -41,52 +41,61 @@
                     </h3>
                 </div>
 
-                @php
-                    $produto = $content->produto1;
-                    $imagem = optional($produto)->imagens ? $produto->imagens->first() : null;
-
-                @endphp
-
                 <!-- Produtos -->
                 <div class="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Produto 1 -->
+                    @php $p1 = $content->produto1; @endphp
                     <div class="flex flex-col items-center">
-                        @if ($imagem)
-                            <img src="{{ asset('storage/' . $content->produto1->imagens->first()->url) }}" alt="Categoria 1"
-                                class="max-w-xs md:w-full rounded-lg shadow-md">
-                            <p class="w-3x1 mt-2 text-gray-700 font-semibold text-start">{{ $content->produto1->nome }}</p>
+                        @if ($p1 && $p1->imagens->isNotEmpty())
+                            <a href="{{ route('produtos.show', $p1->id) }}">
+                                <img src="{{ asset('storage/' . $p1->imagens->first()->url) }}" alt="{{ $p1->nome }}"
+                                    class="max-w-xs md:w-full rounded-lg shadow-md hover:scale-105 transition">
+                            </a>
+                            <p class="w-3x1 mt-2 text-gray-700 font-semibold text-start">{{ $p1->nome }}</p>
                         @else
-                            <p class="w-3x1 mt-2 text-gray-700 font-semibold text-start">No momento não temos nenhum produsto
-                                cadastrado/relacionado</p>
+                            <p class="w-3x1 mt-2 text-gray-700 font-semibold text-start">Produto não disponível</p>
                         @endif
                     </div>
+
+                    <!-- Produto 2 -->
+                    @php $p2 = $content->produto2; @endphp
                     <div class="flex flex-col items-center">
-                        @if ($imagem)
-                            <img src="{{ asset('storage/' . $content->produto2->imagens->first()->url) }}" alt="Categoria 1"
-                                class="max-w-xs md:w-full rounded-lg shadow-md">
-                            <p class="w-3x1 mt-2 text-gray-700 font-semibold text-start">{{ $content->produto2->nome }}</p>
+                        @if ($p2 && $p2->imagens->isNotEmpty())
+                            <a href="{{ route('produtos.show', $p2->id) }}">
+                                <img src="{{ asset('storage/' . $p2->imagens->first()->url) }}" alt="{{ $p2->nome }}"
+                                    class="max-w-xs md:w-full rounded-lg shadow-md hover:scale-105 transition">
+                            </a>
+                            <p class="w-3x1 mt-2 text-gray-700 font-semibold text-start">{{ $p2->nome }}</p>
                         @else
-                            <p class="w-3x1 mt-2 text-gray-700 font-semibold text-start">No momento não temos nenhum produsto
-                                cadastrado/relacionado</p>
+                            <p class="w-3x1 mt-2 text-gray-700 font-semibold text-start">Produto não disponível</p>
                         @endif
                     </div>
+
+                    <!-- Produto 3 -->
+                    @php $p3 = $content->produto3; @endphp
                     <div class="flex flex-col items-center">
-                        @if ($imagem)
-                            <img src="{{ asset('storage/' . $content->produto3->imagens->first()->url) }}" alt="Categoria 1"
-                                class="max-w-xs md:w-full rounded-lg shadow-md">
-                            <p class="w-3x1 mt-2 text-gray-700 font-semibold text-start">{{ $content->produto3->nome }}</p>
+                        @if ($p3 && $p3->imagens->isNotEmpty())
+                            <a href="{{ route('produtos.show', $p3->id) }}">
+                                <img src="{{ asset('storage/' . $p3->imagens->first()->url) }}" alt="{{ $p3->nome }}"
+                                    class="max-w-xs md:w-full rounded-lg shadow-md hover:scale-105 transition">
+                            </a>
+                            <p class="w-3x1 mt-2 text-gray-700 font-semibold text-start">{{ $p3->nome }}</p>
                         @else
-                            <p class="w-3x1 mt-2 text-gray-700 font-semibold text-start">No momento não temos nenhum produsto
-                                cadastrado/relacionado</p>
+                            <p class="w-3x1 mt-2 text-gray-700 font-semibold text-start">Produto não disponível</p>
                         @endif
                     </div>
+
+                    <!-- Produto 4 -->
+                    @php $p4 = $content->produto4; @endphp
                     <div class="flex flex-col items-center">
-                        @if ($imagem)
-                            <img src="{{ asset('storage/' . $content->produto4->imagens->first()->url) }}" alt="Categoria 1"
-                                class="max-w-xs md:w-full rounded-lg shadow-md">
-                            <p class="w-3x1 mt-2 text-gray-700 font-semibold text-start">{{ $content->produto4->nome }}</p>
+                        @if ($p4 && $p4->imagens->isNotEmpty())
+                            <a href="{{ route('produtos.show', $p4->id) }}">
+                                <img src="{{ asset('storage/' . $p4->imagens->first()->url) }}" alt="{{ $p4->nome }}"
+                                    class="max-w-xs md:w-full rounded-lg shadow-md hover:scale-105 transition">
+                            </a>
+                            <p class="w-3x1 mt-2 text-gray-700 font-semibold text-start">{{ $p4->nome }}</p>
                         @else
-                            <p class="w-3x1 mt-2 text-gray-700 font-semibold text-start">No momento não temos nenhum produsto
-                                cadastrado/relacionado</p>
+                            <p class="w-3x1 mt-2 text-gray-700 font-semibold text-start">Produto não disponível</p>
                         @endif
                     </div>
                 </div>
