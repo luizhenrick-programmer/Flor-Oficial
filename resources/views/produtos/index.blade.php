@@ -53,7 +53,7 @@
                                 <td class="p-3">{{ $produto->id }}</td>
                                 <td class="p-3">
                                     @if ($produto->imagens->isNotEmpty())
-                                        <img src="{{ asset('storage/' . $produto->imagens->first()->url) }}"
+                                        <img src="{{ asset('storage/' . $content->imagem) }}"
                                              class="w-16 h-16 object-cover rounded-md border border-gray-300"
                                              alt="Imagem do produto">
                                     @else
