@@ -21,12 +21,14 @@
             @csrf
 
             <!-- Nome do Produto -->
+            <label for="nome" class="block text-sm font-medium text-white">Nome do Produto</label>
             <div class="mb-4">
                 <input id="nome" type="text" name="nome" placeholder="Digite o Nome do Produto" value="{{ old('nome') }}"
                     class="mt-1 w-full px-2 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
             </div>
 
             <!-- Descrição -->
+            <label for="descricao" class="block text-sm font-medium text-white">Descrição do Produto</label>
             <div class="mb-4">
                 <textarea id="descricao" name="descricao" placeholder="Digite a descrição desse produto..." value="{{ old('descricao') }}"
                     class="mt-1 w-full px-2 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700 h-28"></textarea>
@@ -37,18 +39,21 @@
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                     <!-- Preço -->
                     <div>
+                        <label for="preco" class="block text-sm font-medium text-white">Preço do Produto</label>
                         <input id="preco" name="preco" type="number" step="0.01" min="0" value="{{ old('preco') }}"
                             placeholder="Digite o Preço Original"
                             class="mt-1 w-full px-2 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
                     </div>
                     <!-- Desconto -->
                     <div>
+                        <label for="desconto" class="block text-sm font-medium text-white">Desconto do Produto</label>
                         <input id="desconto" name="desconto" type="number" step="0.01" min="0" value="{{ old('desconto') }}"
                             placeholder="Digite o Preço de Desconto"
                             class="mt-1 w-full px-2 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
                     </div>
                     <!-- Marca -->
                     <div>
+                        <label for="marca" class="block text-sm font-medium text-white">Marca do Produto</label>
                         <select id="marca" name="marca_id"
                             class="mt-1 w-full px-2 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
                             <option value="">Selecione a Marca</option>
@@ -59,6 +64,7 @@
                     </div>
                     <!-- Categoria -->
                     <div>
+                        <label for="categoria" class="block text-sm font-medium text-white">Categoria do Produto</label>
                         <select id="categoria" name="categoria_id" value="{{ old('categoria') }}"
                             class="mt-1 w-full px-2 py-2 border rounded-lg focus:ring-indigo-500 focus:border-indigo-500 text-gray-700">
                             <option value="">Selecione a Categoria</option>
@@ -76,6 +82,7 @@
                     <div class="variacao-item grid grid-cols-1 md:grid-cols-4 gap-3 items-center rounded">
                         <!-- Tamanho -->
                         <div>
+                            <label for="tamanho" class="block text-sm font-medium text-white">Tamanho do Produto</label>
                             <select name="variacoes[0][tamanho]"
                                 class="tamanho px-2 py-2 border rounded-lg text-gray-700 w-full">
                                 <option value="" class="hidden" disabled selected>Selecione o tamanho</option>
@@ -90,6 +97,7 @@
 
                         <!-- Estoque -->
                         <div>
+                            <label for="estoque" class="block text-sm font-medium text-white">Quant. Produto</label>
                             <input type="number" name="variacoes[0][estoque]" placeholder="Digite a quantidade de estoque" min="0"
                                 class="estoque px-2 py-2 border rounded-lg text-gray-700 w-full" />
                         </div>
@@ -98,6 +106,7 @@
                         <div>
                             <div class="flex gap-2">
                                 @foreach (['blue', 'pink', 'purple', 'yellow', 'green', 'red', 'orange', 'cyan', 'gray', 'teal'] as $cores)
+                                
                                     <label class="cursor-pointer">
                                         <input type="checkbox" name="variacoes[0][cores][]" value="{{ $cores }}"
                                             class="peer hidden">
@@ -235,7 +244,7 @@
 
             <!-- Publicar -->
             <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-700 mb-2">Publicar?</label>
+                <label class="block text-sm font-medium text-light mb-2">Publicar?</label>
                 <div class="flex gap-4">
                     <label class="flex items-center cursor-pointer">
                         <input type="radio" name="status" value="publicado" class="peer hidden">

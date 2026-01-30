@@ -79,7 +79,6 @@ Route::get('/pagamento/sucesso', [PagamentoController::class, 'aprovado'])->name
 Route::get('/pagamento/falha', fn() => 'Pagamento falhou')->name('pagamento.falha');
 Route::get('/pagamento/pendente', fn() => 'Pagamento pendente')->name('pagamento.pendente');
 
-
 Route::resource('carrinho', CarrinhoController::class);
 Route::post('carrinho/add', [CarrinhoController::class, 'add'])->name('carrinho.add');
 Route::put('/carrinho/atualizar', [CarrinhoController::class, 'update'])->name('carrinho.update');
