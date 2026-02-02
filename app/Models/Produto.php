@@ -16,6 +16,8 @@ class Produto extends Model
         'nome', 'descricao', 'preco', 'desconto', 'categoria_id', 'marca_id', 'status', 'criado_por',
     ];
 
+    protected $with = ['imagens', 'variacoes'];
+
     public function variacoes()
     {
         return $this->hasMany(ProdutoVariacao::class, 'produto_id');

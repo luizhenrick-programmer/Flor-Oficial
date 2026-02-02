@@ -19,11 +19,29 @@ use Illuminate\Support\Facades\Storage;
 class ProdutoController extends Controller
 {
     public function index()
-    {
-        $produtos = Produto::with(['variacoes', 'categoria', 'imagens'])->paginate(10);
-        $carrinho = Carrinho::with('itens.produto')->where('user_id', Auth::user())->first();
-        return view('produtos.index', compact('produtos', 'carrinho'));
+{
+    // 1. Busque apenas o que vai usar na vitrine (evite carregar 'descricao' longa aqui)
+    $produtos = Produto::with([
+        'categoria:id,nome', 
+        'imagens:id,produto_id,url', 
+        'variacoes:id,produto_id,tamanho,estoque'
+    ])
+    ->where('status', 'publicado')
+    ->select('id', 'nome', 'preco', 'desconto', 'categoria_id') // Seleciona apenas o necessário
+    ->paginate(10);
+
+    // 2. Só busque o carrinho se o usuário estiver logado
+    $carrinho = null;
+    if (auth()->check()) {
+        $carrinho = Carrinho::where('user_id', auth()->id())
+            ->with(['itens' => function($query) {
+                $query->select('id', 'carrinho_id', 'produto_id', 'quantidade');
+            }])
+            ->first();
     }
+
+    return view('produtos.index', compact('produtos', 'carrinho'));
+}
 
 
 
