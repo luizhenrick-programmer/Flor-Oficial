@@ -81,7 +81,7 @@ Route::get('/pagamento/pendente', fn() => 'Pagamento pendente')->name('pagamento
 
 Route::resource('carrinho', CarrinhoController::class);
 Route::post('carrinho/add', [CarrinhoController::class, 'add'])->name('carrinho.add');
-Route::put('/carrinho/atualizar', [CarrinhoController::class, 'update'])->name('carrinho.update');
+Route::post('/carrinho/atualizar', [CarrinhoController::class, 'update'])->name('carrinho.update');
 Route::resource('pedido', PedidoController::class);
 Route::resource('pagamento', PagamentoController::class);
 
