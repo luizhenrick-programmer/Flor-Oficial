@@ -2,23 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ItemPedido extends Model
 {
-    use HasFactory;
-
     protected $table = 'item_pedido';
-    protected $fillable = ['pedido_id', 'produto_id', 'quantidade', 'preco_unitario'];
+    protected $fillable = [
+        'pedido_id', 'produto_id', 'variacao_id', 
+        'produto_nome', 'preco_unitario', 'quantidade'
+    ];
 
-    public function pedido()
+    public function produto(): BelongsTo
     {
-        return $this->belongsTo(Pedido::class, 'pedido_id');
-    }
-
-    public function produto()
-    {
-        return $this->belongsTo(Produto::class, 'produto_id');
+        return $this->belongsTo(Produto::class);
     }
 }

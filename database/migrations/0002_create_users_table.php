@@ -11,6 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
+
+        Schema::create('enderecos', function (Blueprint $table) {
+            $table->id();
+            $table->string('cep', 10);
+            $table->string('rua', 255);
+            $table->string('numero', 10);
+            $table->string('bairro', 255);
+            $table->string('cidade', 255);
+            $table->string('estado', 255);
+            $table->timestamps();
+        });
+
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -45,11 +57,9 @@ return new class extends Migration
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
+        Schema::dropIfExists('enderecos');
         Schema::dropIfExists('users');
         Schema::dropIfExists('password_reset_tokens');
         Schema::dropIfExists('sessions');

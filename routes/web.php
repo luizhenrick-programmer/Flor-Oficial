@@ -1,94 +1,103 @@
 <?php
 
-use App\Http\Controllers\HomePageController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ProdutoController;
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\PagamentoController;
-use App\Http\Controllers\CarrinhoController;
-use App\Http\Controllers\EcommerceController;
-use App\Http\Controllers\FinanceiroController;
-use App\Http\Controllers\PedidoController;
-use App\Http\Controllers\SearchController;
-use App\Http\Controllers\RelatorioController;
-use App\Models\Carrinho;
-use App\Http\Controllers\FreteController;
-
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\{
+    EcommerceController,
+    ProdutoController,
+    CarrinhoController,
+    PedidoController,
+    PagamentoController,
+    AdminController,
+    ProfileController,
+    FreteController
+};
 
-Route::get('/', [HomePageController::class, 'index'])->name('home');
+/*
+|--------------------------------------------------------------------------
+| 1. ROTAS PÚBLICAS (Qualquer um acessa)
+|--------------------------------------------------------------------------
+*/
 
-Route::get('/flor-compras-oficial', function () {
-    return view('loja');
-})->name('shopping');
+// Home Page (Landing Page com Destaques)
+Route::get('/', [EcommerceController::class, 'index'])->name('home');
 
-Route::get('/sobre-a-flor', function () {
-    return view('about');
-})->name('about');
+// Vitrine da Loja (Listagem de Produtos com Filtros)
+Route::get('/loja', [ProdutoController::class, 'index'])->name('loja.index');
 
-Route::get('/venha-conversar-conosco', function () {
-    return view('contact');
-})->name('contact');
+// Detalhes do Produto
+Route::get('/produto/{id}', [ProdutoController::class, 'show'])->name('produtos.show');
 
-// rota de pesquisa
-Route::get('/search', [SearchController::class, 'index'])->name('search');
+// Busca
+Route::get('/search', [EcommerceController::class, 'search'])->name('search');
 
+// Páginas Institucionais
+Route::get('/sobre', [EcommerceController::class, 'about'])->name('about');
+Route::get('/contato', [EcommerceController::class, 'contact'])->name('contact');
+Route::post('/contato/enviar', [EcommerceController::class, 'sendContact'])->name('contact.send');
 
-// CRUD USUÁRIO
-Route::middleware('auth')->group(function () {
+/*
+|--------------------------------------------------------------------------
+| 2. ROTAS DO CLIENTE (Precisa estar logado)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth'])->group(function () {
+    
+    // --- Carrinho de Compras ---
+    Route::get('/carrinho', [CarrinhoController::class, 'index'])->name('carrinho.index');
+    Route::post('/carrinho/adicionar', [CarrinhoController::class, 'add'])->name('carrinho.add');
+    Route::post('/carrinho/atualizar', [CarrinhoController::class, 'update'])->name('carrinho.update');
+    Route::delete('/carrinho/{id}', [CarrinhoController::class, 'destroy'])->name('carrinho.destroy');
+    Route::post('/frete/calcular', [FreteController::class, 'calcular'])->name('frete.calcular');
+
+    // --- Checkout e Pedidos ---
+    // Transforma carrinho em pedido
+    Route::post('/checkout/processar', [PedidoController::class, 'store'])->name('pedido.store');
+    
+    // Tela de Pagamento
+    Route::get('/checkout/pagamento/{pedido?}', [PagamentoController::class, 'checkout'])->name('pagamento.checkout');
+    
+    // Meus Pedidos
+    Route::get('/meus-pedidos', [PedidoController::class, 'index'])->name('pedidos.index');
+    Route::get('/meus-pedidos/{id}', [PedidoController::class, 'show'])->name('pedidos.show');
+    Route::patch('/meus-pedidos/{id}/cancelar', [PedidoController::class, 'update'])->name('pedidos.cancelar');
+
+    // --- Perfil do Usuário (Padrão Breeze/Jetstream) ---
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+/*
+|--------------------------------------------------------------------------
+| 3. ROTAS ADMINISTRATIVAS (Logado + Permissão Admin/Gerente)
+|--------------------------------------------------------------------------
+*/
+Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    
+    // Dashboard Principal
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+
+    // Gestão de Produtos (CRUD Completo exceto show/index que são públicos)
+    Route::resource('produtos', ProdutoController::class)->except(['show', 'index']);
+    
+    // Gestão de Categorias
+    Route::get('/categorias', [AdminController::class, 'categorias'])->name('categorias.index');
+    Route::post('/categorias', [AdminController::class, 'storeCategoria'])->name('categorias.store');
+    Route::delete('/categorias/{id}', [AdminController::class, 'destroyCategoria'])->name('categorias.destroy');
+
+    // Gestão de Marcas
+    Route::get('/marcas', [AdminController::class, 'marcas'])->name('marcas.index');
+    Route::post('/marcas', [AdminController::class, 'storeMarca'])->name('marcas.store');
+
+    // Gestão de Pessoas
+    Route::get('/clientes', [AdminController::class, 'clientes'])->name('clientes.index');
+    Route::get('/funcionarios', [AdminController::class, 'funcionarios'])->name('funcionarios.index');
+    Route::get('/funcionarios/novo', [AdminController::class, 'createFuncionario'])->name('funcionarios.create');
+    Route::post('/funcionarios', [AdminController::class, 'storeFuncionario'])->name('funcionarios.store');
+
+    // Financeiro e Relatórios
+    Route::get('/financeiro', [AdminController::class, 'financeiro'])->name('financeiro.index');
+    Route::get('/relatorios', [AdminController::class, 'relatorios'])->name('relatorios.index');
 });
-
-
-// ROTAS E-COMMERCE
-Route::middleware(['auth'])->prefix('e-commerce')->group(function () {
-    Route::get('/index', [EcommerceController::class, 'index'])->name('e-commerce.index');
-    Route::get('/categorias', [EcommerceController::class, 'categoria'])->name('e-commerce.categorias');
-    Route::get('/categorias/criar', [EcommerceController::class, 'criarCategoria'])->name('e-commerce.criar_categoria');
-    Route::post('/categorias/criar/enviar', [EcommerceController::class, 'store_categoria'])->name('e-commerce.categoria.store');
-    Route::get('/marcas', [EcommerceController::class, 'marcas'])->name('e-commerce.marcas');
-    Route::get('/marcas/criar', [EcommerceController::class, 'criarMarcas'])->name('e-commerce.criar_marcas');
-    Route::post('/marcas/criar/enviar', [EcommerceController::class, 'store_marcas'])->name('e-commerce.marcas.store');
-    Route::get('/clientes', [EcommerceController::class, 'clientes'])->name('e-commerce.clientes');
-    Route::get('/relatorio', [EcommerceController::class, 'relatorio'])->name('e-commerce.relatorio');
-    Route::get('/pedido/confirmado', [EcommerceController::class, 'pedidoConfirma'])->name('e-commerce.pedidos.confirma');
-    Route::get('/pedido/cancelado', [EcommerceController::class, 'pedidoCancelado'])->name('e-commerce.pedidos.cancelado');
-    Route::get('/pedido/pendente', [EcommerceController::class, 'pedidoPendente'])->name('e-commerce.pedidos.pendente');
-    Route::get('/pedido/remessas', [EcommerceController::class, 'remessas'])->name('e-commerce.pedidos.remessas');
-});
-
-Route::middleware(['auth', 'admin'])->prefix('e-commerce')->group(function () {
-    Route::resource('produtos', ProdutoController::class);
-});
-
-
-// ROTAS FINANCEIRO
-Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/financeiro', [FinanceiroController::class, 'index'])->name('financeiro');
-});
-
-
-Route::get('/checkout', [PagamentoController::class, 'checkout'])->name('pagamento.checkout');
-Route::get('/pagamento/sucesso', [PagamentoController::class, 'aprovado'])->name('pagamento.sucesso');
-Route::get('/pagamento/falha', fn() => 'Pagamento falhou')->name('pagamento.falha');
-Route::get('/pagamento/pendente', fn() => 'Pagamento pendente')->name('pagamento.pendente');
-
-Route::resource('carrinho', CarrinhoController::class);
-Route::post('carrinho/add', [CarrinhoController::class, 'add'])->name('carrinho.add');
-Route::resource('pedido', PedidoController::class);
-Route::resource('pagamento', PagamentoController::class);
-
-
-Route::post('/frete/calcular', [FreteController::class, 'calcular']);
-
-Route::get('/home-content/edit', [HomePageController::class, 'edit'])->name('home.edit');
-Route::post('/home-content/update', [HomePageController::class, 'update'])->name('home.update');
-
 
 require __DIR__ . '/auth.php';

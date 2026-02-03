@@ -2,167 +2,133 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Carrinho;
-use App\Models\ItemCarrinho;
+use App\Models\{Produto, ProdutoVariacao, ProdutoImagem, Categorias, Marcas, Carrinho};
 use Illuminate\Http\Request;
-use App\Models\Categorias;
-use App\Models\Marcas;
-use App\Models\ProdutoImagem;
-use App\Models\ProdutoVariacao;
-use App\Models\Produto;
-use App\Models\User;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\{DB, Log, Storage};
 
 class ProdutoController extends Controller
 {
+    /**
+     * Index otimizada para a HostGator
+     */
     public function index()
-{
-    // 1. Busque apenas o que vai usar na vitrine (evite carregar 'descricao' longa aqui)
-    $produtos = Produto::with([
-        'categoria:id,nome', 
-        'imagens:id,produto_id,url', 
-        'variacoes:id,produto_id,tamanho,estoque'
-    ])
-    ->where('status', 'publicado')
-    ->select('id', 'nome', 'preco', 'desconto', 'categoria_id') // Seleciona apenas o necessário
-    ->paginate(10);
+    {
+        // 1. Eager Loading seletivo (pegando apenas o necessário para a vitrine)
+        $produtos = Produto::with([
+            'categoria:id,nome', 
+            'imagemPrincipal:id,produto_id,url', // Só traz a foto da capa
+            'variacoes:id,produto_id,tamanho,cor,estoque'
+        ])
+        ->where('status', 'publicado')
+        ->select('id', 'nome', 'preco', 'desconto', 'categoria_id')
+        ->latest()
+        ->paginate(12);
 
-    // 2. Só busque o carrinho se o usuário estiver logado
-    $carrinho = null;
-    if (auth()->check()) {
-        $carrinho = Carrinho::where('user_id', auth()->id())
-            ->with(['itens' => function($query) {
-                $query->select('id', 'carrinho_id', 'produto_id', 'quantidade');
-            }])
-            ->first();
+        // 2. Carrinho minimalista
+        $carrinho = auth()->check() 
+            ? Carrinho::where('user_id', auth()->id())->with('itens:id,carrinho_id,produto_id,quantidade')->first() 
+            : null;
+
+        return view('produtos.index', compact('produtos', 'carrinho'));
     }
-
-    return view('produtos.index', compact('produtos', 'carrinho'));
-}
-
-
 
     public function create()
     {
-        return view('produtos.create', ['categorias' => Categorias::all(), 'marcas' => Marcas::all()]);
+        // Padrão de Model no singular: Categoria e Marca
+        return view('produtos.create', [
+            'categorias' => Categorias::all(), 
+            'marcas' => Marcas::all()
+        ]);
     }
 
+    /**
+     * Store com tratamento de transação e arquivos
+     */
     public function store(Request $request)
     {
         $validated = $request->validate([
             'nome' => 'required|string|max:255',
             'descricao' => 'nullable|string|max:1000',
-            'preco' => 'required|numeric|min:1',
+            'preco' => 'required|numeric|min:0.01',
             'desconto' => 'nullable|numeric|min:0',
             'marca_id' => 'nullable|exists:marcas,id',
             'categoria_id' => 'required|exists:categorias,id',
             'status' => 'required|in:publicado,inativo',
+            
+            // Variacoes: Agora cada cor é uma linha de estoque
             'variacoes' => 'required|array|min:1',
-            'variacoes.*.tamanho' => 'required|string|in:PP,P,M,G,GG,XG',
-            'variacoes.*.cores' => 'required|array|min:1',
-            'variacoes.*.cores.*' => 'string',
+            'variacoes.*.tamanho' => 'required|string',
+            'variacoes.*.cor' => 'required|string', 
             'variacoes.*.estoque' => 'required|integer|min:0',
-            'arquivos.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            
+            'arquivos.*' => 'image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        DB::beginTransaction();
-        try {
-            $produto = Produto::create([
-                'nome' => $validated['nome'],
-                'descricao' => $validated['descricao'],
-                'preco' => $validated['preco'],
-                'desconto' => $validated['desconto'] ?? 0.00,
-                'marca_id' => $validated['marca_id'] ?? null,
-                'categoria_id' => $validated['categoria_id'],
-                'status' => $validated['status'],
-                'criado_por' => Auth::id(),
-            ]);
-
-            foreach ($validated['variacoes'] as $var) {
-                ProdutoVariacao::create([
-                    'produto_id' => $produto->id,
-                    'tamanho' => $var['tamanho'],
-                    'cores' => json_encode(array_values($var['cores'])),
-                    'estoque' => $var['estoque'],
+        return DB::transaction(function () use ($request, $validated) {
+            try {
+                // 1. Criar Produto
+                $produto = Produto::create([
+                    'nome' => $validated['nome'],
+                    'descricao' => $validated['descricao'],
+                    'preco' => $validated['preco'],
+                    'desconto' => $validated['desconto'] ?? 0.00,
+                    'marca_id' => $validated['marca_id'],
+                    'categoria_id' => $validated['categoria_id'],
+                    'status' => $validated['status'],
+                    'criado_por' => auth()->id(),
                 ]);
-            }
 
-            if ($request->hasFile('arquivos')) {
-                foreach ($request->file('arquivos') as $arquivo) {
-                    $path = $arquivo->store('produtos', 'public');
-                    ProdutoImagem::create([
-                        'produto_id' => $produto->id,
-                        'url' => $path,
+                // 2. Criar Variações (Uma linha para cada combinação)
+                foreach ($validated['variacoes'] as $var) {
+                    $produto->variacoes()->create([
+                        'tamanho' => $var['tamanho'],
+                        'cor' => $var['cor'],
+                        'estoque' => $var['estoque'],
                     ]);
                 }
+
+                // 3. Salvar Imagens
+                if ($request->hasFile('arquivos')) {
+                    foreach ($request->file('arquivos') as $index => $arquivo) {
+                        $path = $arquivo->store('produtos', 'public');
+                        $produto->imagens()->create([
+                            'url' => $path,
+                            'principal' => $index === 0, // A primeira imagem vira a principal por padrão
+                        ]);
+                    }
+                }
+
+                return redirect()->route('produtos.index')->with('success', 'Flor cadastrada com sucesso!');
+
+            } catch (\Exception $e) {
+                Log::error("Erro Flor Oficial: " . $e->getMessage());
+                return redirect()->back()->with('error', 'Erro técnico ao salvar. Tente novamente.')->withInput();
             }
-
-
-            DB::commit();
-            return redirect()->route('produtos.create')->with('success', 'Produto cadastrado com sucesso!');
-        } catch (\Exception $e) {
-            DB::rollBack();
-            Log::error('Erro ao criar produto: ' . $e->getMessage());
-            return redirect()->route('produtos.create')->with('error', 'Erro ao criar produto.');
-        }
+        });
     }
-
-
 
     public function show($id)
     {
-        $produto = Produto::with('variacoes')->findOrFail($id);
+        // Eager Loading aqui é essencial para a página de detalhes não travar
+        $produto = Produto::with(['variacoes', 'imagens', 'categoria'])->findOrFail($id);
 
-        // Busca produtos da mesma categoria, mas exclui o próprio produto atual
         $relacionados = Produto::where('categoria_id', $produto->categoria_id)
-                                        ->where('id', '!=', $produto->id)
-                                        ->limit(8)
-                                        ->get();
+            ->where('id', '!=', $id)
+            ->where('status', 'publicado')
+            ->limit(4)
+            ->get(['id', 'nome', 'preco', 'desconto']);
 
         return view('produtos.show', compact('produto', 'relacionados'));
     }
-
-
-    public function edit($id)
-    {
-        return view('produtos.edit', ['produto' => Produto::findOrFail($id), 'categorias' => Categorias::all(), 'marcas' => Marcas::all()]);
-    }
-
-    public function update(Request $request, $id)
-    {
-        $produto = Produto::findOrFail($id);
-
-        $validated = $request->validate([
-            'nome' => 'required|string|max:255',
-            'descricao' => 'nullable|string|max:1000',
-            'preco' => 'required|numeric|min:1',
-            'marca_id' => 'nullable|exists:marcas,id',
-            'categoria_id' => 'required|exists:categorias,id',
-            'status' => 'required|in:publicado,inativo',
-        ]);
-
-        $produto->update($validated);
-
-        return redirect()->route('produtos.edit', $produto->id)->with('success', 'Produto atualizado com sucesso!');
-    }
-
-
 
     public function destroy($id)
     {
         $produto = Produto::findOrFail($id);
 
-        // Remover imagens do storage
-        foreach ($produto->imagens as $imagem) {
-            Storage::delete(str_replace('/storage/', '', $imagem->url));
-            $imagem->delete();
-        }
+        // Como usamos SoftDeletes, não deletamos as imagens do disco agora.
+        // Elas só saem se usarmos o forceDelete futuramente.
+        $produto->delete(); 
 
-        $produto->delete();
-
-        return redirect()->route('produtos.index')->with('success', 'Produto deletado com sucesso!');
+        return redirect()->route('produtos.index')->with('success', 'Produto movido para a lixeira!');
     }
 }

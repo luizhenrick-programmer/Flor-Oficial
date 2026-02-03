@@ -7,13 +7,14 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('pagamento', function (Blueprint $table) {
+        Schema::create('pagamentos', function (Blueprint $table) { // Plural
             $table->id();
-            $table->unsignedBigInteger('pedido_id');
-            $table->foreign('pedido_id')->references('id')->on('pedido')->onDelete('cascade');
-            $table->enum('status', ['pendente', 'aprovado', 'recusado']);
+            $table->foreignId('pedido_id')->constrained('pedidos')->onDelete('cascade');
             $table->decimal('valor', 10, 2);
-            $table->dateTime('data_pagamento');
+            $table->string('metodo_pagamento')->nullable();
+            $table->enum('status', ['pendente', 'aprovado', 'recusado', 'estornado'])->default('pendente')->index();
+            $table->string('transacao_id')->nullable()->unique()->index(); 
+            $table->dateTime('data_pagamento')->nullable();
             $table->timestamps();
         });
     }

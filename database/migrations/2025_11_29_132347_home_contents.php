@@ -21,10 +21,10 @@ return new class extends Migration
             $table->unsignedBigInteger('desconto2')->nullable();
             $table->unsignedBigInteger('desconto3')->nullable();
             $table->unsignedBigInteger('desconto4')->nullable();
-            $table->foreign('desconto1')->references('id')->on('produtos')->onDelete('set null');
-            $table->foreign('desconto2')->references('id')->on('produtos')->onDelete('set null');
-            $table->foreign('desconto3')->references('id')->on('produtos')->onDelete('set null');
-            $table->foreign('desconto4')->references('id')->on('produtos')->onDelete('set null');
+            $table->foreign('desconto1')->references('id')->on('produto')->onDelete('set null');
+            $table->foreign('desconto2')->references('id')->on('produto')->onDelete('set null');
+            $table->foreign('desconto3')->references('id')->on('produto')->onDelete('set null');
+            $table->foreign('desconto4')->references('id')->on('produto')->onDelete('set null');
             $table->timestamps();
         });
     }

@@ -4,54 +4,55 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Database\Eloquent\SoftDeletes; 
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Produto extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
-    protected $table = 'produtos';
+    protected $table = 'produto';
 
     protected $fillable = [
         'nome', 'descricao', 'preco', 'desconto', 'categoria_id', 'marca_id', 'status', 'criado_por',
     ];
 
-    protected $with = ['imagens', 'variacoes'];
-
-    public function variacoes()
+    public function variacoes(): HasMany
     {
-        return $this->hasMany(ProdutoVariacao::class, 'produto_id');
+        return $this->hasMany(ProdutoVariacao::class);
     }
 
-    public function imagens()
+    public function imagens(): HasMany
     {
-        return $this->hasMany(ProdutoImagem::class, 'produto_id');
+        return $this->hasMany(ProdutoImagem::class);
     }
 
-    public function categoria()
+    public function imagemPrincipal()
     {
-        return $this->belongsTo(Categorias::class, 'categoria_id');
+        return $this->hasOne(ProdutoImagem::class)->where('principal', true);
     }
 
-    public function marca()
+    public function categoria(): BelongsTo
     {
-        return $this->belongsTo(Marcas::class, 'marca_id');
+        return $this->belongsTo(Categorias::class);
     }
 
-    public function storeArquivo($arquivo)
+    public function marca(): BelongsTo
     {
-        if($arquivo) {
-            $path = $arquivo->store('arquivos', 'public');
-            $this->url = Storage::url($path);
-            $this->save();
-        }
-
+        return $this->belongsTo(Marcas::class);
     }
 
-    public function usuario()
+    public function criador(): BelongsTo
     {
         return $this->belongsTo(User::class, 'criado_por');
     }
 
-
+    /**
+     * Accessors (Opcional, mas ajuda muito)
+     */
+    public function getPrecoComDescontoAttribute()
+    {
+        return $this->preco - $this->desconto;
+    }
 }

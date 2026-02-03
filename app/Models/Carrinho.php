@@ -2,33 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Carrinho extends Model
 {
-    use HasFactory;
 
     protected $table = 'carrinho';
     protected $fillable = ['user_id', 'session_id'];
 
-    public function itens()
+    public function itens(): HasMany
     {
-        return $this->hasMany(ItemCarrinho::class, 'carrinho_id');
+        return $this->hasMany(ItemCarrinho::class);
     }
 
-    public function user()
+    public function usuario(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
-
-    public static function current() {
-        if (Auth::check()) {
-            return static::firstOrCreate(['user_id' => Auth::id()]);
-        }
-
-        return static::firstOrCreate(['session_id' => session()->getId()]);
-    }
-
 }

@@ -3,82 +3,152 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Carrinho;
-use App\Models\ItemPedido;
-use App\Models\Pedido;
+use App\Models\{Pedido, ItemPedido, Carrinho, ItemCarrinho, ProdutoVariacao};
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\{DB, Auth, Log};
 
 class PedidoController extends Controller
 {
+    /**
+     * Lista os pedidos do Próprio Usuário (Meus Pedidos)
+     */
     public function index()
     {
-        //
+        $pedidos = Pedido::where('user_id', Auth::id())
+            ->with(['itens.produto', 'pagamento']) // Eager loading leve
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        return view('pedidos.index', compact('pedidos'));
     }
 
+    /**
+     * O Coração do E-commerce: Transformar Carrinho em Pedido
+     */
     public function store(Request $request)
     {
-        $carrinho = Carrinho::with('itens')->where('user_id', $request->user_id)->first();
-
-        if (!$carrinho) {
-            return response()->json(['message' => 'Carrinho não encontrado'], 404);
-        }
-
-        $itensSelecionados = $request->input('itensSelecionados', []);
-
-        if (empty($itensSelecionados)) {
-            return back()->with('message', 'Nenhum item selecionado.');
-        }
-
-        $itens = $carrinho->itens->whereIn('id', $itensSelecionados);
-
-        $pedido = Pedido::create([
-            'user_id' => $request->user_id,
-            'data_pedido' => now(),
-            'status' => 'pendente',
-            'total' => $itens->sum(fn($item) => $item->quantidade * $item->preco_unitario),
-            'tipo_entrega' => 'entrega_domicilio'
+        // 1. Validar entrega
+        $request->validate([
+            'tipo_entrega' => 'required|in:entrega_domicilio,retirada_loja',
+            // Adicione validação de endereço aqui se necessário
         ]);
 
-        foreach ($itens as $item) {
-            ItemPedido::create([
-                'pedido_id' => $pedido->id,
-                'produto_id' => $item->produto_id,
-                'quantidade' => $item->quantidade,
-                'preco_unitario' => $item->preco_unitario
-            ]);
+        $user = Auth::user();
+        
+        // Busca o carrinho com os produtos e variações para checar estoque
+        $carrinho = Carrinho::with(['itens.produto', 'itens.variacao'])
+                    ->where('user_id', $user->id)
+                    ->first();
+
+        if (!$carrinho || $carrinho->itens->isEmpty()) {
+            return redirect()->route('loja.index')->with('error', 'Seu carrinho está vazio.');
         }
 
-        return redirect()->route('pagamento.checkout');
+        // Filtra itens se vier do front (checkbox), senão pega todos
+        $itensParaProcessar = $request->has('itensSelecionados') 
+            ? $carrinho->itens->whereIn('id', $request->itensSelecionados)
+            : $carrinho->itens;
+
+        // INÍCIO DA TRANSAÇÃO (Tudo ou Nada)
+        return DB::transaction(function () use ($user, $itensParaProcessar, $request, $carrinho) {
+            try {
+                // 1. Cria o Pedido (Cabeçalho)
+                $pedido = Pedido::create([
+                    'user_id' => $user->id,
+                    'status' => 'pendente', // Aguardando pagamento
+                    'tipo_entrega' => $request->tipo_entrega,
+                    'total' => 0, // Vamos somar no loop para garantir precisão
+                ]);
+
+                $totalCalculado = 0;
+
+                foreach ($itensParaProcessar as $itemCart) {
+                    $produto = $itemCart->produto;
+                    $variacao = $itemCart->variacao;
+
+                    // 2. CHECK DE ESTOQUE (Segurança Crítica)
+                    if ($variacao->estoque < $itemCart->quantidade) {
+                        throw new \Exception("O produto {$produto->nome} ({$variacao->tamanho}) acabou de esgotar! Estoque atual: {$variacao->estoque}");
+                    }
+
+                    // 3. Define o preço real ATUAL (Ignora o preço antigo do carrinho)
+                    $precoReal = $produto->preco - ($produto->desconto ?? 0);
+
+                    // 4. Cria o Item do Pedido (Snapshot)
+                    ItemPedido::create([
+                        'pedido_id'    => $pedido->id,
+                        'produto_id'   => $produto->id,
+                        'variacao_id'  => $variacao->id, // VITAL: Saber qual tamanho saiu
+                        'produto_nome' => $produto->nome, // Snapshot do nome
+                        'quantidade'   => $itemCart->quantidade,
+                        'preco_unitario' => $precoReal,
+                    ]);
+
+                    // 5. Baixa o Estoque
+                    $variacao->decrement('estoque', $itemCart->quantidade);
+
+                    $totalCalculado += ($precoReal * $itemCart->quantidade);
+                }
+
+                // 6. Atualiza o total do pedido
+                $pedido->update(['total' => $totalCalculado]);
+
+                // 7. Limpa os itens processados do carrinho
+                // Usamos destroy com array de IDs para ser rápido
+                ItemCarrinho::destroy($itensParaProcessar->pluck('id'));
+
+                // Se o carrinho ficar vazio, opcionalmente deletamos a sessão ou o carrinho
+                if ($carrinho->itens()->count() === 0) {
+                   // $carrinho->delete(); // Opcional: manter histórico ou limpar
+                }
+
+                return redirect()->route('pagamento.checkout', ['pedido' => $pedido->id])
+                                 ->with('success', 'Pedido gerado com sucesso!');
+
+            } catch (\Exception $e) {
+                // Se der erro (ex: sem estoque), o DB::transaction desfaz tudo
+                Log::error("Erro Pedido: " . $e->getMessage());
+                return redirect()->route('carrinho.index')->with('error', $e->getMessage());
+            }
+        });
     }
 
-    public function show(string $id)
+    /**
+     * Detalhes de um Pedido Específico
+     */
+    public function show($id)
     {
-        //
+        $pedido = Pedido::with(['itens.variacao', 'pagamento'])
+                        ->where('user_id', Auth::id()) // Segurança: só vê o próprio pedido
+                        ->findOrFail($id);
+
+        return view('pedidos.show', compact('pedido'));
     }
 
-    public function edit(string $id)
+    /**
+     * Atualização de Status (Geralmente usado via API ou Webhooks de Pagamento)
+     */
+    public function update(Request $request, $id)
     {
-        //
-    }
-
-    public function update(Request $request, string $id)
-    {
+        // Esse método geralmente fica protegido para ADMINs ou Webhooks
+        // Se for para o cliente cancelar, precisamos validar
+        
         $pedido = Pedido::findOrFail($id);
 
-        // Valida se o status é permitido
-        $statusPermitidos = ['pendente', 'enviado', 'entregue', 'cancelado'];
-        if (!in_array($request->status, $statusPermitidos)) {
-            return response()->json(['message' => 'Status inválido'], 400);
+        // Cliente só pode cancelar se estiver pendente
+        if ($request->status === 'cancelado' && $pedido->user_id === Auth::id()) {
+            if ($pedido->status === 'pendente') {
+                
+                // DEVOLVER ESTOQUE!
+                foreach ($pedido->itens as $item) {
+                    $item->variacao()->increment('estoque', $item->quantidade);
+                }
+
+                $pedido->update(['status' => 'cancelado']);
+                return back()->with('message', 'Pedido cancelado e estoque estornado.');
+            }
         }
 
-        $pedido->update(['status' => $request->status]);
-
-        return response()->json(['message' => 'Status atualizado com sucesso']);
-    }
-
-
-    public function destroy(string $id)
-    {
-        //
+        return back()->with('error', 'Não é possível alterar este pedido.');
     }
 }

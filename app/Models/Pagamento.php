@@ -2,18 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Pagamento extends Model
 {
-    use HasFactory;
-
     protected $table = 'pagamento';
-    protected $fillable = ['pedido_id', 'status', 'valor', 'data_pagamento'];
+    protected $fillable = [
+        'pedido_id', 'valor', 'metodo_pagamento', 
+        'status', 'transacao_id', 'data_pagamento'
+    ];
 
-    public function pedido()
+    protected $casts = [
+        'data_pagamento' => 'datetime',
+    ];
+
+    public function pedido(): BelongsTo
     {
-        return $this->belongsTo(Pedido::class, 'pedido_id');
+        return $this->belongsTo(Pedido::class);
     }
 }

@@ -4,21 +4,31 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ProdutoImagem extends Model
 {
     use HasFactory;
-
     protected $table = 'produto_imagens';
 
     protected $fillable = [
         'produto_id',
-        'url'
+        'url',
+        'principal',
+        'ordem'
     ];
 
-    // Relacionamento: Cada imagem pertence a um produto
-    public function produto()
+    public function getUrlCompletaAttribute(): string
     {
-        return $this->belongsTo(Produto::class, 'produto_id');
+        if (filter_var($this->url, FILTER_VALIDATE_URL)) {
+            return $this->url;
+        }
+
+        return asset('storage/' . $this->url);
+    }
+
+    public function produto(): BelongsTo
+    {
+        return $this->belongsTo(Produto::class);
     }
 }

@@ -3,238 +3,97 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Models\Categorias;
-use App\Models\Endereco;
-use App\Models\Marcas;
-use App\Models\Pedido;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
-use App\Models\Produto;
-use App\Models\User;
+use App\Models\{Produto, Categorias, Marcas};
 
-class EcommerceController extends Controller {
-
+class EcommerceController extends Controller
+{
+    /**
+     * A Home Page da Flor Oficial (Landing Page)
+     * Aqui mostramos o "filé mignon": promoções e lançamentos.
+     */
     public function index()
     {
-        return view('ecommerce.index');
-    }
-
-    public function showProduto($id)
-    {
-
-        $produto = Produto::with('categoria', 'imagens')->findOrFail($id);
-
-        // Produtos da mesma categoria (exceto o atual)
-        $relacionados = Produto::where('categoria_id', $produto->categoria_id)
-            ->where('id', '!=', $produto->id)
-            ->inRandomOrder()
+        // 1. Destaques / Promoções (produto com desconto)
+        $ofertas = Produto::with('imagemPrincipal')
+            ->where('status', 'publicado')
+            ->where('desconto', '>', 0)
+            ->inRandomOrder() // Mistura para a home não ficar sempre igual
             ->take(4)
             ->get();
 
-        return view('produtos.show', compact('produto', 'relacionados'));
+        // 2. Lançamentos (Os 8 últimos cadastrados)
+        $novidades = Produto::with(['imagemPrincipal', 'categoria'])
+            ->where('status', 'publicado')
+            ->latest()
+            ->take(8)
+            ->get();
+
+        // 3. Categorias Populares (Para exibir ícones na home)
+        // O withCount ajuda a mostrar apenas categorias que tem produto
+        $categoriasDestaque = Categorias::has('produtos')
+            ->withCount('produto')
+            ->take(6)
+            ->get();
+
+        return view('ecommerce.index', compact('ofertas', 'novidades', 'categoriasDestaque'));
     }
 
-    public function filtrar(Request $request)
+    /**
+     * Página Institucional "Sobre Nós"
+     */
+    public function about()
     {
-        $query = Produto::query();
-
-        // Filtrar por categoria
-        if ($request->has('categorias')) {
-            $query->whereIn('categoria_id', $request->categorias);
-        }
-
-        // Filtrar por cor
-        if ($request->has('cores')) {
-            foreach ($request->cores as $cor) {
-                $query->whereJsonContains('cor', $cor);
-            }
-        }
-
-        // Filtrar por tamanho
-        if ($request->has('tamanhos')) {
-            foreach ($request->tamanhos as $tamanho) {
-                $query->where('tamanho', 'LIKE', '%' . $tamanho . '%');
-            }
-        }
-
-        // Filtrar por marca
-        if ($request->has('marcas')) {
-            $query->whereIn('marca_id', $request->marcas);
-        }
-
-        $produtos = $query->get();
-
-        return view('partials.produtos', compact('produtos'))->render();
+        return view('ecommerce.about');
     }
 
-    public function store_categoria(Request $request)
+    /**
+     * Página de Contato / SAC
+     */
+    public function contact()
     {
-        try {
-            // Validação dos dados
-            $validated = $request->validate([
-                'nome' => 'required|string|max:255',
-                'descricao' => 'required|string',
-            ]);
-
-            $validated['criado_por'] = Auth::user()->id;
-
-            // Criando a categoria
-            Categorias::create($validated);
-
-            // Redirecionamento com mensagem de sucesso
-            return redirect()->route('e-commerce.criar_categoria')->with('success', 'Categoria criada com sucesso!');
-        } catch (\Exception $e) {
-            // Redirecionamento com mensagem de erro
-            return redirect()->route('e-commerce.criar_categoria')->with('error', 'Ocorreu um erro ao criar a categoria: ' . $e->getMessage());
-        }
+        return view('ecommerce.contact');
     }
 
-
-    public function categoria()
+    /**
+     * Envio do formulário de contato (Opcional)
+     */
+    public function sendContact(Request $request)
     {
-        $categorias = Categorias::all();
-        return view('ecommerce.categoria', compact('categorias'));
-    }
-
-    public function criarCategoria()
-    {
-        return view('ecommerce.criar_categoria');
-    }
-
-    public function cadastrar_funcionario()
-    {
-        return view('colaboradores.cad-funcionario');
-    }
-
-    public function marcas()
-    {
-        $marcas = Marcas::all();
-        return view('ecommerce.marcas', compact('marcas'));
-    }
-
-    public function criarMarcas()
-    {
-        $marcas = Marcas::all();
-        return view('ecommerce.criar_marcas', compact('marcas'));
-    }
-
-    public function store_marcas(Request $request)
-    {
-        try {
-            $validated = $request->validate([
-                'nome' => 'required|string|max:255',
-                'descricao' => 'required|string',
-            ]);
-
-            $validated['criado_por'] = Auth::user()->id;
-
-            Marcas::create($validated);
-
-            return redirect()->route('e-commerce.criar_marcas')->with('success', 'Produto criado com sucesso!');
-        } catch (\Exception $e) {
-            return redirect()->route('e-commerce.criar_marcas')->with('error', 'Ocorreu um erro ao criar a marca: ' . $e->getMessage());
-        }
-    }
-
-    public function colaboradores()
-    {
-        return view('colaboradores.index');
-    }
-
-    public function salvarFuncionario(Request $request)
-    {
-        // Validação
         $request->validate([
-            'nomeCompleto' => 'required|string|max:255',
-            'cpf' => 'required|string|max:14|unique:users,cpf',
-            'rg' => 'required|string|max:20',
-            'cargo' => 'required|string|in:admin,gerente,vendedor',
-            'email' => 'required|email|unique:users,email',
-            'telefone' => 'required|string|max:20',
-            'cep' => 'required|string|max:10',
-            'rua' => 'required|string|max:255',
-            'numero' => 'required|string|max:10',
-            'bairro' => 'required|string|max:255',
-            'cidade' => 'required|string|max:255',
-            'estado' => 'required|string|max:255',
+            'nome' => 'required',
+            'email' => 'required|email',
+            'mensagem' => 'required'
         ]);
 
-        // Criar endereço e salvar no banco
-        $endereco = Endereco::create([
-            'cep' => $request->cep,
-            'rua' => $request->rua,
-            'numero' => $request->numero,
-            'bairro' => $request->bairro,
-            'cidade' => $request->cidade,
-            'estado' => $request->estado,
-        ]);
+        // Aqui você pode enviar um e-mail real ou salvar no banco
+        // Mail::to('admin@floroficial.com')->send(new ContactMail($request->all()));
 
-        // Criar usuário e associar endereço
-        User::create([
-            'name' => $request->nomeCompleto,
-            'cpf' => $request->cpf,
-            'telefone' => $request->telefone,
-            'role' => $request->cargo,
-            'email' => $request->email,
-            'password' => Hash::make('123456'), // Defina uma senha padrão
-            'endereco_id' => $endereco->id, // Relacionamento correto
-        ]);
-
-        return redirect()->route('colaboradores.listar')->with('success', 'Funcionário cadastrado com sucesso!');
+        return back()->with('success', 'Mensagem enviada! Entraremos em contato em breve.');
     }
 
-
-
-    public function financeiro()
+    /**
+     * Busca Global (Aquela lupa no topo do site)
+     */
+    public function search(Request $request)
     {
-        return view('financeiro.index');
-    }
+        $termo = $request->input('q');
 
-    public function pagamento() {}
+        // Se a busca for vazia, redireciona para a loja completa
+        if (!$termo) {
+            return redirect()->route('loja.index');
+        }
 
-    public function clientes()
-    {
-        $clientes = User::where('role', 'cliente')->paginate(10); // Paginação opcional
-        return view('ecommerce.clientes', compact('clientes'));
-    }
+        // Busca inteligente por nome ou descrição
+        $produto = Produto::where('status', 'publicado')
+            ->where(function($query) use ($termo) {
+                $query->where('nome', 'LIKE', "%{$termo}%")
+                      ->orWhere('descricao', 'LIKE', "%{$termo}%");
+            })
+            ->with(['imagemPrincipal', 'categoria'])
+            ->paginate(12);
 
-    public function listarFuncionarios()
-    {
-        $colaboradores = User::whereIn('role', ['gerente', 'vendedor'])->paginate(10);
-        return view('colaboradores.listar-funcionarios', compact('colaboradores'));
-    }
-
-    public function ReceitasDespesas()
-    {
-        return view('financeiro.index');
-    }
-
-    public function relatorio() {
-
-        return view('ecommerce.relatorio');
-    }
-
-
-    public function pedidoConfirma(){
-        $pedidos = Pedido::with('itens.produto')->where('user_id', Auth::id())->whereHas('itens')->first();
-        return view('pedidos.confirma', compact('pedidos'));
-
-    }
-    public function pedidoCancelado(){
-
-        return view('pedidos.cancelado');
-
-    }
-    public function pedidoPendente(){
-
-        return view('pedidos.pendente');
-
-    }
-     public function remessas(){
-
-        return view('pedidos.remessas');
-
+        // Reutilizamos a view da loja, mas passando os resultados da busca
+        return view('loja.index', compact('produto', 'termo')); // Certifique-se que sua view loja aceita $termo
     }
 }

@@ -7,14 +7,24 @@ use Illuminate\Support\Facades\Schema;
 return new class extends Migration {
     public function up(): void
     {
-        Schema::create('pedido', function (Blueprint $table) {
+        Schema::create('pedidos', function (Blueprint $table) { // Plural para seguir o padrão
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->dateTime('data_pedido');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->enum('tipo_entrega', ['retirada_loja', 'entrega_domicilio'])->default('entrega_domicilio');
-            $table->enum('status', ['pendente', 'enviado', 'entregue', 'cancelado'])->default('pendente');
+            $table->enum('status', ['pendente', 'pago', 'enviado', 'entregue', 'cancelado'])->default('pendente')->index();
             $table->decimal('total', 10, 2);
+            $table->softDeletes(); 
+            $table->timestamps();
+        });
+
+        Schema::create('pedido_itens', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('pedido_id')->constrained('pedidos')->onDelete('cascade');
+            $table->foreignId('produto_id')->constrained('produto');
+            $table->foreignId('variacao_id')->constrained('produto_variacoes'); 
+            $table->string('produto_nome');
+            $table->integer('quantidade');
+            $table->decimal('preco_unitario', 10, 2); 
             $table->timestamps();
         });
     }
@@ -22,5 +32,6 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::dropIfExists('pedido');
+        Schema::dropIfExists('item_pedido');
     }
 };
